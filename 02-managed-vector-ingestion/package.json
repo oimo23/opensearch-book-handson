@@ -1,0 +1,22 @@
+{
+  "name": "hands-on-02-managed-vector-ingestion",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc -w",
+    "synth": "cdk synth",
+    "deploy": "cdk deploy",
+    "destroy": "cdk destroy"
+  },
+  "devDependencies": {
+    "@types/node": "^22.14.1",
+    "aws-cdk": "^2.1016.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.3"
+  },
+  "dependencies": {
+    "aws-cdk-lib": "^2.192.0",
+    "constructs": "^10.4.2"
+  }
+}

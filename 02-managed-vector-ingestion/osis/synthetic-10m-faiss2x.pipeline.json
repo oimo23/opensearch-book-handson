@@ -1,0 +1,96 @@
+{
+  "version": 2,
+  "extension": {
+    "osis_configuration_metadata": {
+      "builder_type": "visual"
+    }
+  },
+  "vectoringestion10mfaiss2x": {
+    "source": {
+      "s3": {
+        "acknowledgments": true,
+        "scan": {
+          "buckets": [
+            {
+              "bucket": {
+                "name": "realworld-opensearch-vector-data-153766774185",
+                "filter": {
+                  "include_prefix": [
+                    "synthetic-cohere-like-parquet-10m-v1/data/"
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        "aws": {
+          "region": "ap-northeast-1",
+          "sts_role_arn": "arn:aws:iam::153766774185:role/service-role/VectorIngestionRole-10mfaiss2x"
+        },
+        "codec": {
+          "parquet": null
+        },
+        "compression": "none",
+        "workers": "5"
+      }
+    },
+    "processor": [
+      {
+        "rename_keys": {
+          "entries": [
+            {
+              "from_key": "_id",
+              "to_key": "id"
+            },
+            {
+              "from_key": "text",
+              "to_key": "chunk"
+            }
+          ]
+        }
+      },
+      {
+        "list_to_map": {
+          "source": "vector",
+          "use_source_key": true,
+          "extract_value": true
+        }
+      },
+      {
+        "delete_entries": {
+          "with_keys": [
+            "vector"
+          ]
+        }
+      },
+      {
+        "rename_keys": {
+          "entries": [
+            {
+              "from_key": "element",
+              "to_key": "vector"
+            }
+          ]
+        }
+      }
+    ],
+    "sink": [
+      {
+        "opensearch": {
+          "hosts": [
+            "https://search-handson-vector-xlarge-fajj4fnh75nikgzragag3wjxyq.ap-northeast-1.es.amazonaws.com"
+          ],
+          "aws": {
+            "serverless": false,
+            "region": "ap-northeast-1",
+            "sts_role_arn": "arn:aws:iam::153766774185:role/service-role/VectorIngestionRole-10mfaiss2x"
+          },
+          "index_type": "custom",
+          "index": "synthetic_10m_faiss_2x",
+          "template_type": "index-template",
+          "template_content": "{\"template\":{\"settings\":{\"knn\":true,\"refresh_interval\":\"300s\",\"number_of_shards\":1,\"number_of_replicas\":0,\"index.knn.advanced.approximate_threshold\":100000,\"index.knn.remote_index_build.enabled\":true,\"index.knn.remote_index_build.size.min\":\"5mb\",\"index.knn.algo_param.ef_search\":512},\"mappings\":{\"properties\":{\"vector\":{\"type\":\"knn_vector\",\"dimension\":1024,\"method\":{\"name\":\"hnsw\",\"space_type\":\"l2\",\"engine\":\"faiss\",\"parameters\":{\"ef_construction\":256,\"m\":32}},\"compression_level\":\"2x\",\"mode\":\"on_disk\"},\"id\":{\"type\":\"keyword\"},\"url\":{\"type\":\"keyword\"},\"title\":{\"type\":\"text\"},\"chunk\":{\"type\":\"text\"}}}}}"
+        }
+      }
+    ]
+  }
+}
