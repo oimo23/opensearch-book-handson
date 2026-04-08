@@ -14,7 +14,8 @@
 ## 起動
 
 ```bash
-cd /Users/yuki/Desktop/programming/projects/opensearch-book/hands-on/01-local-hf-vector-search
+git clone https://github.com/oimo23/opensearch-book-handson.git
+cd opensearch-book-handson/01-local-hf-vector-search
 ./run.sh
 ```
 
@@ -24,7 +25,6 @@ cd /Users/yuki/Desktop/programming/projects/opensearch-book/hands-on/01-local-hf
 
 - 取り込み件数: `10,000`
 - 対象 index: `wiki-ja-demo`
-- サンプルクエリ生成: `heuristic`
 
 より多く入れたい場合は `.env` を編集してください。
 
@@ -38,23 +38,17 @@ cp .env.example .env
 MAX_DOCS=100000
 ```
 
-サンプルクエリの見せ方を自然文寄りにしたい場合は、デフォルトの `heuristic` のままで構いません。Bedrock の Cohere 埋め込みを使って自然文クエリ用の埋め込みを生成したい場合は、次も指定できます。
+サンプルクエリは、次の生成済みファイルをそのまま使います。`example_queries.md` には Dashboards の Dev Tools に貼り付けられる `k-NN` クエリ例が入っています。
 
-```dotenv
-SAMPLE_QUERY_EMBEDDING_MODE=bedrock
-BEDROCK_EMBED_MODEL_ID=cohere.embed-multilingual-v3
-BEDROCK_EMBED_REGION=us-east-1
-AWS_ACCESS_KEY_ID=...
-AWS_SECRET_ACCESS_KEY=...
-AWS_SESSION_TOKEN=...
-```
+- [generated/example_queries.md](./generated/example_queries.md)
+- [generated/example_queries.json](./generated/example_queries.json)
+
+これらのファイルはリポジトリに含めているため、読者はサンプルクエリの生成方法を気にせず、そのまま検索体験を試せます。
 
 ## 起動後に見る場所
 
 - OpenSearch Dashboards: [http://localhost:5601](http://localhost:5601)
 - OpenSearch API: [http://localhost:9200](http://localhost:9200)
-
-loader が完了すると、`generated/example_queries.md` と `generated/example_queries.json` が作られます。`example_queries.md` には Dashboards の Dev Tools に貼り付けられる `k-NN` クエリ例が入っています。
 
 ## 片付け
 

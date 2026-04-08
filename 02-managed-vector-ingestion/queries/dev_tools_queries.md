@@ -9,8 +9,8 @@
 
 まず、次のファイルを使って検索テンプレートを登録します。
 
-- [register_search_template.md](/Users/yuki/Desktop/programming/projects/opensearch-book/hands-on/02-managed-vector-ingestion/queries/register_search_template.md)
-- [register_search_template.json](/Users/yuki/Desktop/programming/projects/opensearch-book/hands-on/02-managed-vector-ingestion/queries/register_search_template.json)
+- [register_search_template.md](./register_search_template.md)
+- [register_search_template.json](./register_search_template.json)
 
 登録後は、Dev Tools で次の短いクエリだけを実行すれば大丈夫です。
 
@@ -23,7 +23,7 @@ GET syn10m_full/_search/template
 
 巨大なベクトル本体を確認したい場合は、次の生ファイルを参照してください。
 
-- [dev_tools_query_syn10m_full.json](/Users/yuki/Desktop/programming/projects/opensearch-book/hands-on/02-managed-vector-ingestion/queries/dev_tools_query_syn10m_full.json)
+- [dev_tools_query_syn10m_full.json](./dev_tools_query_syn10m_full.json)
 
 ## キャッシュを明示的に解放したいとき
 

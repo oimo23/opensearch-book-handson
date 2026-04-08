@@ -51,16 +51,6 @@ services:
       HF_SPLIT: ${HF_SPLIT:-train}
       MAX_DOCS: ${MAX_DOCS:-10000}
       BULK_SIZE: ${BULK_SIZE:-200}
-      EXAMPLES_PATH: /app/generated/example_queries.md
-      EXAMPLES_JSON_PATH: /app/generated/example_queries.json
-      SAMPLE_QUERY_EMBEDDING_MODE: ${SAMPLE_QUERY_EMBEDDING_MODE:-heuristic}
-      BEDROCK_EMBED_MODEL_ID: ${BEDROCK_EMBED_MODEL_ID:-cohere.embed-multilingual-v3}
-      BEDROCK_EMBED_REGION: ${BEDROCK_EMBED_REGION:-us-east-1}
-      AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID:-}
-      AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY:-}
-      AWS_SESSION_TOKEN: ${AWS_SESSION_TOKEN:-}
-    volumes:
-      - ./generated:/app/generated
     restart: "no"
 
 volumes:
