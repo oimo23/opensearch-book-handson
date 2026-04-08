@@ -53,5 +53,30 @@ services:
       BULK_SIZE: ${BULK_SIZE:-200}
     restart: "no"
 
+  streamlit:
+    build:
+      context: .
+      dockerfile: streamlit/Dockerfile
+    container_name: hf-vector-streamlit
+    depends_on:
+      opensearch:
+        condition: service_healthy
+    environment:
+      - OPENSEARCH_URL=http://opensearch:9200
+      - OPENSEARCH_INDEX=${OPENSEARCH_INDEX:-wiki-ja-demo}
+      - BEDROCK_EMBED_MODEL_ID=${BEDROCK_EMBED_MODEL_ID:-cohere.embed-multilingual-v3}
+      - BEDROCK_EMBED_REGION=${BEDROCK_EMBED_REGION:-us-east-1}
+      - AWS_PROFILE
+      - AWS_REGION
+      - AWS_DEFAULT_REGION
+      - AWS_ACCESS_KEY_ID
+      - AWS_SECRET_ACCESS_KEY
+      - AWS_SESSION_TOKEN
+    ports:
+      - "8501:8501"
+    volumes:
+      - ${HOME}/.aws:/root/.aws:ro
+    restart: unless-stopped
+
 volumes:
   opensearch-data:
