@@ -1,5 +1,11 @@
 # Hands-on 2: OpenSearch Service で managed vector ingestion と auto-optimize を試す
 
+## 注意: AWS 料金について
+
+このハンズオンでは、Amazon OpenSearch Service のドメインや関連リソースを実際に作成します。これらのリソースは、作成したままにすると AWS 料金が継続して発生します。
+
+ハンズオンが終わったら、必ず不要なリソースを削除するか、停止できるものは停止してください。特に OpenSearch ドメインは単価が高くなりやすいため、後片付けまで含めて実施することを前提に進めることを勧めます。
+
 このディレクトリでは、Amazon OpenSearch Service の managed vector ingestion を使って、大規模ベクトルデータの自動最適化とインデックス構築を体験します。データセットは、あらかじめ S3 に配置済みの Parquet ファイルを利用します。
 
 大きな流れは次の 3 段階です。
