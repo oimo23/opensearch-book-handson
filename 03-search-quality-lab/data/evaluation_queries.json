@@ -1,0 +1,817 @@
+[
+  {
+    "id": "sem-d01",
+    "split": "dev",
+    "category": "semantic",
+    "case_group": "sem-d01",
+    "query": "家族に同席してもらわず、危険性の説明も足りないまま高齢者へ複雑な商品を売ったケース",
+    "relevance": {
+      "elderly-case-01": 3
+    },
+    "mode": null,
+    "filters": {},
+    "required_context_ids": [],
+    "expected_ids": [],
+    "forbidden_ids": []
+  },
+  {
+    "id": "sem-d02",
+    "split": "dev",
+    "category": "semantic",
+    "case_group": "sem-d02",
+    "query": "顧客の運用損を取引先との関係維持費という名目で穴埋めしたケース",
+    "relevance": {
+      "comp-case-01": 3
+    },
+    "mode": null,
+    "filters": {},
+    "required_context_ids": [],
+    "expected_ids": [],
+    "forbidden_ids": []
+  },
+  {
+    "id": "sem-d03",
+    "split": "dev",
+    "category": "semantic",
+    "case_group": "sem-d03",
+    "query": "見ることはできるが、承認状態を触れない一般担当者の権限",
+    "relevance": {
+      "permission-view-01": 3
+    },
+    "mode": null,
+    "filters": {},
+    "required_context_ids": [],
+    "expected_ids": [],
+    "forbidden_ids": []
+  },
+  {
+    "id": "sem-d04",
+    "split": "dev",
+    "category": "semantic",
+    "case_group": "sem-d04",
+    "query": "金融商品の知識が乏しく安全性を優先する人に複雑な商品を勧めない考え方",
+    "relevance": {
+      "suitability-01": 3
+    },
+    "mode": null,
+    "filters": {},
+    "required_context_ids": [],
+    "expected_ids": [],
+    "forbidden_ids": []
+  },
+  {
+    "id": "sem-d05",
+    "split": "dev",
+    "category": "semantic",
+    "case_group": "sem-d05",
+    "query": "顧客注文より先に自社の売買を済ませた問題",
+    "relevance": {
+      "market-case-05": 3
+    },
+    "mode": null,
+    "filters": {},
+    "required_context_ids": [],
+    "expected_ids": [],
+    "forbidden_ids": []
+  },
+  {
+    "id": "sem-t01",
+    "split": "test",
+    "category": "semantic",
+    "case_group": "sem-t01",
+    "query": "説明した証拠が残っておらず、後から適切だったか確かめられない高齢者販売",
+    "relevance": {
+      "elderly-case-03": 3
+    },
+    "mode": null,
+    "filters": {},
+    "required_context_ids": [],
+    "expected_ids": [],
+    "forbidden_ids": []
+  },
+  {
+    "id": "sem-t02",
+    "split": "test",
+    "category": "semantic",
+    "case_group": "sem-t02",
+    "query": "全員向けに公開された施策なので、個別損失の埋め合わせではない還元",
+    "relevance": {
+      "comp-case-12": 3
+    },
+    "mode": null,
+    "filters": {},
+    "required_context_ids": [],
+    "expected_ids": [],
+    "forbidden_ids": []
+  },
+  {
+    "id": "sem-t03",
+    "split": "test",
+    "category": "semantic",
+    "case_group": "sem-t03",
+    "query": "住宅購入に使う予定の資金を、すぐ現金化できない商品へ入れるべきでない理由",
+    "relevance": {
+      "suitability-03": 3
+    },
+    "mode": null,
+    "filters": {},
+    "required_context_ids": [],
+    "expected_ids": [],
+    "forbidden_ids": []
+  },
+  {
+    "id": "sem-t04",
+    "split": "test",
+    "category": "semantic",
+    "case_group": "sem-t04",
+    "query": "取引が盛んなように見せるため、複数口座で売買を往復させたケース",
+    "relevance": {
+      "market-case-11": 3
+    },
+    "mode": null,
+    "filters": {},
+    "required_context_ids": [],
+    "expected_ids": [],
+    "forbidden_ids": []
+  },
+  {
+    "id": "sem-t05",
+    "split": "test",
+    "category": "semantic",
+    "case_group": "sem-t05",
+    "query": "顧客から断られた商品を短期間にもう一度案内してはいけない規定",
+    "relevance": {
+      "rule-020": 3
+    },
+    "mode": null,
+    "filters": {},
+    "required_context_ids": [],
+    "expected_ids": [],
+    "forbidden_ids": []
+  },
+  {
+    "id": "lex-d01",
+    "split": "dev",
+    "category": "lexical",
+    "case_group": "lex-d01",
+    "query": "第19条",
+    "relevance": {
+      "rule-019": 3
+    },
+    "mode": null,
+    "filters": {},
+    "required_context_ids": [],
+    "expected_ids": [],
+    "forbidden_ids": []
+  },
+  {
+    "id": "lex-d02",
+    "split": "dev",
+    "category": "lexical",
+    "case_group": "lex-d02",
+    "query": "ALPHA-01",
+    "relevance": {
+      "product-alpha-01": 3
+    },
+    "mode": null,
+    "filters": {},
+    "required_context_ids": [],
+    "expected_ids": [],
+    "forbidden_ids": []
+  },
+  {
+    "id": "lex-d03",
+    "split": "dev",
+    "category": "lexical",
+    "case_group": "lex-d03",
+    "query": "E1047",
+    "relevance": {
+      "operation-e1047": 3
+    },
+    "mode": null,
+    "filters": {},
+    "required_context_ids": [],
+    "expected_ids": [],
+    "forbidden_ids": []
+  },
+  {
+    "id": "lex-d04",
+    "split": "dev",
+    "category": "lexical",
+    "case_group": "lex-d04",
+    "query": "ADMIN-01",
+    "relevance": {
+      "permission-admin-01": 3
+    },
+    "mode": null,
+    "filters": {},
+    "required_context_ids": [],
+    "expected_ids": [],
+    "forbidden_ids": []
+  },
+  {
+    "id": "lex-d05",
+    "split": "dev",
+    "category": "lexical",
+    "case_group": "lex-d05",
+    "query": "第19条の2",
+    "relevance": {
+      "rule-019-2": 3
+    },
+    "mode": null,
+    "filters": {},
+    "required_context_ids": [],
+    "expected_ids": [],
+    "forbidden_ids": []
+  },
+  {
+    "id": "lex-t01",
+    "split": "test",
+    "category": "lexical",
+    "case_group": "lex-t01",
+    "query": "ALPHA-10",
+    "relevance": {
+      "product-alpha-10": 3
+    },
+    "mode": null,
+    "filters": {},
+    "required_context_ids": [],
+    "expected_ids": [],
+    "forbidden_ids": []
+  },
+  {
+    "id": "lex-t02",
+    "split": "test",
+    "category": "lexical",
+    "case_group": "lex-t02",
+    "query": "E1407",
+    "relevance": {
+      "operation-e1407": 3
+    },
+    "mode": null,
+    "filters": {},
+    "required_context_ids": [],
+    "expected_ids": [],
+    "forbidden_ids": []
+  },
+  {
+    "id": "lex-t03",
+    "split": "test",
+    "category": "lexical",
+    "case_group": "lex-t03",
+    "query": "RULE-020",
+    "relevance": {
+      "rule-020": 3
+    },
+    "mode": null,
+    "filters": {},
+    "required_context_ids": [],
+    "expected_ids": [],
+    "forbidden_ids": []
+  },
+  {
+    "id": "lex-t04",
+    "split": "test",
+    "category": "lexical",
+    "case_group": "lex-t04",
+    "query": "API-SEARCH-V2",
+    "relevance": {
+      "operation-api-search-v2": 3
+    },
+    "mode": null,
+    "filters": {},
+    "required_context_ids": [],
+    "expected_ids": [],
+    "forbidden_ids": []
+  },
+  {
+    "id": "lex-t05",
+    "split": "test",
+    "category": "lexical",
+    "case_group": "lex-t05",
+    "query": "OMEGA-50",
+    "relevance": {
+      "product-omega-50": 3
+    },
+    "mode": null,
+    "filters": {},
+    "required_context_ids": [],
+    "expected_ids": [],
+    "forbidden_ids": []
+  },
+  {
+    "id": "mix-d01",
+    "split": "dev",
+    "category": "mixed",
+    "case_group": "mix-d01",
+    "query": "ALPHA-07で為替の値動きを抑える仕組み",
+    "relevance": {
+      "product-alpha-07": 3
+    },
+    "mode": null,
+    "filters": {},
+    "required_context_ids": [],
+    "expected_ids": [],
+    "forbidden_ids": []
+  },
+  {
+    "id": "mix-d02",
+    "split": "dev",
+    "category": "mixed",
+    "case_group": "mix-d02",
+    "query": "E1074が出たとき注文額を勝手に変えてよいか",
+    "relevance": {
+      "operation-e1074": 3
+    },
+    "mode": null,
+    "filters": {},
+    "required_context_ids": [],
+    "expected_ids": [],
+    "forbidden_ids": []
+  },
+  {
+    "id": "mix-d03",
+    "split": "dev",
+    "category": "mixed",
+    "case_group": "mix-d03",
+    "query": "第25条の面談記録はいつまで残すか",
+    "relevance": {
+      "rule-025": 3
+    },
+    "mode": null,
+    "filters": {},
+    "required_context_ids": [],
+    "expected_ids": [],
+    "forbidden_ids": []
+  },
+  {
+    "id": "mix-d04",
+    "split": "dev",
+    "category": "mixed",
+    "case_group": "mix-d04",
+    "query": "DELTA-30を長期保有すると指数の逆方向とずれる理由",
+    "relevance": {
+      "product-delta-30": 3
+    },
+    "mode": null,
+    "filters": {},
+    "required_context_ids": [],
+    "expected_ids": [],
+    "forbidden_ids": []
+  },
+  {
+    "id": "mix-d05",
+    "split": "dev",
+    "category": "mixed",
+    "case_group": "mix-d05",
+    "query": "EXPORT-01で通常管理者だけでは一括出力できない理由",
+    "relevance": {
+      "permission-export-01": 3
+    },
+    "mode": null,
+    "filters": {},
+    "required_context_ids": [],
+    "expected_ids": [],
+    "forbidden_ids": []
+  },
+  {
+    "id": "mix-t01",
+    "split": "test",
+    "category": "mixed",
+    "case_group": "mix-t01",
+    "query": "ALPHA-10を現金化するまでの日数と主な価格変動要因",
+    "relevance": {
+      "product-alpha-10": 3
+    },
+    "mode": null,
+    "filters": {},
+    "required_context_ids": [],
+    "expected_ids": [],
+    "forbidden_ids": []
+  },
+  {
+    "id": "mix-t02",
+    "split": "test",
+    "category": "mixed",
+    "case_group": "mix-t02",
+    "query": "E4071をテナント条件を外して回避してはいけない理由",
+    "relevance": {
+      "operation-e4071": 3
+    },
+    "mode": null,
+    "filters": {},
+    "required_context_ids": [],
+    "expected_ids": [],
+    "forbidden_ids": []
+  },
+  {
+    "id": "mix-t03",
+    "split": "test",
+    "category": "mixed",
+    "case_group": "mix-t03",
+    "query": "第29条で新しい手数料を知らせる期限",
+    "relevance": {
+      "rule-029": 3
+    },
+    "mode": null,
+    "filters": {},
+    "required_context_ids": [],
+    "expected_ids": [],
+    "forbidden_ids": []
+  },
+  {
+    "id": "mix-t04",
+    "split": "test",
+    "category": "mixed",
+    "case_group": "mix-t04",
+    "query": "OMEGA-05で参照指数が下がった場合の元本への影響",
+    "relevance": {
+      "product-omega-05": 3
+    },
+    "mode": null,
+    "filters": {},
+    "required_context_ids": [],
+    "expected_ids": [],
+    "forbidden_ids": []
+  },
+  {
+    "id": "mix-t05",
+    "split": "test",
+    "category": "mixed",
+    "case_group": "mix-t05",
+    "query": "APPROVE-01でリスク管理部の追加承認が必要になる金額",
+    "relevance": {
+      "permission-approve-01": 3
+    },
+    "mode": null,
+    "filters": {},
+    "required_context_ids": [],
+    "expected_ids": [],
+    "forbidden_ids": []
+  },
+  {
+    "id": "neg-d01",
+    "split": "dev",
+    "category": "negation_exception",
+    "case_group": "neg-d01",
+    "query": "高リスク商品の勧誘を行わなかった高齢顧客の事例",
+    "relevance": {
+      "elderly-case-02": 3
+    },
+    "mode": null,
+    "filters": {},
+    "required_context_ids": [],
+    "expected_ids": [],
+    "forbidden_ids": []
+  },
+  {
+    "id": "neg-d02",
+    "split": "dev",
+    "category": "negation_exception",
+    "case_group": "neg-d02",
+    "query": "過徴収の返金であり損失補てんには当たらなかった事例",
+    "relevance": {
+      "comp-case-02": 3
+    },
+    "mode": null,
+    "filters": {},
+    "required_context_ids": [],
+    "expected_ids": [],
+    "forbidden_ids": []
+  },
+  {
+    "id": "neg-d03",
+    "split": "dev",
+    "category": "negation_exception",
+    "case_group": "neg-d03",
+    "query": "一般担当者が変更できない監査記録の項目",
+    "relevance": {
+      "permission-view-01": 3
+    },
+    "mode": null,
+    "filters": {},
+    "required_context_ids": [],
+    "expected_ids": [],
+    "forbidden_ids": []
+  },
+  {
+    "id": "neg-d04",
+    "split": "dev",
+    "category": "negation_exception",
+    "case_group": "neg-d04",
+    "query": "顧客注文に先回りした取引ではなかった事例",
+    "relevance": {
+      "market-case-06": 3
+    },
+    "mode": null,
+    "filters": {},
+    "required_context_ids": [],
+    "expected_ids": [],
+    "forbidden_ids": []
+  },
+  {
+    "id": "neg-d05",
+    "split": "dev",
+    "category": "negation_exception",
+    "case_group": "neg-d05",
+    "query": "元本保証を望む顧客にも債券の価格変動を説明する必要があるか",
+    "relevance": {
+      "suitability-12": 3
+    },
+    "mode": null,
+    "filters": {},
+    "required_context_ids": [],
+    "expected_ids": [],
+    "forbidden_ids": []
+  },
+  {
+    "id": "neg-t01",
+    "split": "test",
+    "category": "negation_exception",
+    "case_group": "neg-t01",
+    "query": "投資商品の案内をせず普通預金へ入金した高齢顧客対応",
+    "relevance": {
+      "elderly-case-14": 3
+    },
+    "mode": null,
+    "filters": {},
+    "required_context_ids": [],
+    "expected_ids": [],
+    "forbidden_ids": []
+  },
+  {
+    "id": "neg-t02",
+    "split": "test",
+    "category": "negation_exception",
+    "case_group": "neg-t02",
+    "query": "投資損失ではなく事務事故の実費を賠償した事例",
+    "relevance": {
+      "comp-case-08": 3
+    },
+    "mode": null,
+    "filters": {},
+    "required_context_ids": [],
+    "expected_ids": [],
+    "forbidden_ids": []
+  },
+  {
+    "id": "neg-t03",
+    "split": "test",
+    "category": "negation_exception",
+    "case_group": "neg-t03",
+    "query": "外部委託先が参照できない情報",
+    "relevance": {
+      "permission-read-02": 3
+    },
+    "mode": null,
+    "filters": {},
+    "required_context_ids": [],
+    "expected_ids": [],
+    "forbidden_ids": []
+  },
+  {
+    "id": "neg-t04",
+    "split": "test",
+    "category": "negation_exception",
+    "case_group": "neg-t04",
+    "query": "終値付近の注文だが相場操縦ではなかった事例",
+    "relevance": {
+      "market-case-08": 3
+    },
+    "mode": null,
+    "filters": {},
+    "required_context_ids": [],
+    "expected_ids": [],
+    "forbidden_ids": []
+  },
+  {
+    "id": "neg-t05",
+    "split": "test",
+    "category": "negation_exception",
+    "case_group": "neg-t05",
+    "query": "高収益を希望しても商品を理解できなければ販売しない判断",
+    "relevance": {
+      "suitability-08": 3
+    },
+    "mode": null,
+    "filters": {},
+    "required_context_ids": [],
+    "expected_ids": [],
+    "forbidden_ids": []
+  },
+  {
+    "id": "ctx-d01",
+    "split": "dev",
+    "category": "context",
+    "case_group": "approval-context-elderly",
+    "query": "高齢顧客の継続購入で使える簡易承認の前提と例外",
+    "relevance": {
+      "approval-context-elderly-1": 1,
+      "approval-context-elderly-2": 1,
+      "approval-context-elderly-3": 3
+    },
+    "mode": "hybrid_context",
+    "filters": {},
+    "required_context_ids": [
+      "approval-context-elderly-1",
+      "approval-context-elderly-2",
+      "approval-context-elderly-3"
+    ],
+    "expected_ids": [],
+    "forbidden_ids": []
+  },
+  {
+    "id": "ctx-d02",
+    "split": "dev",
+    "category": "context",
+    "case_group": "approval-context-urgent",
+    "query": "夜間に口座を暫定停止した後、いつまでに何をするか",
+    "relevance": {
+      "approval-context-urgent-1": 1,
+      "approval-context-urgent-2": 1,
+      "approval-context-urgent-3": 3
+    },
+    "mode": "hybrid_context",
+    "filters": {},
+    "required_context_ids": [
+      "approval-context-urgent-1",
+      "approval-context-urgent-2",
+      "approval-context-urgent-3"
+    ],
+    "expected_ids": [],
+    "forbidden_ids": []
+  },
+  {
+    "id": "ctx-d03",
+    "split": "dev",
+    "category": "context",
+    "case_group": "record-context-interview",
+    "query": "面談記録の保存期間と、調査中に廃棄できない条件",
+    "relevance": {
+      "record-context-interview-1": 1,
+      "record-context-interview-2": 1,
+      "record-context-interview-3": 3
+    },
+    "mode": "hybrid_context",
+    "filters": {},
+    "required_context_ids": [
+      "record-context-interview-1",
+      "record-context-interview-2",
+      "record-context-interview-3"
+    ],
+    "expected_ids": [],
+    "forbidden_ids": []
+  },
+  {
+    "id": "ctx-t01",
+    "split": "test",
+    "category": "context",
+    "case_group": "approval-context-high-value",
+    "query": "高額取引を分割した場合の判定と承認を省略できる例外",
+    "relevance": {
+      "approval-context-high-value-1": 1,
+      "approval-context-high-value-2": 1,
+      "approval-context-high-value-3": 3
+    },
+    "mode": "hybrid_context",
+    "filters": {},
+    "required_context_ids": [
+      "approval-context-high-value-1",
+      "approval-context-high-value-2",
+      "approval-context-high-value-3"
+    ],
+    "expected_ids": [],
+    "forbidden_ids": []
+  },
+  {
+    "id": "ctx-t02",
+    "split": "test",
+    "category": "context",
+    "case_group": "record-context-call",
+    "query": "顧客が録音を断って勧誘を中止した通話で残す情報",
+    "relevance": {
+      "record-context-call-1": 1,
+      "record-context-call-2": 1,
+      "record-context-call-3": 3
+    },
+    "mode": "hybrid_context",
+    "filters": {},
+    "required_context_ids": [
+      "record-context-call-1",
+      "record-context-call-2",
+      "record-context-call-3"
+    ],
+    "expected_ids": [],
+    "forbidden_ids": []
+  },
+  {
+    "id": "ctx-t03",
+    "split": "test",
+    "category": "context",
+    "case_group": "record-context-draft",
+    "query": "作成途中の契約書案を90日後も削除してはいけない条件",
+    "relevance": {
+      "record-context-draft-1": 1,
+      "record-context-draft-2": 1,
+      "record-context-draft-3": 3
+    },
+    "mode": "hybrid_context",
+    "filters": {},
+    "required_context_ids": [
+      "record-context-draft-1",
+      "record-context-draft-2",
+      "record-context-draft-3"
+    ],
+    "expected_ids": [],
+    "forbidden_ids": []
+  },
+  {
+    "id": "strict-d01",
+    "split": "dev",
+    "category": "constraint",
+    "case_group": "strict-alpha-01",
+    "query": "ALPHA-01",
+    "relevance": {
+      "product-alpha-01": 3
+    },
+    "mode": "exact",
+    "filters": {},
+    "required_context_ids": [],
+    "expected_ids": [
+      "product-alpha-01"
+    ],
+    "forbidden_ids": [
+      "product-alpha-10"
+    ]
+  },
+  {
+    "id": "strict-d02",
+    "split": "dev",
+    "category": "constraint",
+    "case_group": "strict-elderly-01",
+    "query": "複雑な仕組債を販売した事例",
+    "relevance": {
+      "elderly-case-01": 3
+    },
+    "mode": "hybrid_filter",
+    "filters": {
+      "document_type": "case",
+      "customer_age_gte": 75,
+      "amount_yen_gte": 5000000,
+      "case_outcome": "violation"
+    },
+    "required_context_ids": [],
+    "expected_ids": [
+      "elderly-case-01"
+    ],
+    "forbidden_ids": [
+      "elderly-case-02",
+      "elderly-case-04"
+    ]
+  },
+  {
+    "id": "strict-t01",
+    "split": "test",
+    "category": "constraint",
+    "case_group": "strict-e1407",
+    "query": "E1407",
+    "relevance": {
+      "operation-e1407": 3
+    },
+    "mode": "exact",
+    "filters": {},
+    "required_context_ids": [],
+    "expected_ids": [
+      "operation-e1407"
+    ],
+    "forbidden_ids": [
+      "operation-e1047",
+      "operation-e1704"
+    ]
+  },
+  {
+    "id": "strict-t02",
+    "split": "test",
+    "category": "constraint",
+    "case_group": "strict-elderly-03",
+    "query": "高齢顧客へ販売した記録",
+    "relevance": {
+      "elderly-case-03": 3,
+      "elderly-case-06": 2
+    },
+    "mode": "hybrid_filter",
+    "filters": {
+      "document_type": "case",
+      "customer_age_gte": 80,
+      "amount_yen_gte": 2000000
+    },
+    "required_context_ids": [],
+    "expected_ids": [
+      "elderly-case-03"
+    ],
+    "forbidden_ids": [
+      "elderly-case-01",
+      "elderly-case-09"
+    ]
+  }
+]

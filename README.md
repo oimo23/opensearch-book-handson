@@ -15,6 +15,9 @@
 - `02-managed-vector-ingestion`  
   Amazon OpenSearch Service の managed vector ingestion と auto-optimize を使って、大規模ベクトルデータの取り込みと index build を体験するハンズオンです。
 
+- `03-search-quality-lab`
+  金融文書を模した教材データを使い、ベクトル検索の弱点と、keyword、filter、hybrid、rerankによる補完を比較するハンズオンです。
+
 ## 使い方
 
 各ディレクトリの `README.md` に、前提条件と実行手順を記載しています。書籍の該当章を参照しながら進めてください。

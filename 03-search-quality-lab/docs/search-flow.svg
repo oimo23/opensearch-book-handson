@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 290" role="img" aria-labelledby="title desc">
+  <title id="title">金融文書検索デモの処理フロー</title>
+  <desc id="desc">クエリを全文検索とベクトル検索へ渡し、正規化統合、厳密条件、rerankまたは文脈復元を経て結果を返す。</desc>
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8Z" fill="#315d50"/></marker>
+    <style>.box{fill:#fffdf6;stroke:#17211d;stroke-width:2}.accent{fill:#315d50}.label{font:600 20px sans-serif;fill:#17211d}.small{font:14px sans-serif;fill:#59645e}.white{fill:#fff}.line{stroke:#315d50;stroke-width:3;fill:none;marker-end:url(#arrow)}</style>
+  </defs>
+  <rect width="1100" height="290" fill="#f3efe4"/>
+  <rect class="box" x="30" y="103" width="150" height="84" rx="8"/><text class="label" x="105" y="137" text-anchor="middle">自然文クエリ</text><text class="small" x="105" y="163" text-anchor="middle">質問と厳密条件</text>
+  <path class="line" d="M180 145H245V75H300"/><path class="line" d="M245 145V215H300"/>
+  <rect class="box" x="300" y="33" width="180" height="84" rx="8"/><text class="label" x="390" y="68" text-anchor="middle">Full-text</text><text class="small" x="390" y="93" text-anchor="middle">BM25による語の一致</text>
+  <rect class="box" x="300" y="173" width="180" height="84" rx="8"/><text class="label" x="390" y="208" text-anchor="middle">Vector</text><text class="small" x="390" y="233" text-anchor="middle">意味の近さ</text>
+  <path class="line" d="M480 75H550V145H610"/><path class="line" d="M480 215H550V145"/>
+  <rect class="accent" x="610" y="103" width="180" height="84" rx="8"/><text class="label white" x="700" y="138" text-anchor="middle">Hybrid</text><text class="small white" x="700" y="163" text-anchor="middle">正規化して統合</text>
+  <path class="line" d="M790 145H850"/>
+  <rect class="box" x="850" y="33" width="210" height="84" rx="8"/><text class="label" x="955" y="68" text-anchor="middle">Exact / Filter</text><text class="small" x="955" y="93" text-anchor="middle">識別子と候補範囲を限定</text>
+  <rect class="box" x="850" y="173" width="210" height="84" rx="8"/><text class="label" x="955" y="208" text-anchor="middle">Rerank / Context</text><text class="small" x="955" y="233" text-anchor="middle">再整列または文脈復元</text>
+  <path class="line" d="M820 145V75H850"/><path class="line" d="M820 145V215H850"/>
+</svg>
