@@ -16,18 +16,18 @@ REQUIRED_DOCUMENT_FIELDS = {
     "case_outcome", "synthetic", "body",
 }
 EXPECTED_QUERY_COUNTS = {
-    ("dev", "semantic"): 5,
-    ("test", "semantic"): 5,
-    ("dev", "lexical"): 5,
-    ("test", "lexical"): 5,
-    ("dev", "mixed"): 5,
-    ("test", "mixed"): 5,
-    ("dev", "negation_exception"): 5,
-    ("test", "negation_exception"): 5,
-    ("dev", "context"): 3,
-    ("test", "context"): 3,
-    ("dev", "constraint"): 2,
-    ("test", "constraint"): 2,
+    ("dev", "semantic"): 10,
+    ("test", "semantic"): 10,
+    ("dev", "lexical"): 10,
+    ("test", "lexical"): 10,
+    ("dev", "mixed"): 10,
+    ("test", "mixed"): 10,
+    ("dev", "negation_exception"): 10,
+    ("test", "negation_exception"): 10,
+    ("dev", "context"): 5,
+    ("test", "context"): 5,
+    ("dev", "constraint"): 5,
+    ("test", "constraint"): 5,
 }
 
 
@@ -47,8 +47,8 @@ def validate() -> None:
         errors.append(f"corpus must contain 180 chunks, got {len(documents)}")
     if len(document_id_set) != len(document_ids):
         errors.append("document ids must be unique")
-    if len(queries) != 50:
-        errors.append(f"evaluation set must contain 50 queries, got {len(queries)}")
+    if len(queries) != 100:
+        errors.append(f"evaluation set must contain 100 queries, got {len(queries)}")
 
     for row in documents:
         missing = REQUIRED_DOCUMENT_FIELDS - row.keys()
@@ -81,8 +81,14 @@ def validate() -> None:
         errors.append(f"unexpected split/category counts: {dict(counts)}")
 
     groups_by_split: dict[str, set[str]] = defaultdict(set)
+    positive_ids_by_split: dict[str, set[str]] = defaultdict(set)
     for row in queries:
         groups_by_split[row["split"]].add(row["case_group"])
+        positive_ids_by_split[row["split"]].update(
+            set(row.get("relevance", {}))
+            | set(row.get("required_context_ids", []))
+            | set(row.get("expected_ids", []))
+        )
         referenced = (
             set(row.get("relevance", {}))
             | set(row.get("required_context_ids", []))
@@ -104,6 +110,13 @@ def validate() -> None:
     overlap = groups_by_split["dev"] & groups_by_split["test"]
     if overlap:
         errors.append(f"case groups must not cross dev/test: {sorted(overlap)}")
+
+    positive_overlap = positive_ids_by_split["dev"] & positive_ids_by_split["test"]
+    if positive_overlap:
+        errors.append(
+            "positive document ids must not cross dev/test: "
+            f"{sorted(positive_overlap)}"
+        )
 
     if errors:
         raise SystemExit("\n".join(f"ERROR: {error}" for error in errors))

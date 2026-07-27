@@ -15,6 +15,7 @@ from urllib.request import Request, urlopen
 
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_QUERIES = ROOT / "data" / "evaluation_queries.json"
+EVALUATION_VERSION = "v2"
 CATEGORY_MODES = {
     "semantic": ("vector", "fulltext", "hybrid"),
     "lexical": ("vector", "fulltext", "hybrid"),
@@ -22,6 +23,22 @@ CATEGORY_MODES = {
     "negation_exception": ("hybrid", "hybrid_rerank"),
     "context": ("hybrid", "hybrid_context"),
 }
+
+
+def hit_matches_filters(hit: dict[str, Any], filters: dict[str, Any]) -> bool:
+    if filters.get("document_type") and hit.get("document_type") != filters["document_type"]:
+        return False
+    if filters.get("customer_age_gte") is not None:
+        age = hit.get("customer_age")
+        if age is None or age < filters["customer_age_gte"]:
+            return False
+    if filters.get("amount_yen_gte") is not None:
+        amount = hit.get("amount_yen")
+        if amount is None or amount < filters["amount_yen_gte"]:
+            return False
+    if filters.get("case_outcome") and hit.get("case_outcome") != filters["case_outcome"]:
+        return False
+    return True
 
 
 def request_json(url: str, payload: dict[str, Any] | None = None, timeout: int = 300) -> dict:
@@ -70,17 +87,32 @@ def percentile(values: list[int], percent: float) -> int:
 
 
 def metric_row(case: dict[str, Any], mode: str, response: dict[str, Any]) -> dict[str, Any]:
-    hit_ids = [hit["id"] for hit in response["hits"]]
+    hits = response["hits"]
+    hit_ids = [hit["id"] for hit in hits]
     relevance = case.get("relevance", {})
     required = set(case.get("required_context_ids", []))
     restored = {
         chunk["id"]
-        for hit in response["hits"]
+        for hit in hits
         for chunk in hit.get("context_chunks", [])
     }
     visible_context = set(hit_ids) | restored
     expected = set(case.get("expected_ids", []))
     forbidden = set(case.get("forbidden_ids", []))
+    filters = case.get("filters", {})
+    filter_violations = (
+        sum(not hit_matches_filters(hit, filters) for hit in hits)
+        if filters
+        else 0
+    )
+    exact_unexpected = (
+        len(set(hit_ids) - expected)
+        if mode == "exact" and expected
+        else 0
+    )
+    condition_violations = filter_violations + exact_unexpected
+    expected_pass = expected.issubset(set(hit_ids)) if expected else None
+    forbidden_violations = len(forbidden & set(hit_ids))
     return {
         "id": case["id"],
         "split": case["split"],
@@ -94,8 +126,23 @@ def metric_row(case: dict[str, Any], mode: str, response: dict[str, Any]) -> dic
         "context_completeness": (
             len(required & visible_context) / len(required) if required else None
         ),
-        "expected_pass": expected.issubset(set(hit_ids)) if expected else None,
-        "forbidden_violations": len(forbidden & set(hit_ids)),
+        "parent_hit_at_3": (
+            int(bool(required & set(hit_ids[:3]))) if required else None
+        ),
+        "context_precision": (
+            len(required & restored) / len(restored) if required and restored else None
+        ),
+        "context_chunks_added": len(restored - set(hit_ids)) if required else None,
+        "expected_pass": expected_pass,
+        "condition_violations": condition_violations,
+        "forbidden_violations": forbidden_violations,
+        "constraint_pass": (
+            bool(expected_pass)
+            and condition_violations == 0
+            and forbidden_violations == 0
+            if expected_pass is not None
+            else None
+        ),
         "timings": {
             key: response[key]
             for key in ("embedding_ms", "search_ms", "rerank_ms", "context_ms", "total_ms")
@@ -123,11 +170,32 @@ def aggregate(rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
                     if items[0]["context_completeness"] is not None
                     else None
                 ),
-                "constraint_pass_rate": (
-                    sum(bool(item["expected_pass"]) for item in items) / len(items)
-                    if items[0]["expected_pass"] is not None
+                "parent_hit_rate_at_3": (
+                    sum(item["parent_hit_at_3"] for item in items) / len(items)
+                    if items[0]["parent_hit_at_3"] is not None
                     else None
                 ),
+                "context_precision": (
+                    sum(
+                        item["context_precision"]
+                        for item in items
+                        if item["context_precision"] is not None
+                    )
+                    / sum(item["context_precision"] is not None for item in items)
+                    if any(item["context_precision"] is not None for item in items)
+                    else None
+                ),
+                "context_chunks_added": (
+                    sum(item["context_chunks_added"] for item in items) / len(items)
+                    if items[0]["context_chunks_added"] is not None
+                    else None
+                ),
+                "constraint_pass_rate": (
+                    sum(bool(item["constraint_pass"]) for item in items) / len(items)
+                    if items[0]["constraint_pass"] is not None
+                    else None
+                ),
+                "condition_violations": sum(item["condition_violations"] for item in items),
                 "forbidden_violations": sum(item["forbidden_violations"] for item in items),
             }
         )
@@ -188,36 +256,41 @@ def render_markdown(result: dict[str, Any]) -> str:
         "",
         f"- Executed: {result['metadata']['executed_at']}",
         f"- Documents: {result['health']['document_count']}",
+        f"- Evaluation version: {result['metadata']['evaluation_version']}",
         f"- Candidate size: {result['health']['candidate_size']}",
         f"- Hybrid weights: {result['health']['hybrid_weights']}",
         "",
         "## Quality by category",
         "",
-        "| Category | Mode | Queries | Hit@3 | Hit@10 | MRR@5 | NDCG@5 | Context | Constraint | Violations |",
-        "|---|---|---:|---:|---:|---:|---:|---:|---:|---:|",
+        "| Category | Mode | Queries | Hit@3 | Hit@10 | MRR@5 | NDCG@5 | Parent@3 | Context | Context precision | Constraint | Violations |",
+        "|---|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|",
     ]
     for row in result["summary"]:
         context = "-" if row["context_completeness"] is None else f"{row['context_completeness']:.3f}"
+        parent = "-" if row["parent_hit_rate_at_3"] is None else f"{row['parent_hit_rate_at_3']:.3f}"
+        precision = "-" if row["context_precision"] is None else f"{row['context_precision']:.3f}"
         constraint = "-" if row["constraint_pass_rate"] is None else f"{row['constraint_pass_rate']:.3f}"
+        violations = row["condition_violations"] + row["forbidden_violations"]
         lines.append(
             f"| {row['category']} | `{row['mode']}` | {row['queries']} | "
             f"{row['hit_rate_at_3']:.3f} | {row['hit_rate_at_10']:.3f} | "
-            f"{row['mrr_at_5']:.3f} | {row['ndcg_at_5']:.3f} | {context} | "
-            f"{constraint} | {row['forbidden_violations']} |"
+            f"{row['mrr_at_5']:.3f} | {row['ndcg_at_5']:.3f} | {parent} | "
+            f"{context} | {precision} | {constraint} | {violations} |"
         )
-    lines.extend([
-        "",
-        "## Latency",
-        "",
-        "| Mode | Runs | p50 total | p95 total | p50 search | p50 rerank |",
-        "|---|---:|---:|---:|---:|---:|",
-    ])
-    for row in result["latency"]:
-        lines.append(
-            f"| `{row['mode']}` | {row['runs']} | {row['p50_ms']['total_ms']} ms | "
-            f"{row['p95_ms']['total_ms']} ms | {row['p50_ms']['search_ms']} ms | "
-            f"{row['p50_ms']['rerank_ms']} ms |"
-        )
+    if result["latency"]:
+        lines.extend([
+            "",
+            "## Latency",
+            "",
+            "| Mode | Runs | p50 total | p95 total | p50 search | p50 rerank |",
+            "|---|---:|---:|---:|---:|---:|",
+        ])
+        for row in result["latency"]:
+            lines.append(
+                f"| `{row['mode']}` | {row['runs']} | {row['p50_ms']['total_ms']} ms | "
+                f"{row['p95_ms']['total_ms']} ms | {row['p50_ms']['search_ms']} ms | "
+                f"{row['p50_ms']['rerank_ms']} ms |"
+            )
     return "\n".join(lines) + "\n"
 
 
@@ -226,7 +299,7 @@ def main() -> None:
     parser.add_argument("--base-url", default="http://localhost:8100")
     parser.add_argument("--queries", type=Path, default=DEFAULT_QUERIES)
     parser.add_argument("--split", choices=("dev", "test"), default="test")
-    parser.add_argument("--latency-runs", type=int, default=5)
+    parser.add_argument("--latency-runs", type=int, default=0)
     parser.add_argument("--output", type=Path)
     args = parser.parse_args()
 
@@ -238,6 +311,7 @@ def main() -> None:
     result = {
         "metadata": {
             "executed_at": datetime.now().astimezone().isoformat(timespec="seconds"),
+            "evaluation_version": EVALUATION_VERSION,
             "split": args.split,
             "host": platform.platform(),
             "python": platform.python_version(),
@@ -245,7 +319,11 @@ def main() -> None:
         "health": health,
         "summary": aggregate(quality),
         "details": quality,
-        "latency": evaluate_latency(base_url, cases, args.latency_runs),
+        "latency": (
+            evaluate_latency(base_url, cases, args.latency_runs)
+            if args.latency_runs > 0
+            else []
+        ),
     }
     markdown = render_markdown(result)
     print(markdown)

@@ -125,16 +125,17 @@ curl -s http://localhost:8100/api/search \
 python3 scripts/evaluate.py
 ```
 
-`data/evaluation_queries.json`にはdev 25件、test 25件を収録しています。devはhybrid重みの調整にだけ使い、testは最終評価に使います。
+`data/evaluation_queries.json`にはdev 50件、test 50件を収録しています。devはhybrid重みの調整にだけ使い、testは最終評価に使います。正解文書、期待文書、必須文脈チャンクはdevとtestで重複しないようvalidatorで検査します。
 
 ```bash
 python3 scripts/evaluate.py \
   --split test \
-  --latency-runs 5 \
   --output docs/results/test-results.json
 ```
 
-カテゴリ別のHit Rate@3、Hit Rate@10、MRR@5、NDCG@5、Context Completeness、条件違反件数を出力します。レイテンシーはウォームアップ後のp50とp95を集計します。
+カテゴリ別のHit Rate@3、Hit Rate@10、MRR@5、NDCG@5を出力します。文脈問い合わせでは正しい親文書を上位3件で取得できた割合、Context Completeness、展開した文脈のprecisionを分けて記録します。filterでは返却された全hitが構造化条件へ適合することを検査します。
+
+初期の50問版は`data/evaluation_queries-v1.json`、実測結果は`docs/results/test-results-v1.json`へ保存しています。
 
 データ自体を検証する場合:
 

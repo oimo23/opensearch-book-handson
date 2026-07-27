@@ -1,5 +1,5 @@
 {
-  "captured_at": "2026-07-27T00:09:03+09:00",
+  "captured_at": "2026-07-27T17:06:33+09:00",
   "health": {
     "status": "ok",
     "index_name": "fin-doc-search-demo-v3",
@@ -12,8 +12,8 @@
     "rerank_enabled": true,
     "candidate_size": 10,
     "hybrid_weights": [
-      0.5,
-      0.5
+      0.6,
+      0.4
     ]
   },
   "examples": [
@@ -28,11 +28,11 @@
         "query": "第19条",
         "mode": "vector",
         "timings": {
-          "embedding_ms": 190,
-          "search_ms": 7,
+          "embedding_ms": 105,
+          "search_ms": 3,
           "rerank_ms": 0,
           "context_ms": 0,
-          "total_ms": 197
+          "total_ms": 108
         },
         "total_candidates": 10,
         "request_body": {
@@ -873,10 +873,10 @@
         "mode": "fulltext",
         "timings": {
           "embedding_ms": 0,
-          "search_ms": 3,
+          "search_ms": 1,
           "rerank_ms": 0,
           "context_ms": 0,
-          "total_ms": 3
+          "total_ms": 1
         },
         "total_candidates": 2,
         "request_body": {
@@ -942,10 +942,10 @@
         "mode": "exact",
         "timings": {
           "embedding_ms": 0,
-          "search_ms": 2,
+          "search_ms": 1,
           "rerank_ms": 0,
           "context_ms": 0,
-          "total_ms": 2
+          "total_ms": 1
         },
         "total_candidates": 1,
         "request_body": {
@@ -989,17 +989,17 @@
       "request": {
         "query": "高齢者への勧誘で問題になった事例",
         "mode": "hybrid",
-        "top_k": 3
+        "top_k": 5
       },
       "response": {
         "query": "高齢者への勧誘で問題になった事例",
         "mode": "hybrid",
         "timings": {
-          "embedding_ms": 172,
-          "search_ms": 10,
+          "embedding_ms": 92,
+          "search_ms": 5,
           "rerank_ms": 0,
           "context_ms": 0,
-          "total_ms": 182
+          "total_ms": 97
         },
         "total_candidates": 10,
         "request_body": {
@@ -1820,25 +1820,43 @@
             "id": "market-case-05",
             "title": "取引審査事例集 2024年度",
             "body": "顧客注文の執行前に自己勘定で同じ銘柄を購入し、フロントランニングとして問題になりました。",
-            "score": 0.5,
+            "score": 0.6,
             "rerank_score": null,
             "context_chunks": []
           },
           {
             "rank": 2,
-            "id": "elderly-case-02",
-            "title": "顧客対応事例集 2024年度",
-            "body": "76歳の顧客から高リスク商品の購入希望がありましたが、理解が十分でないと判断して勧誘を行いませんでした。後日、家族同席で低リスク商品を説明しており、不適切勧誘には該当しません。",
-            "score": 0.5,
+            "id": "rule-022",
+            "title": "顧客保護規程 2025年版",
+            "body": "契約締結前交付書面は、顧客が内容を確認できる時点で交付します。電子交付を利用する場合は、閲覧可能になった日時を記録します。",
+            "score": 0.40289164,
             "rerank_score": null,
             "context_chunks": []
           },
           {
             "rank": 3,
+            "id": "elderly-case-02",
+            "title": "顧客対応事例集 2024年度",
+            "body": "76歳の顧客から高リスク商品の購入希望がありましたが、理解が十分でないと判断して勧誘を行いませんでした。後日、家族同席で低リスク商品を説明しており、不適切勧誘には該当しません。",
+            "score": 0.4,
+            "rerank_score": null,
+            "context_chunks": []
+          },
+          {
+            "rank": 4,
             "id": "elderly-case-01",
             "title": "顧客対応事例集 2024年度",
             "body": "担当者は78歳の顧客へ複雑な仕組債を販売しました。元本割れの条件を十分に説明せず、家族同席も提案せず、管理者承認の記録もなかったため不適切な勧誘と判断されました。",
-            "score": 0.4759284,
+            "score": 0.38074273,
+            "rerank_score": null,
+            "context_chunks": []
+          },
+          {
+            "rank": 5,
+            "id": "record-context-access-3",
+            "title": "記録管理細則 2025年版",
+            "body": "セキュリティ調査の対象となったログは、調査終了後1年間または通常期限の長い方まで保存します。",
+            "score": 0.16102512,
             "rerank_score": null,
             "context_chunks": []
           }
@@ -1850,17 +1868,17 @@
       "request": {
         "query": "高齢者への勧誘で問題になった事例",
         "mode": "hybrid_rerank",
-        "top_k": 3
+        "top_k": 5
       },
       "response": {
         "query": "高齢者への勧誘で問題になった事例",
         "mode": "hybrid_rerank",
         "timings": {
-          "embedding_ms": 197,
-          "search_ms": 11,
-          "rerank_ms": 2335,
+          "embedding_ms": 84,
+          "search_ms": 5,
+          "rerank_ms": 1020,
           "context_ms": 0,
-          "total_ms": 2543
+          "total_ms": 1108
         },
         "total_candidates": 10,
         "request_body": {
@@ -2681,7 +2699,7 @@
             "id": "elderly-case-01",
             "title": "顧客対応事例集 2024年度",
             "body": "担当者は78歳の顧客へ複雑な仕組債を販売しました。元本割れの条件を十分に説明せず、家族同席も提案せず、管理者承認の記録もなかったため不適切な勧誘と判断されました。",
-            "score": 0.4759284,
+            "score": 0.38074273,
             "rerank_score": 0.8437403440475464,
             "context_chunks": []
           },
@@ -2690,7 +2708,7 @@
             "id": "elderly-case-02",
             "title": "顧客対応事例集 2024年度",
             "body": "76歳の顧客から高リスク商品の購入希望がありましたが、理解が十分でないと判断して勧誘を行いませんでした。後日、家族同席で低リスク商品を説明しており、不適切勧誘には該当しません。",
-            "score": 0.5,
+            "score": 0.4,
             "rerank_score": 0.4105135500431061,
             "context_chunks": []
           },
@@ -2699,8 +2717,26 @@
             "id": "elderly-case-14",
             "title": "顧客対応事例集 2024年度",
             "body": "88歳の顧客の定期預金満期手続を支援しました。投資商品の案内は行わず、本人の依頼どおり普通預金へ入金したため勧誘事例ではありません。",
-            "score": 0.103278324,
+            "score": 0.12393399,
             "rerank_score": 0.14383909106254578,
+            "context_chunks": []
+          },
+          {
+            "rank": 4,
+            "id": "elderly-case-04",
+            "title": "顧客対応事例集 2024年度",
+            "body": "74歳の顧客へ仕組債の説明を行いました。管理者承認の年齢基準には達していませんが、商品が複雑なため家族同席を提案し、顧客が購入を見送った記録を残しました。",
+            "score": 0.100469984,
+            "rerank_score": 0.03705452382564545,
+            "context_chunks": []
+          },
+          {
+            "rank": 5,
+            "id": "market-case-05",
+            "title": "取引審査事例集 2024年度",
+            "body": "顧客注文の執行前に自己勘定で同じ銘柄を購入し、フロントランニングとして問題になりました。",
+            "score": 0.6,
+            "rerank_score": 0.0006552796112373471,
             "context_chunks": []
           }
         ]
@@ -2717,11 +2753,11 @@
         "query": "高額取引を分割した場合の判定と承認を省略できる例外",
         "mode": "hybrid_context",
         "timings": {
-          "embedding_ms": 212,
-          "search_ms": 10,
+          "embedding_ms": 84,
+          "search_ms": 4,
           "rerank_ms": 0,
-          "context_ms": 3,
-          "total_ms": 225
+          "context_ms": 1,
+          "total_ms": 90
         },
         "total_candidates": 10,
         "request_body": {
@@ -3542,7 +3578,7 @@
             "id": "approval-context-high-value-1",
             "title": "承認手続細則 2025年版",
             "body": "1000万円以上の高額取引は、所属長とリスク管理部による二段階承認を必要とします。",
-            "score": 0.7500957,
+            "score": 0.7418554,
             "rerank_score": null,
             "context_chunks": [
               {
@@ -3567,7 +3603,7 @@
             "id": "permission-approve-10",
             "title": "業務権限一覧 2025年版",
             "body": "リスク管理部は高額取引の追加承認を行えますが、申請者と同一人物が承認者を兼ねることはできません。",
-            "score": 0.5704972,
+            "score": 0.60965496,
             "rerank_score": null,
             "context_chunks": []
           },
@@ -3576,7 +3612,7 @@
             "id": "operation-e4701",
             "title": "システム運用手順 2025年版",
             "body": "一括出力件数が上限を超えています。対象期間を分割し、出力ごとに承認番号を記録します。",
-            "score": 0.32951146,
+            "score": 0.3954138,
             "rerank_score": null,
             "context_chunks": []
           }
@@ -3600,11 +3636,11 @@
         "query": "複雑な仕組債を販売した事例",
         "mode": "hybrid_filter",
         "timings": {
-          "embedding_ms": 186,
-          "search_ms": 8,
+          "embedding_ms": 74,
+          "search_ms": 3,
           "rerank_ms": 0,
           "context_ms": 0,
-          "total_ms": 194
+          "total_ms": 77
         },
         "total_candidates": 5,
         "request_body": {
@@ -4496,7 +4532,7 @@
             "id": "elderly-case-07",
             "title": "顧客対応事例集 2024年度",
             "body": "77歳の顧客に対し、担当者は期限前償還だけを強調して仕組債を販売しました。参照指数下落時の損失を説明しておらず、説明内容が不十分でした。",
-            "score": 0.6997602,
+            "score": 0.69690096,
             "rerank_score": null,
             "context_chunks": []
           },
@@ -4505,7 +4541,7 @@
             "id": "elderly-case-05",
             "title": "顧客対応事例集 2024年度",
             "body": "79歳の顧客が安定運用を希望していたにもかかわらず、担当者は値動きの大きい海外株式商品を販売しました。意向との不一致と説明不足が確認されました。",
-            "score": 0.33791342,
+            "score": 0.31687886,
             "rerank_score": null,
             "context_chunks": []
           },
@@ -4514,7 +4550,7 @@
             "id": "elderly-case-15",
             "title": "顧客対応事例集 2024年度",
             "body": "78歳の顧客へ外貨建て商品を販売した際、為替手数料は説明しましたが為替差損の可能性を説明していませんでした。重要なリスク説明の欠落が問題となりました。",
-            "score": 0.25125462,
+            "score": 0.24843304,
             "rerank_score": null,
             "context_chunks": []
           },

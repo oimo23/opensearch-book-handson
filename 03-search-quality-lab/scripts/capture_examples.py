@@ -26,11 +26,11 @@ EXAMPLES = [
     },
     {
         "id": "hybrid-rerank-before",
-        "request": {"query": "高齢者への勧誘で問題になった事例", "mode": "hybrid", "top_k": 3},
+        "request": {"query": "高齢者への勧誘で問題になった事例", "mode": "hybrid", "top_k": 5},
     },
     {
         "id": "hybrid-rerank-after",
-        "request": {"query": "高齢者への勧誘で問題になった事例", "mode": "hybrid_rerank", "top_k": 3},
+        "request": {"query": "高齢者への勧誘で問題になった事例", "mode": "hybrid_rerank", "top_k": 5},
     },
     {
         "id": "context-restoration",

@@ -511,14 +511,24 @@ def build_queries() -> list[dict[str, Any]]:
         ("dev", "sem-d03", "見ることはできるが、承認状態を触れない一般担当者の権限", "permission-view-01"),
         ("dev", "sem-d04", "金融商品の知識が乏しく安全性を優先する人に複雑な商品を勧めない考え方", "suitability-01"),
         ("dev", "sem-d05", "顧客注文より先に自社の売買を済ませた問題", "market-case-05"),
+        ("dev", "sem-d06", "外国語で案内するとき、本人が理解できる資料と通訳の記録を用意する決まり", "rule-028"),
+        ("dev", "sem-d07", "完了した監査資料をすぐ消さず、低頻度の保管場所へ移す時期", "deadline-archive-365"),
+        ("dev", "sem-d08", "高齢という理由ではなく、短期の乗換えで手数料を重ねたことが問題になった販売", "elderly-case-13"),
+        ("dev", "sem-d09", "実体のない仕事を受けた形にして、取引損を穴埋めした事例", "comp-case-07"),
+        ("dev", "sem-d10", "未発表の資金調達情報を取引先へ漏らし、聞いた側が売却した問題", "market-case-13"),
         ("test", "sem-t01", "説明した証拠が残っておらず、後から適切だったか確かめられない高齢者販売", "elderly-case-03"),
         ("test", "sem-t02", "全員向けに公開された施策なので、個別損失の埋め合わせではない還元", "comp-case-12"),
         ("test", "sem-t03", "住宅購入に使う予定の資金を、すぐ現金化できない商品へ入れるべきでない理由", "suitability-03"),
         ("test", "sem-t04", "取引が盛んなように見せるため、複数口座で売買を往復させたケース", "market-case-11"),
         ("test", "sem-t05", "顧客から断られた商品を短期間にもう一度案内してはいけない規定", "rule-020"),
+        ("test", "sem-t06", "販売側の報酬と代わりの商品を説明しなければならない利益相反の手続", "rule-031"),
+        ("test", "sem-t07", "原因がまだ分からなくても影響範囲を添えて責任者へ知らせる障害対応", "deadline-incident-3"),
+        ("test", "sem-t08", "外貨商品の手数料だけ説明し、為替差損を伝えなかった高齢者販売", "elderly-case-15"),
+        ("test", "sem-t09", "口座を閉じた後に見つかった税計算の誤りを訂正して返金した事例", "comp-case-14"),
+        ("test", "sem-t10", "会社の訂正発表を報道機関が転載しただけで、虚偽投稿ではなかった事例", "market-case-10"),
     ]
     for split, qid, text, target in semantic:
-        queries.append(query(qid, split, "semantic", text, {target: 3}, case_group=qid))
+        queries.append(query(qid, split, "semantic", text, {target: 3}, case_group=target))
 
     lexical = [
         ("dev", "lex-d01", "第19条", "rule-019"),
@@ -526,14 +536,24 @@ def build_queries() -> list[dict[str, Any]]:
         ("dev", "lex-d03", "E1047", "operation-e1047"),
         ("dev", "lex-d04", "ADMIN-01", "permission-admin-01"),
         ("dev", "lex-d05", "第19条の2", "rule-019-2"),
+        ("dev", "lex-d06", "BETA-01", "product-beta-01"),
+        ("dev", "lex-d07", "E2041", "operation-e2041"),
+        ("dev", "lex-d08", "RULE-027", "rule-027"),
+        ("dev", "lex-d09", "DELETE-01", "permission-delete-01"),
+        ("dev", "lex-d10", "DAYS-365", "deadline-archive-365"),
         ("test", "lex-t01", "ALPHA-10", "product-alpha-10"),
         ("test", "lex-t02", "E1407", "operation-e1407"),
         ("test", "lex-t03", "RULE-020", "rule-020"),
         ("test", "lex-t04", "API-SEARCH-V2", "operation-api-search-v2"),
         ("test", "lex-t05", "OMEGA-50", "product-omega-50"),
+        ("test", "lex-t06", "GAMMA-20", "product-gamma-20"),
+        ("test", "lex-t07", "E4107", "operation-e4107"),
+        ("test", "lex-t08", "RULE-032", "rule-032"),
+        ("test", "lex-t09", "LEGAL-01", "permission-legal-01"),
+        ("test", "lex-t10", "DAYS-14", "deadline-appeal-14"),
     ]
     for split, qid, text, target in lexical:
-        queries.append(query(qid, split, "lexical", text, {target: 3}, case_group=qid))
+        queries.append(query(qid, split, "lexical", text, {target: 3}, case_group=target))
 
     mixed = [
         ("dev", "mix-d01", "ALPHA-07で為替の値動きを抑える仕組み", "product-alpha-07"),
@@ -541,14 +561,24 @@ def build_queries() -> list[dict[str, Any]]:
         ("dev", "mix-d03", "第25条の面談記録はいつまで残すか", "rule-025"),
         ("dev", "mix-d04", "DELTA-30を長期保有すると指数の逆方向とずれる理由", "product-delta-30"),
         ("dev", "mix-d05", "EXPORT-01で通常管理者だけでは一括出力できない理由", "permission-export-01"),
+        ("dev", "mix-d06", "BETA-10が対象とする顧客と主な価格変動リスク", "product-beta-10"),
+        ("dev", "mix-d07", "E2104が出た後も本人確認前に取引を受けられるか", "operation-e2104"),
+        ("dev", "mix-d08", "第22条で電子交付の何を記録するか", "rule-022"),
+        ("dev", "mix-d09", "API-INGEST-V2が同じ版の文書を拒否する前に確認する項目", "operation-api-ingest-v2"),
+        ("dev", "mix-d10", "DAYS-45で退職者の権限をいつまでに削除するか", "deadline-deletion-45"),
         ("test", "mix-t01", "ALPHA-10を現金化するまでの日数と主な価格変動要因", "product-alpha-10"),
         ("test", "mix-t02", "E4071をテナント条件を外して回避してはいけない理由", "operation-e4071"),
         ("test", "mix-t03", "第29条で新しい手数料を知らせる期限", "rule-029"),
         ("test", "mix-t04", "OMEGA-05で参照指数が下がった場合の元本への影響", "product-omega-05"),
         ("test", "mix-t05", "APPROVE-01でリスク管理部の追加承認が必要になる金額", "permission-approve-01"),
+        ("test", "mix-t06", "GAMMA-02の分配原資と価格を動かす要因", "product-gamma-02"),
+        ("test", "mix-t07", "E4017で再ログインではなく確認すべきもの", "operation-e4017"),
+        ("test", "mix-t08", "第26条で本人確認済みでも代理注文を受けられない条件", "rule-026"),
+        ("test", "mix-t09", "BATCH-DELETE-01が削除候補から除外する記録", "operation-batch-delete-01"),
+        ("test", "mix-t10", "DAYS-4の受渡日が市場休業日と重なった場合", "deadline-settlement-4"),
     ]
     for split, qid, text, target in mixed:
-        queries.append(query(qid, split, "mixed", text, {target: 3}, case_group=qid))
+        queries.append(query(qid, split, "mixed", text, {target: 3}, case_group=target))
 
     negation = [
         ("dev", "neg-d01", "高リスク商品の勧誘を行わなかった高齢顧客の事例", "elderly-case-02"),
@@ -556,22 +586,36 @@ def build_queries() -> list[dict[str, Any]]:
         ("dev", "neg-d03", "一般担当者が変更できない監査記録の項目", "permission-view-01"),
         ("dev", "neg-d04", "顧客注文に先回りした取引ではなかった事例", "market-case-06"),
         ("dev", "neg-d05", "元本保証を望む顧客にも債券の価格変動を説明する必要があるか", "suitability-12"),
+        ("dev", "neg-d06", "年齢基準には達していないが、複雑商品の購入を見送ったため問題にならなかった事例", "elderly-case-04"),
+        ("dev", "neg-d07", "個別損失への対応ではなく、全顧客共通の災害減免だった事例", "comp-case-06"),
+        ("dev", "neg-d08", "未公表情報ではなく、公開済み決算だけで売買した事例", "market-case-02"),
+        ("dev", "neg-d09", "全記録を閲覧できても営業申請を承認できない担当者", "permission-audit-01"),
+        ("dev", "neg-d10", "為替を避けたい顧客へ外貨商品を無条件に勧めてよいか", "suitability-04"),
         ("test", "neg-t01", "投資商品の案内をせず普通預金へ入金した高齢顧客対応", "elderly-case-14"),
         ("test", "neg-t02", "投資損失ではなく事務事故の実費を賠償した事例", "comp-case-08"),
         ("test", "neg-t03", "外部委託先が参照できない情報", "permission-read-02"),
         ("test", "neg-t04", "終値付近の注文だが相場操縦ではなかった事例", "market-case-08"),
         ("test", "neg-t05", "高収益を希望しても商品を理解できなければ販売しない判断", "suitability-08"),
+        ("test", "neg-t06", "高齢者への販売でも、説明と承認がそろい問題がなかった事例", "elderly-case-12"),
+        ("test", "neg-t07", "投資損ではなく、誤った送金案内で生じた費用を補償した事例", "comp-case-10"),
+        ("test", "neg-t08", "家族口座間の取引だが、仮装売買ではなかった事例", "market-case-12"),
+        ("test", "neg-t09", "文書を登録できても検索結果は取得できないAPI権限", "permission-api-10"),
+        ("test", "neg-t10", "取引が多い顧客でも、手数料負担が大きければ乗換えを勧めない判断", "suitability-14"),
     ]
     for split, qid, text, target in negation:
-        queries.append(query(qid, split, "negation_exception", text, {target: 3}, case_group=qid))
+        queries.append(query(qid, split, "negation_exception", text, {target: 3}, case_group=target))
 
     contexts = [
         ("dev", "ctx-d01", "高齢顧客の継続購入で使える簡易承認の前提と例外", "approval-context-elderly"),
         ("dev", "ctx-d02", "夜間に口座を暫定停止した後、いつまでに何をするか", "approval-context-urgent"),
         ("dev", "ctx-d03", "面談記録の保存期間と、調査中に廃棄できない条件", "record-context-interview"),
+        ("dev", "ctx-d04", "非対面販売で記録が中断した場合と、事前確認の対象外になる条件", "approval-context-remote"),
+        ("dev", "ctx-d05", "アクセスログをオンラインから移した後の保存期間と調査時の延長", "record-context-access"),
         ("test", "ctx-t01", "高額取引を分割した場合の判定と承認を省略できる例外", "approval-context-high-value"),
         ("test", "ctx-t02", "顧客が録音を断って勧誘を中止した通話で残す情報", "record-context-call"),
         ("test", "ctx-t03", "作成途中の契約書案を90日後も削除してはいけない条件", "record-context-draft"),
+        ("test", "ctx-t04", "法人の取引担当者について毎回確認する事項と書類を省略できる条件", "approval-context-corporate"),
+        ("test", "ctx-t05", "同意を撤回した後の保存期間と、同意が無効だった場合の扱い", "record-context-consent"),
     ]
     for split, qid, text, parent in contexts:
         ids = [f"{parent}-{index}" for index in range(1, 4)]
@@ -591,25 +635,59 @@ def build_queries() -> list[dict[str, Any]]:
     queries.extend([
         query(
             "strict-d01", "dev", "constraint", "ALPHA-01", {"product-alpha-01": 3},
-            case_group="strict-alpha-01", mode="exact",
+            case_group="product-alpha-01", mode="exact",
             expected_ids=["product-alpha-01"], forbidden_ids=["product-alpha-10"],
         ),
         query(
             "strict-d02", "dev", "constraint", "複雑な仕組債を販売した事例", {"elderly-case-01": 3},
-            case_group="strict-elderly-01", mode="hybrid_filter",
+            case_group="elderly-case-01", mode="hybrid_filter",
             filters={"document_type": "case", "customer_age_gte": 75, "amount_yen_gte": 5_000_000, "case_outcome": "violation"},
             expected_ids=["elderly-case-01"], forbidden_ids=["elderly-case-02", "elderly-case-04"],
         ),
         query(
+            "strict-d03", "dev", "constraint", "BETA-10", {"product-beta-10": 3},
+            case_group="product-beta-10", mode="exact",
+            expected_ids=["product-beta-10"], forbidden_ids=["product-beta-01"],
+        ),
+        query(
+            "strict-d04", "dev", "constraint", "E2041", {"operation-e2041": 3},
+            case_group="operation-e2041", mode="exact",
+            expected_ids=["operation-e2041"], forbidden_ids=["operation-e2104"],
+        ),
+        query(
+            "strict-d05", "dev", "constraint", "500万円以上の問題となった補償事例",
+            {"comp-case-01": 3, "comp-case-07": 3, "comp-case-13": 3, "comp-case-15": 3},
+            case_group="compensation-violation-high-value", mode="hybrid_filter",
+            filters={"document_type": "case", "amount_yen_gte": 5_000_000, "case_outcome": "violation"},
+            expected_ids=["comp-case-01", "comp-case-07", "comp-case-13", "comp-case-15"],
+            forbidden_ids=["comp-case-02", "comp-case-08"],
+        ),
+        query(
             "strict-t01", "test", "constraint", "E1407", {"operation-e1407": 3},
-            case_group="strict-e1407", mode="exact",
+            case_group="operation-e1407", mode="exact",
             expected_ids=["operation-e1407"], forbidden_ids=["operation-e1047", "operation-e1704"],
         ),
         query(
             "strict-t02", "test", "constraint", "高齢顧客へ販売した記録", {"elderly-case-03": 3, "elderly-case-06": 2},
-            case_group="strict-elderly-03", mode="hybrid_filter",
+            case_group="elderly-case-03", mode="hybrid_filter",
             filters={"document_type": "case", "customer_age_gte": 80, "amount_yen_gte": 2_000_000},
             expected_ids=["elderly-case-03"], forbidden_ids=["elderly-case-01", "elderly-case-09"],
+        ),
+        query(
+            "strict-t03", "test", "constraint", "GAMMA-20", {"product-gamma-20": 3},
+            case_group="product-gamma-20", mode="exact",
+            expected_ids=["product-gamma-20"], forbidden_ids=["product-gamma-02"],
+        ),
+        query(
+            "strict-t04", "test", "constraint", "E4107", {"operation-e4107": 3},
+            case_group="operation-e4107", mode="exact",
+            expected_ids=["operation-e4107"], forbidden_ids=["operation-e4017"],
+        ),
+        query(
+            "strict-t05", "test", "constraint", "問題がなかった高額な高齢顧客対応", {"elderly-case-08": 3, "elderly-case-12": 3},
+            case_group="elderly-non-violation-high-value", mode="hybrid_filter",
+            filters={"document_type": "case", "customer_age_gte": 80, "amount_yen_gte": 4_000_000, "case_outcome": "non_violation"},
+            expected_ids=["elderly-case-08", "elderly-case-12"], forbidden_ids=["elderly-case-03", "elderly-case-11"],
         ),
     ])
     return queries
@@ -633,8 +711,8 @@ def main() -> None:
     queries = build_queries()
     if len(documents) != 180:
         raise RuntimeError(f"expected 180 documents, got {len(documents)}")
-    if len(queries) != 50:
-        raise RuntimeError(f"expected 50 queries, got {len(queries)}")
+    if len(queries) != 100:
+        raise RuntimeError(f"expected 100 queries, got {len(queries)}")
 
     CORPUS_PATH.write_text(
         "".join(json.dumps(row, ensure_ascii=False) + "\n" for row in documents),

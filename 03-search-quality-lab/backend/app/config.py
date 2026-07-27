@@ -21,8 +21,8 @@ class Settings:
     enable_rerank: bool = os.getenv("ENABLE_RERANK", "true").lower() in {"1", "true", "yes"}
     top_k: int = int(os.getenv("TOP_K", "5"))
     candidate_size: int = int(os.getenv("CANDIDATE_SIZE", "10"))
-    keyword_weight: float = float(os.getenv("HYBRID_KEYWORD_WEIGHT", "0.5"))
-    vector_weight: float = float(os.getenv("HYBRID_VECTOR_WEIGHT", "0.5"))
+    keyword_weight: float = float(os.getenv("HYBRID_KEYWORD_WEIGHT", "0.6"))
+    vector_weight: float = float(os.getenv("HYBRID_VECTOR_WEIGHT", "0.4"))
     embedding_dimensions: int = 768
     pipeline_name: str = "fin-doc-hybrid-pipeline"
 
