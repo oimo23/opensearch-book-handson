@@ -24,7 +24,9 @@
 - 初回のモデル取得に必要なインターネット接続があること
 - Dockerへ6GB程度のメモリを割り当てられること
 
-初回起動では埋め込みモデル`cl-nagoya/ruri-v3-310m`を取得し、180件の教材チャンクをベクトル化します。`hybrid_rerank`を初めて実行するときは、別途`BAAI/bge-reranker-v2-m3`を取得するため時間がかかります。モデルは再現性のためcommit SHAを固定しています。
+初回起動では埋め込みモデル`cl-nagoya/ruri-v3-310m`を取得し、180件の教材チャンクをベクトル化します。`hybrid_rerank`を初めて実行するときは、別途`BAAI/bge-reranker-v2-m3`を取得するため時間がかかります。
+
+本文の実測結果を再現できるように、OpenSearch、OpenSearch Dashboards、PythonのDockerイメージはdigestまで固定しています。Pythonの直接・間接依存は`backend/requirements.lock.txt`、2つのモデルはcommit SHAで固定しています。これらを更新する場合は、実測レスポンスと評価結果も同時に取り直してください。
 
 ## 起動
 

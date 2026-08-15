@@ -1,6 +1,6 @@
 services:
   opensearch:
-    image: opensearchproject/opensearch:2.19.1
+    image: opensearchproject/opensearch:2.19.1@sha256:72fe2fc84be8295906b8efca020b46c58ed45c8da60cd9b8b49e1991e38e89a4
     container_name: search-quality-opensearch
     environment:
       discovery.type: single-node
@@ -24,7 +24,7 @@ services:
       - search-quality-opensearch-data:/usr/share/opensearch/data
 
   dashboards:
-    image: opensearchproject/opensearch-dashboards:2.19.1
+    image: opensearchproject/opensearch-dashboards:2.19.1@sha256:70fb0a6563f204f391c444329287ce7ac50dbb7b99a43307c047de1fcfb9c658
     container_name: search-quality-dashboards
     depends_on:
       opensearch:
