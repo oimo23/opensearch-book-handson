@@ -11,6 +11,10 @@ from evaluate import request_json
 
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_OUTPUT = ROOT / "docs" / "results" / "controlled-examples.json"
+AUDIT_QUERY = (
+    "高齢顧客への複雑な金融商品の販売で、"
+    "説明不足と管理者承認の欠落が問題になった事例"
+)
 EXAMPLES = [
     {
         "id": "strict-article",
@@ -25,17 +29,25 @@ EXAMPLES = [
         "request": {"query": "第19条", "mode": "exact", "top_k": 3},
     },
     {
-        "id": "hybrid-rerank-before",
-        "request": {"query": "高齢者への勧誘で問題になった事例", "mode": "hybrid", "top_k": 5},
+        "id": "audit-vector",
+        "request": {"query": AUDIT_QUERY, "mode": "vector", "top_k": 5},
     },
     {
-        "id": "hybrid-rerank-after",
-        "request": {"query": "高齢者への勧誘で問題になった事例", "mode": "hybrid_rerank", "top_k": 5},
+        "id": "audit-fulltext",
+        "request": {"query": AUDIT_QUERY, "mode": "fulltext", "top_k": 5},
+    },
+    {
+        "id": "audit-hybrid",
+        "request": {"query": AUDIT_QUERY, "mode": "hybrid", "top_k": 5},
+    },
+    {
+        "id": "audit-hybrid-rerank",
+        "request": {"query": AUDIT_QUERY, "mode": "hybrid_rerank", "top_k": 5},
     },
     {
         "id": "context-restoration",
         "request": {
-            "query": "高額取引を分割した場合の判定と承認を省略できる例外",
+            "query": "高齢顧客の継続購入で使える簡易承認の前提と例外",
             "mode": "hybrid_context",
             "top_k": 3,
         },

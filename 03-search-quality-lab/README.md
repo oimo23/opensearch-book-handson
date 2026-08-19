@@ -106,7 +106,7 @@ curl -s http://localhost:8100/api/search \
 ```bash
 curl -s http://localhost:8100/api/search \
   -H 'Content-Type: application/json' \
-  -d '{"query":"高齢者への勧誘で問題になった事例","mode":"hybrid_rerank","top_k":3}' | jq
+  -d '{"query":"高齢顧客への複雑な金融商品の販売で、説明不足と管理者承認の欠落が問題になった事例","mode":"hybrid_rerank","top_k":3}' | jq
 ```
 
 検索時の候補数は既定で10件です。180件すべてをrerankerへ渡すのではなく、OpenSearchが選んだ10件だけを再整列します。rerankは候補集合を新しく探す処理ではありません。
@@ -116,7 +116,7 @@ curl -s http://localhost:8100/api/search \
 ```bash
 curl -s http://localhost:8100/api/search \
   -H 'Content-Type: application/json' \
-  -d '{"query":"高額取引を分割した場合の判定と承認を省略できる例外","mode":"hybrid_context","top_k":5}' | jq
+  -d '{"query":"高齢顧客の継続購入で使える簡易承認の前提と例外","mode":"hybrid_context","top_k":5}' | jq
 ```
 
 例外チャンクだけでは「この限り」が指す原則を判断できません。`hybrid_context`は検索に当たった子チャンクの`parent_id`を使い、同じ親に属するチャンクを`chunk_order`順で`context_chunks`へ格納します。同じ親文書は検索結果上で1件にまとめます。

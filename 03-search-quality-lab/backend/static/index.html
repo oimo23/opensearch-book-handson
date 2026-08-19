@@ -29,16 +29,16 @@
 
       <section class="scenario-board" aria-label="デモシナリオ">
         <div><b>STRICT MATCH</b><button data-query="第19条" data-mode="vector">vectorでは外れる</button><button data-query="第19条" data-mode="fulltext">BM25では1位</button><button data-query="第19条" data-mode="exact">termで1件に限定</button></div>
-        <div><b>CANDIDATES</b><button data-query="ALPHA-10を現金化するまでの日数と主な価格変動要因" data-mode="vector">意味検索だけ</button><button data-query="ALPHA-10を現金化するまでの日数と主な価格変動要因" data-mode="fulltext">全文検索だけ</button><button data-query="ALPHA-10を現金化するまでの日数と主な価格変動要因" data-mode="hybrid">両方を統合</button></div>
+        <div><b>CANDIDATES</b><button data-query="高齢顧客への複雑な金融商品の販売で、説明不足と管理者承認の欠落が問題になった事例" data-mode="vector">意味検索だけ</button><button data-query="高齢顧客への複雑な金融商品の販売で、説明不足と管理者承認の欠落が問題になった事例" data-mode="fulltext">全文検索だけ</button><button data-query="高齢顧客への複雑な金融商品の販売で、説明不足と管理者承認の欠落が問題になった事例" data-mode="hybrid">両方を統合</button></div>
         <div><b>CONSTRAINTS</b><button data-query="複雑な仕組債を販売した事例" data-mode="hybrid_filter" data-document-type="case" data-age="75" data-amount="5000000" data-outcome="violation">条件をfilterへ分離</button></div>
-        <div><b>RANKING</b><button data-query="高齢者への勧誘で問題になった事例" data-mode="hybrid">hybridでは正解4位</button><button data-query="高齢者への勧誘で問題になった事例" data-mode="hybrid_rerank">rerankで正解1位</button></div>
-        <div><b>CONTEXT</b><button data-query="高額取引を分割した場合の判定と承認を省略できる例外" data-mode="hybrid_context">原則と例外を復元</button></div>
+        <div><b>RANKING</b><button data-query="高齢顧客への複雑な金融商品の販売で、説明不足と管理者承認の欠落が問題になった事例" data-mode="hybrid">hybridでは事例が2位</button><button data-query="高齢顧客への複雑な金融商品の販売で、説明不足と管理者承認の欠落が問題になった事例" data-mode="hybrid_rerank">rerankで事例が1位</button></div>
+        <div><b>CONTEXT</b><button data-query="高齢顧客の継続購入で使える簡易承認の前提と例外" data-mode="hybrid_context">承認の原則と例外を復元</button></div>
       </section>
 
       <section class="workbench">
         <form id="search-form" class="control-panel">
           <div class="step-label"><span>01</span> QUERY</div>
-          <textarea id="query" rows="4">高齢者への勧誘で問題になった事例</textarea>
+          <textarea id="query" rows="4">高齢顧客への複雑な金融商品の販売で、説明不足と管理者承認の欠落が問題になった事例</textarea>
 
           <div class="step-label"><span>02</span> RETRIEVAL</div>
           <div id="mode-grid" class="mode-grid">

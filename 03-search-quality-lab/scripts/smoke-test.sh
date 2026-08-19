@@ -34,14 +34,14 @@ jq -e '[.hits[].id] | index("elderly-case-01") != null' <<<"${filtered}" >/dev/n
 
 reranked="$(curl -fsS -X POST "${LAB_URL}/api/search" \
   -H 'Content-Type: application/json' \
-  -d '{"query":"高齢者への勧誘で問題になった事例","mode":"hybrid_rerank","top_k":5}')"
+  -d '{"query":"高齢顧客への複雑な金融商品の販売で、説明不足と管理者承認の欠落が問題になった事例","mode":"hybrid_rerank","top_k":5}')"
 jq -e '.hits[0].id == "elderly-case-01"' <<<"${reranked}" >/dev/null
 jq -e '.hits[0].rerank_score > .hits[1].rerank_score' <<<"${reranked}" >/dev/null
 jq -e '.total_candidates == 10 and .rerank_ms > 0' <<<"${reranked}" >/dev/null
 
 context="$(curl -fsS -X POST "${LAB_URL}/api/search" \
   -H 'Content-Type: application/json' \
-  -d '{"query":"高額取引を分割した場合の判定と承認を省略できる例外","mode":"hybrid_context","top_k":5}')"
-jq -e '[.hits[] | select(.parent_id == "approval-context-high-value")][0].context_chunks | length == 3' <<<"${context}" >/dev/null
+  -d '{"query":"高齢顧客の継続購入で使える簡易承認の前提と例外","mode":"hybrid_context","top_k":5}')"
+jq -e '[.hits[] | select(.parent_id == "approval-context-elderly")][0].context_chunks | length == 3' <<<"${context}" >/dev/null
 
 echo "financial document search demo smoke test: passed"

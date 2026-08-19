@@ -4,7 +4,8 @@
 
 ## 環境
 
-- 検証日: 2026-07-27
+- test評価日: 2026-07-27
+- 代表例再取得日: 2026-08-19
 - 評価セット: v2
 - OpenSearch: 2.19.1
 - index: `fin-doc-search-demo-v3`
@@ -45,20 +46,24 @@ testセットへ触れる前に、devの意味検索、識別子、混合、否�
 
 `vector`の上位3件には`rule-019`が入りませんでした。`fulltext`では`rule-019`が1位、`rule-019-2`が2位になり、`exact`では`rule-019`の1件だけが返りました。
 
-### rerank
+### 高齢顧客への販売を調べる
 
-問い合わせは「高齢者への勧誘で問題になった事例」です。
+問い合わせは「高齢顧客への複雑な金融商品の販売で、説明不足と管理者承認の欠落が問題になった事例」です。同じ問い合わせで候補生成と順位調整を比較しました。
 
-| 方式 | 正解`elderly-case-01`の順位 |
-|---|---:|
-| `hybrid` | 4位 |
-| `hybrid_rerank` | 1位 |
+| 方式 | 上位3件 |
+|---|---|
+| `vector` | `elderly-case-01`, `rule-019`, `elderly-case-04` |
+| `fulltext` | `rule-019`, `approval-context-elderly-1`, `elderly-case-15` |
+| `hybrid` | `rule-019`, `elderly-case-01`, `approval-context-elderly-1` |
+| `hybrid_rerank` | `elderly-case-01`, `elderly-case-04`, `elderly-case-15` |
 
-代表例では具体的な不適切勧誘事例が上昇しました。ただし、これは仕組みを説明するための例であり、test全体の改善を意味しません。
+`vector`は意味が近い事例を、`fulltext`は問い合わせ中の語を多く含む規程を強く評価しました。`hybrid`は規程、具体事例、承認手続を上位3件へ残しています。問い合わせは「事例」を求めているため、rerank後は`elderly-case-01`が1位になりました。
+
+この代表例では候補の種類と質問意図の違いを観察できます。ただし、test全体ではrerankによって悪化した問い合わせもあるため、適用前の回帰評価が必要です。
 
 ### 文脈復元
 
-高額取引の原則、分割注文の合算、再投資時の例外を3チャンクへ分割しました。`hybrid_context`では同じ`parent_id`を使い、3チャンクすべてを`context_chunks`へ復元しました。
+高齢顧客への販売について、承認の原則、申請項目、継続購入時の簡易承認を3チャンクへ分割しました。`hybrid_context`では同じ`parent_id`を使い、3チャンクすべてを`context_chunks`へ復元しました。
 
 ## 未調整testセットの結果
 
