@@ -7,6 +7,21 @@
 
 本リポジトリには、書籍内で扱うハンズオンの実行コードや手順書をまとめています。
 
+## 紙の本からコマンドを利用する
+
+書籍に掲載したコマンドは、このリポジトリのREADMEからコピーできます。最初にリポジトリを取得してください。
+
+```bash
+git clone https://github.com/oimo23/opensearch-book-handson.git
+cd opensearch-book-handson
+```
+
+各章の手順は次のページにあります。
+
+- [ハンズオン1: ローカルOpenSearchとHugging Faceモデル](./01-local-hf-vector-search/README.md)
+- [ハンズオン2: managed vector ingestion](./02-managed-vector-ingestion/README.md)
+- [ハンズオン3: ベクトル検索の弱点と補完策](./03-search-quality-lab/README.md)
+
 ## 含まれているハンズオン
 
 - `01-local-hf-vector-search`  
@@ -18,6 +33,4 @@
 - `03-search-quality-lab`
   金融文書を模した教材データを使い、ベクトル検索の弱点と、keyword、filter、hybrid、rerankによる補完を比較するハンズオンです。
 
-## 使い方
-
-各ディレクトリの `README.md` に、前提条件と実行手順を記載しています。書籍の該当章を参照しながら進めてください。
+各ディレクトリのREADMEに、前提条件と実行手順を記載しています。書籍の該当章を参照しながら進めてください。

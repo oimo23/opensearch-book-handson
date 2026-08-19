@@ -12,6 +12,17 @@
 
 ![金融文書検索デモの構成](./docs/search-flow.svg)
 
+## リポジトリを取得する
+
+まだリポジトリを取得していない場合は、次の2行を実行します。
+
+```bash
+git clone https://github.com/oimo23/opensearch-book-handson.git
+cd opensearch-book-handson/03-search-quality-lab
+```
+
+すでにclone済みの場合は、このページの「起動」から進めてください。
+
 ## この教材のデータについて
 
 リポジトリに含まれる`data/corpus.jsonl`は、本ハンズオンのために作成した架空の金融文書です。実在の人物、企業、処分、規程を表すものではありません。
@@ -23,6 +34,7 @@
 - Docker Desktopが起動していること
 - 初回のモデル取得に必要なインターネット接続があること
 - Dockerへ6GB程度のメモリを割り当てられること
+- `curl`と`jq`を実行できること
 
 初回起動では埋め込みモデル`cl-nagoya/ruri-v3-310m`を取得し、180件の教材チャンクをベクトル化します。`hybrid_rerank`を初めて実行するときは、別途`BAAI/bge-reranker-v2-m3`を取得するため時間がかかります。
 
@@ -31,7 +43,6 @@
 ## 起動
 
 ```bash
-cd 03-search-quality-lab
 docker compose up --build
 ```
 
