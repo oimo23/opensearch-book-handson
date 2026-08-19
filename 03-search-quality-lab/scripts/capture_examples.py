@@ -15,6 +15,8 @@ AUDIT_QUERY = (
     "高齢顧客への複雑な金融商品の販売で、"
     "説明不足と管理者承認の欠落が問題になった事例"
 )
+SEMANTIC_QUERY = "説明した証拠が残っておらず、後から適切だったか確かめられない高齢者販売"
+IDENTIFIER_QUERY = "CASE-ELDERLY-03"
 EXAMPLES = [
     {
         "id": "strict-article",
@@ -27,6 +29,30 @@ EXAMPLES = [
     {
         "id": "strict-article-exact",
         "request": {"query": "第19条", "mode": "exact", "top_k": 3},
+    },
+    {
+        "id": "coverage-semantic-vector",
+        "request": {"query": SEMANTIC_QUERY, "mode": "vector", "top_k": 10},
+    },
+    {
+        "id": "coverage-semantic-fulltext",
+        "request": {"query": SEMANTIC_QUERY, "mode": "fulltext", "top_k": 10},
+    },
+    {
+        "id": "coverage-semantic-hybrid",
+        "request": {"query": SEMANTIC_QUERY, "mode": "hybrid", "top_k": 10},
+    },
+    {
+        "id": "coverage-identifier-vector",
+        "request": {"query": IDENTIFIER_QUERY, "mode": "vector", "top_k": 10},
+    },
+    {
+        "id": "coverage-identifier-fulltext",
+        "request": {"query": IDENTIFIER_QUERY, "mode": "fulltext", "top_k": 10},
+    },
+    {
+        "id": "coverage-identifier-hybrid",
+        "request": {"query": IDENTIFIER_QUERY, "mode": "hybrid", "top_k": 10},
     },
     {
         "id": "audit-vector",
@@ -78,7 +104,7 @@ def compact(response: dict) -> dict:
             for key in ("embedding_ms", "search_ms", "rerank_ms", "context_ms", "total_ms")
         },
         "total_candidates": response["total_candidates"],
-        "request_body": response["request_body"],
+        "request_body": omit_vector_values(response["request_body"]),
         "hits": [
             {
                 "rank": hit["rank"],
@@ -92,6 +118,19 @@ def compact(response: dict) -> dict:
             for hit in response["hits"]
         ],
     }
+
+
+def omit_vector_values(value):
+    if isinstance(value, dict):
+        return {
+            key: "[embedding vector omitted]"
+            if key == "vector" and isinstance(item, list)
+            else omit_vector_values(item)
+            for key, item in value.items()
+        }
+    if isinstance(value, list):
+        return [omit_vector_values(item) for item in value]
+    return value
 
 
 def main() -> None:
