@@ -29,16 +29,16 @@
 
       <section class="scenario-board" aria-label="デモシナリオ">
         <div><b>STRICT MATCH</b><button data-query="第19条" data-mode="vector">vectorでは外れる</button><button data-query="第19条" data-mode="fulltext">BM25では1位</button><button data-query="第19条" data-mode="exact">termで1件に限定</button></div>
-        <div><b>CANDIDATES</b><button data-query="高齢顧客への複雑な金融商品の販売で、説明不足と管理者承認の欠落が同時に問題になった事例と、関連する販売規程を調べたい" data-mode="vector">意味検索だけ</button><button data-query="高齢顧客への複雑な金融商品の販売で、説明不足と管理者承認の欠落が同時に問題になった事例と、関連する販売規程を調べたい" data-mode="fulltext">全文検索だけ</button><button data-query="高齢顧客への複雑な金融商品の販売で、説明不足と管理者承認の欠落が同時に問題になった事例と、関連する販売規程を調べたい" data-mode="hybrid">両方を統合</button></div>
+        <div><b>CANDIDATES</b><button data-query="高齢者への販売について、後日になって対応の妥当性を裏付けられない事例" data-mode="vector" data-document-type="case" data-age="75">意味検索だけ</button><button data-query="高齢者への販売について、後日になって対応の妥当性を裏付けられない事例" data-mode="fulltext" data-document-type="case" data-age="75">全文検索だけ</button><button data-query="高齢者への販売について、後日になって対応の妥当性を裏付けられない事例" data-mode="hybrid" data-document-type="case" data-age="75">両方を統合</button></div>
         <div><b>CONSTRAINTS</b><button data-query="複雑な仕組債を販売した事例" data-mode="hybrid_filter" data-document-type="case" data-age="75" data-amount="5000000" data-outcome="violation">条件をfilterへ分離</button></div>
-        <div><b>RANKING</b><button data-query="説明した証拠が残っておらず、後から適切だったか確かめられない高齢者販売" data-mode="hybrid" data-document-type="case" data-age="75" data-outcome="violation">filter後のhybrid</button><button data-query="説明した証拠が残っておらず、後から適切だったか確かめられない高齢者販売" data-mode="hybrid_rerank" data-document-type="case" data-age="75" data-outcome="violation">同じ候補をrerank</button></div>
+        <div><b>RANKING</b><button data-query="高齢者への販売について、後日になって対応の妥当性を裏付けられない事例" data-mode="hybrid" data-document-type="case" data-age="75">filter後のhybrid</button><button data-query="高齢者への販売について、後日になって対応の妥当性を裏付けられない事例" data-mode="hybrid_rerank" data-document-type="case" data-age="75">同じ10件をrerank</button></div>
         <div><b>CONTEXT</b><button data-query="高齢顧客の継続購入で使える簡易承認の前提と例外" data-mode="hybrid_context">承認の原則と例外を復元</button></div>
       </section>
 
       <section class="workbench">
         <form id="search-form" class="control-panel">
           <div class="step-label"><span>01</span> QUERY</div>
-          <textarea id="query" rows="4">高齢顧客への複雑な金融商品の販売で、説明不足と管理者承認の欠落が同時に問題になった事例と、関連する販売規程を調べたい</textarea>
+          <textarea id="query" rows="4">高齢者への販売について、後日になって対応の妥当性を裏付けられない事例</textarea>
 
           <div class="step-label"><span>02</span> RETRIEVAL</div>
           <div id="mode-grid" class="mode-grid">
@@ -53,9 +53,9 @@
 
           <div class="step-label"><span>03</span> STRUCTURED FILTER</div>
           <div class="filter-grid">
-            <label>文書種別<select id="document-type"><option value="">指定なし</option><option value="case">事例</option><option value="rule">規程</option><option value="product">商品</option><option value="procedure">手順</option></select></label>
+            <label>文書種別<select id="document-type"><option value="">指定なし</option><option value="case" selected>事例</option><option value="rule">規程</option><option value="product">商品</option><option value="procedure">手順</option></select></label>
             <label>判定<select id="case-outcome"><option value="">指定なし</option><option value="violation">問題あり</option><option value="non_violation">問題なし</option></select></label>
-            <label>顧客年齢の下限<input id="customer-age" type="number" min="0" max="130" placeholder="例: 75" /></label>
+            <label>顧客年齢の下限<input id="customer-age" type="number" min="0" max="130" value="75" placeholder="例: 75" /></label>
             <label>金額の下限（円）<input id="amount-yen" type="number" min="0" placeholder="例: 5000000" /></label>
           </div>
 

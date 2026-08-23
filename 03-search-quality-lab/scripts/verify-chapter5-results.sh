@@ -53,13 +53,14 @@ jq -e '[.hits[].id] | index("elderly-case-03") == 0' "${tmp_dir}/identifier-full
 jq -e '[.hits[].id] | index("elderly-case-03") == 0' "${tmp_dir}/identifier-hybrid.json" >/dev/null
 
 echo '[4/7] 監査問い合わせの候補生成を確認します'
-audit_query='高齢顧客への複雑な金融商品の販売で、説明不足と管理者承認の欠落が同時に問題になった事例と、関連する販売規程を調べたい'
-search audit-vector "{\"query\":\"${audit_query}\",\"mode\":\"vector\",\"top_k\":3}"
-search audit-fulltext "{\"query\":\"${audit_query}\",\"mode\":\"fulltext\",\"top_k\":3}"
-search audit-hybrid "{\"query\":\"${audit_query}\",\"mode\":\"hybrid\",\"top_k\":3}"
-assert_ids audit-vector '["elderly-case-15", "elderly-case-05", "elderly-case-01"]'
-assert_ids audit-fulltext '["rule-019", "elderly-case-15", "approval-context-elderly-1"]'
-assert_ids audit-hybrid '["elderly-case-15", "rule-019", "elderly-case-01"]'
+audit_query='高齢者への販売について、後日になって対応の妥当性を裏付けられない事例'
+audit_filters='"filters":{"document_type":"case","customer_age_gte":75}'
+search audit-vector "{\"query\":\"${audit_query}\",\"mode\":\"vector\",\"top_k\":10,${audit_filters}}"
+search audit-fulltext "{\"query\":\"${audit_query}\",\"mode\":\"fulltext\",\"top_k\":10,${audit_filters}}"
+search audit-hybrid "{\"query\":\"${audit_query}\",\"mode\":\"hybrid\",\"top_k\":10,${audit_filters}}"
+assert_ids audit-vector '["elderly-case-02", "elderly-case-03", "elderly-case-15", "elderly-case-10", "elderly-case-11", "elderly-case-07", "elderly-case-08", "elderly-case-05", "elderly-case-06", "elderly-case-12"]'
+assert_ids audit-fulltext '["elderly-case-11", "elderly-case-01", "elderly-case-02", "elderly-case-03", "elderly-case-05", "elderly-case-06", "elderly-case-07", "elderly-case-08", "elderly-case-10", "elderly-case-12"]'
+assert_ids audit-hybrid '["elderly-case-11", "elderly-case-02", "elderly-case-03", "elderly-case-15", "elderly-case-10", "elderly-case-07", "elderly-case-08", "elderly-case-05", "elderly-case-06", "elderly-case-12"]'
 
 echo '[5/7] 構造化filterを確認します'
 search filtered '{"query":"複雑な仕組債を販売した事例","mode":"hybrid_filter","top_k":5,"filters":{"document_type":"case","customer_age_gte":75,"amount_yen_gte":5000000,"case_outcome":"violation"}}'
@@ -69,13 +70,12 @@ jq -e '[.hits[0:3][].id] == ["elderly-case-01", "elderly-case-07", "elderly-case
   "${tmp_dir}/filtered.json" >/dev/null
 
 echo '[6/7] filter後の同じ候補をrerankすることを確認します。初回はモデル取得中も画面に進捗が出ません'
-ranking_query='説明した証拠が残っておらず、後から適切だったか確かめられない高齢者販売'
-ranking_filters='"filters":{"document_type":"case","customer_age_gte":75,"case_outcome":"violation"}'
-search ranking-hybrid "{\"query\":\"${ranking_query}\",\"mode\":\"hybrid\",\"top_k\":6,${ranking_filters}}"
-search ranking-rerank "{\"query\":\"${ranking_query}\",\"mode\":\"hybrid_rerank\",\"top_k\":6,${ranking_filters}}"
-assert_ids ranking-hybrid '["elderly-case-15", "elderly-case-07", "elderly-case-03", "elderly-case-01", "elderly-case-05", "elderly-case-11"]'
-assert_ids ranking-rerank '["elderly-case-03", "elderly-case-01", "elderly-case-05", "elderly-case-15", "elderly-case-07", "elderly-case-11"]'
-jq -e '.hits[0].rerank_score > .hits[1].rerank_score and .total_candidates == 6' \
+search ranking-rerank "{\"query\":\"${audit_query}\",\"mode\":\"hybrid_rerank\",\"top_k\":10,${audit_filters}}"
+assert_ids ranking-rerank '["elderly-case-03", "elderly-case-02", "elderly-case-11", "elderly-case-05", "elderly-case-07", "elderly-case-15", "elderly-case-10", "elderly-case-06", "elderly-case-08", "elderly-case-12"]'
+jq -e '.hits[0].rerank_score > .hits[1].rerank_score and .total_candidates == 10' \
+  "${tmp_dir}/ranking-rerank.json" >/dev/null
+jq -e --slurpfile before "${tmp_dir}/audit-hybrid.json" \
+  '([.hits[].id] | sort) == ([$before[0].hits[].id] | sort)' \
   "${tmp_dir}/ranking-rerank.json" >/dev/null
 
 echo '[7/7] 前後チャンクの復元を確認します'

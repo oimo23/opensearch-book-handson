@@ -101,69 +101,59 @@ curl -s http://localhost:8100/api/search \
 
 `vector`の上位10件には`rule-019`が含まれません。`fulltext`は分析済みの`text`フィールドをBM25で検索し、`rule-019`と`rule-019-2`を候補に残します。`exact`は`identifiers.raw`を`term` queryで検索するため、`rule-019`だけが返ります。
 
-## 2. ハイブリッド検索で候補を集める
+## 2. 同じ問い合わせで候補生成を比較する
+
+監査担当者が「高齢者への販売について、後日になって対応の妥当性を裏付けられない事例」を探します。文書種別と年齢だけをfilterへ分け、問題あり・問題なしの両方を検索対象に残します。
 
 ```bash
 curl -s http://localhost:8100/api/search \
   -H 'Content-Type: application/json' \
-  -d '{"query":"高齢顧客への複雑な金融商品の販売で、説明不足と管理者承認の欠落が同時に問題になった事例と、関連する販売規程を調べたい","mode":"hybrid","top_k":3}' \
+  -d '{
+    "query":"高齢者への販売について、後日になって対応の妥当性を裏付けられない事例",
+    "mode":"hybrid",
+    "top_k":10,
+    "filters":{"document_type":"case","customer_age_gte":75}
+  }' \
   | jq '{mode, hits: [.hits[] | {rank, id, score}]}'
 ```
 
-上位3件は`elderly-case-15`、`rule-019`、`elderly-case-01`です。説明・承認記録が不足した事例と関連規程の両方が上位3件へ残ります。APIレスポンスの`request_body`には、実際にOpenSearchへ送った`hybrid`クエリが入ります。画面下部の「OpenSearchへ送ったリクエストを見る」でも確認できます。
+`mode`を`vector`、`fulltext`、`hybrid`へ切り替えると、確認方法の記録がない`elderly-case-03`はそれぞれ2位、4位、3位です。この問い合わせだけを見るとvectorが最上位であり、hybridが常に勝つわけではありません。hybridでは対象事例を候補10件へ残し、次のrerankへ渡します。
 
-## 3. filterで厳密条件を分離する
-
-```bash
-curl -s http://localhost:8100/api/search \
-  -H 'Content-Type: application/json' \
-  -d '{
-    "query": "複雑な仕組債を販売した事例",
-    "mode": "hybrid_filter",
-    "top_k": 5,
-    "filters": {
-      "document_type": "case",
-      "customer_age_gte": 75,
-      "amount_yen_gte": 5000000,
-      "case_outcome": "violation"
-    }
-  }' \
-  | jq '{mode, hits: [.hits[] | {rank, id, customer_age, amount_yen, document_type, case_outcome}]}'
-```
-
-文書種別、年齢、金額、判定のような厳密条件は、自然文に混ぜず`filter`として渡します。この例では全文検索側とk-NN側の両方へ同じfilterを適用しています。上位3件は`elderly-case-01`、`elderly-case-07`、`elderly-case-05`で、すべて指定条件を満たします。
-
-## 4. filter後の事例をrerankする
-
-監査対象を「75歳以上」「問題あり」「顧客対応事例」に限定したうえで、その中から「説明した証拠がなく、後から適切だったか確かめられない販売」を探します。まず、rerank前の順位を確認します。
+## 3. 同じ10件をrerankする
 
 ```bash
 curl -s http://localhost:8100/api/search \
   -H 'Content-Type: application/json' \
   -d '{
-    "query":"説明した証拠が残っておらず、後から適切だったか確かめられない高齢者販売",
-    "mode":"hybrid",
-    "top_k":6,
-    "filters":{"document_type":"case","customer_age_gte":75,"case_outcome":"violation"}
-  }' \
-  | jq '{mode, hits: [.hits[] | {rank, id, score, rerank_score}]}'
-
-curl -s http://localhost:8100/api/search \
-  -H 'Content-Type: application/json' \
-  -d '{
-    "query":"説明した証拠が残っておらず、後から適切だったか確かめられない高齢者販売",
+    "query":"高齢者への販売について、後日になって対応の妥当性を裏付けられない事例",
     "mode":"hybrid_rerank",
-    "top_k":6,
-    "filters":{"document_type":"case","customer_age_gte":75,"case_outcome":"violation"}
+    "top_k":10,
+    "filters":{"document_type":"case","customer_age_gte":75}
   }' \
   | jq '{mode, hits: [.hits[] | {rank, id, score, rerank_score}]}'
 ```
 
-filterに合う6件は両リクエストで同じです。hybridでは`elderly-case-03`が3位ですが、rerank後は1位になります。`elderly-case-03`は「確認方法の記録がなく事後検証できない」事例です。上位だった`elderly-case-15`と`elderly-case-07`はリスク説明自体が不足した事例であり、rerankerは記録の欠落という問い合わせとの違いを順位へ反映しました。
+hybridと同じ10件をrerankerへ渡すと、`elderly-case-03`が3位から1位になります。問題なしの`elderly-case-02`も2位に残ります。rerankは業務上の判定を保証せず、候補の順序だけを変えることを確認できます。
 
-候補数の上限は10件ですが、この例ではfilterに合う6件だけをrerankerへ渡します。rerankは検索対象を変更せず、同じ候補を再整列する処理です。
+`verify-chapter5-results.sh`は、rerank前後の文書IDをソートして比較し、候補集合が同じであることも検査します。
 
-初回はrerankerを取得するため、`curl`に1分から数分ほど応答がない場合があります。途中で停止せずに待ってください。
+## 4. 判定済みデータを厳密条件で絞る
+
+過去に問題ありと判定済みの事例だけを検索する場合は、判定結果もfilterへ指定できます。これは問題事例を新たに発見する検索ではなく、構造化済みの判定を使った絞り込みです。
+
+```bash
+curl -s http://localhost:8100/api/search \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "query":"複雑な仕組債を販売した事例",
+    "mode":"hybrid_filter",
+    "top_k":5,
+    "filters":{"document_type":"case","customer_age_gte":75,"amount_yen_gte":5000000,"case_outcome":"violation"}
+  }' \
+  | jq '{mode, hits: [.hits[] | {rank, id, customer_age, amount_yen, case_outcome}]}'
+```
+
+全文検索側とk-NN側の両方へ同じfilterが適用され、返る文書はすべて指定条件を満たします。アクセス権、テナントID、公開状態も同様に、検索結果が必ず守る条件としてfilterへ渡します。
 
 ## 5. 前後チャンクを復元する
 

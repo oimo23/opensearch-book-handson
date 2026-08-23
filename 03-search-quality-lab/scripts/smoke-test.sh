@@ -32,12 +32,22 @@ filtered="$(curl -fsS -X POST "${LAB_URL}/api/search" \
 jq -e 'all(.hits[]; .document_type == "case" and .customer_age >= 75 and .amount_yen >= 5000000 and .case_outcome == "violation")' <<<"${filtered}" >/dev/null
 jq -e '[.hits[].id] | index("elderly-case-01") != null' <<<"${filtered}" >/dev/null
 
+ranking_query='高齢者への販売について、後日になって対応の妥当性を裏付けられない事例'
+ranking_filters='"filters":{"document_type":"case","customer_age_gte":75}'
+
+ranking_hybrid="$(curl -fsS -X POST "${LAB_URL}/api/search" \
+  -H 'Content-Type: application/json' \
+  -d "{\"query\":\"${ranking_query}\",\"mode\":\"hybrid\",\"top_k\":10,${ranking_filters}}")"
+jq -e '.hits[2].id == "elderly-case-03" and .total_candidates == 10' <<<"${ranking_hybrid}" >/dev/null
+
 reranked="$(curl -fsS -X POST "${LAB_URL}/api/search" \
   -H 'Content-Type: application/json' \
-  -d '{"query":"説明した証拠が残っておらず、後から適切だったか確かめられない高齢者販売","mode":"hybrid_rerank","filters":{"document_type":"case","customer_age_gte":75,"case_outcome":"violation"},"top_k":5}')"
+  -d "{\"query\":\"${ranking_query}\",\"mode\":\"hybrid_rerank\",\"top_k\":10,${ranking_filters}}")"
 jq -e '.hits[0].id == "elderly-case-03"' <<<"${reranked}" >/dev/null
 jq -e '.hits[0].rerank_score > .hits[1].rerank_score' <<<"${reranked}" >/dev/null
-jq -e '.total_candidates == 6 and .rerank_ms > 0' <<<"${reranked}" >/dev/null
+jq -e '.total_candidates == 10 and .rerank_ms > 0' <<<"${reranked}" >/dev/null
+jq -e --argjson before "$(jq '[.hits[].id] | sort' <<<"${ranking_hybrid}")" \
+  '([.hits[].id] | sort) == $before' <<<"${reranked}" >/dev/null
 
 context="$(curl -fsS -X POST "${LAB_URL}/api/search" \
   -H 'Content-Type: application/json' \

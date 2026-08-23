@@ -11,11 +11,11 @@ from evaluate import request_json
 
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_OUTPUT = ROOT / "docs" / "results" / "controlled-examples.json"
-AUDIT_QUERY = (
-    "高齢顧客への複雑な金融商品の販売で、"
-    "説明不足と管理者承認の欠落が同時に問題になった事例と、"
-    "関連する販売規程を調べたい"
-)
+AUDIT_QUERY = "高齢者への販売について、後日になって対応の妥当性を裏付けられない事例"
+AUDIT_FILTERS = {
+    "document_type": "case",
+    "customer_age_gte": 75,
+}
 SEMANTIC_QUERY = "説明した証拠が残っておらず、後から適切だったか確かめられない高齢者販売"
 IDENTIFIER_QUERY = "CASE-ELDERLY-03"
 EXAMPLES = [
@@ -57,40 +57,47 @@ EXAMPLES = [
     },
     {
         "id": "audit-vector",
-        "request": {"query": AUDIT_QUERY, "mode": "vector", "top_k": 5},
+        "request": {
+            "query": AUDIT_QUERY,
+            "mode": "vector",
+            "top_k": 10,
+            "filters": AUDIT_FILTERS,
+        },
     },
     {
         "id": "audit-fulltext",
-        "request": {"query": AUDIT_QUERY, "mode": "fulltext", "top_k": 5},
+        "request": {
+            "query": AUDIT_QUERY,
+            "mode": "fulltext",
+            "top_k": 10,
+            "filters": AUDIT_FILTERS,
+        },
     },
     {
         "id": "audit-hybrid",
-        "request": {"query": AUDIT_QUERY, "mode": "hybrid", "top_k": 5},
+        "request": {
+            "query": AUDIT_QUERY,
+            "mode": "hybrid",
+            "top_k": 10,
+            "filters": AUDIT_FILTERS,
+        },
     },
     {
         "id": "filtered-ranking-hybrid",
         "request": {
-            "query": SEMANTIC_QUERY,
+            "query": AUDIT_QUERY,
             "mode": "hybrid",
-            "top_k": 6,
-            "filters": {
-                "document_type": "case",
-                "customer_age_gte": 75,
-                "case_outcome": "violation",
-            },
+            "top_k": 10,
+            "filters": AUDIT_FILTERS,
         },
     },
     {
         "id": "filtered-ranking-rerank",
         "request": {
-            "query": SEMANTIC_QUERY,
+            "query": AUDIT_QUERY,
             "mode": "hybrid_rerank",
-            "top_k": 6,
-            "filters": {
-                "document_type": "case",
-                "customer_age_gte": 75,
-                "case_outcome": "violation",
-            },
+            "top_k": 10,
+            "filters": AUDIT_FILTERS,
         },
     },
     {
