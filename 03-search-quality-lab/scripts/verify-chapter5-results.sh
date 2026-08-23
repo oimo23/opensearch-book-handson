@@ -53,11 +53,11 @@ jq -e '[.hits[].id] | index("elderly-case-03") == 0' "${tmp_dir}/identifier-full
 jq -e '[.hits[].id] | index("elderly-case-03") == 0' "${tmp_dir}/identifier-hybrid.json" >/dev/null
 
 echo '[4/7] 監査問い合わせの候補生成を確認します'
-audit_query='高齢顧客への複雑な金融商品の販売で、説明不足と管理者承認の欠落が問題になった事例'
+audit_query='高齢顧客への複雑な金融商品の販売で、説明不足と管理者承認の欠落が同時に問題になった事例と、関連する販売規程を調べたい'
 search audit-vector "{\"query\":\"${audit_query}\",\"mode\":\"vector\",\"top_k\":3}"
 search audit-fulltext "{\"query\":\"${audit_query}\",\"mode\":\"fulltext\",\"top_k\":3}"
 search audit-hybrid "{\"query\":\"${audit_query}\",\"mode\":\"hybrid\",\"top_k\":3}"
-assert_ids audit-vector '["elderly-case-15", "elderly-case-07", "elderly-case-01"]'
+assert_ids audit-vector '["elderly-case-15", "elderly-case-05", "elderly-case-01"]'
 assert_ids audit-fulltext '["rule-019", "elderly-case-15", "approval-context-elderly-1"]'
 assert_ids audit-hybrid '["elderly-case-15", "rule-019", "elderly-case-01"]'
 

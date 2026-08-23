@@ -106,11 +106,11 @@ curl -s http://localhost:8100/api/search \
 ```bash
 curl -s http://localhost:8100/api/search \
   -H 'Content-Type: application/json' \
-  -d '{"query":"高齢顧客への複雑な金融商品の販売で、説明不足と管理者承認の欠落が問題になった事例","mode":"hybrid","top_k":3}' \
+  -d '{"query":"高齢顧客への複雑な金融商品の販売で、説明不足と管理者承認の欠落が同時に問題になった事例と、関連する販売規程を調べたい","mode":"hybrid","top_k":3}' \
   | jq '{mode, hits: [.hits[] | {rank, id, score}]}'
 ```
 
-上位3件は`elderly-case-15`、`rule-019`、`elderly-case-01`です。APIレスポンスの`request_body`には、実際にOpenSearchへ送った`hybrid`クエリが入ります。画面下部の「OpenSearchへ送ったリクエストを見る」でも確認できます。
+上位3件は`elderly-case-15`、`rule-019`、`elderly-case-01`です。説明・承認記録が不足した事例と関連規程の両方が上位3件へ残ります。APIレスポンスの`request_body`には、実際にOpenSearchへ送った`hybrid`クエリが入ります。画面下部の「OpenSearchへ送ったリクエストを見る」でも確認できます。
 
 ## 3. filterで厳密条件を分離する
 

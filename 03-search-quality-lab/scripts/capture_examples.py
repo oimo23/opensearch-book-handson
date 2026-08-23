@@ -13,7 +13,8 @@ ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_OUTPUT = ROOT / "docs" / "results" / "controlled-examples.json"
 AUDIT_QUERY = (
     "高齢顧客への複雑な金融商品の販売で、"
-    "説明不足と管理者承認の欠落が問題になった事例"
+    "説明不足と管理者承認の欠落が同時に問題になった事例と、"
+    "関連する販売規程を調べたい"
 )
 SEMANTIC_QUERY = "説明した証拠が残っておらず、後から適切だったか確かめられない高齢者販売"
 IDENTIFIER_QUERY = "CASE-ELDERLY-03"

@@ -1,5 +1,5 @@
 {
-  "captured_at": "2026-08-23T17:06:46+09:00",
+  "captured_at": "2026-08-23T22:41:29+09:00",
   "health": {
     "status": "ok",
     "index_name": "fin-doc-search-demo-v3",
@@ -28,11 +28,11 @@
         "query": "第19条",
         "mode": "vector",
         "timings": {
-          "embedding_ms": 475,
-          "search_ms": 14,
+          "embedding_ms": 144,
+          "search_ms": 15,
           "rerank_ms": 0,
           "context_ms": 0,
-          "total_ms": 489
+          "total_ms": 159
         },
         "total_candidates": 10,
         "request_body": {
@@ -76,7 +76,7 @@
             "id": "record-context-draft-3",
             "title": "記録管理細則 2025年版",
             "body": "係争の証拠として指定された草案は90日を過ぎても削除対象から除外します。",
-            "score": 0.908338,
+            "score": 0.90833795,
             "rerank_score": null,
             "context_chunks": []
           },
@@ -104,10 +104,10 @@
         "mode": "fulltext",
         "timings": {
           "embedding_ms": 0,
-          "search_ms": 8,
+          "search_ms": 4,
           "rerank_ms": 0,
           "context_ms": 0,
-          "total_ms": 8
+          "total_ms": 4
         },
         "total_candidates": 2,
         "request_body": {
@@ -173,10 +173,10 @@
         "mode": "exact",
         "timings": {
           "embedding_ms": 0,
-          "search_ms": 6,
+          "search_ms": 3,
           "rerank_ms": 0,
           "context_ms": 0,
-          "total_ms": 6
+          "total_ms": 3
         },
         "total_candidates": 1,
         "request_body": {
@@ -226,11 +226,11 @@
         "query": "説明した証拠が残っておらず、後から適切だったか確かめられない高齢者販売",
         "mode": "vector",
         "timings": {
-          "embedding_ms": 452,
-          "search_ms": 14,
+          "embedding_ms": 95,
+          "search_ms": 7,
           "rerank_ms": 0,
           "context_ms": 0,
-          "total_ms": 466
+          "total_ms": 103
         },
         "total_candidates": 10,
         "request_body": {
@@ -265,7 +265,7 @@
             "id": "elderly-case-03",
             "title": "顧客対応事例 2024-03",
             "body": "82歳の顧客へ投資信託を販売した面談には家族が同席しました。しかし、損失リスクをどのように確認したか記録がなく、事後検証できない点が問題となりました。",
-            "score": 0.94082147,
+            "score": 0.9408214,
             "rerank_score": null,
             "context_chunks": []
           },
@@ -283,7 +283,7 @@
             "id": "elderly-case-15",
             "title": "顧客対応事例 2024-15",
             "body": "78歳の顧客へ外貨建て商品を販売した際、管理者承認は記録されていました。為替手数料は説明しましたが為替差損の可能性を説明しておらず、重要なリスク説明の欠落が問題となりました。",
-            "score": 0.93758667,
+            "score": 0.93758655,
             "rerank_score": null,
             "context_chunks": []
           },
@@ -337,7 +337,7 @@
             "id": "elderly-case-01",
             "title": "顧客対応事例 2024-01",
             "body": "担当者は78歳の顧客へ複雑な仕組債を販売しました。元本割れの条件を十分に説明せず、家族同席も提案せず、管理者承認の記録もなかったため不適切な勧誘と判断されました。",
-            "score": 0.9281292,
+            "score": 0.9281291,
             "rerank_score": null,
             "context_chunks": []
           },
@@ -365,10 +365,10 @@
         "mode": "fulltext",
         "timings": {
           "embedding_ms": 0,
-          "search_ms": 15,
+          "search_ms": 6,
           "rerank_ms": 0,
           "context_ms": 0,
-          "total_ms": 15
+          "total_ms": 6
         },
         "total_candidates": 10,
         "request_body": {
@@ -505,11 +505,11 @@
         "query": "説明した証拠が残っておらず、後から適切だったか確かめられない高齢者販売",
         "mode": "hybrid",
         "timings": {
-          "embedding_ms": 515,
-          "search_ms": 24,
+          "embedding_ms": 101,
+          "search_ms": 12,
           "rerank_ms": 0,
           "context_ms": 0,
-          "total_ms": 539
+          "total_ms": 113
         },
         "total_candidates": 10,
         "request_body": {
@@ -561,7 +561,7 @@
             "id": "elderly-case-15",
             "title": "顧客対応事例 2024-15",
             "body": "78歳の顧客へ外貨建て商品を販売した際、管理者承認は記録されていました。為替手数料は説明しましたが為替差損の可能性を説明しておらず、重要なリスク説明の欠落が問題となりました。",
-            "score": 0.90136003,
+            "score": 0.90135777,
             "rerank_score": null,
             "context_chunks": []
           },
@@ -570,7 +570,7 @@
             "id": "elderly-case-07",
             "title": "顧客対応事例 2024-07",
             "body": "77歳の顧客に対し、担当者は期限前償還だけを強調して仕組債を販売しました。管理者承認は記録されていましたが、参照指数下落時の損失を説明しておらず、説明内容が不十分でした。",
-            "score": 0.730602,
+            "score": 0.73060286,
             "rerank_score": null,
             "context_chunks": []
           },
@@ -588,7 +588,7 @@
             "id": "elderly-case-02",
             "title": "顧客対応事例 2024-02",
             "body": "76歳の顧客から高リスク商品の購入希望がありましたが、理解が十分でないと判断して勧誘を行いませんでした。後日、家族同席で低リスク商品を説明しており、不適切勧誘には該当しません。",
-            "score": 0.38408417,
+            "score": 0.38408443,
             "rerank_score": null,
             "context_chunks": []
           },
@@ -597,7 +597,7 @@
             "id": "rule-019",
             "title": "顧客保護規程 2025年版",
             "body": "高齢顧客へ複雑な金融商品を勧誘する場合は、商品のリスク、手数料、途中解約時の取扱いを説明し、理解度の確認記録を5年間保存します。75歳以上では管理者の事前承認も必要です。",
-            "score": 0.34465393,
+            "score": 0.34465548,
             "rerank_score": null,
             "context_chunks": []
           },
@@ -615,7 +615,7 @@
             "id": "elderly-case-06",
             "title": "顧客対応事例 2024-06",
             "body": "80歳の顧客へ国内債券商品を案内し、家族同席で価格変動と換金期間を説明しました。理解度確認と管理者承認が記録され、手続上の問題は認められませんでした。",
-            "score": 0.31882855,
+            "score": 0.3188287,
             "rerank_score": null,
             "context_chunks": []
           },
@@ -624,7 +624,7 @@
             "id": "elderly-case-01",
             "title": "顧客対応事例 2024-01",
             "body": "担当者は78歳の顧客へ複雑な仕組債を販売しました。元本割れの条件を十分に説明せず、家族同席も提案せず、管理者承認の記録もなかったため不適切な勧誘と判断されました。",
-            "score": 0.16202472,
+            "score": 0.16202115,
             "rerank_score": null,
             "context_chunks": []
           },
@@ -642,7 +642,7 @@
             "id": "rule-019-2",
             "title": "顧客保護規程 2025年版",
             "body": "第19条の2は、高齢顧客が自ら継続購入を申し出た場合の確認手順を定めます。前回購入から6か月以内でも、理解度と資産状況を改めて確認しなければなりません。",
-            "score": 0.08025918,
+            "score": 0.080259554,
             "rerank_score": null,
             "context_chunks": []
           }
@@ -660,11 +660,11 @@
         "query": "CASE-ELDERLY-03",
         "mode": "vector",
         "timings": {
-          "embedding_ms": 455,
-          "search_ms": 15,
+          "embedding_ms": 88,
+          "search_ms": 8,
           "rerank_ms": 0,
           "context_ms": 0,
-          "total_ms": 470
+          "total_ms": 97
         },
         "total_candidates": 10,
         "request_body": {
@@ -799,10 +799,10 @@
         "mode": "fulltext",
         "timings": {
           "embedding_ms": 0,
-          "search_ms": 7,
+          "search_ms": 3,
           "rerank_ms": 0,
           "context_ms": 0,
-          "total_ms": 7
+          "total_ms": 3
         },
         "total_candidates": 1,
         "request_body": {
@@ -858,11 +858,11 @@
         "query": "CASE-ELDERLY-03",
         "mode": "hybrid",
         "timings": {
-          "embedding_ms": 553,
-          "search_ms": 21,
+          "embedding_ms": 90,
+          "search_ms": 6,
           "rerank_ms": 0,
           "context_ms": 0,
-          "total_ms": 574
+          "total_ms": 96
         },
         "total_candidates": 10,
         "request_body": {
@@ -1005,19 +1005,19 @@
     {
       "id": "audit-vector",
       "request": {
-        "query": "高齢顧客への複雑な金融商品の販売で、説明不足と管理者承認の欠落が問題になった事例",
+        "query": "高齢顧客への複雑な金融商品の販売で、説明不足と管理者承認の欠落が同時に問題になった事例と、関連する販売規程を調べたい",
         "mode": "vector",
         "top_k": 5
       },
       "response": {
-        "query": "高齢顧客への複雑な金融商品の販売で、説明不足と管理者承認の欠落が問題になった事例",
+        "query": "高齢顧客への複雑な金融商品の販売で、説明不足と管理者承認の欠落が同時に問題になった事例と、関連する販売規程を調べたい",
         "mode": "vector",
         "timings": {
-          "embedding_ms": 530,
-          "search_ms": 18,
+          "embedding_ms": 124,
+          "search_ms": 5,
           "rerank_ms": 0,
           "context_ms": 0,
-          "total_ms": 548
+          "total_ms": 129
         },
         "total_candidates": 10,
         "request_body": {
@@ -1052,16 +1052,16 @@
             "id": "elderly-case-15",
             "title": "顧客対応事例 2024-15",
             "body": "78歳の顧客へ外貨建て商品を販売した際、管理者承認は記録されていました。為替手数料は説明しましたが為替差損の可能性を説明しておらず、重要なリスク説明の欠落が問題となりました。",
-            "score": 0.95702547,
+            "score": 0.95677006,
             "rerank_score": null,
             "context_chunks": []
           },
           {
             "rank": 2,
-            "id": "elderly-case-07",
-            "title": "顧客対応事例 2024-07",
-            "body": "77歳の顧客に対し、担当者は期限前償還だけを強調して仕組債を販売しました。管理者承認は記録されていましたが、参照指数下落時の損失を説明しておらず、説明内容が不十分でした。",
-            "score": 0.95384085,
+            "id": "elderly-case-05",
+            "title": "顧客対応事例 2024-05",
+            "body": "79歳の顧客へ値動きの大きい海外株式商品を販売しました。損失リスクの説明と理解度確認は記録されていましたが、管理者承認の記録がなかったため手続違反と判断されました。",
+            "score": 0.9560118,
             "rerank_score": null,
             "context_chunks": []
           },
@@ -1070,25 +1070,25 @@
             "id": "elderly-case-01",
             "title": "顧客対応事例 2024-01",
             "body": "担当者は78歳の顧客へ複雑な仕組債を販売しました。元本割れの条件を十分に説明せず、家族同席も提案せず、管理者承認の記録もなかったため不適切な勧誘と判断されました。",
-            "score": 0.9537375,
+            "score": 0.95438457,
             "rerank_score": null,
             "context_chunks": []
           },
           {
             "rank": 4,
-            "id": "elderly-case-05",
-            "title": "顧客対応事例 2024-05",
-            "body": "79歳の顧客へ値動きの大きい海外株式商品を販売しました。損失リスクの説明と理解度確認は記録されていましたが、管理者承認の記録がなかったため手続違反と判断されました。",
-            "score": 0.95083296,
+            "id": "rule-019",
+            "title": "顧客保護規程 2025年版",
+            "body": "高齢顧客へ複雑な金融商品を勧誘する場合は、商品のリスク、手数料、途中解約時の取扱いを説明し、理解度の確認記録を5年間保存します。75歳以上では管理者の事前承認も必要です。",
+            "score": 0.95289,
             "rerank_score": null,
             "context_chunks": []
           },
           {
             "rank": 5,
-            "id": "elderly-case-11",
-            "title": "顧客対応事例 2024-11",
-            "body": "75歳の顧客への販売で管理者承認はありましたが、承認後に投資金額が1000万円へ変更されていました。変更後の資産状況を確認しなかったため手続違反となりました。",
-            "score": 0.94942456,
+            "id": "elderly-case-07",
+            "title": "顧客対応事例 2024-07",
+            "body": "77歳の顧客に対し、担当者は期限前償還だけを強調して仕組債を販売しました。管理者承認は記録されていましたが、参照指数下落時の損失を説明しておらず、説明内容が不十分でした。",
+            "score": 0.9528372,
             "rerank_score": null,
             "context_chunks": []
           }
@@ -1098,19 +1098,19 @@
     {
       "id": "audit-fulltext",
       "request": {
-        "query": "高齢顧客への複雑な金融商品の販売で、説明不足と管理者承認の欠落が問題になった事例",
+        "query": "高齢顧客への複雑な金融商品の販売で、説明不足と管理者承認の欠落が同時に問題になった事例と、関連する販売規程を調べたい",
         "mode": "fulltext",
         "top_k": 5
       },
       "response": {
-        "query": "高齢顧客への複雑な金融商品の販売で、説明不足と管理者承認の欠落が問題になった事例",
+        "query": "高齢顧客への複雑な金融商品の販売で、説明不足と管理者承認の欠落が同時に問題になった事例と、関連する販売規程を調べたい",
         "mode": "fulltext",
         "timings": {
           "embedding_ms": 0,
-          "search_ms": 16,
+          "search_ms": 6,
           "rerank_ms": 0,
           "context_ms": 0,
-          "total_ms": 17
+          "total_ms": 6
         },
         "total_candidates": 10,
         "request_body": {
@@ -1132,7 +1132,7 @@
           ],
           "query": {
             "multi_match": {
-              "query": "高齢顧客への複雑な金融商品の販売で、説明不足と管理者承認の欠落が問題になった事例",
+              "query": "高齢顧客への複雑な金融商品の販売で、説明不足と管理者承認の欠落が同時に問題になった事例と、関連する販売規程を調べたい",
               "fields": [
                 "title^2",
                 "body",
@@ -1148,7 +1148,7 @@
             "id": "rule-019",
             "title": "顧客保護規程 2025年版",
             "body": "高齢顧客へ複雑な金融商品を勧誘する場合は、商品のリスク、手数料、途中解約時の取扱いを説明し、理解度の確認記録を5年間保存します。75歳以上では管理者の事前承認も必要です。",
-            "score": 36.759357,
+            "score": 37.668888,
             "rerank_score": null,
             "context_chunks": []
           },
@@ -1157,7 +1157,7 @@
             "id": "elderly-case-15",
             "title": "顧客対応事例 2024-15",
             "body": "78歳の顧客へ外貨建て商品を販売した際、管理者承認は記録されていました。為替手数料は説明しましたが為替差損の可能性を説明しておらず、重要なリスク説明の欠落が問題となりました。",
-            "score": 33.788967,
+            "score": 32.87225,
             "rerank_score": null,
             "context_chunks": []
           },
@@ -1166,7 +1166,7 @@
             "id": "approval-context-elderly-1",
             "title": "承認手続細則 2025年版",
             "body": "75歳以上の顧客へ複雑な金融商品を勧誘する場合は、原則として管理者の事前承認を受けます。",
-            "score": 30.969046,
+            "score": 32.112152,
             "rerank_score": null,
             "context_chunks": []
           },
@@ -1175,7 +1175,7 @@
             "id": "elderly-case-11",
             "title": "顧客対応事例 2024-11",
             "body": "75歳の顧客への販売で管理者承認はありましたが、承認後に投資金額が1000万円へ変更されていました。変更後の資産状況を確認しなかったため手続違反となりました。",
-            "score": 26.278027,
+            "score": 28.78768,
             "rerank_score": null,
             "context_chunks": []
           },
@@ -1184,7 +1184,7 @@
             "id": "elderly-case-01",
             "title": "顧客対応事例 2024-01",
             "body": "担当者は78歳の顧客へ複雑な仕組債を販売しました。元本割れの条件を十分に説明せず、家族同席も提案せず、管理者承認の記録もなかったため不適切な勧誘と判断されました。",
-            "score": 24.984768,
+            "score": 27.49442,
             "rerank_score": null,
             "context_chunks": []
           }
@@ -1194,19 +1194,19 @@
     {
       "id": "audit-hybrid",
       "request": {
-        "query": "高齢顧客への複雑な金融商品の販売で、説明不足と管理者承認の欠落が問題になった事例",
+        "query": "高齢顧客への複雑な金融商品の販売で、説明不足と管理者承認の欠落が同時に問題になった事例と、関連する販売規程を調べたい",
         "mode": "hybrid",
         "top_k": 5
       },
       "response": {
-        "query": "高齢顧客への複雑な金融商品の販売で、説明不足と管理者承認の欠落が問題になった事例",
+        "query": "高齢顧客への複雑な金融商品の販売で、説明不足と管理者承認の欠落が同時に問題になった事例と、関連する販売規程を調べたい",
         "mode": "hybrid",
         "timings": {
-          "embedding_ms": 530,
-          "search_ms": 22,
+          "embedding_ms": 114,
+          "search_ms": 8,
           "rerank_ms": 0,
           "context_ms": 0,
-          "total_ms": 552
+          "total_ms": 122
         },
         "total_candidates": 10,
         "request_body": {
@@ -1231,7 +1231,7 @@
               "queries": [
                 {
                   "multi_match": {
-                    "query": "高齢顧客への複雑な金融商品の販売で、説明不足と管理者承認の欠落が問題になった事例",
+                    "query": "高齢顧客への複雑な金融商品の販売で、説明不足と管理者承認の欠落が同時に問題になった事例と、関連する販売規程を調べたい",
                     "fields": [
                       "title^2",
                       "body",
@@ -1258,7 +1258,7 @@
             "id": "elderly-case-15",
             "title": "顧客対応事例 2024-15",
             "body": "78歳の顧客へ外貨建て商品を販売した際、管理者承認は記録されていました。為替手数料は説明しましたが為替差損の可能性を説明しておらず、重要なリスク説明の欠落が問題となりました。",
-            "score": 0.90924335,
+            "score": 0.85303795,
             "rerank_score": null,
             "context_chunks": []
           },
@@ -1267,7 +1267,7 @@
             "id": "rule-019",
             "title": "顧客保護規程 2025年版",
             "body": "高齢顧客へ複雑な金融商品を勧誘する場合は、商品のリスク、手数料、途中解約時の取扱いを説明し、理解度の確認記録を5年間保存します。75歳以上では管理者の事前承認も必要です。",
-            "score": 0.68544716,
+            "score": 0.8286617,
             "rerank_score": null,
             "context_chunks": []
           },
@@ -1276,16 +1276,16 @@
             "id": "elderly-case-01",
             "title": "顧客対応事例 2024-01",
             "body": "担当者は78歳の顧客へ複雑な仕組債を販売しました。元本割れの条件を十分に説明せず、家族同席も提案せず、管理者承認の記録もなかったため不適切な勧誘と判断されました。",
-            "score": 0.5240104,
+            "score": 0.58292913,
             "rerank_score": null,
             "context_chunks": []
           },
           {
             "rank": 4,
-            "id": "approval-context-elderly-1",
-            "title": "承認手続細則 2025年版",
-            "body": "75歳以上の顧客へ複雑な金融商品を勧誘する場合は、原則として管理者の事前承認を受けます。",
-            "score": 0.44318104,
+            "id": "elderly-case-05",
+            "title": "顧客対応事例 2024-05",
+            "body": "79歳の顧客へ値動きの大きい海外株式商品を販売しました。損失リスクの説明と理解度確認は記録されていましたが、管理者承認の記録がなかったため手続違反と判断されました。",
+            "score": 0.5041871,
             "rerank_score": null,
             "context_chunks": []
           },
@@ -1294,7 +1294,7 @@
             "id": "elderly-case-11",
             "title": "顧客対応事例 2024-11",
             "body": "75歳の顧客への販売で管理者承認はありましたが、承認後に投資金額が1000万円へ変更されていました。変更後の資産状況を確認しなかったため手続違反となりました。",
-            "score": 0.41106048,
+            "score": 0.5004232,
             "rerank_score": null,
             "context_chunks": []
           }
@@ -1317,11 +1317,11 @@
         "query": "説明した証拠が残っておらず、後から適切だったか確かめられない高齢者販売",
         "mode": "hybrid",
         "timings": {
-          "embedding_ms": 520,
-          "search_ms": 22,
+          "embedding_ms": 93,
+          "search_ms": 9,
           "rerank_ms": 0,
           "context_ms": 0,
-          "total_ms": 542
+          "total_ms": 101
         },
         "total_candidates": 6,
         "request_body": {
@@ -1489,11 +1489,11 @@
         "query": "説明した証拠が残っておらず、後から適切だったか確かめられない高齢者販売",
         "mode": "hybrid_rerank",
         "timings": {
-          "embedding_ms": 460,
-          "search_ms": 21,
-          "rerank_ms": 5183,
+          "embedding_ms": 92,
+          "search_ms": 6,
+          "rerank_ms": 2217,
           "context_ms": 0,
-          "total_ms": 5665
+          "total_ms": 2314
         },
         "total_candidates": 6,
         "request_body": {
@@ -1656,11 +1656,11 @@
         "query": "高齢顧客の継続購入で使える簡易承認の前提と例外",
         "mode": "hybrid_context",
         "timings": {
-          "embedding_ms": 596,
-          "search_ms": 22,
+          "embedding_ms": 181,
+          "search_ms": 17,
           "rerank_ms": 0,
-          "context_ms": 8,
-          "total_ms": 626
+          "context_ms": 9,
+          "total_ms": 207
         },
         "total_candidates": 10,
         "request_body": {
@@ -1770,11 +1770,11 @@
         "query": "複雑な仕組債を販売した事例",
         "mode": "hybrid_filter",
         "timings": {
-          "embedding_ms": 358,
-          "search_ms": 17,
+          "embedding_ms": 87,
+          "search_ms": 7,
           "rerank_ms": 0,
           "context_ms": 0,
-          "total_ms": 375
+          "total_ms": 94
         },
         "total_candidates": 5,
         "request_body": {
