@@ -6,7 +6,7 @@
 - `fulltext`: BM25による全文検索
 - `exact`: `keyword`型フィールドを`term` queryで完全一致
 - `hybrid`: 全文検索とベクトル検索を正規化して統合
-- `hybrid_filter`: ハイブリッド検索の候補を文書名で限定
+- `hybrid_filter`: ハイブリッド検索の候補を構造化条件で限定
 - `hybrid_rerank`: ハイブリッド検索の上位候補を多言語rerankerで再整列
 - `hybrid_context`: ハイブリッド検索後に同じ親の前後チャンクを復元
 
@@ -110,7 +110,7 @@ curl -s http://localhost:8100/api/search \
   | jq '{mode, hits: [.hits[] | {rank, id, score}]}'
 ```
 
-上位3件は`rule-019`、`elderly-case-01`、`approval-context-elderly-1`です。APIレスポンスの`request_body`には、実際にOpenSearchへ送った`hybrid`クエリが入ります。画面下部の「OpenSearchへ送ったリクエストを見る」でも確認できます。
+上位3件は`elderly-case-15`、`rule-019`、`elderly-case-01`です。APIレスポンスの`request_body`には、実際にOpenSearchへ送った`hybrid`クエリが入ります。画面下部の「OpenSearchへ送ったリクエストを見る」でも確認できます。
 
 ## 3. filterで厳密条件を分離する
 
@@ -133,16 +133,35 @@ curl -s http://localhost:8100/api/search \
 
 文書種別、年齢、金額、判定のような厳密条件は、自然文に混ぜず`filter`として渡します。この例では全文検索側とk-NN側の両方へ同じfilterを適用しています。上位3件は`elderly-case-01`、`elderly-case-07`、`elderly-case-05`で、すべて指定条件を満たします。
 
-## 4. rerankで具体事例を上位へ移す
+## 4. filter後の事例をrerankする
+
+監査対象を「75歳以上」「問題あり」「顧客対応事例」に限定したうえで、その中から「説明した証拠がなく、後から適切だったか確かめられない販売」を探します。まず、rerank前の順位を確認します。
 
 ```bash
 curl -s http://localhost:8100/api/search \
   -H 'Content-Type: application/json' \
-  -d '{"query":"高齢顧客への複雑な金融商品の販売で、説明不足と管理者承認の欠落が問題になった事例","mode":"hybrid_rerank","top_k":3}' \
-  | jq '{mode, hits: [.hits[] | {rank, id, score, rerank_score, case_outcome}]}'
+  -d '{
+    "query":"説明した証拠が残っておらず、後から適切だったか確かめられない高齢者販売",
+    "mode":"hybrid",
+    "top_k":6,
+    "filters":{"document_type":"case","customer_age_gte":75,"case_outcome":"violation"}
+  }' \
+  | jq '{mode, hits: [.hits[] | {rank, id, score, rerank_score}]}'
+
+curl -s http://localhost:8100/api/search \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "query":"説明した証拠が残っておらず、後から適切だったか確かめられない高齢者販売",
+    "mode":"hybrid_rerank",
+    "top_k":6,
+    "filters":{"document_type":"case","customer_age_gte":75,"case_outcome":"violation"}
+  }' \
+  | jq '{mode, hits: [.hits[] | {rank, id, score, rerank_score}]}'
 ```
 
-検索時の候補数は既定で10件です。180件すべてをrerankerへ渡すのではなく、OpenSearchが選んだ10件だけを再整列します。上位3件は`elderly-case-01`、`elderly-case-04`、`elderly-case-15`です。rerankは候補集合を新しく探す処理ではありません。
+filterに合う6件は両リクエストで同じです。hybridでは`elderly-case-03`が3位ですが、rerank後は1位になります。`elderly-case-03`は「確認方法の記録がなく事後検証できない」事例です。上位だった`elderly-case-15`と`elderly-case-07`はリスク説明自体が不足した事例であり、rerankerは記録の欠落という問い合わせとの違いを順位へ反映しました。
+
+候補数の上限は10件ですが、この例ではfilterに合う6件だけをrerankerへ渡します。rerankは検索対象を変更せず、同じ候補を再整列する処理です。
 
 初回はrerankerを取得するため、`curl`に1分から数分ほど応答がない場合があります。途中で停止せずに待ってください。
 
@@ -173,7 +192,7 @@ python3 scripts/evaluate.py \
 
 カテゴリ別のHit Rate@3、Hit Rate@10、MRR@5、NDCG@5を出力します。文脈問い合わせでは正しい親文書を上位3件で取得できた割合、Context Completeness、展開した文脈のprecisionを分けて記録します。filterでは返却された全hitが構造化条件へ適合することを検査します。
 
-初期の50問版は`data/evaluation_queries-v1.json`、実測結果は`docs/results/test-results-v1.json`へ保存しています。
+初期の50問版は`data/evaluation_queries-v1.json`、100問へ拡張したv2は`data/evaluation_queries-v2.json`へ保存しています。対応する実測結果も`docs/results/test-results-v1.json`と`docs/results/test-results-v2.json`に残しています。
 
 データ自体を検証する場合:
 

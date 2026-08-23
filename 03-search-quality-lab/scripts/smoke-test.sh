@@ -34,10 +34,10 @@ jq -e '[.hits[].id] | index("elderly-case-01") != null' <<<"${filtered}" >/dev/n
 
 reranked="$(curl -fsS -X POST "${LAB_URL}/api/search" \
   -H 'Content-Type: application/json' \
-  -d '{"query":"高齢顧客への複雑な金融商品の販売で、説明不足と管理者承認の欠落が問題になった事例","mode":"hybrid_rerank","top_k":5}')"
-jq -e '.hits[0].id == "elderly-case-01"' <<<"${reranked}" >/dev/null
+  -d '{"query":"説明した証拠が残っておらず、後から適切だったか確かめられない高齢者販売","mode":"hybrid_rerank","filters":{"document_type":"case","customer_age_gte":75,"case_outcome":"violation"},"top_k":5}')"
+jq -e '.hits[0].id == "elderly-case-03"' <<<"${reranked}" >/dev/null
 jq -e '.hits[0].rerank_score > .hits[1].rerank_score' <<<"${reranked}" >/dev/null
-jq -e '.total_candidates == 10 and .rerank_ms > 0' <<<"${reranked}" >/dev/null
+jq -e '.total_candidates == 6 and .rerank_ms > 0' <<<"${reranked}" >/dev/null
 
 context="$(curl -fsS -X POST "${LAB_URL}/api/search" \
   -H 'Content-Type: application/json' \

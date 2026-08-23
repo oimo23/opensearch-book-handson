@@ -51,6 +51,24 @@ class BuildQueryTest(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "structured filter"):
             build_query(request, [0.0] * 768, 10)
 
+    def test_hybrid_rerank_applies_filters_before_reranking(self) -> None:
+        request = SearchRequest(
+            query="説明と承認の両方に不備がある事例",
+            mode=SearchMode.HYBRID_RERANK,
+            filters=SearchFilters(document_type="case", case_outcome="violation"),
+        )
+        built = build_query(request, [0.0] * 768, 10)
+        keyword, vector = built.body["query"]["hybrid"]["queries"]
+        expected = [
+            {"term": {"document_type": "case"}},
+            {"term": {"case_outcome": "violation"}},
+        ]
+        self.assertEqual(keyword["bool"]["filter"], expected)
+        self.assertEqual(
+            vector["knn"]["body_vector"]["filter"],
+            {"bool": {"filter": expected}},
+        )
+
 
 if __name__ == "__main__":
     unittest.main()

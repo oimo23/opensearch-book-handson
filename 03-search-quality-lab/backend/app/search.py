@@ -112,9 +112,9 @@ def build_query(
         }
     }
     vector_options: dict[str, Any] = {"vector": query_vector, "k": candidate_size}
-    if request.mode is SearchMode.HYBRID_FILTER:
-        if not filter_clauses:
-            raise ValueError("hybrid_filter requires at least one structured filter")
+    if request.mode is SearchMode.HYBRID_FILTER and not filter_clauses:
+        raise ValueError("hybrid_filter requires at least one structured filter")
+    if filter_clauses:
         keyword_query = {"bool": {"must": [keyword_query], "filter": filter_clauses}}
         vector_options["filter"] = filter_clause
 

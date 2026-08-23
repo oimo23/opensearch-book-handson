@@ -67,8 +67,30 @@ EXAMPLES = [
         "request": {"query": AUDIT_QUERY, "mode": "hybrid", "top_k": 5},
     },
     {
-        "id": "audit-hybrid-rerank",
-        "request": {"query": AUDIT_QUERY, "mode": "hybrid_rerank", "top_k": 5},
+        "id": "filtered-ranking-hybrid",
+        "request": {
+            "query": SEMANTIC_QUERY,
+            "mode": "hybrid",
+            "top_k": 6,
+            "filters": {
+                "document_type": "case",
+                "customer_age_gte": 75,
+                "case_outcome": "violation",
+            },
+        },
+    },
+    {
+        "id": "filtered-ranking-rerank",
+        "request": {
+            "query": SEMANTIC_QUERY,
+            "mode": "hybrid_rerank",
+            "top_k": 6,
+            "filters": {
+                "document_type": "case",
+                "customer_age_gte": 75,
+                "case_outcome": "violation",
+            },
+        },
     },
     {
         "id": "context-restoration",

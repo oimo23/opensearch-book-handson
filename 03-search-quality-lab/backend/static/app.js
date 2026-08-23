@@ -50,15 +50,6 @@ function renderResults(data) {
   resultsBox.hidden = false
   requestDetails.hidden = false
   document.querySelector('#result-title').textContent = `${data.mode} / 上位${data.hits.length}件`
-  document.querySelector('#took').textContent = `${data.took_ms} ms`
-  const timingGrid = document.querySelector('#timing-grid')
-  timingGrid.hidden = false
-  timingGrid.innerHTML = [
-    ['EMBED', data.embedding_ms],
-    ['SEARCH', data.search_ms],
-    ['RERANK', data.rerank_ms],
-    ['CONTEXT', data.context_ms],
-  ].map(([label, value]) => `<span><b>${value} ms</b><small>${label}</small></span>`).join('')
   document.querySelector('#request-json').textContent = JSON.stringify(data.request_body, null, 2)
 
   resultsBox.replaceChildren()
