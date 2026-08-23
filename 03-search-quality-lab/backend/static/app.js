@@ -1,9 +1,10 @@
 const form = document.querySelector('#search-form')
 const queryInput = document.querySelector('#query')
 const documentType = document.querySelector('#document-type')
-const customerAge = document.querySelector('#customer-age')
-const amountYen = document.querySelector('#amount-yen')
-const caseOutcome = document.querySelector('#case-outcome')
+const productCategory = document.querySelector('#product-category')
+const firmwareMajor = document.querySelector('#firmware-major')
+const deviceAgeMonths = document.querySelector('#device-age-months')
+const supportOutcome = document.querySelector('#support-outcome')
 const submitButton = document.querySelector('#submit')
 const errorBox = document.querySelector('#form-error')
 const emptyState = document.querySelector('#empty-state')
@@ -63,9 +64,10 @@ function renderResults(data) {
       : `<div class="context-block"><strong>RESTORED CONTEXT</strong>${hit.context_chunks.map((chunk) => `<p><b>${chunk.chunk_order}</b> ${escapeHtml(chunk.body)}</p>`).join('')}</div>`
     const attributes = [
       hit.document_type,
-      hit.customer_age === null ? null : `${hit.customer_age}歳`,
-      hit.amount_yen === null ? null : `${hit.amount_yen.toLocaleString()}円`,
-      hit.case_outcome,
+      hit.product_category,
+      hit.firmware_major === null ? null : `FW ${hit.firmware_major}`,
+      hit.device_age_months === null ? null : `使用${hit.device_age_months}か月`,
+      hit.support_outcome,
     ].filter(Boolean).map((value) => `<span>${escapeHtml(String(value))}</span>`).join('')
     article.innerHTML = `
       <div class="rank">${String(hit.rank).padStart(2, '0')}</div>
@@ -92,9 +94,10 @@ async function runSearch() {
     mode,
     filters: {
       document_type: documentType.value || null,
-      customer_age_gte: customerAge.value ? Number(customerAge.value) : null,
-      amount_yen_gte: amountYen.value ? Number(amountYen.value) : null,
-      case_outcome: caseOutcome.value || null,
+      product_category: productCategory.value || null,
+      firmware_major_gte: firmwareMajor.value ? Number(firmwareMajor.value) : null,
+      device_age_months_gte: deviceAgeMonths.value ? Number(deviceAgeMonths.value) : null,
+      support_outcome: supportOutcome.value || null,
     },
   }
   if (!body.query) return showError('質問を入力してください。')
@@ -132,9 +135,10 @@ document.querySelectorAll('.scenario-board button').forEach((button) => {
     queryInput.value = button.dataset.query
     chooseMode(button.dataset.mode)
     documentType.value = button.dataset.documentType || ''
-    customerAge.value = button.dataset.age || ''
-    amountYen.value = button.dataset.amount || ''
-    caseOutcome.value = button.dataset.outcome || ''
+    productCategory.value = button.dataset.productCategory || ''
+    firmwareMajor.value = button.dataset.firmware || ''
+    deviceAgeMonths.value = button.dataset.deviceAge || ''
+    supportOutcome.value = button.dataset.outcome || ''
     void runSearch()
   })
 })

@@ -1,33 +1,23 @@
-# ハンズオン3: ベクトル検索の弱点を補完するデモ
+# ハンズオン3: ベクトル検索の弱点を補完する
 
-第5章「ベクトル検索の限界と実務上の補完策」に対応するハンズオンです。金融文書を模した180チャンクのコーパスに対して、検索方式による順位と取得文脈の違いを比較します。
+第5章「ベクトル検索の限界と実務上の補完策」に対応するハンズオンです。架空の家電メーカーが持つ製品情報、エラーコード、サポート事例、保証条件など180チャンクを検索し、問い合わせに応じて検索方式を使い分けます。
 
 - `vector`: ベクトル検索のみ
 - `fulltext`: BM25による全文検索
 - `exact`: `keyword`型フィールドを`term` queryで完全一致
 - `hybrid`: 全文検索とベクトル検索を正規化して統合
-- `hybrid_filter`: ハイブリッド検索の候補を構造化条件で限定
-- `hybrid_rerank`: ハイブリッド検索の上位候補を多言語rerankerで再整列
-- `hybrid_context`: ハイブリッド検索後に同じ親の前後チャンクを復元
+- `hybrid_filter`: 構造化条件で絞ってからハイブリッド検索
+- `hybrid_rerank`: ハイブリッド検索の上位10件をrerankerで再整列
+- `hybrid_context`: 検索後に同じ親文書の前後チャンクを復元
 
-![金融文書検索デモの構成](./docs/search-flow.svg)
+![家電サポート文書検索の構成](./docs/search-flow.svg)
 
 ## リポジトリを取得する
 
-まだリポジトリを取得していない場合は、次の2行を実行します。
-
 ```bash
 git clone https://github.com/oimo23/opensearch-book-handson.git
-cd opensearch-book-handson
+cd opensearch-book-handson/03-search-quality-lab
 ```
-
-以降のコマンドは、リポジトリのルートディレクトリから実行します。すでにclone済みの場合は、リポジトリのルートディレクトリへ移動してから進めてください。
-
-## この教材のデータについて
-
-リポジトリに含まれる`data/corpus.jsonl`は、本ハンズオンのために作成した架空の金融文書です。実在の人物、企業、処分、規程を表すものではありません。
-
-元の`fin-doc`検証アプリではHugging Face上の`TheFinAI/OCR_Task_JA`を利用していましたが、同データセットのカードには非商用目的の説明があります。そのため、商業版の読者向けリポジトリには同データセット、PDF、加工済みSQLiteを含めていません。詳しくは[DATA_SOURCES.md](./DATA_SOURCES.md)を参照してください。
 
 ## 事前条件
 
@@ -35,203 +25,164 @@ cd opensearch-book-handson
 - 初回のモデル取得に必要なインターネット接続があること
 - Dockerへ6GB程度のメモリを割り当てられること
 - `curl`と`jq`を実行できること
-- 評価スクリプトも実行する場合はPython 3.10以上を利用できること
+- 評価スクリプトも使う場合はPython 3.10以上があること
 
-初回起動では埋め込みモデル`cl-nagoya/ruri-v3-310m`を取得し、180件の教材チャンクをベクトル化します。`hybrid_rerank`を初めて実行するときは、別途`BAAI/bge-reranker-v2-m3`を取得するため時間がかかります。
+初回起動では埋め込みモデル`cl-nagoya/ruri-v3-310m`を取得し、180チャンクをベクトル化します。`hybrid_rerank`を初めて実行するときは`BAAI/bge-reranker-v2-m3`も取得します。
 
-本文の実測結果を再現できるように、OpenSearch、OpenSearch Dashboards、PythonのDockerイメージはdigestまで固定しています。Pythonの直接・間接依存は`backend/requirements.lock.txt`、2つのモデルはcommit SHAで固定しています。これらを更新する場合は、実測レスポンスと評価結果も同時に取り直してください。
+再現条件を揃えるため、OpenSearch、OpenSearch Dashboards、PythonのDockerイメージはdigestまで、Python依存とモデルはバージョンまたはcommit SHAまで固定しています。モデルのライセンスは[THIRD_PARTY_NOTICES.md](./THIRD_PARTY_NOTICES.md)を参照してください。
 
-## 起動
+## 起動と確認
 
 ```bash
-cd 03-search-quality-lab
 docker compose up --build
 ```
 
-このコマンドはログを表示し続けます。以降のコマンドは、別のターミナルを開いて`opensearch-book-handson/03-search-quality-lab`へ移動してから実行してください。
+別のターミナルから次のURLを開けます。
 
-起動後は次を開きます。
-
-- 金融文書検索デモ: http://localhost:8100
+- 家電サポート文書検索デモ: http://localhost:8100
 - OpenSearch Dashboards: http://localhost:5601
 - OpenSearch API: http://localhost:9200
 
-起動確認:
+APIの起動確認:
 
 ```bash
 curl -s http://localhost:8100/api/health | jq
 ```
 
-7方式の基本動作をまとめて検証する場合:
+7方式の基本動作を確認:
 
 ```bash
 ./scripts/smoke-test.sh
 ```
 
-本文に掲載した主要な順位をまとめて確認する場合:
+第5章の主要結果を確認:
 
 ```bash
 ./scripts/verify-chapter5-results.sh
 ```
 
-`第5章の主要な実測結果を再現できました。`と表示されれば成功です。初回のrerankではモデルを取得するため、1分から数分ほど出力が止まる場合があります。
+初回のrerankではモデルの取得と読み込みに時間がかかることがあります。
 
-## 1. 専門用語を含む問い合わせを比較する
+## ケース1: 型番と症状を両方使う
 
-第5章と同じ問い合わせを、ベクトル検索、全文検索、ハイブリッド検索の順に実行します。
+`WM-A410でE42が出たときの給水エラーの対処`を3方式で検索します。
 
 ```bash
 for mode in vector fulltext hybrid; do
   curl -s http://localhost:8100/api/search \
     -H 'Content-Type: application/json' \
-    -d "{\"query\":\"OMEGA-05で参照指数が下がった場合の元本への影響\",\"mode\":\"${mode}\",\"top_k\":3}" \
-    | jq '{mode, hits: [.hits[] | {rank, id, score}]}'
+    -d "{\"query\":\"WM-A410でE42が出たときの給水エラーの対処\",\"mode\":\"${mode}\",\"top_k\":5}" \
+    | jq '{mode, hits: [.hits[] | {rank, id, title, score}]}'
 done
 ```
 
-`product-omega-05`は、`vector`では3位、`fulltext`と`hybrid`では1位です。`vector`の1位は、意味が近い別商品の`product-delta-03`になります。
+正解の`error-wm-a410-e42`は、ベクトル検索では修理事例の後の2位、全文検索とハイブリッド検索では1位です。ベクトル検索は「給水できない」という意味を拾いますが、型番とエラーコードの一致を最優先にはしません。ハイブリッド検索は、文字列一致と意味の近さの両方を候補生成へ使います。
 
-## 2. 監査問い合わせの候補を比較する
-
-監査担当者が「高齢者への販売について、後日になって対応の妥当性を裏付けられない事例」を探します。文書種別と年齢だけをfilterへ分け、問題あり・問題なしの両方を検索対象に残します。
-
-```bash
-curl -s http://localhost:8100/api/search \
-  -H 'Content-Type: application/json' \
-  -d '{
-    "query":"高齢者への販売について、後日になって対応の妥当性を裏付けられない事例",
-    "mode":"hybrid",
-    "top_k":10,
-    "filters":{"document_type":"case","customer_age_gte":75}
-  }' \
-  | jq '{mode, hits: [.hits[] | {rank, id, score}]}'
-```
-
-`mode`を`vector`、`fulltext`、`hybrid`へ切り替えると、確認方法の記録がない`elderly-case-03`はそれぞれ2位、4位、3位です。この問い合わせだけを見るとvectorが最上位であり、hybridが常に勝つわけではありません。hybridでは対象事例を候補10件へ残し、次のrerankへ渡します。
-
-## 3. 同じ10件をrerankする
-
-```bash
-curl -s http://localhost:8100/api/search \
-  -H 'Content-Type: application/json' \
-  -d '{
-    "query":"高齢者への販売について、後日になって対応の妥当性を裏付けられない事例",
-    "mode":"hybrid_rerank",
-    "top_k":10,
-    "filters":{"document_type":"case","customer_age_gte":75}
-  }' \
-  | jq '{mode, hits: [.hits[] | {rank, id, score, rerank_score}]}'
-```
-
-hybridと同じ10件をrerankerへ渡すと、`elderly-case-03`が3位から1位になります。問題なしの`elderly-case-02`も2位に残ります。rerankは業務上の判定を保証せず、候補の順序だけを変えることを確認できます。
-
-`verify-chapter5-results.sh`は、rerank前後の文書IDをソートして比較し、候補集合が同じであることも検査します。
-
-## 4. 前後チャンクを復元する
-
-```bash
-curl -s http://localhost:8100/api/search \
-  -H 'Content-Type: application/json' \
-  -d '{"query":"高齢顧客の継続購入で使える簡易承認の前提と例外","mode":"hybrid_context","top_k":5}' \
-  | jq '{mode, hits: [.hits[] | {rank, id, parent_id, context_chunks}]}'
-```
-
-例外チャンクだけでは「この限り」が指す原則を判断できません。1位は`approval-context-elderly-3`で、`context_chunks`には同じ親の3チャンクが順番に入ります。`hybrid_context`は検索に当たった子チャンクの`parent_id`を使い、同じ親に属するチャンクを`chunk_order`順で`context_chunks`へ格納します。同じ親文書は検索結果上で1件にまとめます。
-
-## 5. 評価セットをまとめて実行する
-
-```bash
-python3 scripts/evaluate.py
-```
-
-`data/evaluation_queries.json`にはdev 50件、test 50件を収録しています。devはhybrid重みの調整にだけ使い、testは最終評価に使います。正解文書、期待文書、必須文脈チャンクはdevとtestで重複しないようvalidatorで検査します。
-
-```bash
-python3 scripts/evaluate.py \
-  --split test \
-  --output docs/results/test-results.json
-```
-
-カテゴリ別のHit Rate@3、Hit Rate@10、MRR@5、NDCG@5を出力します。文脈問い合わせでは正しい親文書を上位3件で取得できた割合、Context Completeness、展開した文脈のprecisionを分けて記録します。filterでは返却された全hitが構造化条件へ適合することを検査します。
-
-初期の50問版は`data/evaluation_queries-v1.json`、100問へ拡張したv2は`data/evaluation_queries-v2.json`へ保存しています。対応する実測結果も`docs/results/test-results-v1.json`と`docs/results/test-results-v2.json`に残しています。
-
-データ自体を検証する場合:
-
-```bash
-python3 scripts/validate_dataset.py
-```
-
-著者がdevセットだけでhybrid重みを比較する場合:
-
-```bash
-python3 scripts/tune_hybrid.py
-```
-
-test結果を確認した後で、testクエリ、正解ラベル、検索設定を調整しないでください。
-
-## 補足: 完全一致と判定済みデータのfilter
-
-条番号や識別子を一つに限定する要求は、関連度を調整するのではなく`exact`で完全一致させます。次の例では、全文検索は`rule-019`と`rule-019-2`を候補に残し、完全一致は`rule-019`だけを返します。
+エラー識別子だけで1件へ限定したい場合は、関連度を調整せず完全一致を使います。
 
 ```bash
 for mode in fulltext exact; do
   curl -s http://localhost:8100/api/search \
     -H 'Content-Type: application/json' \
-    -d "{\"query\":\"第19条\",\"mode\":\"${mode}\",\"top_k\":3}" \
-    | jq '{mode, hits: [.hits[] | {rank, id, score}]}'
+    -d "{\"query\":\"WM-A410-E42\",\"mode\":\"${mode}\",\"top_k\":5}" \
+    | jq '{mode, ids: [.hits[].id]}'
 done
 ```
 
-過去に問題ありと判定済みの事例だけを取得する場合は、`case_outcome`もfilterへ指定できます。これは問題事例を検索で推測する処理ではなく、構造化済みの判定を使った絞り込みです。
+全文検索は同じ型番の別エラーも候補に残しますが、`exact`は`identifiers.raw`への`term` queryで`error-wm-a410-e42`だけを返します。
+
+## ケース2: 候補10件をrerankする
+
+「ソフトウェアを新しくした後も、あらゆる再接続を試して直らなかった事例」を探します。文書種別とファームウェアのメジャーバージョンは構造化filterへ分けます。
+
+```bash
+query='ソフトウェアを新しくした後も、あらゆる再接続を試して直らなかった事例'
+for mode in hybrid hybrid_rerank; do
+  curl -s http://localhost:8100/api/search \
+    -H 'Content-Type: application/json' \
+    -d "{\"query\":\"${query}\",\"mode\":\"${mode}\",\"top_k\":10,\"filters\":{\"document_type\":\"support_case\",\"firmware_major_gte\":3}}" \
+    | jq '{mode, hits: [.hits[] | {rank, id, score, rerank_score}]}'
+done
+```
+
+hybridでは、一部の再接続だけを試して未解決だった`support-connect-13`が1位です。問い合わせに最も合う`support-connect-03`は2位ですが、rerank後は1位へ上がります。rerankは候補を検索し直さず、hybridが取得した同じ10件を質問との適合度で並べ替えます。
+
+## ケース3: 前後チャンクを復元する
+
+保証ガイドは「原則」「申請に必要な情報」「対象外」の3チャンクに分かれています。
+
+```bash
+curl -s http://localhost:8100/api/search \
+  -H 'Content-Type: application/json' \
+  -d '{"query":"WM-A410の無償交換が認められる条件と、対象外になる場合","mode":"hybrid_context","top_k":5}' \
+  | jq '{mode, hits: [.hits[] | {rank, id, title, context_chunks}]}'
+```
+
+1位の`warranty-context-wm-a410-1`には、同じ`parent_id`を持つ3チャンクが`chunk_order`順で付加されます。検索で1チャンクに到達した後、回答に必要な前提や例外を同じ親文書から補う処理です。
+
+## 構造化filterを試す
+
+自然文へ埋め込まず、文書種別、製品カテゴリ、バージョン、使用期間、対応結果をfilterとして指定できます。
 
 ```bash
 curl -s http://localhost:8100/api/search \
   -H 'Content-Type: application/json' \
   -d '{
-    "query":"複雑な仕組債を販売した事例",
+    "query":"更新後も接続できない洗濯機の事例",
     "mode":"hybrid_filter",
     "top_k":5,
-    "filters":{"document_type":"case","customer_age_gte":75,"amount_yen_gte":5000000,"case_outcome":"violation"}
-  }' \
-  | jq '{mode, hits: [.hits[] | {rank, id, customer_age, amount_yen, case_outcome}]}'
+    "filters":{
+      "document_type":"support_case",
+      "product_category":"washer",
+      "firmware_major_gte":3,
+      "device_age_months_gte":12,
+      "support_outcome":"unresolved"
+    }
+  }' | jq '{mode, hits: [.hits[] | {rank, id, document_type, product_category, firmware_major, device_age_months, support_outcome}]}'
 ```
+
+## 評価セットを実行する
+
+`data/evaluation_queries.json`にはdev 50件とtest 50件があります。devはハイブリッド重みの調整にだけ使い、testは設定固定後の最終評価に使います。
+
+```bash
+python3 scripts/validate_dataset.py
+python3 scripts/evaluate.py --split test --output docs/results/test-results.json
+```
+
+候補生成はHit Rate@3、Hit Rate@10、MRR@5、NDCG@5で評価します。文脈復元は必要な全チャンクが揃った割合と、追加したチャンクのうち必要だった割合を記録します。完全一致とfilterは順位ではなく、返却結果が指定条件を満たした割合を検査します。
+
+著者がdevセットだけで重みを再調整する場合:
+
+```bash
+python3 scripts/tune_hybrid.py
+```
+
+test結果を確認した後で、testクエリ、正解ラベル、検索設定を変更しないでください。
 
 ## Dashboardsで直接試す
 
-検索パイプラインはアプリ起動時に`fin-doc-hybrid-pipeline`という名前で作られます。Dev Toolsでは、APIレスポンスの`request_body`から`body_vector.vector`を省略せずコピーし、次のエンドポイントへ送ります。
+APIレスポンスの`request_body`に、OpenSearchへ送ったリクエストが含まれます。`body_vector.vector`を省略せずコピーし、Dev Toolsから次へ送信できます。
 
 ```text
-POST fin-doc-search-demo-v3/_search?search_pipeline=fin-doc-hybrid-pipeline
+POST appliance-support-demo-v1/_search?search_pipeline=appliance-hybrid
 ```
 
-## パラメータを変更する
+## 設定を変更する
 
 ```bash
 cp .env.example .env
 ```
 
-主な設定:
-
-- `TOP_K`: 画面へ返す件数
-- `CANDIDATE_SIZE`: hybridとrerankへ渡す候補数。教材の既定値は10件
-- `HYBRID_KEYWORD_WEIGHT`: 全文検索スコアの重み
-- `HYBRID_VECTOR_WEIGHT`: ベクトル検索スコアの重み
-- `ENABLE_RERANK`: `false`にするとrerankモデルを読み込まない
-- `EMBEDDING_MODEL_NAME`: 埋め込みモデル
-- `RERANK_MODEL_NAME`: reranker
-
-モデルを変更する場合は、次元数、入力prefix、ライセンス、用途を必ず確認してください。現在のmappingは768次元に固定しています。
+主な設定は`CANDIDATE_SIZE`、`HYBRID_KEYWORD_WEIGHT`、`HYBRID_VECTOR_WEIGHT`、`ENABLE_RERANK`、`EMBEDDING_MODEL_NAME`、`RERANK_MODEL_NAME`です。モデルを変更する場合は、次元数、入力prefix、ライセンス、用途を確認してください。現在のmappingは768次元です。
 
 ## 片付け
-
-コンテナだけを停止:
 
 ```bash
 docker compose down
 ```
 
-OpenSearchのデータとモデルキャッシュも削除:
+OpenSearchのデータとモデルキャッシュも削除する場合:
 
 ```bash
 docker compose down -v
@@ -239,8 +190,7 @@ docker compose down -v
 
 ## 注意点
 
-- 初回のrerankはモデル読み込み時間を含むため、2回目以降と分けて計測してください。
-- `took_ms`はOpenSearch検索、文脈復元、rerankの時間です。クエリの埋め込み生成、ブラウザ描画、通信時間は含みません。
-- 本文の代表例は仕組みを理解するための制御された教材例です。一般的な品質判断には、代表例と分離したtestセットを使います。
-- 教材コーパスは意図的にhard negativeを含みます。実データでは評価用クエリと正解集合を別途作る必要があります。
-- モデルとライブラリのライセンスは[THIRD_PARTY_NOTICES.md](./THIRD_PARTY_NOTICES.md)を参照してください。
+- 代表例は処理の違いを理解するための制御された例です。一般的な傾向は分離したtestセットで確認します。
+- rerankは候補10件の順序だけを変えます。候補に入らなかった文書は復活できません。
+- 文脈復元は必要なチャンクを補える一方、不要な前後チャンクも増やすことがあります。
+- 実データへ適用する場合は、自分たちの問い合わせと正解集合で評価してください。

@@ -12,716 +12,476 @@ QUERIES_PATH = ROOT / "data" / "evaluation_queries.json"
 
 
 def document(
-    *,
-    id: str,
-    family: str,
-    title: str,
-    filename: str,
-    category: str,
-    body: str,
-    identifiers: list[str] | None = None,
-    parent_id: str | None = None,
-    chunk_order: int | None = None,
-    document_type: str,
-    customer_age: int | None = None,
-    amount_yen: int | None = None,
-    case_outcome: str | None = None,
+    *, id: str, family: str, title: str, filename: str, category: str,
+    body: str, identifiers: list[str] | None = None,
+    parent_id: str | None = None, chunk_order: int | None = None,
+    document_type: str, product_category: str | None = None,
+    firmware_major: int | None = None, device_age_months: int | None = None,
+    support_outcome: str | None = None,
 ) -> dict[str, Any]:
     return {
-        "id": id,
-        "family": family,
-        "title": title,
-        "filename": filename,
-        "category": category,
-        "page_start": 1,
-        "identifiers": identifiers or [],
-        "parent_id": parent_id,
-        "chunk_order": chunk_order,
-        "document_type": document_type,
-        "customer_age": customer_age,
-        "amount_yen": amount_yen,
-        "case_outcome": case_outcome,
-        "synthetic": True,
-        "body": body,
+        "id": id, "family": family, "title": title, "filename": filename,
+        "category": category, "page_start": 1, "identifiers": identifiers or [],
+        "parent_id": parent_id, "chunk_order": chunk_order,
+        "document_type": document_type, "product_category": product_category,
+        "firmware_major": firmware_major, "device_age_months": device_age_months,
+        "support_outcome": support_outcome, "synthetic": True, "body": body,
     }
-
-
-def build_rules() -> list[dict[str, Any]]:
-    rows = [
-        ("019", "第19条", "高齢顧客へ複雑な金融商品を勧誘する場合は、商品のリスク、手数料、途中解約時の取扱いを説明し、理解度の確認記録を5年間保存します。75歳以上では管理者の事前承認も必要です。"),
-        ("019-2", "第19条の2", "第19条の2は、高齢顧客が自ら継続購入を申し出た場合の確認手順を定めます。前回購入から6か月以内でも、理解度と資産状況を改めて確認しなければなりません。"),
-        ("020", "第20条", "電話で商品を案内した顧客が明確に断った場合、同じ商品を30日以内に再勧誘してはなりません。資料送付だけを希望した顧客への説明は、同意を得た範囲に限ります。"),
-        ("021", "第21条", "訪問による勧誘は午前9時から午後7時までとし、顧客から別の時間帯を明示的に指定された場合だけ、その記録を残して対応できます。"),
-        ("022", "第22条", "契約締結前交付書面は、顧客が内容を確認できる時点で交付します。電子交付を利用する場合は、閲覧可能になった日時を記録します。"),
-        ("023", "第23条", "元本保証と誤認させる表現を広告へ使用してはなりません。過去の運用実績を示す場合も、将来の成果を保証しない旨を同じ画面へ表示します。"),
-        ("024", "第24条", "苦情を受け付けた担当者は、翌営業日までに顧客対応管理部へ連携します。重大な損失が疑われる場合は、金額が未確定でも直ちに報告します。"),
-        ("025", "第25条", "顧客との面談記録は契約終了後7年間保存します。録音データを廃棄しても、説明項目と確認結果を記載した記録は保存対象です。"),
-        ("026", "第26条", "代理人から注文を受ける場合は、代理権の範囲と有効期限を確認します。本人確認が完了していても、対象商品の取引権限がなければ受注できません。"),
-        ("027", "第27条", "未成年者口座では法定代理人の同意を確認します。積立額の変更と高リスク商品の追加購入には、都度の同意記録が必要です。"),
-        ("028", "第28条", "外国語で説明する場合は、顧客が理解できる言語の資料を用意します。通訳者を介した場合は、通訳者の氏名と説明日時を記録します。"),
-        ("029", "第29条", "手数料の変更は適用開始日の30日前までに通知します。既存契約へ遡って新しい料率を適用することはできません。"),
-        ("030", "第30条", "システム障害で注文時刻を確定できない場合は、受信ログと顧客申告を照合します。推測した時刻だけで約定訂正を行ってはなりません。"),
-        ("031", "第31条", "利益相反のおそれがある商品を提案する場合は、販売側が受け取る報酬と代替商品の有無を説明します。説明記録は商品別に残します。"),
-        ("032", "第32条", "顧客情報を検索目的で利用する場合は、業務上必要な範囲に限定します。検証環境へ複製するときは識別情報を仮名化します。"),
-    ]
-    return [
-        document(
-            id=f"rule-{slug}",
-            family="rules",
-            title="顧客保護規程 2025年版",
-            filename="customer-protection-rules-2025.pdf",
-            category="規程",
-            body=body,
-            identifiers=[label, f"RULE-{slug.upper()}"],
-            document_type="rule",
-        )
-        for slug, label, body in rows
-    ]
 
 
 def build_products() -> list[dict[str, Any]]:
     rows = [
-        ("ALPHA-01", "国内債券を中心に運用する安定型商品です。申込単位は10万円で、標準的な換金期間は3営業日です。金利上昇時には基準価額が下落する可能性があります。"),
-        ("ALPHA-10", "海外株式を中心に運用する成長型商品です。申込単位は10万円で、為替変動と株価変動による元本割れの可能性があります。換金には7営業日かかります。"),
-        ("ALPHA-07", "為替ヘッジ付きの外国債券商品です。外貨資産へ投資しますが、原則として為替変動の影響を抑える運用を行います。換金期間は5営業日です。"),
-        ("BETA-01", "国内の短期金融資産へ投資する商品です。価格変動を抑える設計ですが、元本保証ではありません。購入手数料はなく、換金期間は2営業日です。"),
-        ("BETA-10", "新興国の株式と債券へ分散投資する商品です。大きな価格変動と為替変動が想定され、積極型の顧客を対象とします。"),
-        ("GAMMA-02", "複数の国内REITへ投資し、賃料収入を原資とする分配を目指します。不動産市況と金利の変動により価格が下落することがあります。"),
-        ("GAMMA-20", "海外REITへ投資する毎月分配型商品です。分配金が投資元本の一部払戻しとなる場合があり、為替変動の影響も受けます。"),
-        ("DELTA-03", "日経平均株価に連動することを目指すインデックス商品です。指数の下落に応じて基準価額も下落し、元本は保証されません。"),
-        ("DELTA-30", "日経平均株価の値動きの逆方向へ連動することを目指す商品です。長期保有では複利効果により指数の単純な逆数と乖離します。"),
-        ("EPSILON-04", "物価連動国債へ投資し、物価上昇への対応を目指します。実質金利の変動や市場流動性の低下により価格が変動します。"),
-        ("EPSILON-40", "金価格との連動を目指す上場商品です。金価格だけでなく、為替相場と市場価格の乖離による影響を受けます。"),
-        ("OMEGA-05", "期限前償還条項を持つ仕組債です。参照指数が一定水準を下回ると償還額が元本を割り込むため、複雑商品として扱います。"),
-        ("OMEGA-50", "複数銘柄を参照する期限前償還条項付き仕組債です。いずれかの銘柄が基準を下回ると損失が生じる可能性があります。"),
-        ("SIGMA-06", "国内外の債券と株式を均等に配分するバランス商品です。四半期ごとに基本配分へ戻すリバランスを行います。"),
-        ("SIGMA-60", "市場変動に応じて株式比率を調整するバランス商品です。急激な相場変動時には比率変更が遅れる可能性があります。"),
+        ("WM-A410", "washer", "ドラム式洗濯乾燥機です。自動投入、温水洗浄、スマートフォンからの運転予約に対応します。無線LANは2.4GHz帯を使用します。"),
+        ("WM-A410S", "washer", "WM-A410の小型モデルです。乾燥容量とドラム径が異なり、交換部品や一部のエラー内容はWM-A410と共通ではありません。"),
+        ("WM-A401", "washer", "洗濯容量10kgの旧世代モデルです。スマートフォン連携には対応せず、本体パネルから運転コースを選択します。"),
+        ("DR-B220", "dryer", "ヒートポンプ式衣類乾燥機です。湿度センサーで乾燥時間を調整し、フィルター詰まりを検知すると運転を停止します。"),
+        ("DR-B202", "dryer", "電気ヒーター式の衣類乾燥機です。排気ダクトが必要で、DR-B220用のフィルターは装着できません。"),
+        ("AC-C300", "air_conditioner", "無線LAN内蔵のルームエアコンです。外出先操作、室温通知、フィルター清掃時期の通知に対応します。"),
+        ("AC-C330", "air_conditioner", "寒冷地向けルームエアコンです。低温暖房能力を強化していますが、AC-C300とは室外機と更新ファイルが異なります。"),
+        ("RF-D510", "refrigerator", "容量510Lの冷蔵庫です。自動製氷、急速冷凍、扉の閉め忘れ通知をスマートフォンで確認できます。"),
+        ("RF-D501", "refrigerator", "容量500Lの冷蔵庫です。自動製氷に対応しますが、ネットワーク機能と遠隔通知には対応しません。"),
+        ("OV-E600", "oven", "過熱水蒸気オーブンレンジです。温度センサーと重量センサーを使い、自動調理とスチーム洗浄を行います。"),
+        ("OV-E660", "oven", "業務向けの大容量オーブンです。OV-E600と名称は似ていますが、電源、設置間隔、エラーコード体系が異なります。"),
+        ("VC-F710", "vacuum", "コードレス掃除機です。着脱式バッテリー、床面検知、自動吸引力調整に対応します。"),
+        ("VC-F701", "vacuum", "軽量コードレス掃除機です。VC-F710用バッテリーとは電圧が異なり、相互に取り付けられません。"),
+        ("TV-G800", "television", "4K液晶テレビです。動画配信アプリ、無線LAN、Bluetooth音声出力、録画機能に対応します。"),
+        ("TV-G880", "television", "有機ELテレビです。TV-G800と同じ操作アプリを使えますが、パネル保護と壁掛け金具の条件が異なります。"),
     ]
-    return [
-        document(
-            id=f"product-{code.lower()}",
-            family="products",
-            title="取扱商品説明書 2025年版",
-            filename="product-guide-2025.pdf",
-            category="商品",
-            body=body,
-            identifiers=[code],
-            document_type="product",
-        )
-        for code, body in rows
-    ]
+    return [document(
+        id=f"product-{model.lower()}", family="products", title="製品カタログ 2026年版",
+        filename="product-catalog-2026.pdf", category="製品", body=body,
+        identifiers=[model, f"PRODUCT-{model}"], document_type="product",
+        product_category=category,
+    ) for model, category, body in rows]
 
 
-def build_deadlines() -> list[dict[str, Any]]:
+def build_error_codes() -> list[dict[str, Any]]:
     rows = [
-        ("review-30", "通常審査", 30, "通常審査は申請受付から30日以内に一次判定を完了します。追加資料を依頼してから受領するまでの期間は、審査日数へ含めません。"),
-        ("review-60", "特別審査", 60, "複雑な取引を含む特別審査は60日以内に一次判定を完了します。通常審査の30日基準を適用してはなりません。"),
-        ("retention-30", "一時ログ保存", 30, "障害調査用の一時ログは30日間保存し、調査終了後に削除します。審査期限ではなく、技術ログの保存期間です。"),
-        ("notice-30", "手数料変更通知", 30, "手数料率を変更する場合は適用開始日の30日前までに顧客へ通知します。通知後30日以内に変更するという意味ではありません。"),
-        ("complaint-2", "苦情一次回答", 2, "苦情を受け付けた場合は2営業日以内に一次回答し、調査継続時は次回連絡予定日を伝えます。"),
-        ("refund-5", "過徴収返金", 5, "手数料の過徴収が確定した場合は5営業日以内に返金処理を開始します。投資損失の補てんとは区別して記録します。"),
-        ("approval-1", "緊急承認", 1, "緊急性の高い口座制限解除は、受付当日中に管理者の承認を得ます。承認前に解除操作を行うことはできません。"),
-        ("archive-365", "監査資料移管", 365, "完了した監査案件の資料は365日後に低頻度ストレージへ移管します。法定保存期間が終了するわけではありません。"),
-        ("kyc-90", "本人確認更新", 90, "本人確認情報の更新依頼に回答がない場合は、90日後に一部取引を制限します。制限前に複数回の通知を行います。"),
-        ("cancel-8", "契約取消受付", 8, "対象商品について契約書面受領日から8日以内の取消しを受け付けます。対象外商品には同じ期間を適用しません。"),
-        ("incident-3", "障害報告", 3, "重大障害は検知から3時間以内に責任者へ第一報を行います。原因が未確定でも影響範囲を添えて報告します。"),
-        ("record-7y", "面談記録保存", 2555, "面談記録は契約終了後7年間保存します。日数換算値は運用上の目安であり、廃棄日は暦日に基づいて決定します。"),
-        ("appeal-14", "異議申立て", 14, "審査結果への異議申立ては通知受領後14日以内に受け付けます。追加資料がある場合は申立てと同時に提出します。"),
-        ("settlement-4", "海外商品受渡し", 4, "対象となる海外商品の受渡しは原則4営業日後です。市場休業日がある場合は受渡日を繰り下げます。"),
-        ("deletion-45", "退職者権限削除", 45, "退職予定者の不要な権限は最終出社日の45日前から確認し、最終出社日の終了時までに削除します。"),
+        ("WM-A410", "E42", "washer", "給水を開始できないエラーです。蛇口、給水ホース、給水口フィルターを確認します。排水異常を示すE24とは対処が異なります。"),
+        ("WM-A410", "E24", "washer", "排水を完了できないエラーです。排水ホースの折れと糸くずフィルターを確認します。給水側の点検では解消しません。"),
+        ("WM-A410S", "E42", "washer", "ドアロックを確認できないエラーです。WM-A410のE42とは意味が異なるため、給水ホースではなく扉の異物を点検します。"),
+        ("WM-A401", "E42", "washer", "水位センサーの応答が規定範囲外であることを示します。電源を切っても再発する場合は点検を依頼します。"),
+        ("DR-B220", "E42", "dryer", "乾燥室の温度上昇を検知したエラーです。吸気口とフィルターを清掃し、冷却後に再開します。"),
+        ("AC-C300", "E24", "air_conditioner", "室内機と室外機の通信が途切れたことを示します。ブレーカーと接続線を確認し、無線LAN設定は変更しません。"),
+        ("AC-C300", "E42", "air_conditioner", "排水経路の詰まりを検知したエラーです。ドレンホースの折れや逆勾配を確認します。"),
+        ("RF-D510", "E17", "refrigerator", "製氷皿が所定位置へ戻れないエラーです。氷の固着を除き、製氷室を空にして再試行します。"),
+        ("OV-E600", "E17", "oven", "庫内温度センサーの値を取得できないエラーです。加熱を中止し、電源を入れ直しても続く場合は修理を依頼します。"),
+        ("VC-F710", "E31", "vacuum", "回転ブラシの拘束を検知したエラーです。髪の毛や糸を取り除き、ブラシが手で回ることを確認します。"),
+        ("TV-G800", "E31", "television", "配信サービスとの認証に失敗したエラーです。ネットワーク接続と本体時刻を確認します。"),
+        ("WM-A410", "C07", "washer", "洗剤自動投入タンクが正しく装着されていない通知です。運転はできますが、自動投入は行われません。"),
+        ("WM-A410", "U11", "washer", "排水に通常より時間がかかっている通知です。E24になる前に排水フィルターを清掃します。"),
+        ("DR-B220", "U11", "dryer", "乾燥フィルターの清掃時期を示す通知です。故障ではなく、清掃後に通知をリセットします。"),
+        ("RF-D510", "C07", "refrigerator", "冷蔵室の扉が一定時間開いている通知です。扉を閉めても続く場合は食品の挟まりを確認します。"),
     ]
-    return [
-        document(
-            id=f"deadline-{slug}",
-            family="deadlines",
-            title="業務処理基準 2025年版",
-            filename="operation-deadlines-2025.pdf",
-            category="手順",
-            body=body,
-            identifiers=[label, f"DAYS-{days}"],
-            document_type="procedure",
-        )
-        for slug, label, days, body in rows
-    ]
+    return [document(
+        id=f"error-{model.lower()}-{code.lower()}", family="error-codes",
+        title=f"{model} エラーコード一覧", filename="error-code-reference-2026.pdf",
+        category="エラー", body=body, identifiers=[model, code, f"{model}-{code}"],
+        document_type="error_code", product_category=category,
+    ) for model, code, category, body in rows]
 
 
-def build_elderly_cases() -> list[dict[str, Any]]:
+def build_connectivity_cases() -> list[dict[str, Any]]:
     rows = [
-        ("01", 78, 5_000_000, "violation", "担当者は78歳の顧客へ複雑な仕組債を販売しました。元本割れの条件を十分に説明せず、家族同席も提案せず、管理者承認の記録もなかったため不適切な勧誘と判断されました。"),
-        ("02", 76, 4_000_000, "non_violation", "76歳の顧客から高リスク商品の購入希望がありましたが、理解が十分でないと判断して勧誘を行いませんでした。後日、家族同席で低リスク商品を説明しており、不適切勧誘には該当しません。"),
-        ("03", 82, 3_000_000, "violation", "82歳の顧客へ投資信託を販売した面談には家族が同席しました。しかし、損失リスクをどのように確認したか記録がなく、事後検証できない点が問題となりました。"),
-        ("04", 74, 8_000_000, "non_violation", "74歳の顧客へ仕組債の説明を行いました。管理者承認の年齢基準には達していませんが、商品が複雑なため家族同席を提案し、顧客が購入を見送った記録を残しました。"),
-        ("05", 79, 7_000_000, "violation", "79歳の顧客へ値動きの大きい海外株式商品を販売しました。損失リスクの説明と理解度確認は記録されていましたが、管理者承認の記録がなかったため手続違反と判断されました。"),
-        ("06", 80, 2_000_000, "non_violation", "80歳の顧客へ国内債券商品を案内し、家族同席で価格変動と換金期間を説明しました。理解度確認と管理者承認が記録され、手続上の問題は認められませんでした。"),
-        ("07", 77, 6_000_000, "violation", "77歳の顧客に対し、担当者は期限前償還だけを強調して仕組債を販売しました。管理者承認は記録されていましたが、参照指数下落時の損失を説明しておらず、説明内容が不十分でした。"),
-        ("08", 81, 6_000_000, "non_violation", "81歳の顧客が以前から保有する同一商品の継続購入を希望しました。理解度を再確認し、管理者承認と家族への連絡を行ったうえで受注しました。"),
-        ("09", 73, 5_500_000, "violation", "73歳の顧客へ高リスク商品を販売しました。年齢基準未満でしたが、投資経験がなく生活資金が中心であり、適合性確認が不十分と判断されました。"),
-        ("10", 85, 1_000_000, "non_violation", "85歳の顧客から商品の問い合わせを受けましたが、担当者は一般情報の提供だけを行い、購入を勧めませんでした。問い合わせ記録にも勧誘を行っていないことを残しました。"),
-        ("11", 75, 10_000_000, "violation", "75歳の顧客への販売で管理者承認はありましたが、承認後に投資金額が1000万円へ変更されていました。変更後の資産状況を確認しなかったため手続違反となりました。"),
-        ("12", 83, 4_500_000, "non_violation", "83歳の顧客へ複数回説明し、最終面談では家族と管理者が同席しました。顧客はリスクを自分の言葉で説明でき、購入額も余裕資金の範囲でした。"),
-        ("13", 72, 9_000_000, "violation", "72歳の顧客へ短期間に複数の商品を乗り換えさせ、多額の手数料が発生しました。年齢ではなく、取引頻度と顧客利益の観点から不適切と判断されました。"),
-        ("14", 88, 500_000, "non_violation", "88歳の顧客の定期預金満期手続を支援しました。投資商品の案内は行わず、本人の依頼どおり普通預金へ入金したため勧誘事例ではありません。"),
-        ("15", 78, 5_500_000, "violation", "78歳の顧客へ外貨建て商品を販売した際、管理者承認は記録されていました。為替手数料は説明しましたが為替差損の可能性を説明しておらず、重要なリスク説明の欠落が問題となりました。"),
+        ("01", "washer", 3, 8, "resolved", "WM-A410をファームウェア3へ更新後、アプリから見つからなくなりました。登録を解除して同じ家庭内ネットワークで再登録すると接続できるようになりました。"),
+        ("02", "air_conditioner", 3, 14, "unresolved", "AC-C300は無線LANへ接続済みですが、スマートフォンのローカルネットワーク権限が許可されておらず、アプリから操作できない状態が続きました。"),
+        ("03", "washer", 4, 18, "unresolved", "WM-A410をファームウェア4へ更新しましたが、更新完了後もスマートフォンとの接続が回復しませんでした。再登録とルーター再起動でも未解決です。"),
+        ("04", "washer", 2, 30, "unresolved", "WM-A410のファームウェアは2のままで、アプリの新しい認証方式に対応できず接続できませんでした。更新作業はまだ行っていません。"),
+        ("05", "refrigerator", 4, 10, "resolved", "RF-D510の更新後に通知が届かなくなりました。ルーターと冷蔵庫を再起動するとクラウド接続が復旧し、扉通知も届くようになりました。"),
+        ("06", "television", 3, 6, "resolved", "TV-G800はアプリから操作できましたが、番組開始通知だけが遅れていました。通知権限を有効にすると解消しました。"),
+        ("07", "air_conditioner", 3, 20, "unresolved", "ルーター交換後、AC-C300を新しいSSIDへ登録しても外出先操作を利用できませんでした。本体操作はできますが、クラウド接続は未解決です。"),
+        ("08", "oven", 4, 9, "resolved", "OV-E600がアプリに表示されなくなりました。アプリを再インストールして製品を再登録すると接続が回復しました。"),
+        ("09", "vacuum", 3, 16, "unresolved", "VC-F710はBluetoothで検出できますが、クラウドアカウントへの紐付けが完了せず、履歴を同期できませんでした。"),
+        ("10", "television", 5, 22, "resolved", "TV-G880の更新直後にリモート操作が失敗しました。設定を保持したまま更新を再適用すると接続できる状態へ戻りました。"),
+        ("11", "washer", 3, 13, "unresolved", "WM-A410を5GHz専用SSIDへ接続しようとして失敗しました。2.4GHz帯のSSIDが用意されるまでアプリ連携は利用できませんでした。"),
+        ("12", "refrigerator", 4, 11, "unresolved", "RF-D510はルーターへ接続して通知も送信していますが、アプリ画面だけがオフライン表示のままでした。キャッシュ削除でも表示は直りませんでした。"),
+        ("13", "air_conditioner", 3, 7, "resolved", "AC-C300をファームウェア3へ更新した後、一度は接続が切れましたが、本体の再起動だけでアプリ操作が再開できました。"),
+        ("14", "washer", 4, 25, "unresolved", "スマートフォンを交換した後、WM-A410を新端末へ登録できませんでした。旧端末の登録解除を行っても接続できない状態が続きました。"),
+        ("15", "washer", 2, 28, "resolved", "旧ファームウェアのWM-A410で一時的に接続が切れましたが、ルーターのDHCP更新後は再発せず、現在は接続できています。"),
     ]
-    return [
-        document(
-            id=f"elderly-case-{slug}",
-            family="elderly-cases",
-            title=f"顧客対応事例 2024-{slug}",
-            filename="customer-cases-2024.pdf",
-            category="事例",
-            body=body,
-            identifiers=[f"CASE-ELDERLY-{slug}"],
-            document_type="case",
-            customer_age=age,
-            amount_yen=amount,
-            case_outcome=outcome,
-        )
-        for slug, age, amount, outcome, body in rows
-    ]
+    return [document(
+        id=f"support-connect-{slug}", family="connectivity-cases",
+        title=f"接続サポート事例 2025-{slug}", filename="connectivity-support-cases-2025.pdf",
+        category="サポート事例", body=body, identifiers=[f"CASE-CONNECT-{slug}"],
+        document_type="support_case", product_category=category,
+        firmware_major=firmware, device_age_months=age, support_outcome=outcome,
+    ) for slug, category, firmware, age, outcome, body in rows]
 
 
-def build_compensation_cases() -> list[dict[str, Any]]:
+def build_repair_cases() -> list[dict[str, Any]]:
     rows = [
-        ("01", 5_000_000, "violation", "営業部門は重要顧客との関係維持を目的に、投資損失500万円を業務委託費の名目で支払いました。名目にかかわらず実質的な損失補てんに当たると判断されました。"),
-        ("02", 500_000, "non_violation", "システム障害で二重徴収した手数料50万円を顧客へ返還しました。過徴収分の返金であり、投資判断による損失を穴埋めするものではありません。"),
-        ("03", 1_200_000, "violation", "価格下落への苦情を収束させるため、担当者が顧客へ120万円相当の商品券を渡しました。謝罪名目でも損失額に連動した利益提供であり問題となりました。"),
-        ("04", 80_000, "non_violation", "約定訂正により本来徴収すべきでなかった手数料8万円を返金しました。訂正根拠と計算過程が残されており、損失補てんには該当しません。"),
-        ("05", 3_000_000, "violation", "営業担当者が顧客の含み損300万円を埋める目的で、別取引の手数料を免除しました。取引条件の変更による実質的な補てんと判断されました。"),
-        ("06", 300_000, "non_violation", "災害に伴う全顧客共通の手数料減免として30万円分を免除しました。個別の投資損失と結び付かず、公開された基準に従う措置です。"),
-        ("07", 7_500_000, "violation", "損失を出した顧客企業から実体のない調査業務を受託し、750万円を支払いました。役務の対価ではなく損失穴埋めが目的でした。"),
-        ("08", 150_000, "non_violation", "事務遅延で発生した実費15万円を領収書に基づいて賠償しました。投資商品の価格変動とは関係がなく、範囲も実損額に限定されています。"),
-        ("09", 2_000_000, "violation", "顧客の売買損200万円を担当者個人が現金で支払いました。会社経費を使っていなくても、顧客損失を補う行為は禁止対象です。"),
-        ("10", 600_000, "non_violation", "誤った振込先案内により発生した送金手数料60万円を補償しました。原因調査と承認を経た事務事故の賠償として処理されています。"),
-        ("11", 4_000_000, "violation", "損失のある顧客だけに将来の手数料400万円分を無償化しました。一般キャンペーンを装っていましたが対象選定が損失額に基づいていました。"),
-        ("12", 200_000, "non_violation", "すべての新規顧客を対象とする公開キャンペーンで手数料20万円を上限に還元しました。投資損失の有無は対象条件ではありません。"),
-        ("13", 9_000_000, "violation", "取引損失900万円を埋めるため、関連会社が顧客資産を市場価格より高く買い取りました。第三者を介しても実質的な補てんに当たります。"),
-        ("14", 100_000, "non_violation", "口座閉鎖後に判明した税計算誤りについて10万円を返金しました。計算根拠を訂正した返金で、運用損失とは関係しません。"),
-        ("15", 6_000_000, "violation", "顧客の損失600万円と同額を、紹介料として親族の会社へ支払いました。紹介業務の実態がなく、迂回した利益提供と認定されました。"),
+        ("01", "washer", 3, 20, "resolved", "給水が遅いWM-A410を点検し、給水口フィルターの砂を除去しました。部品交換は行わず、規定時間内に給水できることを確認しました。"),
+        ("02", "dryer", 2, 15, "resolved", "DR-B220が途中停止しましたが、フィルター清掃後は正常に乾燥できました。温度部品の交換は不要でした。"),
+        ("03", "dryer", 2, 26, "unresolved", "DR-B220のフィルターを清掃しても過熱停止が再発しました。温度センサー交換が必要ですが、訪問時に部品がなく未解決です。"),
+        ("04", "refrigerator", 2, 40, "resolved", "RF-D510の製氷皿に氷が固着していました。氷を除去して給水経路を清掃すると製氷を再開しました。"),
+        ("05", "oven", 2, 12, "resolved", "OV-E600が予熱を完了しない申告でした。庫内の温度センサー周辺の汚れを清掃し、設定温度へ到達することを確認しました。"),
+        ("06", "vacuum", 3, 19, "unresolved", "VC-F710の回転ブラシを清掃してもE31が再発しました。モーター交換の見積りを案内し、修理は保留になりました。"),
+        ("07", "television", 5, 9, "resolved", "TV-G800で配信アプリだけ音が出ない状態でした。音声出力設定をPCMへ変更すると解消し、基板交換は不要でした。"),
+        ("08", "air_conditioner", 4, 31, "unresolved", "AC-C300の冷房が弱く、フィルター清掃後も改善しませんでした。冷媒漏れが疑われ、後日の再訪問となりました。"),
+        ("09", "washer", 4, 17, "resolved", "WM-A410の排水エラーE24は、排水ホースの折れを直すと解消しました。給水弁と水位センサーには異常がありませんでした。"),
+        ("10", "refrigerator", 2, 52, "unresolved", "RF-D501の冷蔵室が冷えず、霜取り後も温度が下がりませんでした。圧縮機の点検が必要なため持ち帰り修理となりました。"),
+        ("11", "washer", 4, 21, "unresolved", "WM-A410でE42が表示され、蛇口とホースを確認しても給水できませんでした。給水弁の交換部品を手配し、作業は未完了です。"),
+        ("12", "oven", 2, 33, "resolved", "OV-E600のスチーム量が少ない状態は、給水タンクの弁に付着した水あかを除去すると改善しました。"),
+        ("13", "vacuum", 3, 14, "resolved", "VC-F710の運転時間が短い申告に対し、劣化したバッテリーを交換しました。標準モードの連続運転時間へ戻りました。"),
+        ("14", "television", 5, 24, "unresolved", "TV-G880の画面に縦線が出るためパネル交換が必要と判断しました。部品納期を案内し、修理完了待ちです。"),
+        ("15", "air_conditioner", 3, 18, "resolved", "AC-C330の室外機が始動しない状態は、ブレーカー復帰と端子の締め直しで解消しました。"),
     ]
-    return [
-        document(
-            id=f"comp-case-{slug}",
-            family="compensation-cases",
-            title="補償判断事例集 2024年度",
-            filename="compensation-cases-2024.pdf",
-            category="事例",
-            body=body,
-            identifiers=[f"CASE-COMP-{slug}"],
-            document_type="case",
-            amount_yen=amount,
-            case_outcome=outcome,
-        )
-        for slug, amount, outcome, body in rows
-    ]
+    return [document(
+        id=f"repair-case-{slug}", family="repair-cases",
+        title=f"訪問修理事例 2025-{slug}", filename="repair-cases-2025.pdf",
+        category="修理事例", body=body, identifiers=[f"CASE-REPAIR-{slug}"],
+        document_type="support_case", product_category=category,
+        firmware_major=firmware, device_age_months=age, support_outcome=outcome,
+    ) for slug, category, firmware, age, outcome, body in rows]
 
 
-def build_permissions() -> list[dict[str, Any]]:
+def build_simple_family(
+    *, family: str, title: str, filename: str, category: str,
+    document_type: str, rows: list[tuple[str, str, str, str]],
+) -> list[dict[str, Any]]:
+    return [document(
+        id=f"{family}-{slug}", family=family, title=title, filename=filename,
+        category=category, body=body, identifiers=[identifier],
+        document_type=document_type, product_category=product_category,
+    ) for slug, identifier, product_category, body in rows]
+
+
+def build_manuals() -> list[dict[str, Any]]:
     rows = [
-        ("VIEW-01", "一般担当者は監査記録を閲覧できますが、承認状態の変更と記録の削除は実行できません。コメントの追記は自分が担当する案件だけ許可されます。"),
-        ("ADMIN-01", "管理者は監査記録の承認状態を変更できます。ただし、確定済み記録の本文を削除することはできず、訂正履歴を残す必要があります。"),
-        ("AUDIT-01", "内部監査担当者は全部門の記録を閲覧できますが、営業部門の申請を承認できません。監査メモは内部監査担当者だけが編集できます。"),
-        ("TEMP-01", "一時担当者には閲覧権限だけを付与し、顧客情報のダウンロードと一括出力を禁止します。権限は7日後に自動失効します。"),
-        ("EXPORT-01", "顧客情報の一括出力は情報管理責任者の承認後に実行できます。通常の管理者権限だけでは出力を開始できません。"),
-        ("DELETE-01", "保存期限を過ぎた一時ログはシステム管理者が削除できます。顧客面談記録は期限を過ぎても法務確認が完了するまで削除できません。"),
-        ("APPROVE-01", "所属長は1000万円未満の取引申請を承認できます。1000万円以上はリスク管理部の追加承認が必要です。"),
-        ("APPROVE-10", "リスク管理部は高額取引の追加承認を行えますが、申請者と同一人物が承認者を兼ねることはできません。"),
-        ("READ-02", "外部委託先は割り当てられた匿名化データだけを閲覧できます。原本データ、氏名、契約IDへアクセスする権限はありません。"),
-        ("EDIT-02", "データ品質担当者は誤記を訂正できますが、顧客の同意記録と承認結果は変更できません。訂正前の値は履歴へ保存されます。"),
-        ("API-01", "検索API用サービスアカウントは公開済み文書だけを参照できます。非公開文書を含むindexへの直接検索権限は付与しません。"),
-        ("API-10", "投入API用サービスアカウントは文書を登録できますが、検索結果を取得する権限はありません。用途ごとに認証情報を分離します。"),
-        ("BRANCH-01", "支店担当者は自支店の案件だけを閲覧できます。本部管理者でも、調査目的が記録されていなければ他支店の顧客情報を参照できません。"),
-        ("LEGAL-01", "法務担当者は係争中案件の保存期限を延長できますが、元の保存期限や作成日時を書き換えることはできません。"),
-        ("GUEST-01", "研修用ゲストは架空データだけを検索できます。本番顧客データと同じ認証経路を利用せず、出力機能も無効化します。"),
+        ("wm-water", "MANUAL-WM-WATER", "washer", "洗濯機へ水が入らない場合は、蛇口が開いていること、給水ホースが折れていないこと、給水口フィルターに異物がないことを順に確認します。"),
+        ("wm-drain", "MANUAL-WM-DRAIN", "washer", "排水できない場合は、糸くずフィルター、排水ホースの高さと折れ、排水口の詰まりを確認します。"),
+        ("dryer-filter", "MANUAL-DR-FILTER", "dryer", "乾燥運転ごとに糸くずフィルターを清掃します。目詰まりしたまま運転すると乾燥時間が延び、過熱停止することがあります。"),
+        ("ac-pairing", "MANUAL-AC-PAIR", "air_conditioner", "エアコンをアプリへ登録するときは、2.4GHzの無線LANへスマートフォンを接続し、本体の接続ボタンを5秒押します。"),
+        ("ac-clean", "MANUAL-AC-CLEAN", "air_conditioner", "フィルターを外して掃除機でほこりを取り、水洗い後は陰干しで完全に乾かしてから戻します。"),
+        ("fridge-temp", "MANUAL-RF-TEMP", "refrigerator", "冷蔵室が冷えにくい場合は、食品の詰め込み、吹出口のふさがり、扉パッキンの隙間、周囲温度を確認します。"),
+        ("fridge-ice", "MANUAL-RF-ICE", "refrigerator", "自動製氷を再開する前に、給水タンクを洗い、製氷皿に固着した氷がないことを確認します。"),
+        ("oven-preheat", "MANUAL-OV-PREHEAT", "oven", "予熱中は扉を開けず、空の角皿だけを指定段へ入れます。庫内が汚れていると温度検知に時間がかかります。"),
+        ("oven-steam", "MANUAL-OV-STEAM", "oven", "スチームを使う前に給水タンクへ水を入れ、タンク弁と蒸気口に水あかがないことを確認します。"),
+        ("vacuum-brush", "MANUAL-VC-BRUSH", "vacuum", "回転ブラシへ絡んだ髪や糸は電源を切ってから取り除きます。軸受け部へ油を差してはいけません。"),
+        ("vacuum-dust", "MANUAL-VC-DUST", "vacuum", "ダストカップのごみを捨て、フィルターを水洗いした場合は24時間以上乾燥させてから装着します。"),
+        ("tv-network", "MANUAL-TV-NET", "television", "配信アプリが開かない場合は、テレビの時刻、ネットワーク診断、サービス稼働状況の順に確認します。"),
+        ("tv-audio", "MANUAL-TV-AUDIO", "television", "外部機器から音が出ない場合は、入力端子、音声形式、ARC設定、消音状態を確認します。"),
+        ("app-account", "MANUAL-APP-ACCOUNT", "app", "製品を別のスマートフォンへ移す場合は、旧端末から登録解除して同じアカウントで新端末へログインします。"),
+        ("router-reset", "MANUAL-ROUTER-RESET", "network", "ルーターを再起動するときは電源を抜いて30秒待ち、起動完了後に家電を再接続します。初期化ボタンは押しません。"),
     ]
-    return [
-        document(
-            id=f"permission-{code.lower()}",
-            family="permissions",
-            title="業務権限一覧 2025年版",
-            filename="permission-matrix-2025.pdf",
-            category="権限",
-            body=body,
-            identifiers=[code],
-            document_type="permission",
-        )
-        for code, body in rows
+    return build_simple_family(family="manual", title="製品サポートガイド", filename="support-manual-2026.pdf", category="取扱説明", document_type="manual", rows=rows)
+
+
+def build_firmware_notes() -> list[dict[str, Any]]:
+    rows = [
+        ("wm-a410-3", "FW-WM-A410-3", "washer", "WM-A410ファームウェア3では、予約運転の同期と無線LAN再接続処理を改善しました。更新後にアプリの再登録が必要な場合があります。"),
+        ("wm-a410-4", "FW-WM-A410-4", "washer", "WM-A410ファームウェア4では、認証方式を更新し、接続履歴の保存を改善しました。更新中は電源を切らないでください。"),
+        ("wm-a410s-3", "FW-WM-A410S-3", "washer", "WM-A410S専用ファームウェア3です。WM-A410へ適用すると起動できないため、型番を確認して更新します。"),
+        ("ac-c300-3", "FW-AC-C300-3", "air_conditioner", "AC-C300ファームウェア3では、外出先操作の再接続と室温通知の遅延を改善しました。"),
+        ("ac-c300-4", "FW-AC-C300-4", "air_conditioner", "AC-C300ファームウェア4では、WPA3移行時の接続処理を追加しました。旧ルーターでは設定変更は不要です。"),
+        ("ac-c330-4", "FW-AC-C330-4", "air_conditioner", "AC-C330専用の低温運転制御を更新します。AC-C300用ファイルとの互換性はありません。"),
+        ("rf-d510-2", "FW-RF-D510-2", "refrigerator", "RF-D510ファームウェア2では、扉通知と製氷完了通知が重複する問題を修正しました。"),
+        ("ov-e600-2", "FW-OV-E600-2", "oven", "OV-E600ファームウェア2では、自動調理終了後にアプリへ結果が反映されない問題を修正しました。"),
+        ("vc-f710-3", "FW-VC-F710-3", "vacuum", "VC-F710ファームウェア3では、床面検知の切替えと清掃履歴の同期を改善しました。"),
+        ("tv-g800-5", "FW-TV-G800-5", "television", "TV-G800ファームウェア5では、配信アプリの認証更新とBluetooth音声の遅延を改善しました。"),
+        ("tv-g880-5", "FW-TV-G880-5", "television", "TV-G880ファームウェア5では、パネル保護処理と配信アプリの起動を改善しました。"),
+        ("app-240", "APP-2.4.0", "app", "アプリ2.4.0では製品一覧のオフライン表示を修正し、旧ファームウェア2の製品も引き続き登録できます。"),
+        ("app-250", "APP-2.5.0", "app", "アプリ2.5.0では新しい認証方式を追加しました。ローカルネットワーク権限が無効だと製品を検出できません。"),
+        ("hub-3", "HUB-FW-3", "network", "ホームハブ3では最大20台の製品を管理し、ルーター再起動後の自動再接続に対応します。"),
+        ("hub-4", "HUB-FW-4", "network", "ホームハブ4ではWPA3と複数住居の切替えに対応します。旧ハブからの移行には再登録が必要です。"),
     ]
+    return build_simple_family(family="firmware", title="更新履歴", filename="firmware-release-notes-2026.pdf", category="更新情報", document_type="release_note", rows=rows)
+
+
+def build_compatibility() -> list[dict[str, Any]]:
+    rows = [
+        ("ios18", "COMPAT-IOS18", "app", "iOS 18ではアプリ2.4.0以降を利用します。ローカルネットワークとBluetoothの権限を許可しないと製品登録を開始できません。"),
+        ("android15", "COMPAT-ANDROID15", "app", "Android 15では近くのデバイス権限と通知権限を個別に設定します。位置情報を常時許可する必要はありません。"),
+        ("router-wpa3", "COMPAT-WPA3", "network", "WPA3を使う場合は製品側ファームウェア4以降が必要です。移行モードを使えばWPA2対応製品も同じルーターへ接続できます。"),
+        ("router-5g", "COMPAT-5GHZ", "network", "WM-A410とAC-C300は2.4GHz帯だけに対応します。SSIDが5GHz専用の場合は製品登録できません。"),
+        ("app240", "COMPAT-APP240", "app", "アプリ2.4.0はファームウェア2から4の製品を操作できます。ファームウェア5の一部機能は表示されません。"),
+        ("app250", "COMPAT-APP250", "app", "アプリ2.5.0は新認証へ対応します。ファームウェア2の製品は初回登録時に追加確認が必要です。"),
+        ("wm-a410", "COMPAT-WM-A410", "washer", "WM-A410はアプリ2.3.0以降、2.4GHz無線LAN、iOS 16以降またはAndroid 12以降で利用できます。"),
+        ("wm-a410s", "COMPAT-WM-A410S", "washer", "WM-A410SはWM-A410と同じアプリを使えますが、交換部品と更新ファイルは共通ではありません。"),
+        ("ac-c300", "COMPAT-AC-C300", "air_conditioner", "AC-C300はホームハブなしでも外出先操作できます。企業向け認証の無線LANには対応しません。"),
+        ("rf-d510", "COMPAT-RF-D510", "refrigerator", "RF-D510の扉通知はアプリ2.4.0以降で利用できます。旧アプリでは温度履歴だけを表示します。"),
+        ("tv-g800", "COMPAT-TV-G800", "television", "TV-G800はBluetoothヘッドホンへ接続できますが、同時に2台へ音声を出力できません。"),
+        ("hub-old", "COMPAT-HUB2", "network", "ホームハブ2はファームウェア4の製品を登録できますが、WPA3と複数住居には対応しません。"),
+        ("voice-a", "COMPAT-VOICE-A", "app", "音声アシスタントAではエアコンと照明の操作に対応します。洗濯機の運転開始は安全上の理由で行えません。"),
+        ("voice-b", "COMPAT-VOICE-B", "app", "音声アシスタントBではテレビとエアコンを操作できます。冷蔵庫の扉状態は読み上げません。"),
+        ("bluetooth", "COMPAT-BT5", "network", "VC-F710とTV-G800はBluetooth 5に対応しますが、家電の無線LAN登録をBluetoothだけで完了することはできません。"),
+    ]
+    return build_simple_family(family="compat", title="動作環境・互換性一覧", filename="compatibility-2026.pdf", category="互換性", document_type="compatibility", rows=rows)
+
+
+def build_maintenance() -> list[dict[str, Any]]:
+    rows = [
+        ("wm-filter", "CARE-WM-FILTER", "washer", "給水口フィルターは半年ごとに確認し、砂やさびを歯ブラシで除きます。外す前に蛇口を閉めます。"),
+        ("wm-drum", "CARE-WM-DRUM", "washer", "月に一度は槽洗浄コースを実行し、終了後は扉と洗剤ケースを開けて乾燥させます。"),
+        ("dryer-filter", "CARE-DR-FILTER", "dryer", "乾燥フィルターは運転ごとに清掃し、月に一度は奥の吸気口のほこりも取り除きます。"),
+        ("dryer-duct", "CARE-DR-DUCT", "dryer", "排気ダクトは半年ごとに外して詰まりを確認します。つぶれたダクトは伸ばさず交換します。"),
+        ("ac-filter", "CARE-AC-FILTER", "air_conditioner", "エアコンのフィルターは2週間ごとに清掃します。自動清掃機能があってもダストボックスのごみは捨てます。"),
+        ("ac-drain", "CARE-AC-DRAIN", "air_conditioner", "冷房期の前にドレンホース出口が土や虫で塞がれていないことを確認します。内部へ棒を差し込みません。"),
+        ("rf-coil", "CARE-RF-COIL", "refrigerator", "冷蔵庫の背面と側面にほこりをためず、放熱スペースを確保します。電源を抜いてから清掃します。"),
+        ("rf-ice", "CARE-RF-ICE", "refrigerator", "給水タンクと浄水フィルターを週に一度水洗いし、塩素系洗剤は使用しません。"),
+        ("oven-steam", "CARE-OV-STEAM", "oven", "スチーム使用後は給水タンクを空にし、クエン酸洗浄の通知が出たら専用コースを実行します。"),
+        ("oven-cavity", "CARE-OV-CAVITY", "oven", "庫内が冷えてから飛び散った油を拭き取ります。ヒーターへ洗剤を直接吹き付けません。"),
+        ("vc-brush", "CARE-VC-BRUSH", "vacuum", "回転ブラシの髪や糸を週に一度取り除き、軸受けへごみが入っていないことを確認します。"),
+        ("vc-battery", "CARE-VC-BATTERY", "vacuum", "長期間使わない場合も3か月に一度充電し、高温になる車内へバッテリーを放置しません。"),
+        ("tv-screen", "CARE-TV-SCREEN", "television", "画面は柔らかい乾いた布で拭き、アルコールやガラス洗剤を使用しません。"),
+        ("tv-vent", "CARE-TV-VENT", "television", "背面の通風孔を月に一度確認し、掃除機を弱く当ててほこりを除きます。"),
+        ("app-account", "CARE-APP-ACCOUNT", "app", "譲渡や廃棄の前にアプリから製品登録を解除し、本体のネットワーク設定を初期化します。"),
+    ]
+    return build_simple_family(family="maintenance", title="お手入れガイド", filename="maintenance-guide-2026.pdf", category="手入れ", document_type="guide", rows=rows)
+
+
+def build_installation() -> list[dict[str, Any]]:
+    rows = [
+        ("wm-level", "INSTALL-WM-LEVEL", "washer", "洗濯機は水平器を使って脚を調整し、対角を押してがたつかないことを確認します。"),
+        ("wm-drain", "INSTALL-WM-DRAIN", "washer", "排水ホースは途中で高く持ち上げず、つぶれや逆勾配がない状態で排水口へ接続します。"),
+        ("dryer-vent", "INSTALL-DR-VENT", "dryer", "乾燥機の排気ダクトは指定径を使い、曲げ回数と全長を設置基準以内に収めます。"),
+        ("dryer-stack", "INSTALL-DR-STACK", "dryer", "洗濯機の上へ乾燥機を設置する場合は指定の架台を使い、壁へ転倒防止金具を固定します。"),
+        ("ac-wall", "INSTALL-AC-WALL", "air_conditioner", "室内機は壁の強度を確認し、左右と上部に指定の吸気スペースを確保します。"),
+        ("ac-drain", "INSTALL-AC-DRAIN", "air_conditioner", "ドレンホースは屋外へ下り勾配を付け、先端を水たまりや土の中へ入れません。"),
+        ("rf-clearance", "INSTALL-RF-CLEAR", "refrigerator", "冷蔵庫は上部と側面の放熱距離を確保し、扉を開けられる壁との間隔も確認します。"),
+        ("rf-level", "INSTALL-RF-LEVEL", "refrigerator", "前脚を調整して本体を安定させ、扉が自然に閉まるわずかな後傾を付けます。"),
+        ("oven-power", "INSTALL-OV-POWER", "oven", "オーブンは単独回路のコンセントを使い、延長コードやたこ足配線を使用しません。"),
+        ("oven-clearance", "INSTALL-OV-CLEAR", "oven", "上面と背面に放熱スペースを取り、蒸気が棚板へ直接当たらない位置へ設置します。"),
+        ("vc-charge", "INSTALL-VC-CHARGE", "vacuum", "充電台は直射日光と水気を避け、付属ねじで壁の下地へ固定します。"),
+        ("tv-wall", "INSTALL-TV-WALL", "television", "壁掛けは機種に合う金具を使い、壁の材質と耐荷重を施工業者が確認します。"),
+        ("tv-stand", "INSTALL-TV-STAND", "television", "テレビ台は本体より広く水平なものを使い、付属ベルトで壁または台へ転倒防止固定します。"),
+        ("router-place", "INSTALL-ROUTER", "network", "ルーターは家電との間に金属製家具や水槽が少ない場所へ置き、床へ直置きしません。"),
+        ("hub-place", "INSTALL-HUB", "network", "ホームハブはルーターから10m以内を目安に置き、電子レンジのすぐ横を避けます。"),
+    ]
+    return build_simple_family(family="installation", title="設置工事ガイド", filename="installation-guide-2026.pdf", category="設置", document_type="guide", rows=rows)
+
+
+def build_faq() -> list[dict[str, Any]]:
+    rows = [
+        ("wm-odor", "FAQ-WM-ODOR", "washer", "洗濯槽からにおいがする場合は、洗剤量を減らし、槽洗浄と排水フィルター清掃を行います。故障とは限りません。"),
+        ("wm-vibration", "FAQ-WM-VIB", "washer", "脱水時の振動が大きい場合は、衣類の偏り、輸送用固定ボルト、床の水平を確認します。"),
+        ("dryer-time", "FAQ-DR-TIME", "dryer", "乾燥時間が長い場合はフィルター、衣類量、室温、排気ダクトを確認します。"),
+        ("ac-smell", "FAQ-AC-SMELL", "air_conditioner", "運転開始時のにおいはフィルターや熱交換器の汚れが原因になることがあります。焦げ臭い場合は使用を中止します。"),
+        ("ac-noise", "FAQ-AC-NOISE", "air_conditioner", "停止後の水の流れる音や樹脂のきしみ音は温度変化で発生します。連続する金属音は点検対象です。"),
+        ("fridge-frost", "FAQ-RF-FROST", "refrigerator", "冷凍室に霜が増える場合は、食品の挟まりと扉パッキンを確認します。扉を頻繁に開けた直後だけなら異常ではありません。"),
+        ("fridge-hot", "FAQ-RF-HOT", "refrigerator", "冷蔵庫の側面が熱くなるのは放熱のためです。手で触れられないほどの高温や焦げ臭さがある場合は電源を抜きます。"),
+        ("oven-smoke", "FAQ-OV-SMOKE", "oven", "初回運転時の少量の煙は製造時の油分による場合があります。食品残りが燃えている場合は清掃します。"),
+        ("oven-spark", "FAQ-OV-SPARK", "oven", "電子レンジ運転で火花が出た場合は金属容器やアルミ箔を取り除き、庫内の汚れを確認します。"),
+        ("vacuum-short", "FAQ-VC-SHORT", "vacuum", "運転時間が短い場合は強モードの使用、低温、フィルター詰まり、バッテリー劣化を確認します。"),
+        ("tv-delay", "FAQ-TV-DELAY", "television", "Bluetooth音声の遅延は音声モードと接続機器で変わります。低遅延モードを選び、映像補正を減らします。"),
+        ("tv-black", "FAQ-TV-BLACK", "television", "音は出るが画面が黒い場合は入力切替と省電力設定を確認します。画面を強く押しません。"),
+        ("app-login", "FAQ-APP-LOGIN", "app", "アプリへログインできない場合はメールアドレス、端末時刻、認証メールの有効期限を確認します。"),
+        ("app-offline", "FAQ-APP-OFFLINE", "app", "製品がオフライン表示でも通知が届く場合は表示キャッシュの可能性があります。製品登録をすぐ削除せずアプリを再起動します。"),
+        ("noise-night", "FAQ-NOISE-NIGHT", "washer", "夜間に洗濯機の作動音が響く場合は、防振脚、壁との接触、予約運転の時間帯を確認します。"),
+    ]
+    return build_simple_family(family="faq", title="よくある質問", filename="faq-2026.pdf", category="FAQ", document_type="faq", rows=rows)
 
 
 def build_context_family(
-    *,
-    family: str,
-    title: str,
-    filename: str,
-    topics: list[tuple[str, list[str]]],
+    *, family: str, title: str, filename: str,
+    topics: list[tuple[str, str, list[str]]],
 ) -> list[dict[str, Any]]:
     records: list[dict[str, Any]] = []
-    for parent_slug, chunks in topics:
+    for parent_slug, product_category, chunks in topics:
         parent_id = f"{family}-{parent_slug}"
-        for index, body in enumerate(chunks, start=1):
-            records.append(
-                document(
-                    id=f"{parent_id}-{index}",
-                    family=family,
-                    title=title,
-                    filename=filename,
-                    category="規程",
-                    body=body,
-                    identifiers=[parent_slug.upper()],
-                    parent_id=parent_id,
-                    chunk_order=index,
-                    document_type="rule",
-                )
-            )
+        for order, body in enumerate(chunks, start=1):
+            records.append(document(
+                id=f"{parent_id}-{order}", family=family, title=title,
+                filename=filename, category="サポート規定", body=body,
+                identifiers=[parent_slug.upper()], parent_id=parent_id,
+                chunk_order=order, document_type="policy",
+                product_category=product_category,
+            ))
     return records
 
 
-def build_approval_context() -> list[dict[str, Any]]:
+def build_warranty_context() -> list[dict[str, Any]]:
     return build_context_family(
-        family="approval-context",
-        title="承認手続細則 2025年版",
-        filename="approval-procedure-2025.pdf",
+        family="warranty-context", title="保証判定ガイド", filename="warranty-policy-2026.pdf",
         topics=[
-            ("elderly", [
-                "75歳以上の顧客へ複雑な金融商品を勧誘する場合は、原則として管理者の事前承認を受けます。",
-                "承認申請には投資経験、金融資産、購入目的、家族同席の有無、理解度確認の結果を記載します。",
-                "ただし、同一商品の継続購入を顧客が自発的に申し出て、理解度を再確認できた場合は簡易承認を利用できます。承認自体が不要になるわけではありません。",
+            ("wm-a410", "washer", [
+                "WM-A410は購入から12か月以内に製造上の不具合が確認された場合、無償修理または同等品への交換対象になります。",
+                "申請には製造番号、購入日を確認できる書類、表示されたエラー、実施済みの確認手順を添えます。",
+                "給水口の未清掃、排水ホースの誤設置、異物混入、業務利用による故障は対象外です。ただし安全上の回収対象は保証期間外でも別に対応します。",
             ]),
-            ("urgent", [
-                "口座の不正利用が疑われる場合は、管理者承認を得て出金を停止することを原則とします。",
-                "夜間など管理者へ連絡できず、資産流出のおそれが高い場合は、当番責任者が暫定停止を実行できます。",
-                "暫定停止を行った場合は翌営業日の午前10時までに管理者の追認を得て、判断根拠を記録します。",
+            ("ac-c300", "air_conditioner", [
+                "AC-C300の冷媒回路や制御基板に製造上の不具合がある場合は、購入から5年間の特別保証を適用します。",
+                "施工記録、製造番号、故障コード、配管長、点検時の圧力を保証申請へ記載します。",
+                "指定外施工、移設時の配管再利用、落雷や浸水による故障は特別保証の対象外です。",
             ]),
-            ("high-value", [
-                "1000万円以上の高額取引は、所属長とリスク管理部による二段階承認を必要とします。",
-                "金額は同一顧客が同日に行う関連取引を合算して判定し、分割注文で基準を回避してはなりません。",
-                "国債の償還金を同じ国債へ再投資する場合は、商品性が変わらないことを確認したうえでリスク管理部の承認を省略できます。",
+            ("rf-d510", "refrigerator", [
+                "RF-D510の圧縮機と冷却器は購入から5年間、それ以外の部品は1年間を無償修理期間とします。",
+                "冷却不良では庫内温度、設置間隔、扉の開閉状態、製造番号を確認して申請します。",
+                "食品の詰め込みや扉の閉め忘れだけが原因の場合は保証修理の対象外です。",
             ]),
-            ("remote", [
-                "非対面で複雑な商品を販売する場合は、録画または録音を残し、管理者が説明内容を事前確認します。",
-                "通信障害で記録が中断した場合は、その時点で申込みを確定せず、改めて説明を行います。",
-                "顧客が書面説明を希望し、商品説明を伴う勧誘を行わない場合は、事前確認の対象外です。",
+            ("ov-e600", "oven", [
+                "OV-E600は購入から12か月以内のヒーター、センサー、制御基板の製造不良を無償修理します。",
+                "エラー履歴、使用した加熱モード、容器、庫内写真を申請へ添付します。",
+                "金属容器の誤使用、清掃不足による発煙、業務用途での連続運転は対象外です。",
             ]),
-            ("corporate", [
-                "法人顧客のデリバティブ取引は、取締役会決議または権限規程で確認できる担当者から受注します。",
-                "過去に同種取引の権限確認を行っていても、有効期限と担当者変更の有無を取引ごとに確認します。",
-                "包括的な権限証明が有効期間内に登録されている場合は、決議書の再提出を省略できます。",
+            ("tv-g800", "television", [
+                "TV-G800は購入から12か月以内の基板とパネルの製造不良を保証します。",
+                "画面症状の写真、入力機器を外した結果、製造番号、購入日を記録します。",
+                "外部からの衝撃、壁掛け施工不良、長時間の静止画による焼き付きは対象外です。",
             ]),
         ],
     )
 
 
-def build_record_context() -> list[dict[str, Any]]:
+def build_safety_context() -> list[dict[str, Any]]:
     return build_context_family(
-        family="record-context",
-        title="記録管理細則 2025年版",
-        filename="record-management-2025.pdf",
+        family="safety-context", title="安全対応ガイド", filename="safety-response-2026.pdf",
         topics=[
-            ("interview", [
-                "顧客面談の記録は、契約終了後7年間保存することを原則とします。",
-                "記録には説明した商品、リスク、顧客の質問、理解度確認、同席者、承認者を含めます。",
-                "係争または調査が継続している場合は、7年を経過しても終了通知があるまで廃棄してはなりません。",
+            ("recall-wm-a401", "washer", [
+                "対象製造番号のWM-A401では電源部品を無償交換する回収対応を行います。使用を停止し電源プラグを抜きます。",
+                "型番、製造番号、設置先、連絡先を確認し、回収受付へ登録します。",
+                "通常保証が終了していても回収対象なら無償です。対象外の製造番号へ予防交換は行いません。",
             ]),
-            ("call", [
-                "電話勧誘の録音は通話日から5年間保存します。",
-                "録音と案件番号を結び付け、担当者以外の監査担当者が検索できる状態にします。",
-                "顧客が録音に同意せず勧誘を中止した通話は、録音本体ではなく中止した事実と日時だけを保存します。",
+            ("overheating-dryer", "dryer", [
+                "乾燥機から焦げ臭さや煙が出た場合は運転を停止し、可能なら電源プラグを抜きます。",
+                "煙の有無、停止前の運転時間、フィルター状態、周囲への延焼がないことを確認します。",
+                "通常の温風のにおいだけで煙や異常発熱がない場合は、冷却後にフィルターを点検します。",
             ]),
-            ("access", [
-                "顧客情報へのアクセスログは2年間オンラインで保持します。",
-                "2年を経過したログは低頻度ストレージへ移し、合計7年間保存します。",
-                "セキュリティ調査の対象となったログは、調査終了後1年間または通常期限の長い方まで保存します。",
+            ("gas-oven", "oven", [
+                "オーブンから火花が出た場合は加熱を停止し、扉を開けず電源を切ります。",
+                "庫内が冷えてから金属片、アルミ箔、焦げた食品、導波板の損傷を確認します。",
+                "初回運転の少量の煙だけで火花がない場合は、換気しながら空焼き手順を続けられます。",
             ]),
-            ("draft", [
-                "作成途中の契約書案は案件完了後90日で削除します。",
-                "顧客へ提示した版と最終承認版は正式記録として7年間保存します。",
-                "係争の証拠として指定された草案は90日を過ぎても削除対象から除外します。",
+            ("battery-vacuum", "vacuum", [
+                "掃除機のバッテリーが膨らんだ場合は充電と使用を中止し、端子へ触れないよう保管します。",
+                "型番、製造番号、膨らみの写真、落下や水濡れの有無を確認して回収を手配します。",
+                "単に運転時間が短いだけで膨らみや発熱がない場合は、安全回収ではなく劣化診断を行います。",
             ]),
-            ("consent", [
-                "個人情報利用の同意記録は、同意が有効な期間中と撤回後5年間保存します。",
-                "同意の取得日時、対象目的、提示した規約版、取得経路を記録します。",
-                "同意が無効と判明した場合でも、監査証跡として記録を直ちに削除せず、法務部の判断に従います。",
+            ("tipover-tv", "television", [
+                "テレビが傾いた、または転倒した場合は使用を中止し、画面と電源コードへ触れず安全を確保します。",
+                "壁掛け金具、スタンド、固定ベルト、壁の損傷を写真で確認し、施工担当へ連絡します。",
+                "地震後に外観上の異常がなく固定部も緩んでいない場合は、電源コードを確認してから使用を再開できます。",
             ]),
         ],
     )
-
-
-def build_suitability() -> list[dict[str, Any]]:
-    rows = [
-        ("01", "投資経験がほとんどなく元本の安全性を最優先する顧客には、複雑な仕組債を提案しません。預金や価格変動の小さい商品を含めて選択肢を説明します。"),
-        ("02", "長期運用を希望し一時的な価格下落を許容できる顧客には、分散された株式商品を候補にできます。ただし生活資金を投資へ充てないことを確認します。"),
-        ("03", "近く住宅購入を予定する顧客の資金は、換金制限のある商品に適しません。利用予定時期と換金期間を照合します。"),
-        ("04", "為替変動を避けたい顧客へ外貨建て商品を案内する場合、為替ヘッジの有無と費用を比較し、希望と合わなければ提案を見送ります。"),
-        ("05", "毎月の分配金を希望する顧客には、分配金が元本の払戻しとなる場合を説明します。分配額だけで適合性を判断しません。"),
-        ("06", "短期的な利益を求める顧客でも、損失許容額が小さい場合にレバレッジ商品を提案することは適切ではありません。"),
-        ("07", "法人顧客が余剰資金を運用する場合、資金使途、必要時期、社内権限、会計上の制約を確認して商品を選びます。"),
-        ("08", "高い収益を希望していても、商品構造を理解できない顧客には複雑商品を販売しません。希望収益だけを根拠に適合性を認めないことが重要です。"),
-        ("09", "複数商品を保有する顧客では、新規商品の単体リスクだけでなく、資産全体の通貨、地域、発行体の偏りを確認します。"),
-        ("10", "相続した有価証券を保有する顧客へ売買を提案するときは、取得経緯と保有目的を確認します。過去の保有期間だけで投資経験を推定しません。"),
-        ("11", "定期収入が減少した顧客については、以前と同じ投資意向が登録されていても、現在の余裕資金を再確認します。"),
-        ("12", "元本保証を希望する顧客へ債券商品を提案する場合も、発行体の信用リスクと中途売却時の価格変動を説明します。"),
-        ("13", "環境分野への投資を希望する顧客には、名称だけでなく投資対象と選定基準を説明し、期待するテーマと一致するか確認します。"),
-        ("14", "取引頻度が高い顧客でも、手数料負担が収益機会を上回る状態では追加の乗換えを勧めません。"),
-        ("15", "顧客が家族のために運用する場合は、名義人本人の目的とリスク許容度を確認します。家族の意向だけで商品を決定しません。"),
-    ]
-    return [
-        document(
-            id=f"suitability-{slug}",
-            family="suitability",
-            title="適合性確認ガイド 2025年版",
-            filename="suitability-guide-2025.pdf",
-            category="ガイド",
-            body=body,
-            identifiers=[f"SUIT-{slug}"],
-            document_type="guide",
-        )
-        for slug, body in rows
-    ]
-
-
-def build_complaints() -> list[dict[str, Any]]:
-    topics = [
-        "商品リスクの説明不足", "手数料表示", "電話勧誘の継続", "解約処理の遅延", "システム停止",
-        "本人確認", "相続手続", "価格配信", "広告表現", "担当者交代",
-        "書面未着", "注文取消し", "分配金説明", "為替手数料", "個人情報",
-    ]
-    records = []
-    for index, topic in enumerate(topics, start=1):
-        body = (
-            f"{topic}に関する申出を受け付けた担当者は、事実関係と顧客の希望を記録し、"
-            "翌営業日までに顧客対応管理部へ引き継ぎます。回答期限を確約できない場合も、次回連絡日を案内します。"
-        )
-        records.append(
-            document(
-                id=f"complaint-{index:02d}",
-                family="complaints",
-                title="苦情対応手順 2025年版",
-                filename="complaint-handbook-2025.pdf",
-                category="手順",
-                body=body,
-                identifiers=[f"COMPLAINT-{index:02d}"],
-                document_type="procedure",
-            )
-        )
-    return records
-
-
-def build_operations() -> list[dict[str, Any]]:
-    rows = [
-        ("E1047", "注文登録時に口座状態が更新中であることを示すエラーです。5分後に再実行し、解消しない場合は口座管理担当へ連絡します。注文を重複登録してはいけません。"),
-        ("E1074", "注文金額が利用可能残高を超えていることを示すエラーです。残高と未約定注文を確認し、顧客の同意なく金額を変更しないでください。"),
-        ("E1407", "商品コードが取扱対象外であることを示すエラーです。似た商品コードへ置き換えず、商品マスタの適用日を確認します。"),
-        ("E1704", "承認者が申請者と同一であることを示すエラーです。別の承認者へ依頼し、申請を作り直す必要はありません。"),
-        ("E2041", "顧客情報の必須項目が不足していることを示します。不足項目を確認し、推測値を入力せず顧客へ確認します。"),
-        ("E2104", "本人確認書類の有効期限切れを示します。新しい書類の確認が完了するまで対象取引を受け付けません。"),
-        ("E4017", "検索APIの認証情報が失効していることを示します。再ログインではなく、サービスアカウントの鍵更新状況を確認します。"),
-        ("E4071", "検索対象テナントへの権限がないことを示します。クエリ条件からテナントfilterを外して回避してはいけません。"),
-        ("E4107", "指定した文書が保存期限により移管済みであることを示します。アーカイブ検索を利用し、同じ文書を再登録しないでください。"),
-        ("E4701", "一括出力件数が上限を超えています。対象期間を分割し、出力ごとに承認番号を記録します。"),
-        ("JOB-017", "夜間の顧客属性更新ジョブです。処理中は口座状態が一時的に更新中となるため、注文登録を再試行する場合があります。"),
-        ("JOB-071", "検索indexへ公開文書を反映するジョブです。失敗時は前回成功版を維持し、空のindexへ切り替えません。"),
-        ("API-SEARCH-V2", "文書検索APIの第2版です。テナントと公開範囲のfilterは認証済みコンテキストから強制し、利用者入力では変更できません。"),
-        ("API-INGEST-V2", "文書投入APIの第2版です。登録前に文書ID、版番号、公開日を検証し、同一版の重複投入を拒否します。"),
-        ("BATCH-DELETE-01", "期限切れ一時データを削除する処理です。正式記録と法務保全対象は削除候補から除外し、件数を監査ログへ残します。"),
-    ]
-    return [
-        document(
-            id=f"operation-{code.lower()}",
-            family="operations",
-            title="システム運用手順 2025年版",
-            filename="system-operation-2025.pdf",
-            category="システム",
-            body=body,
-            identifiers=[code],
-            document_type="procedure",
-        )
-        for code, body in rows
-    ]
-
-
-def build_market_cases() -> list[dict[str, Any]]:
-    subjects = [
-        ("01", "公表前情報を知った担当者が株式を購入したため、内部者取引の疑いとして調査対象になりました。"),
-        ("02", "公表済みの決算情報だけを用いて顧客が株式を購入しており、内部者情報の利用は確認されませんでした。"),
-        ("03", "注文を誘引する目的で約定意思のない大量注文を発注し、相場操縦に当たると判断されました。"),
-        ("04", "大口注文を複数回に分けましたが、市場への影響を抑える執行計画に基づき、見せ玉ではありませんでした。"),
-        ("05", "顧客注文の執行前に自己勘定で同じ銘柄を購入し、フロントランニングとして問題になりました。"),
-        ("06", "顧客注文と自己勘定注文の時間が近接していましたが、独立した自動運用戦略によるものと確認されました。"),
-        ("07", "終値を引き上げる目的で取引終了直前に反復注文を行い、不公正な価格形成と判断されました。"),
-        ("08", "指数連動商品のリバランスに伴う終値付近の注文であり、事前計画と注文根拠が記録されていました。"),
-        ("09", "虚偽の業績情報をSNSへ投稿して価格上昇後に売却し、風説の流布として調査されました。"),
-        ("10", "企業が公式発表を訂正し、その内容を報道機関が転載したもので、投稿者による虚偽情報の作成ではありません。"),
-        ("11", "複数口座を使って売買を繰り返し、取引が活発に見える外観を作った疑いが確認されました。"),
-        ("12", "家族口座間の売買がありましたが、独立した投資判断と市場価格に基づく取引である記録が残っていました。"),
-        ("13", "未公表の増資情報を取引先へ伝え、伝達を受けた者が売却したため情報伝達行為が問題となりました。"),
-        ("14", "秘密保持契約下で情報を受領しましたが、情報隔壁により運用担当者には共有されず取引も停止されていました。"),
-        ("15", "顧客の取消注文を意図的に処理せず自己勘定取引を優先したため、執行管理上の重大な違反となりました。"),
-    ]
-    return [
-        document(
-            id=f"market-case-{slug}",
-            family="market-cases",
-            title="取引審査事例集 2024年度",
-            filename="market-review-cases-2024.pdf",
-            category="事例",
-            body=body,
-            identifiers=[f"MARKET-{slug}"],
-            document_type="case",
-            case_outcome="violation" if int(slug) % 2 else "non_violation",
-        )
-        for slug, body in subjects
-    ]
 
 
 def query(
-    id: str,
-    split: str,
-    category: str,
-    text: str,
-    relevance: dict[str, int],
-    *,
-    case_group: str,
-    mode: str | None = None,
-    filters: dict[str, Any] | None = None,
+    id: str, split: str, category: str, text: str, relevance: dict[str, int],
+    *, mode: str | None = None, filters: dict[str, Any] | None = None,
     required_context_ids: list[str] | None = None,
     expected_ids: list[str] | None = None,
     forbidden_ids: list[str] | None = None,
 ) -> dict[str, Any]:
     return {
-        "id": id,
-        "split": split,
-        "category": category,
-        "case_group": case_group,
-        "query": text,
-        "relevance": relevance,
-        "mode": mode,
-        "filters": filters or {},
-        "required_context_ids": required_context_ids or [],
-        "expected_ids": expected_ids or [],
-        "forbidden_ids": forbidden_ids or [],
+        "id": id, "split": split, "category": category, "case_group": id,
+        "query": text, "relevance": relevance, "mode": mode,
+        "filters": filters or {}, "required_context_ids": required_context_ids or [],
+        "expected_ids": expected_ids or [], "forbidden_ids": forbidden_ids or [],
     }
 
 
 def build_queries() -> list[dict[str, Any]]:
     queries: list[dict[str, Any]] = []
-    semantic = [
-        ("dev", "sem-d01", "家族に同席してもらわず、危険性の説明も足りないまま高齢者へ複雑な商品を売ったケース", "elderly-case-01"),
-        ("dev", "sem-d02", "顧客の運用損を取引先との関係維持費という名目で穴埋めしたケース", "comp-case-01"),
-        ("dev", "sem-d03", "見ることはできるが、承認状態を触れない一般担当者の権限", "permission-view-01"),
-        ("dev", "sem-d04", "金融商品の知識が乏しく安全性を優先する人に複雑な商品を勧めない考え方", "suitability-01"),
-        ("dev", "sem-d05", "顧客注文より先に自社の売買を済ませた問題", "market-case-05"),
-        ("dev", "sem-d06", "外国語で案内するとき、本人が理解できる資料と通訳の記録を用意する決まり", "rule-028"),
-        ("dev", "sem-d07", "完了した監査資料をすぐ消さず、低頻度の保管場所へ移す時期", "deadline-archive-365"),
-        ("dev", "sem-d08", "高齢という理由ではなく、短期の乗換えで手数料を重ねたことが問題になった販売", "elderly-case-13"),
-        ("dev", "sem-d09", "実体のない仕事を受けた形にして、取引損を穴埋めした事例", "comp-case-07"),
-        ("dev", "sem-d10", "未発表の資金調達情報を取引先へ漏らし、聞いた側が売却した問題", "market-case-13"),
-        ("test", "sem-t01", "説明した証拠が残っておらず、後から適切だったか確かめられない高齢者販売", "elderly-case-03"),
-        ("test", "sem-t02", "全員向けに公開された施策なので、個別損失の埋め合わせではない還元", "comp-case-12"),
-        ("test", "sem-t03", "住宅購入に使う予定の資金を、すぐ現金化できない商品へ入れるべきでない理由", "suitability-03"),
-        ("test", "sem-t04", "取引が盛んなように見せるため、複数口座で売買を往復させたケース", "market-case-11"),
-        ("test", "sem-t05", "顧客から断られた商品を短期間にもう一度案内してはいけない規定", "rule-020"),
-        ("test", "sem-t06", "販売側の報酬と代わりの商品を説明しなければならない利益相反の手続", "rule-031"),
-        ("test", "sem-t07", "原因がまだ分からなくても影響範囲を添えて責任者へ知らせる障害対応", "deadline-incident-3"),
-        ("test", "sem-t08", "外貨商品の手数料だけ説明し、為替差損を伝えなかった高齢者販売", "elderly-case-15"),
-        ("test", "sem-t09", "口座を閉じた後に見つかった税計算の誤りを訂正して返金した事例", "comp-case-14"),
-        ("test", "sem-t10", "会社の訂正発表を報道機関が転載しただけで、虚偽投稿ではなかった事例", "market-case-10"),
-    ]
-    for split, qid, text, target in semantic:
-        queries.append(query(qid, split, "semantic", text, {target: 3}, case_group=target))
+    groups = {
+        "semantic": {
+            "dev": [
+                ("更新後に家電がアプリから消えたが、登録し直したら使えるようになった事例", "support-connect-01"),
+                ("給水が遅かったが部品を替えずに入口の砂を取って直った修理", "repair-case-01"),
+                ("乾燥時間が延びないよう毎回掃除する場所", "manual-dryer-filter"),
+                ("外からエアコンを操作するときの再接続を改善した更新", "firmware-ac-c300-3"),
+                ("新しいiPhoneで家電を探すために許可する項目", "compat-ios18"),
+                ("洗濯機へ水が入りにくくなる前に砂やさびを取る手入れ", "maintenance-wm-filter"),
+                ("エアコンを壁へ付けるときに必要な強度と吸気空間", "installation-ac-wall"),
+                ("夜間の洗濯音が家に響くときの確認方法", "faq-noise-night"),
+                ("床の種類に応じて吸う強さを自動で変える掃除機", "product-vc-f710"),
+                ("テレビの動画サービスで認証に失敗したときのコード", "error-tv-g800-e31"),
+            ],
+            "test": [
+                ("更新は終わったのにスマートフォンから操作できない洗濯機の事例", "support-connect-03"),
+                ("乾燥機を掃除しても熱で停止し、交換部品待ちになった修理", "repair-case-03"),
+                ("洗濯機に水が入らないとき蛇口から順に調べる手順", "manual-wm-water"),
+                ("WPA3のルーターへエアコンをつなぐための更新", "firmware-ac-c300-4"),
+                ("新しい暗号方式と古い家電を同じ無線LANで使う条件", "compat-router-wpa3"),
+                ("冷房前にエアコンのほこりを取る頻度", "maintenance-ac-filter"),
+                ("洗濯機の水を流すホースを高くしない設置方法", "installation-wm-drain"),
+                ("冷凍室に霜が増えたとき扉の隙間を確認する案内", "faq-fridge-frost"),
+                ("扉を閉め忘れたときスマートフォンへ知らせる大型冷蔵庫", "product-rf-d510"),
+                ("掃除機のブラシに髪が絡んで止まったときのコード", "error-vc-f710-e31"),
+            ],
+        },
+        "lexical": {
+            "dev": [("WM-A410S", "product-wm-a410s"), ("WM-A410 E24", "error-wm-a410-e24"), ("FW-TV-G800-5", "firmware-tv-g800-5"), ("COMPAT-APP240", "compat-app240"), ("CARE-RF-COIL", "maintenance-rf-coil"), ("INSTALL-TV-WALL", "installation-tv-wall"), ("FAQ-APP-LOGIN", "faq-app-login"), ("MANUAL-OV-STEAM", "manual-oven-steam"), ("CASE-REPAIR-05", "repair-case-05"), ("CASE-CONNECT-05", "support-connect-05")],
+            "test": [("WM-A410", "product-wm-a410"), ("WM-A410 E42", "error-wm-a410-e42"), ("FW-WM-A410-4", "firmware-wm-a410-4"), ("COMPAT-APP250", "compat-app250"), ("CARE-VC-BRUSH", "maintenance-vc-brush"), ("INSTALL-RF-CLEAR", "installation-rf-clearance"), ("FAQ-WM-ODOR", "faq-wm-odor"), ("MANUAL-TV-NET", "manual-tv-network"), ("CASE-REPAIR-07", "repair-case-07"), ("CASE-CONNECT-14", "support-connect-14")],
+        },
+        "mixed": {
+            "dev": [("AC-C300のE24で室外機と通信できない", "error-ac-c300-e24"), ("AC-C330は寒い地域でどの程度暖房できる製品か", "product-ac-c330"), ("CASE-CONNECT-07で外出先操作が使えない原因", "support-connect-07"), ("CASE-REPAIR-09の排水エラーを直した方法", "repair-case-09"), ("VC-F710で清掃履歴の同期を改善した更新", "firmware-vc-f710-3"), ("Android 15で近くの家電を見つける権限", "compat-android15"), ("OV-E600の蒸気が弱くならないための水あか清掃", "maintenance-oven-steam"), ("DR-B220の排気ダクトの長さと曲げ方", "installation-dryer-vent"), ("TV-G800のBluetooth音声が映像より遅れる", "faq-tv-delay"), ("AC-C300を2.4GHzへ登録するボタン操作", "manual-ac-pairing")],
+            "test": [("WM-A410でE42が出たときの給水エラーの対処", "error-wm-a410-e42"), ("WM-A410をスマートフォンから予約運転できるか", "product-wm-a410"), ("CASE-CONNECT-03で更新後も接続できない経緯", "support-connect-03"), ("CASE-REPAIR-11で給水弁の交換が未完了の理由", "repair-case-11"), ("WM-A410の予約運転と再接続を改善した更新", "firmware-wm-a410-3"), ("WM-A410が5GHzだけのSSIDへ接続できない理由", "compat-router-5g"), ("WM-A410の槽を月に一度洗浄する手順", "maintenance-wm-drum"), ("WM-A410の振動を抑える水平調整", "installation-wm-level"), ("通知は届くのにアプリではオフラインと出る", "faq-app-offline"), ("WM-A410のE24で排水できないときの確認箇所", "manual-wm-drain")],
+        },
+    }
+    prefixes = {"semantic": "sem", "lexical": "lex", "mixed": "mix"}
+    for category, sets in groups.items():
+        for split, rows in sets.items():
+            marker = "d" if split == "dev" else "t"
+            for index, (text, target) in enumerate(rows, start=1):
+                queries.append(query(f"{prefixes[category]}-{marker}{index:02d}", split, category, text, {target: 3}))
 
-    lexical = [
-        ("dev", "lex-d01", "第19条", "rule-019"),
-        ("dev", "lex-d02", "ALPHA-01", "product-alpha-01"),
-        ("dev", "lex-d03", "E1047", "operation-e1047"),
-        ("dev", "lex-d04", "ADMIN-01", "permission-admin-01"),
-        ("dev", "lex-d05", "第19条の2", "rule-019-2"),
-        ("dev", "lex-d06", "BETA-01", "product-beta-01"),
-        ("dev", "lex-d07", "E2041", "operation-e2041"),
-        ("dev", "lex-d08", "RULE-027", "rule-027"),
-        ("dev", "lex-d09", "DELETE-01", "permission-delete-01"),
-        ("dev", "lex-d10", "DAYS-365", "deadline-archive-365"),
-        ("test", "lex-t01", "ALPHA-10", "product-alpha-10"),
-        ("test", "lex-t02", "E1407", "operation-e1407"),
-        ("test", "lex-t03", "RULE-020", "rule-020"),
-        ("test", "lex-t04", "API-SEARCH-V2", "operation-api-search-v2"),
-        ("test", "lex-t05", "OMEGA-50", "product-omega-50"),
-        ("test", "lex-t06", "GAMMA-20", "product-gamma-20"),
-        ("test", "lex-t07", "E4107", "operation-e4107"),
-        ("test", "lex-t08", "RULE-032", "rule-032"),
-        ("test", "lex-t09", "LEGAL-01", "permission-legal-01"),
-        ("test", "lex-t10", "DAYS-14", "deadline-appeal-14"),
-    ]
-    for split, qid, text, target in lexical:
-        queries.append(query(qid, split, "lexical", text, {target: 3}, case_group=target))
+    negation = {
+        "dev": [
+            ("更新後に再登録して接続できるようになった事例", "support-connect-01", "support-connect-03"),
+            ("本体は接続済みだが権限不足でアプリ操作できない事例", "support-connect-02", "support-connect-06"),
+            ("ルーター再起動で通知が届くようになった冷蔵庫", "support-connect-05", "support-connect-12"),
+            ("接続はできるが通知だけ遅れていた事例", "support-connect-06", "support-connect-03"),
+            ("新しいSSIDへ登録しても外出先操作できない事例", "support-connect-07", "support-connect-13"),
+            ("アプリの再インストールで接続が回復した事例", "support-connect-08", "support-connect-09"),
+            ("Bluetoothでは見えるがクラウド同期できない事例", "support-connect-09", "support-connect-08"),
+            ("更新を再適用して接続できる状態へ戻ったテレビ", "support-connect-10", "support-connect-14"),
+            ("5GHz専用SSIDのため洗濯機を登録できない事例", "support-connect-11", "support-connect-15"),
+            ("通知は送れるのにアプリ表示だけ直らない冷蔵庫", "support-connect-12", "support-connect-05"),
+        ],
+        "test": [
+            ("ソフトウェアを新しくした後も、あらゆる再接続を試して直らなかった事例", "support-connect-03", "support-connect-13"),
+            ("更新をまだ行っておらず新しい認証へ接続できない事例", "support-connect-04", "support-connect-03"),
+            ("更新後に再起動だけでアプリ操作を再開できた事例", "support-connect-13", "support-connect-03"),
+            ("スマートフォン交換後も新端末へ接続できない事例", "support-connect-14", "support-connect-15"),
+            ("旧ファームウェアだが現在は接続できている事例", "support-connect-15", "support-connect-04"),
+            ("清掃だけで乾燥機の過熱停止が解消した修理", "repair-case-02", "repair-case-03"),
+            ("清掃しても過熱停止が続き部品交換待ちの修理", "repair-case-03", "repair-case-02"),
+            ("冷房が弱く清掃後も改善しなかったエアコン", "repair-case-08", "repair-case-15"),
+            ("画面の縦線が直らずパネル交換待ちのテレビ", "repair-case-14", "repair-case-07"),
+            ("バッテリー交換で運転時間が元に戻った掃除機", "repair-case-13", "repair-case-06"),
+        ],
+    }
+    for split, rows in negation.items():
+        marker = "d" if split == "dev" else "t"
+        for index, (text, target, forbidden) in enumerate(rows, start=1):
+            queries.append(query(f"neg-{marker}{index:02d}", split, "negation_exception", text, {target: 3}, forbidden_ids=[forbidden]))
 
-    mixed = [
-        ("dev", "mix-d01", "ALPHA-07で為替の値動きを抑える仕組み", "product-alpha-07"),
-        ("dev", "mix-d02", "E1074が出たとき注文額を勝手に変えてよいか", "operation-e1074"),
-        ("dev", "mix-d03", "第25条の面談記録はいつまで残すか", "rule-025"),
-        ("dev", "mix-d04", "DELTA-30を長期保有すると指数の逆方向とずれる理由", "product-delta-30"),
-        ("dev", "mix-d05", "EXPORT-01で通常管理者だけでは一括出力できない理由", "permission-export-01"),
-        ("dev", "mix-d06", "BETA-10が対象とする顧客と主な価格変動リスク", "product-beta-10"),
-        ("dev", "mix-d07", "E2104が出た後も本人確認前に取引を受けられるか", "operation-e2104"),
-        ("dev", "mix-d08", "第22条で電子交付の何を記録するか", "rule-022"),
-        ("dev", "mix-d09", "API-INGEST-V2が同じ版の文書を拒否する前に確認する項目", "operation-api-ingest-v2"),
-        ("dev", "mix-d10", "DAYS-45で退職者の権限をいつまでに削除するか", "deadline-deletion-45"),
-        ("test", "mix-t01", "ALPHA-10を現金化するまでの日数と主な価格変動要因", "product-alpha-10"),
-        ("test", "mix-t02", "E4071をテナント条件を外して回避してはいけない理由", "operation-e4071"),
-        ("test", "mix-t03", "第29条で新しい手数料を知らせる期限", "rule-029"),
-        ("test", "mix-t04", "OMEGA-05で参照指数が下がった場合の元本への影響", "product-omega-05"),
-        ("test", "mix-t05", "APPROVE-01でリスク管理部の追加承認が必要になる金額", "permission-approve-01"),
-        ("test", "mix-t06", "GAMMA-02の分配原資と価格を動かす要因", "product-gamma-02"),
-        ("test", "mix-t07", "E4017で再ログインではなく確認すべきもの", "operation-e4017"),
-        ("test", "mix-t08", "第26条で本人確認済みでも代理注文を受けられない条件", "rule-026"),
-        ("test", "mix-t09", "BATCH-DELETE-01が削除候補から除外する記録", "operation-batch-delete-01"),
-        ("test", "mix-t10", "DAYS-4の受渡日が市場休業日と重なった場合", "deadline-settlement-4"),
-    ]
-    for split, qid, text, target in mixed:
-        queries.append(query(qid, split, "mixed", text, {target: 3}, case_group=target))
+    contexts = {
+        "dev": [("AC-C300の特別保証の条件と対象外", "warranty-context-ac-c300"), ("RF-D510の部品別保証期間と対象外", "warranty-context-rf-d510"), ("OV-E600の無償修理に必要な情報と対象外", "warranty-context-ov-e600"), ("TV-G800の保証条件と対象外になる破損", "warranty-context-tv-g800"), ("WM-A401の回収対象と保証期間外の扱い", "safety-context-recall-wm-a401")],
+        "test": [("WM-A410の無償交換が認められる条件と、対象外になる場合", "warranty-context-wm-a410"), ("乾燥機から焦げ臭さがしたときの停止条件と通常のにおいとの違い", "safety-context-overheating-dryer"), ("オーブンで火花が出たときの対応と初回の煙だけの場合", "safety-context-gas-oven"), ("掃除機のバッテリー膨張時の回収と単なる劣化の違い", "safety-context-battery-vacuum"), ("テレビ転倒時の確認と地震後に使用再開できる条件", "safety-context-tipover-tv")],
+    }
+    for split, rows in contexts.items():
+        marker = "d" if split == "dev" else "t"
+        for index, (text, parent) in enumerate(rows, start=1):
+            ids = [f"{parent}-{order}" for order in range(1, 4)]
+            queries.append(query(f"ctx-{marker}{index:02d}", split, "context", text, {ids[0]: 1, ids[1]: 1, ids[2]: 3}, required_context_ids=ids))
 
-    negation = [
-        ("dev", "neg-d01", "高リスク商品の勧誘を行わなかった高齢顧客の事例", "elderly-case-02"),
-        ("dev", "neg-d02", "過徴収の返金であり損失補てんには当たらなかった事例", "comp-case-02"),
-        ("dev", "neg-d03", "一般担当者が変更できない監査記録の項目", "permission-view-01"),
-        ("dev", "neg-d04", "顧客注文に先回りした取引ではなかった事例", "market-case-06"),
-        ("dev", "neg-d05", "元本保証を望む顧客にも債券の価格変動を説明する必要があるか", "suitability-12"),
-        ("dev", "neg-d06", "年齢基準には達していないが、複雑商品の購入を見送ったため問題にならなかった事例", "elderly-case-04"),
-        ("dev", "neg-d07", "個別損失への対応ではなく、全顧客共通の災害減免だった事例", "comp-case-06"),
-        ("dev", "neg-d08", "未公表情報ではなく、公開済み決算だけで売買した事例", "market-case-02"),
-        ("dev", "neg-d09", "全記録を閲覧できても営業申請を承認できない担当者", "permission-audit-01"),
-        ("dev", "neg-d10", "為替を避けたい顧客へ外貨商品を無条件に勧めてよいか", "suitability-04"),
-        ("test", "neg-t01", "投資商品の案内をせず普通預金へ入金した高齢顧客対応", "elderly-case-14"),
-        ("test", "neg-t02", "投資損失ではなく事務事故の実費を賠償した事例", "comp-case-08"),
-        ("test", "neg-t03", "外部委託先が参照できない情報", "permission-read-02"),
-        ("test", "neg-t04", "終値付近の注文だが相場操縦ではなかった事例", "market-case-08"),
-        ("test", "neg-t05", "高収益を希望しても商品を理解できなければ販売しない判断", "suitability-08"),
-        ("test", "neg-t06", "高齢者への販売でも、説明と承認がそろい問題がなかった事例", "elderly-case-12"),
-        ("test", "neg-t07", "投資損ではなく、誤った送金案内で生じた費用を補償した事例", "comp-case-10"),
-        ("test", "neg-t08", "家族口座間の取引だが、仮装売買ではなかった事例", "market-case-12"),
-        ("test", "neg-t09", "文書を登録できても検索結果は取得できないAPI権限", "permission-api-10"),
-        ("test", "neg-t10", "取引が多い顧客でも、手数料負担が大きければ乗換えを勧めない判断", "suitability-14"),
-    ]
-    for split, qid, text, target in negation:
-        queries.append(query(qid, split, "negation_exception", text, {target: 3}, case_group=target))
-
-    contexts = [
-        ("dev", "ctx-d01", "高齢顧客の継続購入で使える簡易承認の前提と例外", "approval-context-elderly"),
-        ("dev", "ctx-d02", "夜間に口座を暫定停止した後、いつまでに何をするか", "approval-context-urgent"),
-        ("dev", "ctx-d03", "面談記録の保存期間と、調査中に廃棄できない条件", "record-context-interview"),
-        ("dev", "ctx-d04", "非対面販売で記録が中断した場合と、事前確認の対象外になる条件", "approval-context-remote"),
-        ("dev", "ctx-d05", "アクセスログをオンラインから移した後の保存期間と調査時の延長", "record-context-access"),
-        ("test", "ctx-t01", "高額取引を分割した場合の判定と承認を省略できる例外", "approval-context-high-value"),
-        ("test", "ctx-t02", "顧客が録音を断って勧誘を中止した通話で残す情報", "record-context-call"),
-        ("test", "ctx-t03", "作成途中の契約書案を90日後も削除してはいけない条件", "record-context-draft"),
-        ("test", "ctx-t04", "法人の取引担当者について毎回確認する事項と書類を省略できる条件", "approval-context-corporate"),
-        ("test", "ctx-t05", "同意を撤回した後の保存期間と、同意が無効だった場合の扱い", "record-context-consent"),
-    ]
-    for split, qid, text, parent in contexts:
-        ids = [f"{parent}-{index}" for index in range(1, 4)]
-        queries.append(
-            query(
-                qid,
-                split,
-                "context",
-                text,
-                {chunk_id: 3 if chunk_id.endswith("-3") else 1 for chunk_id in ids},
-                case_group=parent,
-                mode="hybrid_context",
-                required_context_ids=ids,
-            )
-        )
-
-    queries.extend([
-        query(
-            "strict-d01", "dev", "constraint", "ALPHA-01", {"product-alpha-01": 3},
-            case_group="product-alpha-01", mode="exact",
-            expected_ids=["product-alpha-01"], forbidden_ids=["product-alpha-10"],
-        ),
-        query(
-            "strict-d02", "dev", "constraint", "複雑な仕組債を販売した事例", {"elderly-case-01": 3},
-            case_group="elderly-case-01", mode="hybrid_filter",
-            filters={"document_type": "case", "customer_age_gte": 75, "amount_yen_gte": 5_000_000, "case_outcome": "violation"},
-            expected_ids=["elderly-case-01"], forbidden_ids=["elderly-case-02", "elderly-case-04"],
-        ),
-        query(
-            "strict-d03", "dev", "constraint", "BETA-10", {"product-beta-10": 3},
-            case_group="product-beta-10", mode="exact",
-            expected_ids=["product-beta-10"], forbidden_ids=["product-beta-01"],
-        ),
-        query(
-            "strict-d04", "dev", "constraint", "E2041", {"operation-e2041": 3},
-            case_group="operation-e2041", mode="exact",
-            expected_ids=["operation-e2041"], forbidden_ids=["operation-e2104"],
-        ),
-        query(
-            "strict-d05", "dev", "constraint", "500万円以上の問題となった補償事例",
-            {"comp-case-01": 3, "comp-case-07": 3, "comp-case-13": 3, "comp-case-15": 3},
-            case_group="compensation-violation-high-value", mode="hybrid_filter",
-            filters={"document_type": "case", "amount_yen_gte": 5_000_000, "case_outcome": "violation"},
-            expected_ids=["comp-case-01", "comp-case-07", "comp-case-13", "comp-case-15"],
-            forbidden_ids=["comp-case-02", "comp-case-08"],
-        ),
-        query(
-            "strict-t01", "test", "constraint", "E1407", {"operation-e1407": 3},
-            case_group="operation-e1407", mode="exact",
-            expected_ids=["operation-e1407"], forbidden_ids=["operation-e1047", "operation-e1704"],
-        ),
-        query(
-            "strict-t02", "test", "constraint", "高齢顧客へ販売した記録", {"elderly-case-03": 3, "elderly-case-06": 2},
-            case_group="elderly-case-03", mode="hybrid_filter",
-            filters={"document_type": "case", "customer_age_gte": 80, "amount_yen_gte": 2_000_000},
-            expected_ids=["elderly-case-03"], forbidden_ids=["elderly-case-01", "elderly-case-09"],
-        ),
-        query(
-            "strict-t03", "test", "constraint", "GAMMA-20", {"product-gamma-20": 3},
-            case_group="product-gamma-20", mode="exact",
-            expected_ids=["product-gamma-20"], forbidden_ids=["product-gamma-02"],
-        ),
-        query(
-            "strict-t04", "test", "constraint", "E4107", {"operation-e4107": 3},
-            case_group="operation-e4107", mode="exact",
-            expected_ids=["operation-e4107"], forbidden_ids=["operation-e4017"],
-        ),
-        query(
-            "strict-t05", "test", "constraint", "問題がなかった高額な高齢顧客対応", {"elderly-case-08": 3, "elderly-case-12": 3},
-            case_group="elderly-non-violation-high-value", mode="hybrid_filter",
-            filters={"document_type": "case", "customer_age_gte": 80, "amount_yen_gte": 4_000_000, "case_outcome": "non_violation"},
-            expected_ids=["elderly-case-08", "elderly-case-12"], forbidden_ids=["elderly-case-03", "elderly-case-11"],
-        ),
-    ])
+    constraints = {
+        "dev": [("WM-A410-E24", "exact", {}, ["error-wm-a410-e24"]), ("AC-C300-E24", "exact", {}, ["error-ac-c300-e24"]), ("未解決のエアコンサポート", "hybrid_filter", {"document_type": "support_case", "product_category": "air_conditioner", "support_outcome": "unresolved"}, ["support-connect-07"]), ("1年以上使った未解決の掃除機", "hybrid_filter", {"document_type": "support_case", "product_category": "vacuum", "device_age_months_gte": 12, "support_outcome": "unresolved"}, ["repair-case-06"]), ("ファームウェア3以降の接続事例", "hybrid_filter", {"document_type": "support_case", "firmware_major_gte": 3}, ["support-connect-01"])],
+        "test": [("WM-A410-E42", "exact", {}, ["error-wm-a410-e42"]), ("RF-D510-E17", "exact", {}, ["error-rf-d510-e17"]), ("未解決の洗濯機サポート", "hybrid_filter", {"document_type": "support_case", "product_category": "washer", "support_outcome": "unresolved"}, ["support-connect-03"]), ("1年以上使った未解決の洗濯機", "hybrid_filter", {"document_type": "support_case", "product_category": "washer", "device_age_months_gte": 12, "support_outcome": "unresolved"}, ["repair-case-11"]), ("ファームウェア3以降で更新後も接続できない事例", "hybrid_filter", {"document_type": "support_case", "firmware_major_gte": 3, "support_outcome": "unresolved"}, ["support-connect-03"])],
+    }
+    for split, rows in constraints.items():
+        marker = "d" if split == "dev" else "t"
+        for index, (text, mode, filters, expected) in enumerate(rows, start=1):
+            queries.append(query(f"con-{marker}{index:02d}", split, "constraint", text, {}, mode=mode, filters=filters, expected_ids=expected))
     return queries
 
 
 def main() -> None:
-    documents = (
-        build_rules()
-        + build_products()
-        + build_deadlines()
-        + build_elderly_cases()
-        + build_compensation_cases()
-        + build_permissions()
-        + build_approval_context()
-        + build_record_context()
-        + build_suitability()
-        + build_complaints()
-        + build_operations()
-        + build_market_cases()
-    )
+    documents = [
+        *build_products(), *build_error_codes(), *build_connectivity_cases(),
+        *build_repair_cases(), *build_manuals(), *build_firmware_notes(),
+        *build_compatibility(), *build_maintenance(), *build_installation(),
+        *build_faq(), *build_warranty_context(), *build_safety_context(),
+    ]
     queries = build_queries()
     if len(documents) != 180:
-        raise RuntimeError(f"expected 180 documents, got {len(documents)}")
+        raise SystemExit(f"expected 180 documents, got {len(documents)}")
     if len(queries) != 100:
-        raise RuntimeError(f"expected 100 queries, got {len(queries)}")
-
-    CORPUS_PATH.write_text(
-        "".join(json.dumps(row, ensure_ascii=False) + "\n" for row in documents),
-        encoding="utf-8",
-    )
-    QUERIES_PATH.write_text(
-        json.dumps(queries, ensure_ascii=False, indent=2) + "\n",
-        encoding="utf-8",
-    )
+        raise SystemExit(f"expected 100 queries, got {len(queries)}")
+    CORPUS_PATH.write_text("".join(json.dumps(row, ensure_ascii=False) + "\n" for row in documents), encoding="utf-8")
+    QUERIES_PATH.write_text(json.dumps(queries, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(f"wrote {len(documents)} documents and {len(queries)} queries")
 
 

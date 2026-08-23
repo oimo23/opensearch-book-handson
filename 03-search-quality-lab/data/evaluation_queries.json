@@ -3,10 +3,10 @@
     "id": "sem-d01",
     "split": "dev",
     "category": "semantic",
-    "case_group": "elderly-case-01",
-    "query": "家族に同席してもらわず、危険性の説明も足りないまま高齢者へ複雑な商品を売ったケース",
+    "case_group": "sem-d01",
+    "query": "更新後に家電がアプリから消えたが、登録し直したら使えるようになった事例",
     "relevance": {
-      "elderly-case-01": 3
+      "support-connect-01": 3
     },
     "mode": null,
     "filters": {},
@@ -18,10 +18,10 @@
     "id": "sem-d02",
     "split": "dev",
     "category": "semantic",
-    "case_group": "comp-case-01",
-    "query": "顧客の運用損を取引先との関係維持費という名目で穴埋めしたケース",
+    "case_group": "sem-d02",
+    "query": "給水が遅かったが部品を替えずに入口の砂を取って直った修理",
     "relevance": {
-      "comp-case-01": 3
+      "repair-case-01": 3
     },
     "mode": null,
     "filters": {},
@@ -33,10 +33,10 @@
     "id": "sem-d03",
     "split": "dev",
     "category": "semantic",
-    "case_group": "permission-view-01",
-    "query": "見ることはできるが、承認状態を触れない一般担当者の権限",
+    "case_group": "sem-d03",
+    "query": "乾燥時間が延びないよう毎回掃除する場所",
     "relevance": {
-      "permission-view-01": 3
+      "manual-dryer-filter": 3
     },
     "mode": null,
     "filters": {},
@@ -48,10 +48,10 @@
     "id": "sem-d04",
     "split": "dev",
     "category": "semantic",
-    "case_group": "suitability-01",
-    "query": "金融商品の知識が乏しく安全性を優先する人に複雑な商品を勧めない考え方",
+    "case_group": "sem-d04",
+    "query": "外からエアコンを操作するときの再接続を改善した更新",
     "relevance": {
-      "suitability-01": 3
+      "firmware-ac-c300-3": 3
     },
     "mode": null,
     "filters": {},
@@ -63,10 +63,10 @@
     "id": "sem-d05",
     "split": "dev",
     "category": "semantic",
-    "case_group": "market-case-05",
-    "query": "顧客注文より先に自社の売買を済ませた問題",
+    "case_group": "sem-d05",
+    "query": "新しいiPhoneで家電を探すために許可する項目",
     "relevance": {
-      "market-case-05": 3
+      "compat-ios18": 3
     },
     "mode": null,
     "filters": {},
@@ -78,10 +78,10 @@
     "id": "sem-d06",
     "split": "dev",
     "category": "semantic",
-    "case_group": "rule-028",
-    "query": "外国語で案内するとき、本人が理解できる資料と通訳の記録を用意する決まり",
+    "case_group": "sem-d06",
+    "query": "洗濯機へ水が入りにくくなる前に砂やさびを取る手入れ",
     "relevance": {
-      "rule-028": 3
+      "maintenance-wm-filter": 3
     },
     "mode": null,
     "filters": {},
@@ -93,10 +93,10 @@
     "id": "sem-d07",
     "split": "dev",
     "category": "semantic",
-    "case_group": "deadline-archive-365",
-    "query": "完了した監査資料をすぐ消さず、低頻度の保管場所へ移す時期",
+    "case_group": "sem-d07",
+    "query": "エアコンを壁へ付けるときに必要な強度と吸気空間",
     "relevance": {
-      "deadline-archive-365": 3
+      "installation-ac-wall": 3
     },
     "mode": null,
     "filters": {},
@@ -108,10 +108,10 @@
     "id": "sem-d08",
     "split": "dev",
     "category": "semantic",
-    "case_group": "elderly-case-13",
-    "query": "高齢という理由ではなく、短期の乗換えで手数料を重ねたことが問題になった販売",
+    "case_group": "sem-d08",
+    "query": "夜間の洗濯音が家に響くときの確認方法",
     "relevance": {
-      "elderly-case-13": 3
+      "faq-noise-night": 3
     },
     "mode": null,
     "filters": {},
@@ -123,10 +123,10 @@
     "id": "sem-d09",
     "split": "dev",
     "category": "semantic",
-    "case_group": "comp-case-07",
-    "query": "実体のない仕事を受けた形にして、取引損を穴埋めした事例",
+    "case_group": "sem-d09",
+    "query": "床の種類に応じて吸う強さを自動で変える掃除機",
     "relevance": {
-      "comp-case-07": 3
+      "product-vc-f710": 3
     },
     "mode": null,
     "filters": {},
@@ -138,10 +138,10 @@
     "id": "sem-d10",
     "split": "dev",
     "category": "semantic",
-    "case_group": "market-case-13",
-    "query": "未発表の資金調達情報を取引先へ漏らし、聞いた側が売却した問題",
+    "case_group": "sem-d10",
+    "query": "テレビの動画サービスで認証に失敗したときのコード",
     "relevance": {
-      "market-case-13": 3
+      "error-tv-g800-e31": 3
     },
     "mode": null,
     "filters": {},
@@ -153,10 +153,10 @@
     "id": "sem-t01",
     "split": "test",
     "category": "semantic",
-    "case_group": "elderly-case-03",
-    "query": "説明した証拠が残っておらず、後から適切だったか確かめられない高齢者販売",
+    "case_group": "sem-t01",
+    "query": "更新は終わったのにスマートフォンから操作できない洗濯機の事例",
     "relevance": {
-      "elderly-case-03": 3
+      "support-connect-03": 3
     },
     "mode": null,
     "filters": {},
@@ -168,10 +168,10 @@
     "id": "sem-t02",
     "split": "test",
     "category": "semantic",
-    "case_group": "comp-case-12",
-    "query": "全員向けに公開された施策なので、個別損失の埋め合わせではない還元",
+    "case_group": "sem-t02",
+    "query": "乾燥機を掃除しても熱で停止し、交換部品待ちになった修理",
     "relevance": {
-      "comp-case-12": 3
+      "repair-case-03": 3
     },
     "mode": null,
     "filters": {},
@@ -183,10 +183,10 @@
     "id": "sem-t03",
     "split": "test",
     "category": "semantic",
-    "case_group": "suitability-03",
-    "query": "住宅購入に使う予定の資金を、すぐ現金化できない商品へ入れるべきでない理由",
+    "case_group": "sem-t03",
+    "query": "洗濯機に水が入らないとき蛇口から順に調べる手順",
     "relevance": {
-      "suitability-03": 3
+      "manual-wm-water": 3
     },
     "mode": null,
     "filters": {},
@@ -198,10 +198,10 @@
     "id": "sem-t04",
     "split": "test",
     "category": "semantic",
-    "case_group": "market-case-11",
-    "query": "取引が盛んなように見せるため、複数口座で売買を往復させたケース",
+    "case_group": "sem-t04",
+    "query": "WPA3のルーターへエアコンをつなぐための更新",
     "relevance": {
-      "market-case-11": 3
+      "firmware-ac-c300-4": 3
     },
     "mode": null,
     "filters": {},
@@ -213,10 +213,10 @@
     "id": "sem-t05",
     "split": "test",
     "category": "semantic",
-    "case_group": "rule-020",
-    "query": "顧客から断られた商品を短期間にもう一度案内してはいけない規定",
+    "case_group": "sem-t05",
+    "query": "新しい暗号方式と古い家電を同じ無線LANで使う条件",
     "relevance": {
-      "rule-020": 3
+      "compat-router-wpa3": 3
     },
     "mode": null,
     "filters": {},
@@ -228,10 +228,10 @@
     "id": "sem-t06",
     "split": "test",
     "category": "semantic",
-    "case_group": "rule-031",
-    "query": "販売側の報酬と代わりの商品を説明しなければならない利益相反の手続",
+    "case_group": "sem-t06",
+    "query": "冷房前にエアコンのほこりを取る頻度",
     "relevance": {
-      "rule-031": 3
+      "maintenance-ac-filter": 3
     },
     "mode": null,
     "filters": {},
@@ -243,10 +243,10 @@
     "id": "sem-t07",
     "split": "test",
     "category": "semantic",
-    "case_group": "deadline-incident-3",
-    "query": "原因がまだ分からなくても影響範囲を添えて責任者へ知らせる障害対応",
+    "case_group": "sem-t07",
+    "query": "洗濯機の水を流すホースを高くしない設置方法",
     "relevance": {
-      "deadline-incident-3": 3
+      "installation-wm-drain": 3
     },
     "mode": null,
     "filters": {},
@@ -258,10 +258,10 @@
     "id": "sem-t08",
     "split": "test",
     "category": "semantic",
-    "case_group": "elderly-case-15",
-    "query": "外貨商品の手数料だけ説明し、為替差損を伝えなかった高齢者販売",
+    "case_group": "sem-t08",
+    "query": "冷凍室に霜が増えたとき扉の隙間を確認する案内",
     "relevance": {
-      "elderly-case-15": 3
+      "faq-fridge-frost": 3
     },
     "mode": null,
     "filters": {},
@@ -273,10 +273,10 @@
     "id": "sem-t09",
     "split": "test",
     "category": "semantic",
-    "case_group": "comp-case-14",
-    "query": "口座を閉じた後に見つかった税計算の誤りを訂正して返金した事例",
+    "case_group": "sem-t09",
+    "query": "扉を閉め忘れたときスマートフォンへ知らせる大型冷蔵庫",
     "relevance": {
-      "comp-case-14": 3
+      "product-rf-d510": 3
     },
     "mode": null,
     "filters": {},
@@ -288,10 +288,10 @@
     "id": "sem-t10",
     "split": "test",
     "category": "semantic",
-    "case_group": "market-case-10",
-    "query": "会社の訂正発表を報道機関が転載しただけで、虚偽投稿ではなかった事例",
+    "case_group": "sem-t10",
+    "query": "掃除機のブラシに髪が絡んで止まったときのコード",
     "relevance": {
-      "market-case-10": 3
+      "error-vc-f710-e31": 3
     },
     "mode": null,
     "filters": {},
@@ -303,10 +303,10 @@
     "id": "lex-d01",
     "split": "dev",
     "category": "lexical",
-    "case_group": "rule-019",
-    "query": "第19条",
+    "case_group": "lex-d01",
+    "query": "WM-A410S",
     "relevance": {
-      "rule-019": 3
+      "product-wm-a410s": 3
     },
     "mode": null,
     "filters": {},
@@ -318,10 +318,10 @@
     "id": "lex-d02",
     "split": "dev",
     "category": "lexical",
-    "case_group": "product-alpha-01",
-    "query": "ALPHA-01",
+    "case_group": "lex-d02",
+    "query": "WM-A410 E24",
     "relevance": {
-      "product-alpha-01": 3
+      "error-wm-a410-e24": 3
     },
     "mode": null,
     "filters": {},
@@ -333,10 +333,10 @@
     "id": "lex-d03",
     "split": "dev",
     "category": "lexical",
-    "case_group": "operation-e1047",
-    "query": "E1047",
+    "case_group": "lex-d03",
+    "query": "FW-TV-G800-5",
     "relevance": {
-      "operation-e1047": 3
+      "firmware-tv-g800-5": 3
     },
     "mode": null,
     "filters": {},
@@ -348,10 +348,10 @@
     "id": "lex-d04",
     "split": "dev",
     "category": "lexical",
-    "case_group": "permission-admin-01",
-    "query": "ADMIN-01",
+    "case_group": "lex-d04",
+    "query": "COMPAT-APP240",
     "relevance": {
-      "permission-admin-01": 3
+      "compat-app240": 3
     },
     "mode": null,
     "filters": {},
@@ -363,10 +363,10 @@
     "id": "lex-d05",
     "split": "dev",
     "category": "lexical",
-    "case_group": "rule-019-2",
-    "query": "第19条の2",
+    "case_group": "lex-d05",
+    "query": "CARE-RF-COIL",
     "relevance": {
-      "rule-019-2": 3
+      "maintenance-rf-coil": 3
     },
     "mode": null,
     "filters": {},
@@ -378,10 +378,10 @@
     "id": "lex-d06",
     "split": "dev",
     "category": "lexical",
-    "case_group": "product-beta-01",
-    "query": "BETA-01",
+    "case_group": "lex-d06",
+    "query": "INSTALL-TV-WALL",
     "relevance": {
-      "product-beta-01": 3
+      "installation-tv-wall": 3
     },
     "mode": null,
     "filters": {},
@@ -393,10 +393,10 @@
     "id": "lex-d07",
     "split": "dev",
     "category": "lexical",
-    "case_group": "operation-e2041",
-    "query": "E2041",
+    "case_group": "lex-d07",
+    "query": "FAQ-APP-LOGIN",
     "relevance": {
-      "operation-e2041": 3
+      "faq-app-login": 3
     },
     "mode": null,
     "filters": {},
@@ -408,10 +408,10 @@
     "id": "lex-d08",
     "split": "dev",
     "category": "lexical",
-    "case_group": "rule-027",
-    "query": "RULE-027",
+    "case_group": "lex-d08",
+    "query": "MANUAL-OV-STEAM",
     "relevance": {
-      "rule-027": 3
+      "manual-oven-steam": 3
     },
     "mode": null,
     "filters": {},
@@ -423,10 +423,10 @@
     "id": "lex-d09",
     "split": "dev",
     "category": "lexical",
-    "case_group": "permission-delete-01",
-    "query": "DELETE-01",
+    "case_group": "lex-d09",
+    "query": "CASE-REPAIR-05",
     "relevance": {
-      "permission-delete-01": 3
+      "repair-case-05": 3
     },
     "mode": null,
     "filters": {},
@@ -438,10 +438,10 @@
     "id": "lex-d10",
     "split": "dev",
     "category": "lexical",
-    "case_group": "deadline-archive-365",
-    "query": "DAYS-365",
+    "case_group": "lex-d10",
+    "query": "CASE-CONNECT-05",
     "relevance": {
-      "deadline-archive-365": 3
+      "support-connect-05": 3
     },
     "mode": null,
     "filters": {},
@@ -453,10 +453,10 @@
     "id": "lex-t01",
     "split": "test",
     "category": "lexical",
-    "case_group": "product-alpha-10",
-    "query": "ALPHA-10",
+    "case_group": "lex-t01",
+    "query": "WM-A410",
     "relevance": {
-      "product-alpha-10": 3
+      "product-wm-a410": 3
     },
     "mode": null,
     "filters": {},
@@ -468,10 +468,10 @@
     "id": "lex-t02",
     "split": "test",
     "category": "lexical",
-    "case_group": "operation-e1407",
-    "query": "E1407",
+    "case_group": "lex-t02",
+    "query": "WM-A410 E42",
     "relevance": {
-      "operation-e1407": 3
+      "error-wm-a410-e42": 3
     },
     "mode": null,
     "filters": {},
@@ -483,10 +483,10 @@
     "id": "lex-t03",
     "split": "test",
     "category": "lexical",
-    "case_group": "rule-020",
-    "query": "RULE-020",
+    "case_group": "lex-t03",
+    "query": "FW-WM-A410-4",
     "relevance": {
-      "rule-020": 3
+      "firmware-wm-a410-4": 3
     },
     "mode": null,
     "filters": {},
@@ -498,10 +498,10 @@
     "id": "lex-t04",
     "split": "test",
     "category": "lexical",
-    "case_group": "operation-api-search-v2",
-    "query": "API-SEARCH-V2",
+    "case_group": "lex-t04",
+    "query": "COMPAT-APP250",
     "relevance": {
-      "operation-api-search-v2": 3
+      "compat-app250": 3
     },
     "mode": null,
     "filters": {},
@@ -513,10 +513,10 @@
     "id": "lex-t05",
     "split": "test",
     "category": "lexical",
-    "case_group": "product-omega-50",
-    "query": "OMEGA-50",
+    "case_group": "lex-t05",
+    "query": "CARE-VC-BRUSH",
     "relevance": {
-      "product-omega-50": 3
+      "maintenance-vc-brush": 3
     },
     "mode": null,
     "filters": {},
@@ -528,10 +528,10 @@
     "id": "lex-t06",
     "split": "test",
     "category": "lexical",
-    "case_group": "product-gamma-20",
-    "query": "GAMMA-20",
+    "case_group": "lex-t06",
+    "query": "INSTALL-RF-CLEAR",
     "relevance": {
-      "product-gamma-20": 3
+      "installation-rf-clearance": 3
     },
     "mode": null,
     "filters": {},
@@ -543,10 +543,10 @@
     "id": "lex-t07",
     "split": "test",
     "category": "lexical",
-    "case_group": "operation-e4107",
-    "query": "E4107",
+    "case_group": "lex-t07",
+    "query": "FAQ-WM-ODOR",
     "relevance": {
-      "operation-e4107": 3
+      "faq-wm-odor": 3
     },
     "mode": null,
     "filters": {},
@@ -558,10 +558,10 @@
     "id": "lex-t08",
     "split": "test",
     "category": "lexical",
-    "case_group": "rule-032",
-    "query": "RULE-032",
+    "case_group": "lex-t08",
+    "query": "MANUAL-TV-NET",
     "relevance": {
-      "rule-032": 3
+      "manual-tv-network": 3
     },
     "mode": null,
     "filters": {},
@@ -573,10 +573,10 @@
     "id": "lex-t09",
     "split": "test",
     "category": "lexical",
-    "case_group": "permission-legal-01",
-    "query": "LEGAL-01",
+    "case_group": "lex-t09",
+    "query": "CASE-REPAIR-07",
     "relevance": {
-      "permission-legal-01": 3
+      "repair-case-07": 3
     },
     "mode": null,
     "filters": {},
@@ -588,10 +588,10 @@
     "id": "lex-t10",
     "split": "test",
     "category": "lexical",
-    "case_group": "deadline-appeal-14",
-    "query": "DAYS-14",
+    "case_group": "lex-t10",
+    "query": "CASE-CONNECT-14",
     "relevance": {
-      "deadline-appeal-14": 3
+      "support-connect-14": 3
     },
     "mode": null,
     "filters": {},
@@ -603,10 +603,10 @@
     "id": "mix-d01",
     "split": "dev",
     "category": "mixed",
-    "case_group": "product-alpha-07",
-    "query": "ALPHA-07で為替の値動きを抑える仕組み",
+    "case_group": "mix-d01",
+    "query": "AC-C300のE24で室外機と通信できない",
     "relevance": {
-      "product-alpha-07": 3
+      "error-ac-c300-e24": 3
     },
     "mode": null,
     "filters": {},
@@ -618,10 +618,10 @@
     "id": "mix-d02",
     "split": "dev",
     "category": "mixed",
-    "case_group": "operation-e1074",
-    "query": "E1074が出たとき注文額を勝手に変えてよいか",
+    "case_group": "mix-d02",
+    "query": "AC-C330は寒い地域でどの程度暖房できる製品か",
     "relevance": {
-      "operation-e1074": 3
+      "product-ac-c330": 3
     },
     "mode": null,
     "filters": {},
@@ -633,10 +633,10 @@
     "id": "mix-d03",
     "split": "dev",
     "category": "mixed",
-    "case_group": "rule-025",
-    "query": "第25条の面談記録はいつまで残すか",
+    "case_group": "mix-d03",
+    "query": "CASE-CONNECT-07で外出先操作が使えない原因",
     "relevance": {
-      "rule-025": 3
+      "support-connect-07": 3
     },
     "mode": null,
     "filters": {},
@@ -648,10 +648,10 @@
     "id": "mix-d04",
     "split": "dev",
     "category": "mixed",
-    "case_group": "product-delta-30",
-    "query": "DELTA-30を長期保有すると指数の逆方向とずれる理由",
+    "case_group": "mix-d04",
+    "query": "CASE-REPAIR-09の排水エラーを直した方法",
     "relevance": {
-      "product-delta-30": 3
+      "repair-case-09": 3
     },
     "mode": null,
     "filters": {},
@@ -663,10 +663,10 @@
     "id": "mix-d05",
     "split": "dev",
     "category": "mixed",
-    "case_group": "permission-export-01",
-    "query": "EXPORT-01で通常管理者だけでは一括出力できない理由",
+    "case_group": "mix-d05",
+    "query": "VC-F710で清掃履歴の同期を改善した更新",
     "relevance": {
-      "permission-export-01": 3
+      "firmware-vc-f710-3": 3
     },
     "mode": null,
     "filters": {},
@@ -678,10 +678,10 @@
     "id": "mix-d06",
     "split": "dev",
     "category": "mixed",
-    "case_group": "product-beta-10",
-    "query": "BETA-10が対象とする顧客と主な価格変動リスク",
+    "case_group": "mix-d06",
+    "query": "Android 15で近くの家電を見つける権限",
     "relevance": {
-      "product-beta-10": 3
+      "compat-android15": 3
     },
     "mode": null,
     "filters": {},
@@ -693,10 +693,10 @@
     "id": "mix-d07",
     "split": "dev",
     "category": "mixed",
-    "case_group": "operation-e2104",
-    "query": "E2104が出た後も本人確認前に取引を受けられるか",
+    "case_group": "mix-d07",
+    "query": "OV-E600の蒸気が弱くならないための水あか清掃",
     "relevance": {
-      "operation-e2104": 3
+      "maintenance-oven-steam": 3
     },
     "mode": null,
     "filters": {},
@@ -708,10 +708,10 @@
     "id": "mix-d08",
     "split": "dev",
     "category": "mixed",
-    "case_group": "rule-022",
-    "query": "第22条で電子交付の何を記録するか",
+    "case_group": "mix-d08",
+    "query": "DR-B220の排気ダクトの長さと曲げ方",
     "relevance": {
-      "rule-022": 3
+      "installation-dryer-vent": 3
     },
     "mode": null,
     "filters": {},
@@ -723,10 +723,10 @@
     "id": "mix-d09",
     "split": "dev",
     "category": "mixed",
-    "case_group": "operation-api-ingest-v2",
-    "query": "API-INGEST-V2が同じ版の文書を拒否する前に確認する項目",
+    "case_group": "mix-d09",
+    "query": "TV-G800のBluetooth音声が映像より遅れる",
     "relevance": {
-      "operation-api-ingest-v2": 3
+      "faq-tv-delay": 3
     },
     "mode": null,
     "filters": {},
@@ -738,10 +738,10 @@
     "id": "mix-d10",
     "split": "dev",
     "category": "mixed",
-    "case_group": "deadline-deletion-45",
-    "query": "DAYS-45で退職者の権限をいつまでに削除するか",
+    "case_group": "mix-d10",
+    "query": "AC-C300を2.4GHzへ登録するボタン操作",
     "relevance": {
-      "deadline-deletion-45": 3
+      "manual-ac-pairing": 3
     },
     "mode": null,
     "filters": {},
@@ -753,10 +753,10 @@
     "id": "mix-t01",
     "split": "test",
     "category": "mixed",
-    "case_group": "product-alpha-10",
-    "query": "ALPHA-10を現金化するまでの日数と主な価格変動要因",
+    "case_group": "mix-t01",
+    "query": "WM-A410でE42が出たときの給水エラーの対処",
     "relevance": {
-      "product-alpha-10": 3
+      "error-wm-a410-e42": 3
     },
     "mode": null,
     "filters": {},
@@ -768,10 +768,10 @@
     "id": "mix-t02",
     "split": "test",
     "category": "mixed",
-    "case_group": "operation-e4071",
-    "query": "E4071をテナント条件を外して回避してはいけない理由",
+    "case_group": "mix-t02",
+    "query": "WM-A410をスマートフォンから予約運転できるか",
     "relevance": {
-      "operation-e4071": 3
+      "product-wm-a410": 3
     },
     "mode": null,
     "filters": {},
@@ -783,10 +783,10 @@
     "id": "mix-t03",
     "split": "test",
     "category": "mixed",
-    "case_group": "rule-029",
-    "query": "第29条で新しい手数料を知らせる期限",
+    "case_group": "mix-t03",
+    "query": "CASE-CONNECT-03で更新後も接続できない経緯",
     "relevance": {
-      "rule-029": 3
+      "support-connect-03": 3
     },
     "mode": null,
     "filters": {},
@@ -798,10 +798,10 @@
     "id": "mix-t04",
     "split": "test",
     "category": "mixed",
-    "case_group": "product-omega-05",
-    "query": "OMEGA-05で参照指数が下がった場合の元本への影響",
+    "case_group": "mix-t04",
+    "query": "CASE-REPAIR-11で給水弁の交換が未完了の理由",
     "relevance": {
-      "product-omega-05": 3
+      "repair-case-11": 3
     },
     "mode": null,
     "filters": {},
@@ -813,10 +813,10 @@
     "id": "mix-t05",
     "split": "test",
     "category": "mixed",
-    "case_group": "permission-approve-01",
-    "query": "APPROVE-01でリスク管理部の追加承認が必要になる金額",
+    "case_group": "mix-t05",
+    "query": "WM-A410の予約運転と再接続を改善した更新",
     "relevance": {
-      "permission-approve-01": 3
+      "firmware-wm-a410-3": 3
     },
     "mode": null,
     "filters": {},
@@ -828,10 +828,10 @@
     "id": "mix-t06",
     "split": "test",
     "category": "mixed",
-    "case_group": "product-gamma-02",
-    "query": "GAMMA-02の分配原資と価格を動かす要因",
+    "case_group": "mix-t06",
+    "query": "WM-A410が5GHzだけのSSIDへ接続できない理由",
     "relevance": {
-      "product-gamma-02": 3
+      "compat-router-5g": 3
     },
     "mode": null,
     "filters": {},
@@ -843,10 +843,10 @@
     "id": "mix-t07",
     "split": "test",
     "category": "mixed",
-    "case_group": "operation-e4017",
-    "query": "E4017で再ログインではなく確認すべきもの",
+    "case_group": "mix-t07",
+    "query": "WM-A410の槽を月に一度洗浄する手順",
     "relevance": {
-      "operation-e4017": 3
+      "maintenance-wm-drum": 3
     },
     "mode": null,
     "filters": {},
@@ -858,10 +858,10 @@
     "id": "mix-t08",
     "split": "test",
     "category": "mixed",
-    "case_group": "rule-026",
-    "query": "第26条で本人確認済みでも代理注文を受けられない条件",
+    "case_group": "mix-t08",
+    "query": "WM-A410の振動を抑える水平調整",
     "relevance": {
-      "rule-026": 3
+      "installation-wm-level": 3
     },
     "mode": null,
     "filters": {},
@@ -873,10 +873,10 @@
     "id": "mix-t09",
     "split": "test",
     "category": "mixed",
-    "case_group": "operation-batch-delete-01",
-    "query": "BATCH-DELETE-01が削除候補から除外する記録",
+    "case_group": "mix-t09",
+    "query": "通知は届くのにアプリではオフラインと出る",
     "relevance": {
-      "operation-batch-delete-01": 3
+      "faq-app-offline": 3
     },
     "mode": null,
     "filters": {},
@@ -888,10 +888,10 @@
     "id": "mix-t10",
     "split": "test",
     "category": "mixed",
-    "case_group": "deadline-settlement-4",
-    "query": "DAYS-4の受渡日が市場休業日と重なった場合",
+    "case_group": "mix-t10",
+    "query": "WM-A410のE24で排水できないときの確認箇所",
     "relevance": {
-      "deadline-settlement-4": 3
+      "manual-wm-drain": 3
     },
     "mode": null,
     "filters": {},
@@ -903,319 +903,359 @@
     "id": "neg-d01",
     "split": "dev",
     "category": "negation_exception",
-    "case_group": "elderly-case-02",
-    "query": "高リスク商品の勧誘を行わなかった高齢顧客の事例",
+    "case_group": "neg-d01",
+    "query": "更新後に再登録して接続できるようになった事例",
     "relevance": {
-      "elderly-case-02": 3
+      "support-connect-01": 3
     },
     "mode": null,
     "filters": {},
     "required_context_ids": [],
     "expected_ids": [],
-    "forbidden_ids": []
+    "forbidden_ids": [
+      "support-connect-03"
+    ]
   },
   {
     "id": "neg-d02",
     "split": "dev",
     "category": "negation_exception",
-    "case_group": "comp-case-02",
-    "query": "過徴収の返金であり損失補てんには当たらなかった事例",
+    "case_group": "neg-d02",
+    "query": "本体は接続済みだが権限不足でアプリ操作できない事例",
     "relevance": {
-      "comp-case-02": 3
+      "support-connect-02": 3
     },
     "mode": null,
     "filters": {},
     "required_context_ids": [],
     "expected_ids": [],
-    "forbidden_ids": []
+    "forbidden_ids": [
+      "support-connect-06"
+    ]
   },
   {
     "id": "neg-d03",
     "split": "dev",
     "category": "negation_exception",
-    "case_group": "permission-view-01",
-    "query": "一般担当者が変更できない監査記録の項目",
+    "case_group": "neg-d03",
+    "query": "ルーター再起動で通知が届くようになった冷蔵庫",
     "relevance": {
-      "permission-view-01": 3
+      "support-connect-05": 3
     },
     "mode": null,
     "filters": {},
     "required_context_ids": [],
     "expected_ids": [],
-    "forbidden_ids": []
+    "forbidden_ids": [
+      "support-connect-12"
+    ]
   },
   {
     "id": "neg-d04",
     "split": "dev",
     "category": "negation_exception",
-    "case_group": "market-case-06",
-    "query": "顧客注文に先回りした取引ではなかった事例",
+    "case_group": "neg-d04",
+    "query": "接続はできるが通知だけ遅れていた事例",
     "relevance": {
-      "market-case-06": 3
+      "support-connect-06": 3
     },
     "mode": null,
     "filters": {},
     "required_context_ids": [],
     "expected_ids": [],
-    "forbidden_ids": []
+    "forbidden_ids": [
+      "support-connect-03"
+    ]
   },
   {
     "id": "neg-d05",
     "split": "dev",
     "category": "negation_exception",
-    "case_group": "suitability-12",
-    "query": "元本保証を望む顧客にも債券の価格変動を説明する必要があるか",
+    "case_group": "neg-d05",
+    "query": "新しいSSIDへ登録しても外出先操作できない事例",
     "relevance": {
-      "suitability-12": 3
+      "support-connect-07": 3
     },
     "mode": null,
     "filters": {},
     "required_context_ids": [],
     "expected_ids": [],
-    "forbidden_ids": []
+    "forbidden_ids": [
+      "support-connect-13"
+    ]
   },
   {
     "id": "neg-d06",
     "split": "dev",
     "category": "negation_exception",
-    "case_group": "elderly-case-04",
-    "query": "年齢基準には達していないが、複雑商品の購入を見送ったため問題にならなかった事例",
+    "case_group": "neg-d06",
+    "query": "アプリの再インストールで接続が回復した事例",
     "relevance": {
-      "elderly-case-04": 3
+      "support-connect-08": 3
     },
     "mode": null,
     "filters": {},
     "required_context_ids": [],
     "expected_ids": [],
-    "forbidden_ids": []
+    "forbidden_ids": [
+      "support-connect-09"
+    ]
   },
   {
     "id": "neg-d07",
     "split": "dev",
     "category": "negation_exception",
-    "case_group": "comp-case-06",
-    "query": "個別損失への対応ではなく、全顧客共通の災害減免だった事例",
+    "case_group": "neg-d07",
+    "query": "Bluetoothでは見えるがクラウド同期できない事例",
     "relevance": {
-      "comp-case-06": 3
+      "support-connect-09": 3
     },
     "mode": null,
     "filters": {},
     "required_context_ids": [],
     "expected_ids": [],
-    "forbidden_ids": []
+    "forbidden_ids": [
+      "support-connect-08"
+    ]
   },
   {
     "id": "neg-d08",
     "split": "dev",
     "category": "negation_exception",
-    "case_group": "market-case-02",
-    "query": "未公表情報ではなく、公開済み決算だけで売買した事例",
+    "case_group": "neg-d08",
+    "query": "更新を再適用して接続できる状態へ戻ったテレビ",
     "relevance": {
-      "market-case-02": 3
+      "support-connect-10": 3
     },
     "mode": null,
     "filters": {},
     "required_context_ids": [],
     "expected_ids": [],
-    "forbidden_ids": []
+    "forbidden_ids": [
+      "support-connect-14"
+    ]
   },
   {
     "id": "neg-d09",
     "split": "dev",
     "category": "negation_exception",
-    "case_group": "permission-audit-01",
-    "query": "全記録を閲覧できても営業申請を承認できない担当者",
+    "case_group": "neg-d09",
+    "query": "5GHz専用SSIDのため洗濯機を登録できない事例",
     "relevance": {
-      "permission-audit-01": 3
+      "support-connect-11": 3
     },
     "mode": null,
     "filters": {},
     "required_context_ids": [],
     "expected_ids": [],
-    "forbidden_ids": []
+    "forbidden_ids": [
+      "support-connect-15"
+    ]
   },
   {
     "id": "neg-d10",
     "split": "dev",
     "category": "negation_exception",
-    "case_group": "suitability-04",
-    "query": "為替を避けたい顧客へ外貨商品を無条件に勧めてよいか",
+    "case_group": "neg-d10",
+    "query": "通知は送れるのにアプリ表示だけ直らない冷蔵庫",
     "relevance": {
-      "suitability-04": 3
+      "support-connect-12": 3
     },
     "mode": null,
     "filters": {},
     "required_context_ids": [],
     "expected_ids": [],
-    "forbidden_ids": []
+    "forbidden_ids": [
+      "support-connect-05"
+    ]
   },
   {
     "id": "neg-t01",
     "split": "test",
     "category": "negation_exception",
-    "case_group": "elderly-case-14",
-    "query": "投資商品の案内をせず普通預金へ入金した高齢顧客対応",
+    "case_group": "neg-t01",
+    "query": "ソフトウェアを新しくした後も、あらゆる再接続を試して直らなかった事例",
     "relevance": {
-      "elderly-case-14": 3
+      "support-connect-03": 3
     },
     "mode": null,
     "filters": {},
     "required_context_ids": [],
     "expected_ids": [],
-    "forbidden_ids": []
+    "forbidden_ids": [
+      "support-connect-13"
+    ]
   },
   {
     "id": "neg-t02",
     "split": "test",
     "category": "negation_exception",
-    "case_group": "comp-case-08",
-    "query": "投資損失ではなく事務事故の実費を賠償した事例",
+    "case_group": "neg-t02",
+    "query": "更新をまだ行っておらず新しい認証へ接続できない事例",
     "relevance": {
-      "comp-case-08": 3
+      "support-connect-04": 3
     },
     "mode": null,
     "filters": {},
     "required_context_ids": [],
     "expected_ids": [],
-    "forbidden_ids": []
+    "forbidden_ids": [
+      "support-connect-03"
+    ]
   },
   {
     "id": "neg-t03",
     "split": "test",
     "category": "negation_exception",
-    "case_group": "permission-read-02",
-    "query": "外部委託先が参照できない情報",
+    "case_group": "neg-t03",
+    "query": "更新後に再起動だけでアプリ操作を再開できた事例",
     "relevance": {
-      "permission-read-02": 3
+      "support-connect-13": 3
     },
     "mode": null,
     "filters": {},
     "required_context_ids": [],
     "expected_ids": [],
-    "forbidden_ids": []
+    "forbidden_ids": [
+      "support-connect-03"
+    ]
   },
   {
     "id": "neg-t04",
     "split": "test",
     "category": "negation_exception",
-    "case_group": "market-case-08",
-    "query": "終値付近の注文だが相場操縦ではなかった事例",
+    "case_group": "neg-t04",
+    "query": "スマートフォン交換後も新端末へ接続できない事例",
     "relevance": {
-      "market-case-08": 3
+      "support-connect-14": 3
     },
     "mode": null,
     "filters": {},
     "required_context_ids": [],
     "expected_ids": [],
-    "forbidden_ids": []
+    "forbidden_ids": [
+      "support-connect-15"
+    ]
   },
   {
     "id": "neg-t05",
     "split": "test",
     "category": "negation_exception",
-    "case_group": "suitability-08",
-    "query": "高収益を希望しても商品を理解できなければ販売しない判断",
+    "case_group": "neg-t05",
+    "query": "旧ファームウェアだが現在は接続できている事例",
     "relevance": {
-      "suitability-08": 3
+      "support-connect-15": 3
     },
     "mode": null,
     "filters": {},
     "required_context_ids": [],
     "expected_ids": [],
-    "forbidden_ids": []
+    "forbidden_ids": [
+      "support-connect-04"
+    ]
   },
   {
     "id": "neg-t06",
     "split": "test",
     "category": "negation_exception",
-    "case_group": "elderly-case-12",
-    "query": "高齢者への販売でも、説明と承認がそろい問題がなかった事例",
+    "case_group": "neg-t06",
+    "query": "清掃だけで乾燥機の過熱停止が解消した修理",
     "relevance": {
-      "elderly-case-12": 3
+      "repair-case-02": 3
     },
     "mode": null,
     "filters": {},
     "required_context_ids": [],
     "expected_ids": [],
-    "forbidden_ids": []
+    "forbidden_ids": [
+      "repair-case-03"
+    ]
   },
   {
     "id": "neg-t07",
     "split": "test",
     "category": "negation_exception",
-    "case_group": "comp-case-10",
-    "query": "投資損ではなく、誤った送金案内で生じた費用を補償した事例",
+    "case_group": "neg-t07",
+    "query": "清掃しても過熱停止が続き部品交換待ちの修理",
     "relevance": {
-      "comp-case-10": 3
+      "repair-case-03": 3
     },
     "mode": null,
     "filters": {},
     "required_context_ids": [],
     "expected_ids": [],
-    "forbidden_ids": []
+    "forbidden_ids": [
+      "repair-case-02"
+    ]
   },
   {
     "id": "neg-t08",
     "split": "test",
     "category": "negation_exception",
-    "case_group": "market-case-12",
-    "query": "家族口座間の取引だが、仮装売買ではなかった事例",
+    "case_group": "neg-t08",
+    "query": "冷房が弱く清掃後も改善しなかったエアコン",
     "relevance": {
-      "market-case-12": 3
+      "repair-case-08": 3
     },
     "mode": null,
     "filters": {},
     "required_context_ids": [],
     "expected_ids": [],
-    "forbidden_ids": []
+    "forbidden_ids": [
+      "repair-case-15"
+    ]
   },
   {
     "id": "neg-t09",
     "split": "test",
     "category": "negation_exception",
-    "case_group": "permission-api-10",
-    "query": "文書を登録できても検索結果は取得できないAPI権限",
+    "case_group": "neg-t09",
+    "query": "画面の縦線が直らずパネル交換待ちのテレビ",
     "relevance": {
-      "permission-api-10": 3
+      "repair-case-14": 3
     },
     "mode": null,
     "filters": {},
     "required_context_ids": [],
     "expected_ids": [],
-    "forbidden_ids": []
+    "forbidden_ids": [
+      "repair-case-07"
+    ]
   },
   {
     "id": "neg-t10",
     "split": "test",
     "category": "negation_exception",
-    "case_group": "suitability-14",
-    "query": "取引が多い顧客でも、手数料負担が大きければ乗換えを勧めない判断",
+    "case_group": "neg-t10",
+    "query": "バッテリー交換で運転時間が元に戻った掃除機",
     "relevance": {
-      "suitability-14": 3
+      "repair-case-13": 3
     },
     "mode": null,
     "filters": {},
     "required_context_ids": [],
     "expected_ids": [],
-    "forbidden_ids": []
+    "forbidden_ids": [
+      "repair-case-06"
+    ]
   },
   {
     "id": "ctx-d01",
     "split": "dev",
     "category": "context",
-    "case_group": "approval-context-elderly",
-    "query": "高齢顧客の継続購入で使える簡易承認の前提と例外",
+    "case_group": "ctx-d01",
+    "query": "AC-C300の特別保証の条件と対象外",
     "relevance": {
-      "approval-context-elderly-1": 1,
-      "approval-context-elderly-2": 1,
-      "approval-context-elderly-3": 3
+      "warranty-context-ac-c300-1": 1,
+      "warranty-context-ac-c300-2": 1,
+      "warranty-context-ac-c300-3": 3
     },
-    "mode": "hybrid_context",
+    "mode": null,
     "filters": {},
     "required_context_ids": [
-      "approval-context-elderly-1",
-      "approval-context-elderly-2",
-      "approval-context-elderly-3"
+      "warranty-context-ac-c300-1",
+      "warranty-context-ac-c300-2",
+      "warranty-context-ac-c300-3"
     ],
     "expected_ids": [],
     "forbidden_ids": []
@@ -1224,19 +1264,19 @@
     "id": "ctx-d02",
     "split": "dev",
     "category": "context",
-    "case_group": "approval-context-urgent",
-    "query": "夜間に口座を暫定停止した後、いつまでに何をするか",
+    "case_group": "ctx-d02",
+    "query": "RF-D510の部品別保証期間と対象外",
     "relevance": {
-      "approval-context-urgent-1": 1,
-      "approval-context-urgent-2": 1,
-      "approval-context-urgent-3": 3
+      "warranty-context-rf-d510-1": 1,
+      "warranty-context-rf-d510-2": 1,
+      "warranty-context-rf-d510-3": 3
     },
-    "mode": "hybrid_context",
+    "mode": null,
     "filters": {},
     "required_context_ids": [
-      "approval-context-urgent-1",
-      "approval-context-urgent-2",
-      "approval-context-urgent-3"
+      "warranty-context-rf-d510-1",
+      "warranty-context-rf-d510-2",
+      "warranty-context-rf-d510-3"
     ],
     "expected_ids": [],
     "forbidden_ids": []
@@ -1245,19 +1285,19 @@
     "id": "ctx-d03",
     "split": "dev",
     "category": "context",
-    "case_group": "record-context-interview",
-    "query": "面談記録の保存期間と、調査中に廃棄できない条件",
+    "case_group": "ctx-d03",
+    "query": "OV-E600の無償修理に必要な情報と対象外",
     "relevance": {
-      "record-context-interview-1": 1,
-      "record-context-interview-2": 1,
-      "record-context-interview-3": 3
+      "warranty-context-ov-e600-1": 1,
+      "warranty-context-ov-e600-2": 1,
+      "warranty-context-ov-e600-3": 3
     },
-    "mode": "hybrid_context",
+    "mode": null,
     "filters": {},
     "required_context_ids": [
-      "record-context-interview-1",
-      "record-context-interview-2",
-      "record-context-interview-3"
+      "warranty-context-ov-e600-1",
+      "warranty-context-ov-e600-2",
+      "warranty-context-ov-e600-3"
     ],
     "expected_ids": [],
     "forbidden_ids": []
@@ -1266,19 +1306,19 @@
     "id": "ctx-d04",
     "split": "dev",
     "category": "context",
-    "case_group": "approval-context-remote",
-    "query": "非対面販売で記録が中断した場合と、事前確認の対象外になる条件",
+    "case_group": "ctx-d04",
+    "query": "TV-G800の保証条件と対象外になる破損",
     "relevance": {
-      "approval-context-remote-1": 1,
-      "approval-context-remote-2": 1,
-      "approval-context-remote-3": 3
+      "warranty-context-tv-g800-1": 1,
+      "warranty-context-tv-g800-2": 1,
+      "warranty-context-tv-g800-3": 3
     },
-    "mode": "hybrid_context",
+    "mode": null,
     "filters": {},
     "required_context_ids": [
-      "approval-context-remote-1",
-      "approval-context-remote-2",
-      "approval-context-remote-3"
+      "warranty-context-tv-g800-1",
+      "warranty-context-tv-g800-2",
+      "warranty-context-tv-g800-3"
     ],
     "expected_ids": [],
     "forbidden_ids": []
@@ -1287,19 +1327,19 @@
     "id": "ctx-d05",
     "split": "dev",
     "category": "context",
-    "case_group": "record-context-access",
-    "query": "アクセスログをオンラインから移した後の保存期間と調査時の延長",
+    "case_group": "ctx-d05",
+    "query": "WM-A401の回収対象と保証期間外の扱い",
     "relevance": {
-      "record-context-access-1": 1,
-      "record-context-access-2": 1,
-      "record-context-access-3": 3
+      "safety-context-recall-wm-a401-1": 1,
+      "safety-context-recall-wm-a401-2": 1,
+      "safety-context-recall-wm-a401-3": 3
     },
-    "mode": "hybrid_context",
+    "mode": null,
     "filters": {},
     "required_context_ids": [
-      "record-context-access-1",
-      "record-context-access-2",
-      "record-context-access-3"
+      "safety-context-recall-wm-a401-1",
+      "safety-context-recall-wm-a401-2",
+      "safety-context-recall-wm-a401-3"
     ],
     "expected_ids": [],
     "forbidden_ids": []
@@ -1308,19 +1348,19 @@
     "id": "ctx-t01",
     "split": "test",
     "category": "context",
-    "case_group": "approval-context-high-value",
-    "query": "高額取引を分割した場合の判定と承認を省略できる例外",
+    "case_group": "ctx-t01",
+    "query": "WM-A410の無償交換が認められる条件と、対象外になる場合",
     "relevance": {
-      "approval-context-high-value-1": 1,
-      "approval-context-high-value-2": 1,
-      "approval-context-high-value-3": 3
+      "warranty-context-wm-a410-1": 1,
+      "warranty-context-wm-a410-2": 1,
+      "warranty-context-wm-a410-3": 3
     },
-    "mode": "hybrid_context",
+    "mode": null,
     "filters": {},
     "required_context_ids": [
-      "approval-context-high-value-1",
-      "approval-context-high-value-2",
-      "approval-context-high-value-3"
+      "warranty-context-wm-a410-1",
+      "warranty-context-wm-a410-2",
+      "warranty-context-wm-a410-3"
     ],
     "expected_ids": [],
     "forbidden_ids": []
@@ -1329,19 +1369,19 @@
     "id": "ctx-t02",
     "split": "test",
     "category": "context",
-    "case_group": "record-context-call",
-    "query": "顧客が録音を断って勧誘を中止した通話で残す情報",
+    "case_group": "ctx-t02",
+    "query": "乾燥機から焦げ臭さがしたときの停止条件と通常のにおいとの違い",
     "relevance": {
-      "record-context-call-1": 1,
-      "record-context-call-2": 1,
-      "record-context-call-3": 3
+      "safety-context-overheating-dryer-1": 1,
+      "safety-context-overheating-dryer-2": 1,
+      "safety-context-overheating-dryer-3": 3
     },
-    "mode": "hybrid_context",
+    "mode": null,
     "filters": {},
     "required_context_ids": [
-      "record-context-call-1",
-      "record-context-call-2",
-      "record-context-call-3"
+      "safety-context-overheating-dryer-1",
+      "safety-context-overheating-dryer-2",
+      "safety-context-overheating-dryer-3"
     ],
     "expected_ids": [],
     "forbidden_ids": []
@@ -1350,19 +1390,19 @@
     "id": "ctx-t03",
     "split": "test",
     "category": "context",
-    "case_group": "record-context-draft",
-    "query": "作成途中の契約書案を90日後も削除してはいけない条件",
+    "case_group": "ctx-t03",
+    "query": "オーブンで火花が出たときの対応と初回の煙だけの場合",
     "relevance": {
-      "record-context-draft-1": 1,
-      "record-context-draft-2": 1,
-      "record-context-draft-3": 3
+      "safety-context-gas-oven-1": 1,
+      "safety-context-gas-oven-2": 1,
+      "safety-context-gas-oven-3": 3
     },
-    "mode": "hybrid_context",
+    "mode": null,
     "filters": {},
     "required_context_ids": [
-      "record-context-draft-1",
-      "record-context-draft-2",
-      "record-context-draft-3"
+      "safety-context-gas-oven-1",
+      "safety-context-gas-oven-2",
+      "safety-context-gas-oven-3"
     ],
     "expected_ids": [],
     "forbidden_ids": []
@@ -1371,19 +1411,19 @@
     "id": "ctx-t04",
     "split": "test",
     "category": "context",
-    "case_group": "approval-context-corporate",
-    "query": "法人の取引担当者について毎回確認する事項と書類を省略できる条件",
+    "case_group": "ctx-t04",
+    "query": "掃除機のバッテリー膨張時の回収と単なる劣化の違い",
     "relevance": {
-      "approval-context-corporate-1": 1,
-      "approval-context-corporate-2": 1,
-      "approval-context-corporate-3": 3
+      "safety-context-battery-vacuum-1": 1,
+      "safety-context-battery-vacuum-2": 1,
+      "safety-context-battery-vacuum-3": 3
     },
-    "mode": "hybrid_context",
+    "mode": null,
     "filters": {},
     "required_context_ids": [
-      "approval-context-corporate-1",
-      "approval-context-corporate-2",
-      "approval-context-corporate-3"
+      "safety-context-battery-vacuum-1",
+      "safety-context-battery-vacuum-2",
+      "safety-context-battery-vacuum-3"
     ],
     "expected_ids": [],
     "forbidden_ids": []
@@ -1392,243 +1432,196 @@
     "id": "ctx-t05",
     "split": "test",
     "category": "context",
-    "case_group": "record-context-consent",
-    "query": "同意を撤回した後の保存期間と、同意が無効だった場合の扱い",
+    "case_group": "ctx-t05",
+    "query": "テレビ転倒時の確認と地震後に使用再開できる条件",
     "relevance": {
-      "record-context-consent-1": 1,
-      "record-context-consent-2": 1,
-      "record-context-consent-3": 3
+      "safety-context-tipover-tv-1": 1,
+      "safety-context-tipover-tv-2": 1,
+      "safety-context-tipover-tv-3": 3
     },
-    "mode": "hybrid_context",
+    "mode": null,
     "filters": {},
     "required_context_ids": [
-      "record-context-consent-1",
-      "record-context-consent-2",
-      "record-context-consent-3"
+      "safety-context-tipover-tv-1",
+      "safety-context-tipover-tv-2",
+      "safety-context-tipover-tv-3"
     ],
     "expected_ids": [],
     "forbidden_ids": []
   },
   {
-    "id": "strict-d01",
+    "id": "con-d01",
     "split": "dev",
     "category": "constraint",
-    "case_group": "product-alpha-01",
-    "query": "ALPHA-01",
-    "relevance": {
-      "product-alpha-01": 3
-    },
+    "case_group": "con-d01",
+    "query": "WM-A410-E24",
+    "relevance": {},
     "mode": "exact",
     "filters": {},
     "required_context_ids": [],
     "expected_ids": [
-      "product-alpha-01"
+      "error-wm-a410-e24"
     ],
-    "forbidden_ids": [
-      "product-alpha-10"
-    ]
+    "forbidden_ids": []
   },
   {
-    "id": "strict-d02",
+    "id": "con-d02",
     "split": "dev",
     "category": "constraint",
-    "case_group": "elderly-case-01",
-    "query": "複雑な仕組債を販売した事例",
-    "relevance": {
-      "elderly-case-01": 3
-    },
+    "case_group": "con-d02",
+    "query": "AC-C300-E24",
+    "relevance": {},
+    "mode": "exact",
+    "filters": {},
+    "required_context_ids": [],
+    "expected_ids": [
+      "error-ac-c300-e24"
+    ],
+    "forbidden_ids": []
+  },
+  {
+    "id": "con-d03",
+    "split": "dev",
+    "category": "constraint",
+    "case_group": "con-d03",
+    "query": "未解決のエアコンサポート",
+    "relevance": {},
     "mode": "hybrid_filter",
     "filters": {
-      "document_type": "case",
-      "customer_age_gte": 75,
-      "amount_yen_gte": 5000000,
-      "case_outcome": "violation"
+      "document_type": "support_case",
+      "product_category": "air_conditioner",
+      "support_outcome": "unresolved"
     },
     "required_context_ids": [],
     "expected_ids": [
-      "elderly-case-01"
+      "support-connect-07"
     ],
-    "forbidden_ids": [
-      "elderly-case-02",
-      "elderly-case-04"
-    ]
+    "forbidden_ids": []
   },
   {
-    "id": "strict-d03",
+    "id": "con-d04",
     "split": "dev",
     "category": "constraint",
-    "case_group": "product-beta-10",
-    "query": "BETA-10",
-    "relevance": {
-      "product-beta-10": 3
+    "case_group": "con-d04",
+    "query": "1年以上使った未解決の掃除機",
+    "relevance": {},
+    "mode": "hybrid_filter",
+    "filters": {
+      "document_type": "support_case",
+      "product_category": "vacuum",
+      "device_age_months_gte": 12,
+      "support_outcome": "unresolved"
     },
-    "mode": "exact",
-    "filters": {},
     "required_context_ids": [],
     "expected_ids": [
-      "product-beta-10"
+      "repair-case-06"
     ],
-    "forbidden_ids": [
-      "product-beta-01"
-    ]
+    "forbidden_ids": []
   },
   {
-    "id": "strict-d04",
+    "id": "con-d05",
     "split": "dev",
     "category": "constraint",
-    "case_group": "operation-e2041",
-    "query": "E2041",
-    "relevance": {
-      "operation-e2041": 3
-    },
-    "mode": "exact",
-    "filters": {},
-    "required_context_ids": [],
-    "expected_ids": [
-      "operation-e2041"
-    ],
-    "forbidden_ids": [
-      "operation-e2104"
-    ]
-  },
-  {
-    "id": "strict-d05",
-    "split": "dev",
-    "category": "constraint",
-    "case_group": "compensation-violation-high-value",
-    "query": "500万円以上の問題となった補償事例",
-    "relevance": {
-      "comp-case-01": 3,
-      "comp-case-07": 3,
-      "comp-case-13": 3,
-      "comp-case-15": 3
-    },
+    "case_group": "con-d05",
+    "query": "ファームウェア3以降の接続事例",
+    "relevance": {},
     "mode": "hybrid_filter",
     "filters": {
-      "document_type": "case",
-      "amount_yen_gte": 5000000,
-      "case_outcome": "violation"
+      "document_type": "support_case",
+      "firmware_major_gte": 3
     },
     "required_context_ids": [],
     "expected_ids": [
-      "comp-case-01",
-      "comp-case-07",
-      "comp-case-13",
-      "comp-case-15"
+      "support-connect-01"
     ],
-    "forbidden_ids": [
-      "comp-case-02",
-      "comp-case-08"
-    ]
+    "forbidden_ids": []
   },
   {
-    "id": "strict-t01",
+    "id": "con-t01",
     "split": "test",
     "category": "constraint",
-    "case_group": "operation-e1407",
-    "query": "E1407",
-    "relevance": {
-      "operation-e1407": 3
-    },
+    "case_group": "con-t01",
+    "query": "WM-A410-E42",
+    "relevance": {},
     "mode": "exact",
     "filters": {},
     "required_context_ids": [],
     "expected_ids": [
-      "operation-e1407"
+      "error-wm-a410-e42"
     ],
-    "forbidden_ids": [
-      "operation-e1047",
-      "operation-e1704"
-    ]
+    "forbidden_ids": []
   },
   {
-    "id": "strict-t02",
+    "id": "con-t02",
     "split": "test",
     "category": "constraint",
-    "case_group": "elderly-case-03",
-    "query": "高齢顧客へ販売した記録",
-    "relevance": {
-      "elderly-case-03": 3,
-      "elderly-case-06": 2
-    },
+    "case_group": "con-t02",
+    "query": "RF-D510-E17",
+    "relevance": {},
+    "mode": "exact",
+    "filters": {},
+    "required_context_ids": [],
+    "expected_ids": [
+      "error-rf-d510-e17"
+    ],
+    "forbidden_ids": []
+  },
+  {
+    "id": "con-t03",
+    "split": "test",
+    "category": "constraint",
+    "case_group": "con-t03",
+    "query": "未解決の洗濯機サポート",
+    "relevance": {},
     "mode": "hybrid_filter",
     "filters": {
-      "document_type": "case",
-      "customer_age_gte": 80,
-      "amount_yen_gte": 2000000
+      "document_type": "support_case",
+      "product_category": "washer",
+      "support_outcome": "unresolved"
     },
     "required_context_ids": [],
     "expected_ids": [
-      "elderly-case-03"
+      "support-connect-03"
     ],
-    "forbidden_ids": [
-      "elderly-case-01",
-      "elderly-case-09"
-    ]
+    "forbidden_ids": []
   },
   {
-    "id": "strict-t03",
+    "id": "con-t04",
     "split": "test",
     "category": "constraint",
-    "case_group": "product-gamma-20",
-    "query": "GAMMA-20",
-    "relevance": {
-      "product-gamma-20": 3
-    },
-    "mode": "exact",
-    "filters": {},
-    "required_context_ids": [],
-    "expected_ids": [
-      "product-gamma-20"
-    ],
-    "forbidden_ids": [
-      "product-gamma-02"
-    ]
-  },
-  {
-    "id": "strict-t04",
-    "split": "test",
-    "category": "constraint",
-    "case_group": "operation-e4107",
-    "query": "E4107",
-    "relevance": {
-      "operation-e4107": 3
-    },
-    "mode": "exact",
-    "filters": {},
-    "required_context_ids": [],
-    "expected_ids": [
-      "operation-e4107"
-    ],
-    "forbidden_ids": [
-      "operation-e4017"
-    ]
-  },
-  {
-    "id": "strict-t05",
-    "split": "test",
-    "category": "constraint",
-    "case_group": "elderly-non-violation-high-value",
-    "query": "問題がなかった高額な高齢顧客対応",
-    "relevance": {
-      "elderly-case-08": 3,
-      "elderly-case-12": 3
-    },
+    "case_group": "con-t04",
+    "query": "1年以上使った未解決の洗濯機",
+    "relevance": {},
     "mode": "hybrid_filter",
     "filters": {
-      "document_type": "case",
-      "customer_age_gte": 80,
-      "amount_yen_gte": 4000000,
-      "case_outcome": "non_violation"
+      "document_type": "support_case",
+      "product_category": "washer",
+      "device_age_months_gte": 12,
+      "support_outcome": "unresolved"
     },
     "required_context_ids": [],
     "expected_ids": [
-      "elderly-case-08",
-      "elderly-case-12"
+      "repair-case-11"
     ],
-    "forbidden_ids": [
-      "elderly-case-03",
-      "elderly-case-11"
-    ]
+    "forbidden_ids": []
+  },
+  {
+    "id": "con-t05",
+    "split": "test",
+    "category": "constraint",
+    "case_group": "con-t05",
+    "query": "ファームウェア3以降で更新後も接続できない事例",
+    "relevance": {},
+    "mode": "hybrid_filter",
+    "filters": {
+      "document_type": "support_case",
+      "firmware_major_gte": 3,
+      "support_outcome": "unresolved"
+    },
+    "required_context_ids": [],
+    "expected_ids": [
+      "support-connect-03"
+    ],
+    "forbidden_ids": []
   }
 ]

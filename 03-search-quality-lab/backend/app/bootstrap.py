@@ -58,7 +58,7 @@ def _ensure_pipeline(client: OpenSearch) -> None:
         "PUT",
         f"/_search/pipeline/{settings.pipeline_name}",
         body={
-            "description": "Normalize and combine keyword and vector scores for the financial document search demo",
+            "description": "Normalize and combine keyword and vector scores for the appliance support search demo",
             "phase_results_processors": [
                 {
                     "normalization-processor": {
@@ -93,9 +93,10 @@ def _index_definition(dataset_sha256: str) -> dict[str, Any]:
                 "category": {"type": "keyword"},
                 "page_start": {"type": "integer"},
                 "document_type": {"type": "keyword"},
-                "customer_age": {"type": "integer"},
-                "amount_yen": {"type": "long"},
-                "case_outcome": {"type": "keyword"},
+                "product_category": {"type": "keyword"},
+                "firmware_major": {"type": "integer"},
+                "device_age_months": {"type": "integer"},
+                "support_outcome": {"type": "keyword"},
                 "synthetic": {"type": "boolean"},
                 "identifiers": {
                     "type": "text",

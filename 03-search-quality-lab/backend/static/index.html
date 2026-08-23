@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>FinDoc Search Demo</title>
+    <title>Appliance Support Search Demo</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+JP:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,600&display=swap" rel="stylesheet" />
@@ -14,7 +14,7 @@
       <header class="masthead">
         <div>
           <p class="kicker">OpenSearch / Retrieval Quality Workbench</p>
-          <h1>FinDoc Search<br /><span>Demo</span></h1>
+          <h1>Appliance Support<br /><span>Search Demo</span></h1>
           <p class="intro">ベクトル検索の弱点を観察し、完全一致、全文検索、filter、hybrid、rerank、文脈復元を使い分けます。</p>
         </div>
         <aside class="status-panel">
@@ -28,17 +28,17 @@
       </header>
 
       <section class="scenario-board" aria-label="デモシナリオ">
-        <div><b>STRICT MATCH</b><button data-query="第19条" data-mode="vector">vectorでは外れる</button><button data-query="第19条" data-mode="fulltext">BM25では1位</button><button data-query="第19条" data-mode="exact">termで1件に限定</button></div>
-        <div><b>CANDIDATES</b><button data-query="高齢者への販売について、後日になって対応の妥当性を裏付けられない事例" data-mode="vector" data-document-type="case" data-age="75">意味検索だけ</button><button data-query="高齢者への販売について、後日になって対応の妥当性を裏付けられない事例" data-mode="fulltext" data-document-type="case" data-age="75">全文検索だけ</button><button data-query="高齢者への販売について、後日になって対応の妥当性を裏付けられない事例" data-mode="hybrid" data-document-type="case" data-age="75">両方を統合</button></div>
-        <div><b>CONSTRAINTS</b><button data-query="複雑な仕組債を販売した事例" data-mode="hybrid_filter" data-document-type="case" data-age="75" data-amount="5000000" data-outcome="violation">条件をfilterへ分離</button></div>
-        <div><b>RANKING</b><button data-query="高齢者への販売について、後日になって対応の妥当性を裏付けられない事例" data-mode="hybrid" data-document-type="case" data-age="75">filter後のhybrid</button><button data-query="高齢者への販売について、後日になって対応の妥当性を裏付けられない事例" data-mode="hybrid_rerank" data-document-type="case" data-age="75">同じ10件をrerank</button></div>
-        <div><b>CONTEXT</b><button data-query="高齢顧客の継続購入で使える簡易承認の前提と例外" data-mode="hybrid_context">承認の原則と例外を復元</button></div>
+        <div><b>STRICT MATCH</b><button data-query="WM-A410-E42" data-mode="vector">vectorでは曖昧</button><button data-query="WM-A410-E42" data-mode="fulltext">BM25で候補化</button><button data-query="WM-A410-E42" data-mode="exact">termで1件に限定</button></div>
+        <div><b>CANDIDATES</b><button data-query="WM-A410でE42が出たときの給水エラーの対処" data-mode="vector">意味検索だけ</button><button data-query="WM-A410でE42が出たときの給水エラーの対処" data-mode="fulltext">全文検索だけ</button><button data-query="WM-A410でE42が出たときの給水エラーの対処" data-mode="hybrid">両方を統合</button></div>
+        <div><b>CONSTRAINTS</b><button data-query="更新後も接続できない洗濯機の事例" data-mode="hybrid_filter" data-document-type="support_case" data-product-category="washer" data-firmware="3" data-device-age="12" data-outcome="unresolved">条件をfilterへ分離</button></div>
+        <div><b>RANKING</b><button data-query="ソフトウェアを新しくした後も、あらゆる再接続を試して直らなかった事例" data-mode="hybrid" data-document-type="support_case" data-firmware="3">filter後のhybrid</button><button data-query="ソフトウェアを新しくした後も、あらゆる再接続を試して直らなかった事例" data-mode="hybrid_rerank" data-document-type="support_case" data-firmware="3">同じ10件をrerank</button></div>
+        <div><b>CONTEXT</b><button data-query="WM-A410の無償交換が認められる条件と、対象外になる場合" data-mode="hybrid_context">保証条件と対象外を復元</button></div>
       </section>
 
       <section class="workbench">
         <form id="search-form" class="control-panel">
           <div class="step-label"><span>01</span> QUERY</div>
-          <textarea id="query" rows="4">高齢者への販売について、後日になって対応の妥当性を裏付けられない事例</textarea>
+          <textarea id="query" rows="4">ソフトウェアを新しくした後も、あらゆる再接続を試して直らなかった事例</textarea>
 
           <div class="step-label"><span>02</span> RETRIEVAL</div>
           <div id="mode-grid" class="mode-grid">
@@ -53,10 +53,11 @@
 
           <div class="step-label"><span>03</span> STRUCTURED FILTER</div>
           <div class="filter-grid">
-            <label>文書種別<select id="document-type"><option value="">指定なし</option><option value="case" selected>事例</option><option value="rule">規程</option><option value="product">商品</option><option value="procedure">手順</option></select></label>
-            <label>判定<select id="case-outcome"><option value="">指定なし</option><option value="violation">問題あり</option><option value="non_violation">問題なし</option></select></label>
-            <label>顧客年齢の下限<input id="customer-age" type="number" min="0" max="130" value="75" placeholder="例: 75" /></label>
-            <label>金額の下限（円）<input id="amount-yen" type="number" min="0" placeholder="例: 5000000" /></label>
+            <label>文書種別<select id="document-type"><option value="">指定なし</option><option value="support_case" selected>サポート事例</option><option value="error_code">エラーコード</option><option value="product">製品</option><option value="manual">取扱説明</option><option value="policy">サポート規定</option></select></label>
+            <label>製品カテゴリ<select id="product-category"><option value="">指定なし</option><option value="washer">洗濯機</option><option value="dryer">乾燥機</option><option value="air_conditioner">エアコン</option><option value="refrigerator">冷蔵庫</option><option value="oven">オーブン</option><option value="vacuum">掃除機</option><option value="television">テレビ</option></select></label>
+            <label>ファームウェア世代の下限<input id="firmware-major" type="number" min="0" max="99" value="3" placeholder="例: 3" /></label>
+            <label>使用月数の下限<input id="device-age-months" type="number" min="0" max="600" placeholder="例: 12" /></label>
+            <label>対応結果<select id="support-outcome"><option value="">指定なし</option><option value="unresolved">未解決</option><option value="resolved">解決済み</option></select></label>
           </div>
 
           <button id="submit" class="search-button" type="submit">検索して順位を比較する <span>→</span></button>

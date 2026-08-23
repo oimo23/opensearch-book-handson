@@ -8,7 +8,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 
-from evaluate import hit_matches_filters, metric_row, ndcg, reciprocal_rank  # noqa: E402
+from evaluate import aggregate, hit_matches_filters, metric_row, ndcg, reciprocal_rank  # noqa: E402
 
 
 class EvaluationMetricTest(unittest.TestCase):
@@ -24,19 +24,42 @@ class EvaluationMetricTest(unittest.TestCase):
 
     def test_filter_validation_checks_returned_fields(self) -> None:
         filters = {
-            "document_type": "case",
-            "customer_age_gte": 75,
-            "amount_yen_gte": 5_000_000,
-            "case_outcome": "violation",
+            "document_type": "support_case",
+            "product_category": "washer",
+            "firmware_major_gte": 3,
+            "device_age_months_gte": 12,
+            "support_outcome": "unresolved",
         }
         matching = {
-            "document_type": "case",
-            "customer_age": 78,
-            "amount_yen": 5_000_000,
-            "case_outcome": "violation",
+            "document_type": "support_case",
+            "product_category": "washer",
+            "firmware_major": 4,
+            "device_age_months": 18,
+            "support_outcome": "unresolved",
         }
         self.assertTrue(hit_matches_filters(matching, filters))
-        self.assertFalse(hit_matches_filters({**matching, "customer_age": 74}, filters))
+        self.assertFalse(hit_matches_filters({**matching, "firmware_major": 2}, filters))
+
+    def test_constraint_summary_omits_ranking_metrics(self) -> None:
+        row = {
+            "category": "constraint",
+            "mode": "exact",
+            "hit_at_3": 0,
+            "hit_at_10": 0,
+            "mrr_at_5": 0.0,
+            "ndcg_at_5": 0.0,
+            "context_completeness": None,
+            "parent_hit_at_3": None,
+            "context_precision": None,
+            "context_chunks_added": None,
+            "constraint_pass": True,
+            "condition_violations": 0,
+            "forbidden_violations": 0,
+        }
+        summary = aggregate([row])[0]
+        self.assertIsNone(summary["hit_rate_at_3"])
+        self.assertIsNone(summary["ndcg_at_5"])
+        self.assertEqual(summary["constraint_pass_rate"], 1.0)
 
     def test_context_metrics_separate_parent_hit_and_expansion_precision(self) -> None:
         case = {

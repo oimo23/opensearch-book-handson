@@ -23,12 +23,14 @@ def _filter_clauses(request: SearchRequest) -> list[dict[str, Any]]:
         clauses.append({"term": {"filename.raw": request.filename}})
     if request.filters.document_type:
         clauses.append({"term": {"document_type": request.filters.document_type}})
-    if request.filters.customer_age_gte is not None:
-        clauses.append({"range": {"customer_age": {"gte": request.filters.customer_age_gte}}})
-    if request.filters.amount_yen_gte is not None:
-        clauses.append({"range": {"amount_yen": {"gte": request.filters.amount_yen_gte}}})
-    if request.filters.case_outcome:
-        clauses.append({"term": {"case_outcome": request.filters.case_outcome}})
+    if request.filters.product_category:
+        clauses.append({"term": {"product_category": request.filters.product_category}})
+    if request.filters.firmware_major_gte is not None:
+        clauses.append({"range": {"firmware_major": {"gte": request.filters.firmware_major_gte}}})
+    if request.filters.device_age_months_gte is not None:
+        clauses.append({"range": {"device_age_months": {"gte": request.filters.device_age_months_gte}}})
+    if request.filters.support_outcome:
+        clauses.append({"term": {"support_outcome": request.filters.support_outcome}})
     return clauses
 
 
@@ -56,9 +58,10 @@ def build_query(
         "parent_id",
         "chunk_order",
         "document_type",
-        "customer_age",
-        "amount_yen",
-        "case_outcome",
+        "product_category",
+        "firmware_major",
+        "device_age_months",
+        "support_outcome",
     ]
     filter_clauses = _filter_clauses(request)
     filter_clause = _combined_filter(filter_clauses)
@@ -200,9 +203,10 @@ class SearchService:
                     page_start=source["page_start"],
                     body=source["body"],
                     document_type=source["document_type"],
-                    customer_age=source.get("customer_age"),
-                    amount_yen=source.get("amount_yen"),
-                    case_outcome=source.get("case_outcome"),
+                    product_category=source.get("product_category"),
+                    firmware_major=source.get("firmware_major"),
+                    device_age_months=source.get("device_age_months"),
+                    support_outcome=source.get("support_outcome"),
                     score=float(hit.get("_score") or 0.0),
                     rerank_score=rerank_scores.get(hit["_id"]),
                     parent_id=source.get("parent_id"),

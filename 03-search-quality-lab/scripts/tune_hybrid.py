@@ -43,7 +43,7 @@ def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--base-url", default="http://localhost:8100")
     parser.add_argument("--opensearch-url", default="http://localhost:9200")
-    parser.add_argument("--pipeline", default="fin-doc-hybrid-pipeline")
+    parser.add_argument("--pipeline", default="appliance-hybrid")
     parser.add_argument("--queries", type=Path, default=DEFAULT_QUERIES)
     args = parser.parse_args()
     cases = [

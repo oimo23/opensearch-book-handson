@@ -1,7 +1,7 @@
-weights=(0.3, 0.7) macro_ndcg_at_5=0.8641
-weights=(0.4, 0.6) macro_ndcg_at_5=0.9064
-weights=(0.45, 0.55) macro_ndcg_at_5=0.9164
-weights=(0.5, 0.5) macro_ndcg_at_5=0.9723
-weights=(0.6, 0.4) macro_ndcg_at_5=0.9815
-weights=(0.7, 0.3) macro_ndcg_at_5=0.9723
-selected=(0.6, 0.4) macro_ndcg_at_5=0.9815
+weights=(0.3, 0.7) macro_ndcg_at_5=0.8162
+weights=(0.4, 0.6) macro_ndcg_at_5=0.8245
+weights=(0.45, 0.55) macro_ndcg_at_5=0.8508
+weights=(0.5, 0.5) macro_ndcg_at_5=0.8739
+weights=(0.6, 0.4) macro_ndcg_at_5=0.8743
+weights=(0.7, 0.3) macro_ndcg_at_5=0.8901
+selected=(0.7, 0.3) macro_ndcg_at_5=0.8901

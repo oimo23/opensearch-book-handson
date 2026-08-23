@@ -12,8 +12,8 @@ CORPUS_PATH = ROOT / "data" / "corpus.jsonl"
 QUERIES_PATH = ROOT / "data" / "evaluation_queries.json"
 REQUIRED_DOCUMENT_FIELDS = {
     "id", "family", "title", "filename", "category", "page_start", "identifiers",
-    "parent_id", "chunk_order", "document_type", "customer_age", "amount_yen",
-    "case_outcome", "synthetic", "body",
+    "parent_id", "chunk_order", "document_type", "product_category",
+    "firmware_major", "device_age_months", "support_outcome", "synthetic", "body",
 }
 EXPECTED_QUERY_COUNTS = {
     ("dev", "semantic"): 10,

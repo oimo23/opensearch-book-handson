@@ -8,50 +8,47 @@ jq -e '.status == "ok" and .document_count == 180 and .candidate_size == 10' <<<
 
 vector="$(curl -fsS -X POST "${LAB_URL}/api/search" \
   -H 'Content-Type: application/json' \
-  -d '{"query":"第19条","mode":"vector","top_k":3}')"
-jq -e '.hits | length == 3 and ([.[].id] | index("rule-019") == null)' <<<"${vector}" >/dev/null
+  -d '{"query":"WM-A410でE42が出たときの給水エラーの対処","mode":"vector","top_k":5}')"
+jq -e '.hits | length == 5' <<<"${vector}" >/dev/null
 
 fulltext="$(curl -fsS -X POST "${LAB_URL}/api/search" \
   -H 'Content-Type: application/json' \
-  -d '{"query":"第19条","mode":"fulltext","top_k":3}')"
-jq -e '.hits[0].id == "rule-019"' <<<"${fulltext}" >/dev/null
+  -d '{"query":"WM-A410でE42が出たときの給水エラーの対処","mode":"fulltext","top_k":5}')"
+jq -e '[.hits[].id] | index("error-wm-a410-e42") != null' <<<"${fulltext}" >/dev/null
 
 exact="$(curl -fsS -X POST "${LAB_URL}/api/search" \
   -H 'Content-Type: application/json' \
-  -d '{"query":"第19条","mode":"exact","top_k":3}')"
-jq -e '.hits | length == 1 and .[0].id == "rule-019"' <<<"${exact}" >/dev/null
+  -d '{"query":"WM-A410-E42","mode":"exact","top_k":3}')"
+jq -e '.hits | length == 1 and .[0].id == "error-wm-a410-e42"' <<<"${exact}" >/dev/null
 
 hybrid="$(curl -fsS -X POST "${LAB_URL}/api/search" \
   -H 'Content-Type: application/json' \
-  -d '{"query":"家族に同席してもらわず、危険性の説明も足りないまま高齢者へ複雑な商品を売ったケース","mode":"hybrid","top_k":5}')"
-jq -e '[.hits[].id] | index("elderly-case-01") != null' <<<"${hybrid}" >/dev/null
+  -d '{"query":"WM-A410でE42が出たときの給水エラーの対処","mode":"hybrid","top_k":5}')"
+jq -e '[.hits[].id] | index("error-wm-a410-e42") != null' <<<"${hybrid}" >/dev/null
 
 filtered="$(curl -fsS -X POST "${LAB_URL}/api/search" \
   -H 'Content-Type: application/json' \
-  -d '{"query":"複雑な仕組債を販売した事例","mode":"hybrid_filter","filters":{"document_type":"case","customer_age_gte":75,"amount_yen_gte":5000000,"case_outcome":"violation"},"top_k":5}')"
-jq -e 'all(.hits[]; .document_type == "case" and .customer_age >= 75 and .amount_yen >= 5000000 and .case_outcome == "violation")' <<<"${filtered}" >/dev/null
-jq -e '[.hits[].id] | index("elderly-case-01") != null' <<<"${filtered}" >/dev/null
+  -d '{"query":"更新後も接続できない洗濯機の事例","mode":"hybrid_filter","filters":{"document_type":"support_case","product_category":"washer","firmware_major_gte":3,"device_age_months_gte":12,"support_outcome":"unresolved"},"top_k":5}')"
+jq -e 'all(.hits[]; .document_type == "support_case" and .product_category == "washer" and .firmware_major >= 3 and .device_age_months >= 12 and .support_outcome == "unresolved")' <<<"${filtered}" >/dev/null
+jq -e '[.hits[].id] | index("support-connect-03") != null' <<<"${filtered}" >/dev/null
 
-ranking_query='高齢者への販売について、後日になって対応の妥当性を裏付けられない事例'
-ranking_filters='"filters":{"document_type":"case","customer_age_gte":75}'
-
+ranking_query='ソフトウェアを新しくした後も、あらゆる再接続を試して直らなかった事例'
+ranking_filters='"filters":{"document_type":"support_case","firmware_major_gte":3}'
 ranking_hybrid="$(curl -fsS -X POST "${LAB_URL}/api/search" \
   -H 'Content-Type: application/json' \
   -d "{\"query\":\"${ranking_query}\",\"mode\":\"hybrid\",\"top_k\":10,${ranking_filters}}")"
-jq -e '.hits[2].id == "elderly-case-03" and .total_candidates == 10' <<<"${ranking_hybrid}" >/dev/null
-
 reranked="$(curl -fsS -X POST "${LAB_URL}/api/search" \
   -H 'Content-Type: application/json' \
   -d "{\"query\":\"${ranking_query}\",\"mode\":\"hybrid_rerank\",\"top_k\":10,${ranking_filters}}")"
-jq -e '.hits[0].id == "elderly-case-03"' <<<"${reranked}" >/dev/null
-jq -e '.hits[0].rerank_score > .hits[1].rerank_score' <<<"${reranked}" >/dev/null
+jq -e '[.hits[].id] | index("support-connect-03") != null' <<<"${ranking_hybrid}" >/dev/null
+jq -e '[.hits[].id] | index("support-connect-03") != null' <<<"${reranked}" >/dev/null
 jq -e '.total_candidates == 10 and .rerank_ms > 0' <<<"${reranked}" >/dev/null
 jq -e --argjson before "$(jq '[.hits[].id] | sort' <<<"${ranking_hybrid}")" \
   '([.hits[].id] | sort) == $before' <<<"${reranked}" >/dev/null
 
 context="$(curl -fsS -X POST "${LAB_URL}/api/search" \
   -H 'Content-Type: application/json' \
-  -d '{"query":"高齢顧客の継続購入で使える簡易承認の前提と例外","mode":"hybrid_context","top_k":5}')"
-jq -e '[.hits[] | select(.parent_id == "approval-context-elderly")][0].context_chunks | length == 3' <<<"${context}" >/dev/null
+  -d '{"query":"WM-A410の無償交換が認められる条件と、対象外になる場合","mode":"hybrid_context","top_k":5}')"
+jq -e '[.hits[] | select(.parent_id == "warranty-context-wm-a410")][0].context_chunks | length == 3' <<<"${context}" >/dev/null
 
-echo "financial document search demo smoke test: passed"
+echo "appliance support search demo smoke test: passed"

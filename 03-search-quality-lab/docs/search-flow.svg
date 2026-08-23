@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 290" role="img" aria-labelledby="title desc">
-  <title id="title">金融文書検索デモの処理フロー</title>
+  <title id="title">家電サポート文書検索デモの処理フロー</title>
   <desc id="desc">クエリを全文検索とベクトル検索へ渡し、正規化統合、厳密条件、rerankまたは文脈復元を経て結果を返す。</desc>
   <defs>
     <marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8Z" fill="#315d50"/></marker>

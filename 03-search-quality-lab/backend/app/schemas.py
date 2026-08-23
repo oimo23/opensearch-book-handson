@@ -17,9 +17,10 @@ class SearchMode(str, Enum):
 
 class SearchFilters(BaseModel):
     document_type: str | None = None
-    customer_age_gte: int | None = Field(default=None, ge=0, le=130)
-    amount_yen_gte: int | None = Field(default=None, ge=0)
-    case_outcome: str | None = None
+    product_category: str | None = None
+    firmware_major_gte: int | None = Field(default=None, ge=0, le=99)
+    device_age_months_gte: int | None = Field(default=None, ge=0, le=600)
+    support_outcome: str | None = None
 
 
 class SearchRequest(BaseModel):
@@ -45,9 +46,10 @@ class SearchHit(BaseModel):
     page_start: int
     body: str
     document_type: str
-    customer_age: int | None = None
-    amount_yen: int | None = None
-    case_outcome: str | None = None
+    product_category: str | None = None
+    firmware_major: int | None = None
+    device_age_months: int | None = None
+    support_outcome: str | None = None
     score: float
     rerank_score: float | None = None
     parent_id: str | None = None

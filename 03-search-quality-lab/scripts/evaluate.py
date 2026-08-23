@@ -28,15 +28,17 @@ CATEGORY_MODES = {
 def hit_matches_filters(hit: dict[str, Any], filters: dict[str, Any]) -> bool:
     if filters.get("document_type") and hit.get("document_type") != filters["document_type"]:
         return False
-    if filters.get("customer_age_gte") is not None:
-        age = hit.get("customer_age")
-        if age is None or age < filters["customer_age_gte"]:
+    if filters.get("product_category") and hit.get("product_category") != filters["product_category"]:
+        return False
+    if filters.get("firmware_major_gte") is not None:
+        version = hit.get("firmware_major")
+        if version is None or version < filters["firmware_major_gte"]:
             return False
-    if filters.get("amount_yen_gte") is not None:
-        amount = hit.get("amount_yen")
-        if amount is None or amount < filters["amount_yen_gte"]:
+    if filters.get("device_age_months_gte") is not None:
+        age = hit.get("device_age_months")
+        if age is None or age < filters["device_age_months_gte"]:
             return False
-    if filters.get("case_outcome") and hit.get("case_outcome") != filters["case_outcome"]:
+    if filters.get("support_outcome") and hit.get("support_outcome") != filters["support_outcome"]:
         return False
     return True
 
@@ -156,15 +158,28 @@ def aggregate(rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
         groups[(row["category"], row["mode"])].append(row)
     summary = []
     for (category, mode), items in sorted(groups.items()):
+        has_ranking_metrics = category != "constraint"
         summary.append(
             {
                 "category": category,
                 "mode": mode,
                 "queries": len(items),
-                "hit_rate_at_3": sum(item["hit_at_3"] for item in items) / len(items),
-                "hit_rate_at_10": sum(item["hit_at_10"] for item in items) / len(items),
-                "mrr_at_5": sum(item["mrr_at_5"] for item in items) / len(items),
-                "ndcg_at_5": sum(item["ndcg_at_5"] for item in items) / len(items),
+                "hit_rate_at_3": (
+                    sum(item["hit_at_3"] for item in items) / len(items)
+                    if has_ranking_metrics else None
+                ),
+                "hit_rate_at_10": (
+                    sum(item["hit_at_10"] for item in items) / len(items)
+                    if has_ranking_metrics else None
+                ),
+                "mrr_at_5": (
+                    sum(item["mrr_at_5"] for item in items) / len(items)
+                    if has_ranking_metrics else None
+                ),
+                "ndcg_at_5": (
+                    sum(item["ndcg_at_5"] for item in items) / len(items)
+                    if has_ranking_metrics else None
+                ),
                 "context_completeness": (
                     sum(item["context_completeness"] for item in items) / len(items)
                     if items[0]["context_completeness"] is not None
@@ -266,6 +281,10 @@ def render_markdown(result: dict[str, Any]) -> str:
         "|---|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|",
     ]
     for row in result["summary"]:
+        hit3 = "-" if row["hit_rate_at_3"] is None else f"{row['hit_rate_at_3']:.3f}"
+        hit10 = "-" if row["hit_rate_at_10"] is None else f"{row['hit_rate_at_10']:.3f}"
+        mrr = "-" if row["mrr_at_5"] is None else f"{row['mrr_at_5']:.3f}"
+        ndcg_value = "-" if row["ndcg_at_5"] is None else f"{row['ndcg_at_5']:.3f}"
         context = "-" if row["context_completeness"] is None else f"{row['context_completeness']:.3f}"
         parent = "-" if row["parent_hit_rate_at_3"] is None else f"{row['parent_hit_rate_at_3']:.3f}"
         precision = "-" if row["context_precision"] is None else f"{row['context_precision']:.3f}"
@@ -273,8 +292,7 @@ def render_markdown(result: dict[str, Any]) -> str:
         violations = row["condition_violations"] + row["forbidden_violations"]
         lines.append(
             f"| {row['category']} | `{row['mode']}` | {row['queries']} | "
-            f"{row['hit_rate_at_3']:.3f} | {row['hit_rate_at_10']:.3f} | "
-            f"{row['mrr_at_5']:.3f} | {row['ndcg_at_5']:.3f} | {parent} | "
+            f"{hit3} | {hit10} | {mrr} | {ndcg_value} | {parent} | "
             f"{context} | {precision} | {constraint} | {violations} |"
         )
     if result["latency"]:

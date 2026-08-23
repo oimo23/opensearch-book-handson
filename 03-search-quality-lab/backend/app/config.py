@@ -7,7 +7,7 @@ from dataclasses import dataclass
 @dataclass(frozen=True)
 class Settings:
     opensearch_url: str = os.getenv("OPENSEARCH_URL", "http://localhost:9200")
-    index_name: str = os.getenv("OPENSEARCH_INDEX", "fin-doc-search-demo-v3")
+    index_name: str = os.getenv("OPENSEARCH_INDEX", "appliance-support-demo-v1")
     embedding_model_name: str = os.getenv("EMBEDDING_MODEL_NAME", "cl-nagoya/ruri-v3-310m")
     embedding_model_revision: str = os.getenv(
         "EMBEDDING_MODEL_REVISION",
@@ -21,10 +21,10 @@ class Settings:
     enable_rerank: bool = os.getenv("ENABLE_RERANK", "true").lower() in {"1", "true", "yes"}
     top_k: int = int(os.getenv("TOP_K", "5"))
     candidate_size: int = int(os.getenv("CANDIDATE_SIZE", "10"))
-    keyword_weight: float = float(os.getenv("HYBRID_KEYWORD_WEIGHT", "0.6"))
-    vector_weight: float = float(os.getenv("HYBRID_VECTOR_WEIGHT", "0.4"))
+    keyword_weight: float = float(os.getenv("HYBRID_KEYWORD_WEIGHT", "0.7"))
+    vector_weight: float = float(os.getenv("HYBRID_VECTOR_WEIGHT", "0.3"))
     embedding_dimensions: int = 768
-    pipeline_name: str = "fin-doc-hybrid-pipeline"
+    pipeline_name: str = "appliance-hybrid"
 
 
 settings = Settings()

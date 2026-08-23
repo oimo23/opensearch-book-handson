@@ -14,31 +14,33 @@ from app.search import build_query  # noqa: E402
 
 class BuildQueryTest(unittest.TestCase):
     def test_exact_uses_term_query(self) -> None:
-        request = SearchRequest(query="ALPHA-01", mode=SearchMode.EXACT)
+        request = SearchRequest(query="WM-A410-E42", mode=SearchMode.EXACT)
         built = build_query(request, None, 10)
         self.assertEqual(
             built.body["query"],
-            {"term": {"identifiers.raw": "ALPHA-01"}},
+            {"term": {"identifiers.raw": "WM-A410-E42"}},
         )
 
     def test_hybrid_filter_applies_all_clauses_to_both_queries(self) -> None:
         request = SearchRequest(
-            query="複雑な商品の販売事例",
+            query="更新後も接続できない洗濯機の事例",
             mode=SearchMode.HYBRID_FILTER,
             filters=SearchFilters(
-                document_type="case",
-                customer_age_gte=75,
-                amount_yen_gte=5_000_000,
-                case_outcome="violation",
+                document_type="support_case",
+                product_category="washer",
+                firmware_major_gte=3,
+                device_age_months_gte=12,
+                support_outcome="unresolved",
             ),
         )
         built = build_query(request, [0.0] * 768, 10)
         keyword, vector = built.body["query"]["hybrid"]["queries"]
         expected = [
-            {"term": {"document_type": "case"}},
-            {"range": {"customer_age": {"gte": 75}}},
-            {"range": {"amount_yen": {"gte": 5_000_000}}},
-            {"term": {"case_outcome": "violation"}},
+            {"term": {"document_type": "support_case"}},
+            {"term": {"product_category": "washer"}},
+            {"range": {"firmware_major": {"gte": 3}}},
+            {"range": {"device_age_months": {"gte": 12}}},
+            {"term": {"support_outcome": "unresolved"}},
         ]
         self.assertEqual(keyword["bool"]["filter"], expected)
         self.assertEqual(
@@ -53,15 +55,15 @@ class BuildQueryTest(unittest.TestCase):
 
     def test_hybrid_rerank_applies_filters_before_reranking(self) -> None:
         request = SearchRequest(
-            query="説明と承認の両方に不備がある事例",
+            query="更新後も接続できない事例",
             mode=SearchMode.HYBRID_RERANK,
-            filters=SearchFilters(document_type="case", case_outcome="violation"),
+            filters=SearchFilters(document_type="support_case", support_outcome="unresolved"),
         )
         built = build_query(request, [0.0] * 768, 10)
         keyword, vector = built.body["query"]["hybrid"]["queries"]
         expected = [
-            {"term": {"document_type": "case"}},
-            {"term": {"case_outcome": "violation"}},
+            {"term": {"document_type": "support_case"}},
+            {"term": {"support_outcome": "unresolved"}},
         ]
         self.assertEqual(keyword["bool"]["filter"], expected)
         self.assertEqual(
