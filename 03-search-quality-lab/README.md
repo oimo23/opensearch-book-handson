@@ -76,32 +76,22 @@ curl -s http://localhost:8100/api/health | jq
 
 `第5章の主要な実測結果を再現できました。`と表示されれば成功です。初回のrerankではモデルを取得するため、1分から数分ほど出力が止まる場合があります。
 
-## 1. 条番号をベクトル検索だけで探す
+## 1. 専門用語を含む問い合わせを比較する
+
+第5章と同じ問い合わせを、ベクトル検索、全文検索、ハイブリッド検索の順に実行します。
 
 ```bash
-curl -s http://localhost:8100/api/search \
-  -H 'Content-Type: application/json' \
-  -d '{"query":"第19条","mode":"vector","top_k":10}' \
-  | jq '{mode, hits: [.hits[] | {rank, id, score}]}'
+for mode in vector fulltext hybrid; do
+  curl -s http://localhost:8100/api/search \
+    -H 'Content-Type: application/json' \
+    -d "{\"query\":\"OMEGA-05で参照指数が下がった場合の元本への影響\",\"mode\":\"${mode}\",\"top_k\":3}" \
+    | jq '{mode, hits: [.hits[] | {rank, id, score}]}'
+done
 ```
 
-条番号は意味の近さより文字列の一致が重要です。`vector`と`fulltext`を切り替えて順位を比較した後、`exact`で完全一致させます。
+`product-omega-05`は、`vector`では3位、`fulltext`と`hybrid`では1位です。`vector`の1位は、意味が近い別商品の`product-delta-03`になります。
 
-```bash
-curl -s http://localhost:8100/api/search \
-  -H 'Content-Type: application/json' \
-  -d '{"query":"第19条","mode":"fulltext","top_k":3}' \
-  | jq '{mode, hits: [.hits[] | {rank, id, score}]}'
-
-curl -s http://localhost:8100/api/search \
-  -H 'Content-Type: application/json' \
-  -d '{"query":"第19条","mode":"exact","top_k":3}' \
-  | jq '{mode, hits: [.hits[] | {rank, id, score}]}'
-```
-
-`vector`の上位10件には`rule-019`が含まれません。`fulltext`は分析済みの`text`フィールドをBM25で検索し、`rule-019`と`rule-019-2`を候補に残します。`exact`は`identifiers.raw`を`term` queryで検索するため、`rule-019`だけが返ります。
-
-## 2. 同じ問い合わせで候補生成を比較する
+## 2. 監査問い合わせの候補を比較する
 
 監査担当者が「高齢者への販売について、後日になって対応の妥当性を裏付けられない事例」を探します。文書種別と年齢だけをfilterへ分け、問題あり・問題なしの両方を検索対象に残します。
 
@@ -137,25 +127,7 @@ hybridと同じ10件をrerankerへ渡すと、`elderly-case-03`が3位から1位
 
 `verify-chapter5-results.sh`は、rerank前後の文書IDをソートして比較し、候補集合が同じであることも検査します。
 
-## 4. 判定済みデータを厳密条件で絞る
-
-過去に問題ありと判定済みの事例だけを検索する場合は、判定結果もfilterへ指定できます。これは問題事例を新たに発見する検索ではなく、構造化済みの判定を使った絞り込みです。
-
-```bash
-curl -s http://localhost:8100/api/search \
-  -H 'Content-Type: application/json' \
-  -d '{
-    "query":"複雑な仕組債を販売した事例",
-    "mode":"hybrid_filter",
-    "top_k":5,
-    "filters":{"document_type":"case","customer_age_gte":75,"amount_yen_gte":5000000,"case_outcome":"violation"}
-  }' \
-  | jq '{mode, hits: [.hits[] | {rank, id, customer_age, amount_yen, case_outcome}]}'
-```
-
-全文検索側とk-NN側の両方へ同じfilterが適用され、返る文書はすべて指定条件を満たします。アクセス権、テナントID、公開状態も同様に、検索結果が必ず守る条件としてfilterへ渡します。
-
-## 5. 前後チャンクを復元する
+## 4. 前後チャンクを復元する
 
 ```bash
 curl -s http://localhost:8100/api/search \
@@ -166,7 +138,7 @@ curl -s http://localhost:8100/api/search \
 
 例外チャンクだけでは「この限り」が指す原則を判断できません。1位は`approval-context-elderly-3`で、`context_chunks`には同じ親の3チャンクが順番に入ります。`hybrid_context`は検索に当たった子チャンクの`parent_id`を使い、同じ親に属するチャンクを`chunk_order`順で`context_chunks`へ格納します。同じ親文書は検索結果上で1件にまとめます。
 
-## 6. 評価セットをまとめて実行する
+## 5. 評価セットをまとめて実行する
 
 ```bash
 python3 scripts/evaluate.py
@@ -197,6 +169,33 @@ python3 scripts/tune_hybrid.py
 ```
 
 test結果を確認した後で、testクエリ、正解ラベル、検索設定を調整しないでください。
+
+## 補足: 完全一致と判定済みデータのfilter
+
+条番号や識別子を一つに限定する要求は、関連度を調整するのではなく`exact`で完全一致させます。次の例では、全文検索は`rule-019`と`rule-019-2`を候補に残し、完全一致は`rule-019`だけを返します。
+
+```bash
+for mode in fulltext exact; do
+  curl -s http://localhost:8100/api/search \
+    -H 'Content-Type: application/json' \
+    -d "{\"query\":\"第19条\",\"mode\":\"${mode}\",\"top_k\":3}" \
+    | jq '{mode, hits: [.hits[] | {rank, id, score}]}'
+done
+```
+
+過去に問題ありと判定済みの事例だけを取得する場合は、`case_outcome`もfilterへ指定できます。これは問題事例を検索で推測する処理ではなく、構造化済みの判定を使った絞り込みです。
+
+```bash
+curl -s http://localhost:8100/api/search \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "query":"複雑な仕組債を販売した事例",
+    "mode":"hybrid_filter",
+    "top_k":5,
+    "filters":{"document_type":"case","customer_age_gte":75,"amount_yen_gte":5000000,"case_outcome":"violation"}
+  }' \
+  | jq '{mode, hits: [.hits[] | {rank, id, customer_age, amount_yen, case_outcome}]}'
+```
 
 ## Dashboardsで直接試す
 
