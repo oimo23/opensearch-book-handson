@@ -93,10 +93,10 @@ done
 
 ## ケース2: 候補10件をrerankする
 
-「ソフトウェアを新しくした後も、あらゆる再接続を試して直らなかった事例」を探します。文書種別とファームウェアのメジャーバージョンは構造化filterへ分けます。
+「ソフトウェアを更新した後、再登録や再起動を試しても接続できなかった事例」を探します。文書種別とファームウェアのメジャーバージョンは構造化filterへ分けます。
 
 ```bash
-query='ソフトウェアを新しくした後も、あらゆる再接続を試して直らなかった事例'
+query='ソフトウェアを更新した後、再登録や再起動を試しても接続できなかった事例'
 for mode in hybrid hybrid_rerank; do
   curl -s http://localhost:8100/api/search \
     -H 'Content-Type: application/json' \
@@ -105,7 +105,7 @@ for mode in hybrid hybrid_rerank; do
 done
 ```
 
-hybridでは、一部の再接続だけを試して未解決だった`support-connect-13`が1位です。問い合わせに最も合う`support-connect-03`は2位ですが、rerank後は1位へ上がります。rerankは候補を検索し直さず、hybridが取得した同じ10件を質問との適合度で並べ替えます。
+hybridでは、スマートフォン交換後の再登録に失敗した`support-connect-14`が1位です。問い合わせに最も合う`support-connect-03`は2位ですが、rerank後は1位へ上がります。rerankは候補を検索し直さず、hybridが取得した同じ10件を質問との適合度で並べ替えます。
 
 ## ケース3: 前後チャンクを復元する
 

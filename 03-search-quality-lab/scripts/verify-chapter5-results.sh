@@ -27,15 +27,15 @@ jq -e '.hits[0].id == "error-wm-a410-e42"' "${tmp_dir}/product-fulltext.json" >/
 jq -e '.hits[0].id == "error-wm-a410-e42"' "${tmp_dir}/product-hybrid.json" >/dev/null
 
 echo '[3/5] 同じ10件をrerankすることを確認します'
-ranking_query='ソフトウェアを新しくした後も、あらゆる再接続を試して直らなかった事例'
+ranking_query='ソフトウェアを更新した後、再登録や再起動を試しても接続できなかった事例'
 ranking_filters='"filters":{"document_type":"support_case","firmware_major_gte":3}'
 search ranking-hybrid "{\"query\":\"${ranking_query}\",\"mode\":\"hybrid\",\"top_k\":10,${ranking_filters}}"
 search ranking-rerank "{\"query\":\"${ranking_query}\",\"mode\":\"hybrid_rerank\",\"top_k\":10,${ranking_filters}}"
 jq -e '[.hits[].id] | index("support-connect-03") != null' "${tmp_dir}/ranking-hybrid.json" >/dev/null
 jq -e '[.hits[].id] | index("support-connect-03") != null' "${tmp_dir}/ranking-rerank.json" >/dev/null
 jq -e --slurpfile before "${tmp_dir}/ranking-hybrid.json" '([.hits[].id] | sort) == ([$before[0].hits[].id] | sort)' "${tmp_dir}/ranking-rerank.json" >/dev/null
-jq -e '.hits[0].id == "support-connect-13" and .hits[1].id == "support-connect-03"' "${tmp_dir}/ranking-hybrid.json" >/dev/null
-jq -e '.hits[0].id == "support-connect-03" and .hits[1].id == "support-connect-14" and .hits[2].id == "support-connect-13"' "${tmp_dir}/ranking-rerank.json" >/dev/null
+jq -e '.hits[0].id == "support-connect-14" and .hits[1].id == "support-connect-03" and .hits[2].id == "support-connect-13"' "${tmp_dir}/ranking-hybrid.json" >/dev/null
+jq -e '.hits[0].id == "support-connect-03" and .hits[1].id == "support-connect-13" and .hits[2].id == "support-connect-01"' "${tmp_dir}/ranking-rerank.json" >/dev/null
 
 echo '[4/5] 構造化filterを確認します'
 search filtered '{"query":"更新後も接続できない洗濯機の事例","mode":"hybrid_filter","top_k":5,"filters":{"document_type":"support_case","product_category":"washer","firmware_major_gte":3,"device_age_months_gte":12,"support_outcome":"unresolved"}}'

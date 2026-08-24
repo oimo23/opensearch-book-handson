@@ -1,5 +1,5 @@
 {
-  "captured_at": "2026-08-24T01:27:13+09:00",
+  "captured_at": "2026-08-25T00:21:25+09:00",
   "health": {
     "status": "ok",
     "index_name": "appliance-support-demo-v1",
@@ -28,11 +28,11 @@
         "query": "WM-A410-E42",
         "mode": "vector",
         "timings": {
-          "embedding_ms": 2177,
+          "embedding_ms": 304,
           "search_ms": 8,
           "rerank_ms": 0,
           "context_ms": 0,
-          "total_ms": 2185
+          "total_ms": 311
         },
         "total_candidates": 10,
         "request_body": {
@@ -123,10 +123,10 @@
         "mode": "fulltext",
         "timings": {
           "embedding_ms": 0,
-          "search_ms": 4,
+          "search_ms": 5,
           "rerank_ms": 0,
           "context_ms": 0,
-          "total_ms": 4
+          "total_ms": 5
         },
         "total_candidates": 10,
         "request_body": {
@@ -220,10 +220,10 @@
         "mode": "exact",
         "timings": {
           "embedding_ms": 0,
-          "search_ms": 11,
+          "search_ms": 2,
           "rerank_ms": 0,
           "context_ms": 0,
-          "total_ms": 11
+          "total_ms": 2
         },
         "total_candidates": 1,
         "request_body": {
@@ -274,11 +274,11 @@
         "query": "WM-A410でE42が出たときの給水エラーの対処",
         "mode": "vector",
         "timings": {
-          "embedding_ms": 170,
-          "search_ms": 5,
+          "embedding_ms": 91,
+          "search_ms": 4,
           "rerank_ms": 0,
           "context_ms": 0,
-          "total_ms": 174
+          "total_ms": 95
         },
         "total_candidates": 10,
         "request_body": {
@@ -414,10 +414,10 @@
         "mode": "fulltext",
         "timings": {
           "embedding_ms": 0,
-          "search_ms": 4,
+          "search_ms": 3,
           "rerank_ms": 0,
           "context_ms": 0,
-          "total_ms": 4
+          "total_ms": 3
         },
         "total_candidates": 10,
         "request_body": {
@@ -555,11 +555,11 @@
         "query": "WM-A410でE42が出たときの給水エラーの対処",
         "mode": "hybrid",
         "timings": {
-          "embedding_ms": 149,
-          "search_ms": 6,
+          "embedding_ms": 95,
+          "search_ms": 5,
           "rerank_ms": 0,
           "context_ms": 0,
-          "total_ms": 156
+          "total_ms": 101
         },
         "total_candidates": 10,
         "request_body": {
@@ -703,7 +703,7 @@
     {
       "id": "ranking-vector",
       "request": {
-        "query": "ソフトウェアを新しくした後も、あらゆる再接続を試して直らなかった事例",
+        "query": "ソフトウェアを更新した後、再登録や再起動を試しても接続できなかった事例",
         "mode": "vector",
         "top_k": 10,
         "filters": {
@@ -712,14 +712,14 @@
         }
       },
       "response": {
-        "query": "ソフトウェアを新しくした後も、あらゆる再接続を試して直らなかった事例",
+        "query": "ソフトウェアを更新した後、再登録や再起動を試しても接続できなかった事例",
         "mode": "vector",
         "timings": {
-          "embedding_ms": 148,
+          "embedding_ms": 91,
           "search_ms": 4,
           "rerank_ms": 0,
           "context_ms": 0,
-          "total_ms": 152
+          "total_ms": 95
         },
         "total_candidates": 10,
         "request_body": {
@@ -770,46 +770,46 @@
         "hits": [
           {
             "rank": 1,
-            "id": "support-connect-03",
-            "title": "接続サポート事例 2025-03",
-            "body": "WM-A410をファームウェア4へ更新しましたが、更新完了後もスマートフォンとの接続が回復しませんでした。再登録とルーター再起動でも未解決です。",
-            "score": 0.94393694,
+            "id": "support-connect-14",
+            "title": "接続サポート事例 2025-14",
+            "body": "スマートフォンを交換した後、WM-A410を新端末へ登録できませんでした。旧端末の登録解除を行っても接続できない状態が続きました。",
+            "score": 0.95134246,
             "rerank_score": null,
             "context_chunks": []
           },
           {
             "rank": 2,
-            "id": "support-connect-10",
-            "title": "接続サポート事例 2025-10",
-            "body": "TV-G880の更新直後にリモート操作が失敗しました。設定を保持したまま更新を再適用すると接続できる状態へ戻りました。",
-            "score": 0.9414323,
+            "id": "support-connect-03",
+            "title": "接続サポート事例 2025-03",
+            "body": "WM-A410をファームウェア4へ更新しましたが、更新完了後もスマートフォンとの接続が回復しませんでした。再登録とルーター再起動でも未解決です。",
+            "score": 0.950302,
             "rerank_score": null,
             "context_chunks": []
           },
           {
             "rank": 3,
-            "id": "support-connect-13",
-            "title": "接続サポート事例 2025-13",
-            "body": "AC-C300をファームウェア3へ更新した後、一度は接続が切れましたが、本体の再起動だけでアプリ操作が再開できました。",
-            "score": 0.938082,
+            "id": "support-connect-10",
+            "title": "接続サポート事例 2025-10",
+            "body": "TV-G880の更新直後にリモート操作が失敗しました。設定を保持したまま更新を再適用すると接続できる状態へ戻りました。",
+            "score": 0.9485041,
             "rerank_score": null,
             "context_chunks": []
           },
           {
             "rank": 4,
-            "id": "support-connect-14",
-            "title": "接続サポート事例 2025-14",
-            "body": "スマートフォンを交換した後、WM-A410を新端末へ登録できませんでした。旧端末の登録解除を行っても接続できない状態が続きました。",
-            "score": 0.9377674,
+            "id": "support-connect-01",
+            "title": "接続サポート事例 2025-01",
+            "body": "WM-A410をファームウェア3へ更新後、アプリから見つからなくなりました。登録を解除して同じ家庭内ネットワークで再登録すると接続できるようになりました。",
+            "score": 0.94818056,
             "rerank_score": null,
             "context_chunks": []
           },
           {
             "rank": 5,
-            "id": "support-connect-01",
-            "title": "接続サポート事例 2025-01",
-            "body": "WM-A410をファームウェア3へ更新後、アプリから見つからなくなりました。登録を解除して同じ家庭内ネットワークで再登録すると接続できるようになりました。",
-            "score": 0.93762404,
+            "id": "support-connect-13",
+            "title": "接続サポート事例 2025-13",
+            "body": "AC-C300をファームウェア3へ更新した後、一度は接続が切れましたが、本体の再起動だけでアプリ操作が再開できました。",
+            "score": 0.9433535,
             "rerank_score": null,
             "context_chunks": []
           },
@@ -818,25 +818,25 @@
             "id": "support-connect-08",
             "title": "接続サポート事例 2025-08",
             "body": "OV-E600がアプリに表示されなくなりました。アプリを再インストールして製品を再登録すると接続が回復しました。",
-            "score": 0.93541014,
+            "score": 0.9420601,
             "rerank_score": null,
             "context_chunks": []
           },
           {
             "rank": 7,
-            "id": "support-connect-05",
-            "title": "接続サポート事例 2025-05",
-            "body": "RF-D510の更新後に通知が届かなくなりました。ルーターと冷蔵庫を再起動するとクラウド接続が復旧し、扉通知も届くようになりました。",
-            "score": 0.93402326,
+            "id": "support-connect-07",
+            "title": "接続サポート事例 2025-07",
+            "body": "ルーター交換後、AC-C300を新しいSSIDへ登録しても外出先操作を利用できませんでした。本体操作はできますが、クラウド接続は未解決です。",
+            "score": 0.9418789,
             "rerank_score": null,
             "context_chunks": []
           },
           {
             "rank": 8,
-            "id": "support-connect-07",
-            "title": "接続サポート事例 2025-07",
-            "body": "ルーター交換後、AC-C300を新しいSSIDへ登録しても外出先操作を利用できませんでした。本体操作はできますが、クラウド接続は未解決です。",
-            "score": 0.9317484,
+            "id": "support-connect-05",
+            "title": "接続サポート事例 2025-05",
+            "body": "RF-D510の更新後に通知が届かなくなりました。ルーターと冷蔵庫を再起動するとクラウド接続が復旧し、扉通知も届くようになりました。",
+            "score": 0.9397235,
             "rerank_score": null,
             "context_chunks": []
           },
@@ -845,16 +845,16 @@
             "id": "support-connect-11",
             "title": "接続サポート事例 2025-11",
             "body": "WM-A410を5GHz専用SSIDへ接続しようとして失敗しました。2.4GHz帯のSSIDが用意されるまでアプリ連携は利用できませんでした。",
-            "score": 0.9288057,
+            "score": 0.9343643,
             "rerank_score": null,
             "context_chunks": []
           },
           {
             "rank": 10,
-            "id": "support-connect-12",
-            "title": "接続サポート事例 2025-12",
-            "body": "RF-D510はルーターへ接続して通知も送信していますが、アプリ画面だけがオフライン表示のままでした。キャッシュ削除でも表示は直りませんでした。",
-            "score": 0.92653775,
+            "id": "support-connect-09",
+            "title": "接続サポート事例 2025-09",
+            "body": "VC-F710はBluetoothで検出できますが、クラウドアカウントへの紐付けが完了せず、履歴を同期できませんでした。",
+            "score": 0.9325522,
             "rerank_score": null,
             "context_chunks": []
           }
@@ -864,7 +864,7 @@
     {
       "id": "ranking-fulltext",
       "request": {
-        "query": "ソフトウェアを新しくした後も、あらゆる再接続を試して直らなかった事例",
+        "query": "ソフトウェアを更新した後、再登録や再起動を試しても接続できなかった事例",
         "mode": "fulltext",
         "top_k": 10,
         "filters": {
@@ -873,7 +873,7 @@
         }
       },
       "response": {
-        "query": "ソフトウェアを新しくした後も、あらゆる再接続を試して直らなかった事例",
+        "query": "ソフトウェアを更新した後、再登録や再起動を試しても接続できなかった事例",
         "mode": "fulltext",
         "timings": {
           "embedding_ms": 0,
@@ -906,7 +906,7 @@
               "must": [
                 {
                   "multi_match": {
-                    "query": "ソフトウェアを新しくした後も、あらゆる再接続を試して直らなかった事例",
+                    "query": "ソフトウェアを更新した後、再登録や再起動を試しても接続できなかった事例",
                     "fields": [
                       "title^2",
                       "body",
@@ -939,25 +939,25 @@
             "id": "support-connect-13",
             "title": "接続サポート事例 2025-13",
             "body": "AC-C300をファームウェア3へ更新した後、一度は接続が切れましたが、本体の再起動だけでアプリ操作が再開できました。",
-            "score": 14.702038,
+            "score": 24.479433,
             "rerank_score": null,
             "context_chunks": []
           },
           {
             "rank": 2,
-            "id": "support-connect-03",
-            "title": "接続サポート事例 2025-03",
-            "body": "WM-A410をファームウェア4へ更新しましたが、更新完了後もスマートフォンとの接続が回復しませんでした。再登録とルーター再起動でも未解決です。",
-            "score": 12.492508,
+            "id": "support-connect-14",
+            "title": "接続サポート事例 2025-14",
+            "body": "スマートフォンを交換した後、WM-A410を新端末へ登録できませんでした。旧端末の登録解除を行っても接続できない状態が続きました。",
+            "score": 23.974834,
             "rerank_score": null,
             "context_chunks": []
           },
           {
             "rank": 3,
-            "id": "support-connect-07",
-            "title": "接続サポート事例 2025-07",
-            "body": "ルーター交換後、AC-C300を新しいSSIDへ登録しても外出先操作を利用できませんでした。本体操作はできますが、クラウド接続は未解決です。",
-            "score": 11.142563,
+            "id": "support-connect-03",
+            "title": "接続サポート事例 2025-03",
+            "body": "WM-A410をファームウェア4へ更新しましたが、更新完了後もスマートフォンとの接続が回復しませんでした。再登録とルーター再起動でも未解決です。",
+            "score": 22.300629,
             "rerank_score": null,
             "context_chunks": []
           },
@@ -966,25 +966,25 @@
             "id": "support-connect-01",
             "title": "接続サポート事例 2025-01",
             "body": "WM-A410をファームウェア3へ更新後、アプリから見つからなくなりました。登録を解除して同じ家庭内ネットワークで再登録すると接続できるようになりました。",
-            "score": 11.081332,
+            "score": 19.361698,
             "rerank_score": null,
             "context_chunks": []
           },
           {
             "rank": 5,
-            "id": "support-connect-14",
-            "title": "接続サポート事例 2025-14",
-            "body": "スマートフォンを交換した後、WM-A410を新端末へ登録できませんでした。旧端末の登録解除を行っても接続できない状態が続きました。",
-            "score": 10.980534,
+            "id": "support-connect-07",
+            "title": "接続サポート事例 2025-07",
+            "body": "ルーター交換後、AC-C300を新しいSSIDへ登録しても外出先操作を利用できませんでした。本体操作はできますが、クラウド接続は未解決です。",
+            "score": 13.814088,
             "rerank_score": null,
             "context_chunks": []
           },
           {
             "rank": 6,
-            "id": "support-connect-02",
-            "title": "接続サポート事例 2025-02",
-            "body": "AC-C300は無線LANへ接続済みですが、スマートフォンのローカルネットワーク権限が許可されておらず、アプリから操作できない状態が続きました。",
-            "score": 7.370072,
+            "id": "support-connect-10",
+            "title": "接続サポート事例 2025-10",
+            "body": "TV-G880の更新直後にリモート操作が失敗しました。設定を保持したまま更新を再適用すると接続できる状態へ戻りました。",
+            "score": 11.108211,
             "rerank_score": null,
             "context_chunks": []
           },
@@ -993,33 +993,33 @@
             "id": "support-connect-05",
             "title": "接続サポート事例 2025-05",
             "body": "RF-D510の更新後に通知が届かなくなりました。ルーターと冷蔵庫を再起動するとクラウド接続が復旧し、扉通知も届くようになりました。",
-            "score": 7.370072,
+            "score": 11.01199,
             "rerank_score": null,
             "context_chunks": []
           },
           {
             "rank": 8,
-            "id": "support-connect-06",
-            "title": "接続サポート事例 2025-06",
-            "body": "TV-G800はアプリから操作できましたが、番組開始通知だけが遅れていました。通知権限を有効にすると解消しました。",
-            "score": 7.370072,
+            "id": "support-connect-08",
+            "title": "接続サポート事例 2025-08",
+            "body": "OV-E600がアプリに表示されなくなりました。アプリを再インストールして製品を再登録すると接続が回復しました。",
+            "score": 10.80462,
             "rerank_score": null,
             "context_chunks": []
           },
           {
             "rank": 9,
-            "id": "support-connect-08",
-            "title": "接続サポート事例 2025-08",
-            "body": "OV-E600がアプリに表示されなくなりました。アプリを再インストールして製品を再登録すると接続が回復しました。",
+            "id": "support-connect-02",
+            "title": "接続サポート事例 2025-02",
+            "body": "AC-C300は無線LANへ接続済みですが、スマートフォンのローカルネットワーク権限が許可されておらず、アプリから操作できない状態が続きました。",
             "score": 7.370072,
             "rerank_score": null,
             "context_chunks": []
           },
           {
             "rank": 10,
-            "id": "support-connect-09",
-            "title": "接続サポート事例 2025-09",
-            "body": "VC-F710はBluetoothで検出できますが、クラウドアカウントへの紐付けが完了せず、履歴を同期できませんでした。",
+            "id": "support-connect-06",
+            "title": "接続サポート事例 2025-06",
+            "body": "TV-G800はアプリから操作できましたが、番組開始通知だけが遅れていました。通知権限を有効にすると解消しました。",
             "score": 7.370072,
             "rerank_score": null,
             "context_chunks": []
@@ -1030,7 +1030,7 @@
     {
       "id": "ranking-hybrid",
       "request": {
-        "query": "ソフトウェアを新しくした後も、あらゆる再接続を試して直らなかった事例",
+        "query": "ソフトウェアを更新した後、再登録や再起動を試しても接続できなかった事例",
         "mode": "hybrid",
         "top_k": 10,
         "filters": {
@@ -1039,14 +1039,14 @@
         }
       },
       "response": {
-        "query": "ソフトウェアを新しくした後も、あらゆる再接続を試して直らなかった事例",
+        "query": "ソフトウェアを更新した後、再登録や再起動を試しても接続できなかった事例",
         "mode": "hybrid",
         "timings": {
-          "embedding_ms": 149,
-          "search_ms": 6,
+          "embedding_ms": 109,
+          "search_ms": 5,
           "rerank_ms": 0,
           "context_ms": 0,
-          "total_ms": 155
+          "total_ms": 115
         },
         "total_candidates": 10,
         "request_body": {
@@ -1075,7 +1075,7 @@
                     "must": [
                       {
                         "multi_match": {
-                          "query": "ソフトウェアを新しくした後も、あらゆる再接続を試して直らなかった事例",
+                          "query": "ソフトウェアを更新した後、再登録や再起動を試しても接続できなかった事例",
                           "fields": [
                             "title^2",
                             "body",
@@ -1134,10 +1134,10 @@
         "hits": [
           {
             "rank": 1,
-            "id": "support-connect-13",
-            "title": "接続サポート事例 2025-13",
-            "body": "AC-C300をファームウェア3へ更新した後、一度は接続が切れましたが、本体の再起動だけでアプリ操作が再開できました。",
-            "score": 0.8990476,
+            "id": "support-connect-14",
+            "title": "接続サポート事例 2025-14",
+            "body": "スマートフォンを交換した後、WM-A410を新端末へ登録できませんでした。旧端末の登録解除を行っても接続できない状態が続きました。",
+            "score": 0.9793552,
             "rerank_score": null,
             "context_chunks": []
           },
@@ -1146,25 +1146,25 @@
             "id": "support-connect-03",
             "title": "接続サポート事例 2025-03",
             "body": "WM-A410をファームウェア4へ更新しましたが、更新完了後もスマートフォンとの接続が回復しませんでした。再登録とルーター再起動でも未解決です。",
-            "score": 0.789051,
+            "score": 0.8942463,
             "rerank_score": null,
             "context_chunks": []
           },
           {
             "rank": 3,
-            "id": "support-connect-01",
-            "title": "接続サポート事例 2025-01",
-            "body": "WM-A410をファームウェア3へ更新後、アプリから見つからなくなりました。登録を解除して同じ家庭内ネットワークで再登録すると接続できるようになりました。",
-            "score": 0.54547447,
+            "id": "support-connect-13",
+            "title": "接続サポート事例 2025-13",
+            "body": "AC-C300をファームウェア3へ更新した後、一度は接続が切れましたが、本体の再起動だけでアプリ操作が再開できました。",
+            "score": 0.87244993,
             "rerank_score": null,
             "context_chunks": []
           },
           {
             "rank": 4,
-            "id": "support-connect-14",
-            "title": "接続サポート事例 2025-14",
-            "body": "スマートフォンを交換した後、WM-A410を新端末へ登録できませんでした。旧端末の登録解除を行っても接続できない状態が続きました。",
-            "score": 0.5383226,
+            "id": "support-connect-01",
+            "title": "接続サポート事例 2025-01",
+            "body": "WM-A410をファームウェア3へ更新後、アプリから見つからなくなりました。登録を解除して同じ家庭内ネットワークで再登録すると接続できるようになりました。",
+            "score": 0.74013454,
             "rerank_score": null,
             "context_chunks": []
           },
@@ -1173,7 +1173,7 @@
             "id": "support-connect-07",
             "title": "接続サポート事例 2025-07",
             "body": "ルーター交換後、AC-C300を新しいSSIDへ登録しても外出先操作を利用できませんでした。本体操作はできますが、クラウド接続は未解決です。",
-            "score": 0.45001134,
+            "score": 0.4125533,
             "rerank_score": null,
             "context_chunks": []
           },
@@ -1182,7 +1182,7 @@
             "id": "support-connect-10",
             "title": "接続サポート事例 2025-10",
             "body": "TV-G880の更新直後にリモート操作が失敗しました。設定を保持したまま更新を再適用すると接続できる状態へ戻りました。",
-            "score": 0.25681445,
+            "score": 0.4076228,
             "rerank_score": null,
             "context_chunks": []
           },
@@ -1191,7 +1191,7 @@
             "id": "support-connect-08",
             "title": "接続サポート事例 2025-08",
             "body": "OV-E600がアプリに表示されなくなりました。アプリを再インストールして製品を再登録すると接続が回復しました。",
-            "score": 0.15367934,
+            "score": 0.29231912,
             "rerank_score": null,
             "context_chunks": []
           },
@@ -1200,7 +1200,7 @@
             "id": "support-connect-05",
             "title": "接続サポート事例 2025-05",
             "body": "RF-D510の更新後に通知が届かなくなりました。ルーターと冷蔵庫を再起動するとクラウド接続が復旧し、扉通知も届くようになりました。",
-            "score": 0.1297665,
+            "score": 0.2634974,
             "rerank_score": null,
             "context_chunks": []
           },
@@ -1209,7 +1209,7 @@
             "id": "support-connect-11",
             "title": "接続サポート事例 2025-11",
             "body": "WM-A410を5GHz専用SSIDへ接続しようとして失敗しました。2.4GHz帯のSSIDが用意されるまでアプリ連携は利用できませんでした。",
-            "score": 0.03910452,
+            "score": 0.02893151,
             "rerank_score": null,
             "context_chunks": []
           },
@@ -1228,7 +1228,7 @@
     {
       "id": "ranking-rerank",
       "request": {
-        "query": "ソフトウェアを新しくした後も、あらゆる再接続を試して直らなかった事例",
+        "query": "ソフトウェアを更新した後、再登録や再起動を試しても接続できなかった事例",
         "mode": "hybrid_rerank",
         "top_k": 10,
         "filters": {
@@ -1237,14 +1237,14 @@
         }
       },
       "response": {
-        "query": "ソフトウェアを新しくした後も、あらゆる再接続を試して直らなかった事例",
+        "query": "ソフトウェアを更新した後、再登録や再起動を試しても接続できなかった事例",
         "mode": "hybrid_rerank",
         "timings": {
-          "embedding_ms": 103,
-          "search_ms": 6,
-          "rerank_ms": 2585,
+          "embedding_ms": 90,
+          "search_ms": 5,
+          "rerank_ms": 1355,
           "context_ms": 0,
-          "total_ms": 2694
+          "total_ms": 1450
         },
         "total_candidates": 10,
         "request_body": {
@@ -1273,7 +1273,7 @@
                     "must": [
                       {
                         "multi_match": {
-                          "query": "ソフトウェアを新しくした後も、あらゆる再接続を試して直らなかった事例",
+                          "query": "ソフトウェアを更新した後、再登録や再起動を試しても接続できなかった事例",
                           "fields": [
                             "title^2",
                             "body",
@@ -1335,26 +1335,26 @@
             "id": "support-connect-03",
             "title": "接続サポート事例 2025-03",
             "body": "WM-A410をファームウェア4へ更新しましたが、更新完了後もスマートフォンとの接続が回復しませんでした。再登録とルーター再起動でも未解決です。",
-            "score": 0.789051,
-            "rerank_score": 0.2843988835811615,
+            "score": 0.8942463,
+            "rerank_score": 0.9026960134506226,
             "context_chunks": []
           },
           {
             "rank": 2,
-            "id": "support-connect-14",
-            "title": "接続サポート事例 2025-14",
-            "body": "スマートフォンを交換した後、WM-A410を新端末へ登録できませんでした。旧端末の登録解除を行っても接続できない状態が続きました。",
-            "score": 0.5383226,
-            "rerank_score": 0.03609011322259903,
+            "id": "support-connect-13",
+            "title": "接続サポート事例 2025-13",
+            "body": "AC-C300をファームウェア3へ更新した後、一度は接続が切れましたが、本体の再起動だけでアプリ操作が再開できました。",
+            "score": 0.87244993,
+            "rerank_score": 0.22522351145744324,
             "context_chunks": []
           },
           {
             "rank": 3,
-            "id": "support-connect-13",
-            "title": "接続サポート事例 2025-13",
-            "body": "AC-C300をファームウェア3へ更新した後、一度は接続が切れましたが、本体の再起動だけでアプリ操作が再開できました。",
-            "score": 0.8990476,
-            "rerank_score": 0.019057121127843857,
+            "id": "support-connect-01",
+            "title": "接続サポート事例 2025-01",
+            "body": "WM-A410をファームウェア3へ更新後、アプリから見つからなくなりました。登録を解除して同じ家庭内ネットワークで再登録すると接続できるようになりました。",
+            "score": 0.74013454,
+            "rerank_score": 0.18978896737098694,
             "context_chunks": []
           },
           {
@@ -1362,44 +1362,44 @@
             "id": "support-connect-10",
             "title": "接続サポート事例 2025-10",
             "body": "TV-G880の更新直後にリモート操作が失敗しました。設定を保持したまま更新を再適用すると接続できる状態へ戻りました。",
-            "score": 0.25681445,
-            "rerank_score": 0.015056794509291649,
+            "score": 0.4076228,
+            "rerank_score": 0.11985868215560913,
             "context_chunks": []
           },
           {
             "rank": 5,
-            "id": "support-connect-08",
-            "title": "接続サポート事例 2025-08",
-            "body": "OV-E600がアプリに表示されなくなりました。アプリを再インストールして製品を再登録すると接続が回復しました。",
-            "score": 0.15367934,
-            "rerank_score": 0.010119056329131126,
+            "id": "support-connect-14",
+            "title": "接続サポート事例 2025-14",
+            "body": "スマートフォンを交換した後、WM-A410を新端末へ登録できませんでした。旧端末の登録解除を行っても接続できない状態が続きました。",
+            "score": 0.9793552,
+            "rerank_score": 0.11175977438688278,
             "context_chunks": []
           },
           {
             "rank": 6,
-            "id": "support-connect-01",
-            "title": "接続サポート事例 2025-01",
-            "body": "WM-A410をファームウェア3へ更新後、アプリから見つからなくなりました。登録を解除して同じ家庭内ネットワークで再登録すると接続できるようになりました。",
-            "score": 0.54547447,
-            "rerank_score": 0.006636647041887045,
+            "id": "support-connect-08",
+            "title": "接続サポート事例 2025-08",
+            "body": "OV-E600がアプリに表示されなくなりました。アプリを再インストールして製品を再登録すると接続が回復しました。",
+            "score": 0.29231912,
+            "rerank_score": 0.09178508073091507,
             "context_chunks": []
           },
           {
             "rank": 7,
-            "id": "support-connect-11",
-            "title": "接続サポート事例 2025-11",
-            "body": "WM-A410を5GHz専用SSIDへ接続しようとして失敗しました。2.4GHz帯のSSIDが用意されるまでアプリ連携は利用できませんでした。",
-            "score": 0.03910452,
-            "rerank_score": 0.004949693102389574,
+            "id": "support-connect-07",
+            "title": "接続サポート事例 2025-07",
+            "body": "ルーター交換後、AC-C300を新しいSSIDへ登録しても外出先操作を利用できませんでした。本体操作はできますが、クラウド接続は未解決です。",
+            "score": 0.4125533,
+            "rerank_score": 0.02714710868895054,
             "context_chunks": []
           },
           {
             "rank": 8,
-            "id": "support-connect-07",
-            "title": "接続サポート事例 2025-07",
-            "body": "ルーター交換後、AC-C300を新しいSSIDへ登録しても外出先操作を利用できませんでした。本体操作はできますが、クラウド接続は未解決です。",
-            "score": 0.45001134,
-            "rerank_score": 0.0044571347534656525,
+            "id": "support-connect-11",
+            "title": "接続サポート事例 2025-11",
+            "body": "WM-A410を5GHz専用SSIDへ接続しようとして失敗しました。2.4GHz帯のSSIDが用意されるまでアプリ連携は利用できませんでした。",
+            "score": 0.02893151,
+            "rerank_score": 0.019967246800661087,
             "context_chunks": []
           },
           {
@@ -1407,8 +1407,8 @@
             "id": "support-connect-05",
             "title": "接続サポート事例 2025-05",
             "body": "RF-D510の更新後に通知が届かなくなりました。ルーターと冷蔵庫を再起動するとクラウド接続が復旧し、扉通知も届くようになりました。",
-            "score": 0.1297665,
-            "rerank_score": 0.003173096338286996,
+            "score": 0.2634974,
+            "rerank_score": 0.019385917112231255,
             "context_chunks": []
           },
           {
@@ -1417,7 +1417,7 @@
             "title": "接続サポート事例 2025-06",
             "body": "TV-G800はアプリから操作できましたが、番組開始通知だけが遅れていました。通知権限を有効にすると解消しました。",
             "score": 0.00070000003,
-            "rerank_score": 0.001077131601050496,
+            "rerank_score": 0.004572820384055376,
             "context_chunks": []
           }
         ]
@@ -1434,11 +1434,11 @@
         "query": "WM-A410の無償交換が認められる条件と、対象外になる場合",
         "mode": "hybrid_context",
         "timings": {
-          "embedding_ms": 135,
+          "embedding_ms": 117,
           "search_ms": 6,
           "rerank_ms": 0,
-          "context_ms": 6,
-          "total_ms": 146
+          "context_ms": 3,
+          "total_ms": 126
         },
         "total_candidates": 10,
         "request_body": {
@@ -1584,11 +1584,11 @@
         "query": "更新後も接続できない洗濯機の事例",
         "mode": "hybrid_filter",
         "timings": {
-          "embedding_ms": 126,
-          "search_ms": 5,
+          "embedding_ms": 94,
+          "search_ms": 4,
           "rerank_ms": 0,
           "context_ms": 0,
-          "total_ms": 130
+          "total_ms": 98
         },
         "total_candidates": 4,
         "request_body": {

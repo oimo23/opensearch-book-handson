@@ -24,17 +24,17 @@
 | 2 | `error-wm-a410-e42` | `error-wm-a410-e24` | `error-wm-a410-e24` |
 | 3 | `error-wm-a410s-e42` | `error-wm-a410-c07` | `error-wm-a410-u11` |
 
-ベクトル検索は、E42が表示され給水できない修理事例を1位にしました。全文検索は型番とエラーコードの一致を使って期待文書を1位にし、ハイブリッド検索も1位を維持しました。
+ベクトル検索は、E42が表示され給水できない修理事例を1位にしました。全文検索では期待文書が1位に表示されましたが、同じ型番のエラー説明4件は同点です。ハイブリッド検索では4件に順位差がつき、期待文書が単独の1位になりました。
 
 ## 代表例2: rerank
 
-問い合わせは「ソフトウェアを新しくした後も、あらゆる再接続を試して直らなかった事例」です。`document_type=support_case`と`firmware_major>=3`で絞り、期待文書を`support-connect-03`としました。
+問い合わせは「ソフトウェアを更新した後、再登録や再起動を試しても接続できなかった事例」です。`document_type=support_case`と`firmware_major>=3`で絞り、期待文書を`support-connect-03`としました。
 
 | 順位 | hybrid | hybrid + rerank |
 |---:|---|---|
-| 1 | `support-connect-13` | `support-connect-03` |
-| 2 | `support-connect-03` | `support-connect-14` |
-| 3 | `support-connect-01` | `support-connect-13` |
+| 1 | `support-connect-14` | `support-connect-03` |
+| 2 | `support-connect-03` | `support-connect-13` |
+| 3 | `support-connect-13` | `support-connect-01` |
 
 hybridの上位10件をそのままrerankerへ渡すと、期待文書が2位から1位へ上がりました。候補集合は変わっていません。
 

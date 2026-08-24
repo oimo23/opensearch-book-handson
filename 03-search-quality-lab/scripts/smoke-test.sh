@@ -32,7 +32,7 @@ filtered="$(curl -fsS -X POST "${LAB_URL}/api/search" \
 jq -e 'all(.hits[]; .document_type == "support_case" and .product_category == "washer" and .firmware_major >= 3 and .device_age_months >= 12 and .support_outcome == "unresolved")' <<<"${filtered}" >/dev/null
 jq -e '[.hits[].id] | index("support-connect-03") != null' <<<"${filtered}" >/dev/null
 
-ranking_query='ソフトウェアを新しくした後も、あらゆる再接続を試して直らなかった事例'
+ranking_query='ソフトウェアを更新した後、再登録や再起動を試しても接続できなかった事例'
 ranking_filters='"filters":{"document_type":"support_case","firmware_major_gte":3}'
 ranking_hybrid="$(curl -fsS -X POST "${LAB_URL}/api/search" \
   -H 'Content-Type: application/json' \

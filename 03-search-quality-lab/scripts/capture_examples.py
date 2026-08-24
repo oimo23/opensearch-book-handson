@@ -12,7 +12,7 @@ from evaluate import request_json
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_OUTPUT = ROOT / "docs" / "results" / "controlled-examples.json"
 PRODUCT_QUERY = "WM-A410でE42が出たときの給水エラーの対処"
-RANKING_QUERY = "ソフトウェアを新しくした後も、あらゆる再接続を試して直らなかった事例"
+RANKING_QUERY = "ソフトウェアを更新した後、再登録や再起動を試しても接続できなかった事例"
 RANKING_FILTERS = {"document_type": "support_case", "firmware_major_gte": 3}
 EXAMPLES = [
     {"id": "strict-error-vector", "request": {"query": "WM-A410-E42", "mode": "vector", "top_k": 5}},
