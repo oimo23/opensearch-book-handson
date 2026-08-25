@@ -15,7 +15,7 @@ from urllib.request import Request, urlopen
 
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_QUERIES = ROOT / "data" / "evaluation_queries.json"
-EVALUATION_VERSION = "v3"
+EVALUATION_VERSION = "v4"
 CATEGORY_MODES = {
     "semantic": ("vector", "fulltext", "hybrid"),
     "lexical": ("vector", "fulltext", "hybrid"),
@@ -27,18 +27,6 @@ CATEGORY_MODES = {
 
 def hit_matches_filters(hit: dict[str, Any], filters: dict[str, Any]) -> bool:
     if filters.get("document_type") and hit.get("document_type") != filters["document_type"]:
-        return False
-    if filters.get("product_category") and hit.get("product_category") != filters["product_category"]:
-        return False
-    if filters.get("firmware_major_gte") is not None:
-        version = hit.get("firmware_major")
-        if version is None or version < filters["firmware_major_gte"]:
-            return False
-    if filters.get("device_age_months_gte") is not None:
-        age = hit.get("device_age_months")
-        if age is None or age < filters["device_age_months_gte"]:
-            return False
-    if filters.get("support_outcome") and hit.get("support_outcome") != filters["support_outcome"]:
         return False
     return True
 

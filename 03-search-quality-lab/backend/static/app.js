@@ -1,10 +1,5 @@
 const form = document.querySelector('#search-form')
 const queryInput = document.querySelector('#query')
-const documentType = document.querySelector('#document-type')
-const productCategory = document.querySelector('#product-category')
-const firmwareMajor = document.querySelector('#firmware-major')
-const deviceAgeMonths = document.querySelector('#device-age-months')
-const supportOutcome = document.querySelector('#support-outcome')
 const submitButton = document.querySelector('#submit')
 const errorBox = document.querySelector('#form-error')
 const emptyState = document.querySelector('#empty-state')
@@ -17,6 +12,15 @@ function selectedMode() {
 
 function chooseMode(mode) {
   const input = document.querySelector(`input[name="mode"][value="${mode}"]`)
+  if (input) input.checked = true
+}
+
+function selectedDocumentType() {
+  return document.querySelector('input[name="document-type"]:checked').value
+}
+
+function chooseDocumentType(value) {
+  const input = document.querySelector(`input[name="document-type"][value="${value}"]`)
   if (input) input.checked = true
 }
 
@@ -65,7 +69,6 @@ function renderResults(data) {
     const attributes = [
       hit.document_type,
       hit.product_category,
-      hit.firmware_major === null ? null : `FW ${hit.firmware_major}`,
       hit.device_age_months === null ? null : `使用${hit.device_age_months}か月`,
       hit.support_outcome,
     ].filter(Boolean).map((value) => `<span>${escapeHtml(String(value))}</span>`).join('')
@@ -93,17 +96,10 @@ async function runSearch() {
     query: queryInput.value.trim(),
     mode,
     filters: {
-      document_type: documentType.value || null,
-      product_category: productCategory.value || null,
-      firmware_major_gte: firmwareMajor.value ? Number(firmwareMajor.value) : null,
-      device_age_months_gte: deviceAgeMonths.value ? Number(deviceAgeMonths.value) : null,
-      support_outcome: supportOutcome.value || null,
+      document_type: selectedDocumentType() || null,
     },
   }
   if (!body.query) return showError('質問を入力してください。')
-  if (mode === 'hybrid_filter' && Object.values(body.filters).every((value) => value === null)) {
-    return showError('+ Filterでは少なくとも1つの構造化条件を指定してください。')
-  }
 
   clearError()
   submitButton.disabled = true
@@ -134,11 +130,7 @@ document.querySelectorAll('.scenario-board button').forEach((button) => {
   button.addEventListener('click', () => {
     queryInput.value = button.dataset.query
     chooseMode(button.dataset.mode)
-    documentType.value = button.dataset.documentType || ''
-    productCategory.value = button.dataset.productCategory || ''
-    firmwareMajor.value = button.dataset.firmware || ''
-    deviceAgeMonths.value = button.dataset.deviceAge || ''
-    supportOutcome.value = button.dataset.outcome || ''
+    chooseDocumentType(button.dataset.documentType || '')
     void runSearch()
   })
 })

@@ -23,14 +23,6 @@ def _filter_clauses(request: SearchRequest) -> list[dict[str, Any]]:
         clauses.append({"term": {"filename.raw": request.filename}})
     if request.filters.document_type:
         clauses.append({"term": {"document_type": request.filters.document_type}})
-    if request.filters.product_category:
-        clauses.append({"term": {"product_category": request.filters.product_category}})
-    if request.filters.firmware_major_gte is not None:
-        clauses.append({"range": {"firmware_major": {"gte": request.filters.firmware_major_gte}}})
-    if request.filters.device_age_months_gte is not None:
-        clauses.append({"range": {"device_age_months": {"gte": request.filters.device_age_months_gte}}})
-    if request.filters.support_outcome:
-        clauses.append({"term": {"support_outcome": request.filters.support_outcome}})
     return clauses
 
 
@@ -59,7 +51,6 @@ def build_query(
         "chunk_order",
         "document_type",
         "product_category",
-        "firmware_major",
         "device_age_months",
         "support_outcome",
     ]
@@ -115,8 +106,6 @@ def build_query(
         }
     }
     vector_options: dict[str, Any] = {"vector": query_vector, "k": candidate_size}
-    if request.mode is SearchMode.HYBRID_FILTER and not filter_clauses:
-        raise ValueError("hybrid_filter requires at least one structured filter")
     if filter_clauses:
         keyword_query = {"bool": {"must": [keyword_query], "filter": filter_clauses}}
         vector_options["filter"] = filter_clause
@@ -204,7 +193,6 @@ class SearchService:
                     body=source["body"],
                     document_type=source["document_type"],
                     product_category=source.get("product_category"),
-                    firmware_major=source.get("firmware_major"),
                     device_age_months=source.get("device_age_months"),
                     support_outcome=source.get("support_outcome"),
                     score=float(hit.get("_score") or 0.0),

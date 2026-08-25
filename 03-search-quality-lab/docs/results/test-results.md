@@ -1,8 +1,8 @@
 # test split evaluation
 
-- Executed: 2026-08-24T01:14:04+09:00
+- Executed: 2026-08-25T23:53:27+09:00
 - Documents: 180
-- Evaluation version: v3
+- Evaluation version: v4
 - Candidate size: 10
 - Hybrid weights: [0.7, 0.3]
 
@@ -11,7 +11,7 @@
 | Category | Mode | Queries | Hit@3 | Hit@10 | MRR@5 | NDCG@5 | Parent@3 | Context | Context precision | Constraint | Violations |
 |---|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
 | constraint | `exact` | 2 | - | - | - | - | - | - | - | 1.000 | 0 |
-| constraint | `hybrid_filter` | 3 | - | - | - | - | - | - | - | 1.000 | 0 |
+| constraint | `hybrid` | 3 | - | - | - | - | - | - | - | 1.000 | 0 |
 | context | `hybrid` | 5 | 1.000 | 1.000 | 1.000 | 0.481 | 1.000 | 0.733 | - | - | 0 |
 | context | `hybrid_context` | 5 | 1.000 | 1.000 | 1.000 | 0.271 | 1.000 | 1.000 | 0.617 | - | 0 |
 | lexical | `fulltext` | 10 | 0.900 | 1.000 | 0.900 | 0.900 | - | - | - | - | 0 |

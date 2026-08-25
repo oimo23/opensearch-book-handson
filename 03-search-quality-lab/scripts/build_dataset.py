@@ -16,7 +16,7 @@ def document(
     body: str, identifiers: list[str] | None = None,
     parent_id: str | None = None, chunk_order: int | None = None,
     document_type: str, product_category: str | None = None,
-    firmware_major: int | None = None, device_age_months: int | None = None,
+    device_age_months: int | None = None,
     support_outcome: str | None = None,
 ) -> dict[str, Any]:
     return {
@@ -24,7 +24,7 @@ def document(
         "category": category, "page_start": 1, "identifiers": identifiers or [],
         "parent_id": parent_id, "chunk_order": chunk_order,
         "document_type": document_type, "product_category": product_category,
-        "firmware_major": firmware_major, "device_age_months": device_age_months,
+        "device_age_months": device_age_months,
         "support_outcome": support_outcome, "synthetic": True, "body": body,
     }
 
@@ -104,8 +104,8 @@ def build_connectivity_cases() -> list[dict[str, Any]]:
         title=f"接続サポート事例 2025-{slug}", filename="connectivity-support-cases-2025.pdf",
         category="サポート事例", body=body, identifiers=[f"CASE-CONNECT-{slug}"],
         document_type="support_case", product_category=category,
-        firmware_major=firmware, device_age_months=age, support_outcome=outcome,
-    ) for slug, category, firmware, age, outcome, body in rows]
+        device_age_months=age, support_outcome=outcome,
+    ) for slug, category, _firmware, age, outcome, body in rows]
 
 
 def build_repair_cases() -> list[dict[str, Any]]:
@@ -130,9 +130,9 @@ def build_repair_cases() -> list[dict[str, Any]]:
         id=f"repair-case-{slug}", family="repair-cases",
         title=f"訪問修理事例 2025-{slug}", filename="repair-cases-2025.pdf",
         category="修理事例", body=body, identifiers=[f"CASE-REPAIR-{slug}"],
-        document_type="support_case", product_category=category,
-        firmware_major=firmware, device_age_months=age, support_outcome=outcome,
-    ) for slug, category, firmware, age, outcome, body in rows]
+        document_type="repair_case", product_category=category,
+        device_age_months=age, support_outcome=outcome,
+    ) for slug, category, _firmware, age, outcome, body in rows]
 
 
 def build_simple_family(
@@ -458,8 +458,20 @@ def build_queries() -> list[dict[str, Any]]:
             queries.append(query(f"ctx-{marker}{index:02d}", split, "context", text, {ids[0]: 1, ids[1]: 1, ids[2]: 3}, required_context_ids=ids))
 
     constraints = {
-        "dev": [("WM-A410-E24", "exact", {}, ["error-wm-a410-e24"]), ("AC-C300-E24", "exact", {}, ["error-ac-c300-e24"]), ("未解決のエアコンサポート", "hybrid_filter", {"document_type": "support_case", "product_category": "air_conditioner", "support_outcome": "unresolved"}, ["support-connect-07"]), ("1年以上使った未解決の掃除機", "hybrid_filter", {"document_type": "support_case", "product_category": "vacuum", "device_age_months_gte": 12, "support_outcome": "unresolved"}, ["repair-case-06"]), ("ファームウェア3以降の接続事例", "hybrid_filter", {"document_type": "support_case", "firmware_major_gte": 3}, ["support-connect-01"])],
-        "test": [("WM-A410-E42", "exact", {}, ["error-wm-a410-e42"]), ("RF-D510-E17", "exact", {}, ["error-rf-d510-e17"]), ("未解決の洗濯機サポート", "hybrid_filter", {"document_type": "support_case", "product_category": "washer", "support_outcome": "unresolved"}, ["support-connect-03"]), ("1年以上使った未解決の洗濯機", "hybrid_filter", {"document_type": "support_case", "product_category": "washer", "device_age_months_gte": 12, "support_outcome": "unresolved"}, ["repair-case-11"]), ("ファームウェア3以降で更新後も接続できない事例", "hybrid_filter", {"document_type": "support_case", "firmware_major_gte": 3, "support_outcome": "unresolved"}, ["support-connect-03"])],
+        "dev": [
+            ("WM-A410-E24", "exact", {}, ["error-wm-a410-e24"]),
+            ("AC-C300-E24", "exact", {}, ["error-ac-c300-e24"]),
+            ("ルーター交換後も外出先操作できない事例", "hybrid", {"document_type": "support_case"}, ["support-connect-07"]),
+            ("ブラシを清掃してもE31が再発した訪問修理", "hybrid", {"document_type": "repair_case"}, ["repair-case-06"]),
+            ("回転ブラシに絡んだ髪や糸を取り除く手順", "hybrid", {"document_type": "manual"}, ["manual-vacuum-brush"]),
+        ],
+        "test": [
+            ("WM-A410-E42", "exact", {}, ["error-wm-a410-e42"]),
+            ("RF-D510-E17", "exact", {}, ["error-rf-d510-e17"]),
+            ("更新後、再登録と再起動でも接続できない事例", "hybrid", {"document_type": "support_case"}, ["support-connect-03"]),
+            ("給水弁の交換部品を手配した未完了の訪問修理", "hybrid", {"document_type": "repair_case"}, ["repair-case-11"]),
+            ("洗濯機に水が入らないときの確認手順", "hybrid", {"document_type": "manual"}, ["manual-wm-water"]),
+        ],
     }
     for split, rows in constraints.items():
         marker = "d" if split == "dev" else "t"

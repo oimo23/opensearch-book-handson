@@ -1484,13 +1484,11 @@
     "split": "dev",
     "category": "constraint",
     "case_group": "con-d03",
-    "query": "未解決のエアコンサポート",
+    "query": "ルーター交換後も外出先操作できない事例",
     "relevance": {},
-    "mode": "hybrid_filter",
+    "mode": "hybrid",
     "filters": {
-      "document_type": "support_case",
-      "product_category": "air_conditioner",
-      "support_outcome": "unresolved"
+      "document_type": "support_case"
     },
     "required_context_ids": [],
     "expected_ids": [
@@ -1503,14 +1501,11 @@
     "split": "dev",
     "category": "constraint",
     "case_group": "con-d04",
-    "query": "1年以上使った未解決の掃除機",
+    "query": "ブラシを清掃してもE31が再発した訪問修理",
     "relevance": {},
-    "mode": "hybrid_filter",
+    "mode": "hybrid",
     "filters": {
-      "document_type": "support_case",
-      "product_category": "vacuum",
-      "device_age_months_gte": 12,
-      "support_outcome": "unresolved"
+      "document_type": "repair_case"
     },
     "required_context_ids": [],
     "expected_ids": [
@@ -1523,16 +1518,15 @@
     "split": "dev",
     "category": "constraint",
     "case_group": "con-d05",
-    "query": "ファームウェア3以降の接続事例",
+    "query": "回転ブラシに絡んだ髪や糸を取り除く手順",
     "relevance": {},
-    "mode": "hybrid_filter",
+    "mode": "hybrid",
     "filters": {
-      "document_type": "support_case",
-      "firmware_major_gte": 3
+      "document_type": "manual"
     },
     "required_context_ids": [],
     "expected_ids": [
-      "support-connect-01"
+      "manual-vacuum-brush"
     ],
     "forbidden_ids": []
   },
@@ -1571,13 +1565,11 @@
     "split": "test",
     "category": "constraint",
     "case_group": "con-t03",
-    "query": "未解決の洗濯機サポート",
+    "query": "更新後、再登録と再起動でも接続できない事例",
     "relevance": {},
-    "mode": "hybrid_filter",
+    "mode": "hybrid",
     "filters": {
-      "document_type": "support_case",
-      "product_category": "washer",
-      "support_outcome": "unresolved"
+      "document_type": "support_case"
     },
     "required_context_ids": [],
     "expected_ids": [
@@ -1590,14 +1582,11 @@
     "split": "test",
     "category": "constraint",
     "case_group": "con-t04",
-    "query": "1年以上使った未解決の洗濯機",
+    "query": "給水弁の交換部品を手配した未完了の訪問修理",
     "relevance": {},
-    "mode": "hybrid_filter",
+    "mode": "hybrid",
     "filters": {
-      "document_type": "support_case",
-      "product_category": "washer",
-      "device_age_months_gte": 12,
-      "support_outcome": "unresolved"
+      "document_type": "repair_case"
     },
     "required_context_ids": [],
     "expected_ids": [
@@ -1610,17 +1599,15 @@
     "split": "test",
     "category": "constraint",
     "case_group": "con-t05",
-    "query": "ファームウェア3以降で更新後も接続できない事例",
+    "query": "洗濯機に水が入らないときの確認手順",
     "relevance": {},
-    "mode": "hybrid_filter",
+    "mode": "hybrid",
     "filters": {
-      "document_type": "support_case",
-      "firmware_major_gte": 3,
-      "support_outcome": "unresolved"
+      "document_type": "manual"
     },
     "required_context_ids": [],
     "expected_ids": [
-      "support-connect-03"
+      "manual-wm-water"
     ],
     "forbidden_ids": []
   }

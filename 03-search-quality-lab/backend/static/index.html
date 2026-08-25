@@ -15,7 +15,7 @@
         <div>
           <p class="kicker">OpenSearch / Retrieval Quality Workbench</p>
           <h1>Appliance Support<br /><span>Search Demo</span></h1>
-          <p class="intro">ベクトル検索の弱点を観察し、完全一致、全文検索、filter、hybrid、rerank、文脈復元を使い分けます。</p>
+          <p class="intro">必須条件は先にfilterで絞り、残った自然文を全文検索、vector、hybrid、rerankで扱います。</p>
         </div>
         <aside class="status-panel">
           <div class="status-line"><span id="status-dot"></span><strong id="status-text">起動確認中</strong></div>
@@ -30,15 +30,15 @@
       <section class="scenario-board" aria-label="デモシナリオ">
         <div><b>STRICT MATCH</b><button data-query="WM-A410-E42" data-mode="vector">vectorでは曖昧</button><button data-query="WM-A410-E42" data-mode="fulltext">BM25で候補化</button><button data-query="WM-A410-E42" data-mode="exact">termで1件に限定</button></div>
         <div><b>CANDIDATES</b><button data-query="WM-A410でE42が出たときの給水エラーの対処" data-mode="vector">意味検索だけ</button><button data-query="WM-A410でE42が出たときの給水エラーの対処" data-mode="fulltext">全文検索だけ</button><button data-query="WM-A410でE42が出たときの給水エラーの対処" data-mode="hybrid">両方を統合</button></div>
-        <div><b>CONSTRAINTS</b><button data-query="更新後も接続できない洗濯機の事例" data-mode="hybrid_filter" data-document-type="support_case" data-product-category="washer" data-firmware="3" data-device-age="12" data-outcome="unresolved">条件をfilterへ分離</button></div>
-        <div><b>RANKING</b><button data-query="ソフトウェアを更新した後、再登録や再起動を試しても接続できなかった事例" data-mode="hybrid" data-document-type="support_case" data-firmware="3">filter後のhybrid</button><button data-query="ソフトウェアを更新した後、再登録や再起動を試しても接続できなかった事例" data-mode="hybrid_rerank" data-document-type="support_case" data-firmware="3">同じ10件をrerank</button></div>
+        <div><b>FILTER FIRST</b><button data-query="ファームウェア3以降で、ソフトウェアを更新した後、再登録や再起動を試しても接続できなかったもの" data-mode="hybrid" data-document-type="support_case">文書種別を先に限定</button></div>
+        <div><b>RANKING</b><button data-query="ファームウェア3以降で、ソフトウェアを更新した後、再登録や再起動を試しても接続できなかったもの" data-mode="hybrid" data-document-type="support_case">filter後のhybrid</button><button data-query="ファームウェア3以降で、ソフトウェアを更新した後、再登録や再起動を試しても接続できなかったもの" data-mode="hybrid_rerank" data-document-type="support_case">同じ10件をrerank</button></div>
         <div><b>CONTEXT</b><button data-query="WM-A410の無償交換が認められる条件と、対象外になる場合" data-mode="hybrid_context">保証条件と対象外を復元</button></div>
       </section>
 
       <section class="workbench">
         <form id="search-form" class="control-panel">
           <div class="step-label"><span>01</span> QUERY</div>
-          <textarea id="query" rows="4">ソフトウェアを更新した後、再登録や再起動を試しても接続できなかった事例</textarea>
+          <textarea id="query" rows="4">ファームウェア3以降で、ソフトウェアを更新した後、再登録や再起動を試しても接続できなかったもの</textarea>
 
           <div class="step-label"><span>02</span> RETRIEVAL</div>
           <div id="mode-grid" class="mode-grid">
@@ -46,18 +46,16 @@
             <label><input type="radio" name="mode" value="fulltext" /><span><b>Full-text</b><small>BM25による全文検索</small></span></label>
             <label><input type="radio" name="mode" value="exact" /><span><b>Exact</b><small>識別子をtermで完全一致</small></span></label>
             <label><input type="radio" name="mode" value="hybrid" checked /><span><b>Hybrid</b><small>両方を正規化・統合</small></span></label>
-            <label><input type="radio" name="mode" value="hybrid_filter" /><span><b>+ Filter</b><small>文書を厳密に限定</small></span></label>
             <label><input type="radio" name="mode" value="hybrid_rerank" /><span><b>+ Rerank</b><small>上位候補を再整列</small></span></label>
             <label><input type="radio" name="mode" value="hybrid_context" /><span><b>+ Context</b><small>同じ親の前後チャンクを復元</small></span></label>
           </div>
 
-          <div class="step-label"><span>03</span> STRUCTURED FILTER</div>
-          <div class="filter-grid">
-            <label>文書種別<select id="document-type"><option value="">指定なし</option><option value="support_case" selected>サポート事例</option><option value="error_code">エラーコード</option><option value="product">製品</option><option value="manual">取扱説明</option><option value="policy">サポート規定</option></select></label>
-            <label>製品カテゴリ<select id="product-category"><option value="">指定なし</option><option value="washer">洗濯機</option><option value="dryer">乾燥機</option><option value="air_conditioner">エアコン</option><option value="refrigerator">冷蔵庫</option><option value="oven">オーブン</option><option value="vacuum">掃除機</option><option value="television">テレビ</option></select></label>
-            <label>ファームウェア世代の下限<input id="firmware-major" type="number" min="0" max="99" value="3" placeholder="例: 3" /></label>
-            <label>使用月数の下限<input id="device-age-months" type="number" min="0" max="600" placeholder="例: 12" /></label>
-            <label>対応結果<select id="support-outcome"><option value="">指定なし</option><option value="unresolved">未解決</option><option value="resolved">解決済み</option></select></label>
+          <div class="step-label"><span>03</span> DOCUMENT TYPE FILTER</div>
+          <div class="document-type-filter" role="radiogroup" aria-label="文書種別">
+            <label><input type="radio" name="document-type" value="" /><span>指定なし</span></label>
+            <label><input type="radio" name="document-type" value="support_case" checked /><span>サポート事例</span></label>
+            <label><input type="radio" name="document-type" value="repair_case" /><span>訪問修理事例</span></label>
+            <label><input type="radio" name="document-type" value="manual" /><span>製品マニュアル</span></label>
           </div>
 
           <button id="submit" class="search-button" type="submit">検索して順位を比較する <span>→</span></button>
@@ -83,6 +81,6 @@
         </section>
       </section>
     </main>
-    <script type="module" src="/static/app.js?v=3"></script>
+    <script type="module" src="/static/app.js?v=4"></script>
   </body>
 </html>

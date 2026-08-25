@@ -94,7 +94,6 @@ def _index_definition(dataset_sha256: str) -> dict[str, Any]:
                 "page_start": {"type": "integer"},
                 "document_type": {"type": "keyword"},
                 "product_category": {"type": "keyword"},
-                "firmware_major": {"type": "integer"},
                 "device_age_months": {"type": "integer"},
                 "support_outcome": {"type": "keyword"},
                 "synthetic": {"type": "boolean"},

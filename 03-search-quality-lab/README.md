@@ -6,9 +6,10 @@
 - `fulltext`: BM25による全文検索
 - `exact`: `keyword`型フィールドを`term` queryで完全一致
 - `hybrid`: 全文検索とベクトル検索を正規化して統合
-- `hybrid_filter`: 構造化条件で絞ってからハイブリッド検索
 - `hybrid_rerank`: ハイブリッド検索の上位10件をrerankerで再整列
 - `hybrid_context`: 検索後に同じ親文書の前後チャンクを復元
+
+文書種別filterは独立した検索方式ではありません。`vector`、`fulltext`、`hybrid`、`hybrid_rerank`の検索対象を、検索前に限定する条件として使います。
 
 ![家電サポート文書検索の構成](./docs/search-flow.svg)
 
@@ -49,7 +50,7 @@ APIの起動確認:
 curl -s http://localhost:8100/api/health | jq
 ```
 
-7方式の基本動作を確認:
+6方式と文書種別filterの基本動作を確認:
 
 ```bash
 ./scripts/smoke-test.sh
@@ -63,7 +64,30 @@ curl -s http://localhost:8100/api/health | jq
 
 初回のrerankではモデルの取得と読み込みに時間がかかることがあります。
 
-## ケース1: 型番と症状を両方使う
+## ケース1: 使えるfilterを先に適用する
+
+次の問い合わせを考えます。
+
+> サポート事例の中から、ファームウェア3以降で、ソフトウェアを更新した後、再登録や再起動を試しても接続できなかったものを探す
+
+このデモでは文書種別だけを構造化しており、`document_type`へのfilterを利用できます。「サポート事例の中から」は検索文へ入れず、残りを自然文検索へ渡します。
+
+```bash
+query='ファームウェア3以降で、ソフトウェアを更新した後、再登録や再起動を試しても接続できなかったもの'
+
+for filters in '{}' '{"document_type":"support_case"}'; do
+  curl -s http://localhost:8100/api/search \
+    -H 'Content-Type: application/json' \
+    -d "{\"query\":\"${query}\",\"mode\":\"hybrid\",\"top_k\":10,\"filters\":${filters}}" \
+    | jq '{filters: .request_body.query.hybrid.queries[0].bool.filter, hits: [.hits[] | {rank, id, document_type}]}'
+done
+```
+
+filterなしではファームウェアのリリースノートも上位に入ります。`document_type=support_case`を指定すると、候補はサポート事例だけになります。
+
+一方、ファームウェアのメジャーバージョンは構造化フィールドとして保持していません。そのため、ファームウェア2の事例も候補に残ります。バージョンを必須条件として確実に判定する必要があるなら、取り込み時に数値フィールドとして構造化し、`range` queryをfilterへ追加する設計が必要です。
+
+## ケース2: 型番と症状を両方使う
 
 `WM-A410でE42が出たときの給水エラーの対処`を3方式で検索します。
 
@@ -91,23 +115,23 @@ done
 
 全文検索は同じ型番の別エラーも候補に残しますが、`exact`は`identifiers.raw`への`term` queryで`error-wm-a410-e42`だけを返します。
 
-## ケース2: 候補10件をrerankする
+## ケース3: 候補10件をrerankする
 
-「ソフトウェアを更新した後、再登録や再起動を試しても接続できなかった事例」を探します。文書種別とファームウェアのメジャーバージョンは構造化filterへ分けます。
+ケース1と同じ問い合わせを使います。文書種別はfilterへ分けますが、ファームウェア3以降という条件は検索文に残します。
 
 ```bash
-query='ソフトウェアを更新した後、再登録や再起動を試しても接続できなかった事例'
+query='ファームウェア3以降で、ソフトウェアを更新した後、再登録や再起動を試しても接続できなかったもの'
 for mode in hybrid hybrid_rerank; do
   curl -s http://localhost:8100/api/search \
     -H 'Content-Type: application/json' \
-    -d "{\"query\":\"${query}\",\"mode\":\"${mode}\",\"top_k\":10,\"filters\":{\"document_type\":\"support_case\",\"firmware_major_gte\":3}}" \
+    -d "{\"query\":\"${query}\",\"mode\":\"${mode}\",\"top_k\":10,\"filters\":{\"document_type\":\"support_case\"}}" \
     | jq '{mode, hits: [.hits[] | {rank, id, score, rerank_score}]}'
 done
 ```
 
-hybridでは、スマートフォン交換後の再登録に失敗した`support-connect-14`が1位です。問い合わせに最も合う`support-connect-03`は2位ですが、rerank後は1位へ上がります。rerankは候補を検索し直さず、hybridが取得した同じ10件を質問との適合度で並べ替えます。
+hybridでは、更新後に接続が切れたものの再起動で解決した`support-connect-13`が1位です。問い合わせに最も合う`support-connect-03`は2位ですが、rerank後は1位へ上がります。rerankは候補を検索し直さず、hybridが取得した同じ10件を質問との適合度で並べ替えます。
 
-## ケース3: 前後チャンクを復元する
+## ケース4: 前後チャンクを復元する
 
 保証ガイドは「原則」「申請に必要な情報」「対象外」の3チャンクに分かれています。
 
@@ -119,27 +143,6 @@ curl -s http://localhost:8100/api/search \
 ```
 
 1位の`warranty-context-wm-a410-1`には、同じ`parent_id`を持つ3チャンクが`chunk_order`順で付加されます。検索で1チャンクに到達した後、回答に必要な前提や例外を同じ親文書から補う処理です。
-
-## 構造化filterを試す
-
-自然文へ埋め込まず、文書種別、製品カテゴリ、バージョン、使用期間、対応結果をfilterとして指定できます。
-
-```bash
-curl -s http://localhost:8100/api/search \
-  -H 'Content-Type: application/json' \
-  -d '{
-    "query":"更新後も接続できない洗濯機の事例",
-    "mode":"hybrid_filter",
-    "top_k":5,
-    "filters":{
-      "document_type":"support_case",
-      "product_category":"washer",
-      "firmware_major_gte":3,
-      "device_age_months_gte":12,
-      "support_outcome":"unresolved"
-    }
-  }' | jq '{mode, hits: [.hits[] | {rank, id, document_type, product_category, firmware_major, device_age_months, support_outcome}]}'
-```
 
 ## 評価セットを実行する
 

@@ -28,12 +28,12 @@ jq -e '[.hits[].id] | index("error-wm-a410-e42") != null' <<<"${hybrid}" >/dev/n
 
 filtered="$(curl -fsS -X POST "${LAB_URL}/api/search" \
   -H 'Content-Type: application/json' \
-  -d '{"query":"更新後も接続できない洗濯機の事例","mode":"hybrid_filter","filters":{"document_type":"support_case","product_category":"washer","firmware_major_gte":3,"device_age_months_gte":12,"support_outcome":"unresolved"},"top_k":5}')"
-jq -e 'all(.hits[]; .document_type == "support_case" and .product_category == "washer" and .firmware_major >= 3 and .device_age_months >= 12 and .support_outcome == "unresolved")' <<<"${filtered}" >/dev/null
+  -d '{"query":"ファームウェア3以降で、ソフトウェアを更新した後、再登録や再起動を試しても接続できなかったもの","mode":"hybrid","filters":{"document_type":"support_case"},"top_k":5}')"
+jq -e 'all(.hits[]; .document_type == "support_case")' <<<"${filtered}" >/dev/null
 jq -e '[.hits[].id] | index("support-connect-03") != null' <<<"${filtered}" >/dev/null
 
-ranking_query='ソフトウェアを更新した後、再登録や再起動を試しても接続できなかった事例'
-ranking_filters='"filters":{"document_type":"support_case","firmware_major_gte":3}'
+ranking_query='ファームウェア3以降で、ソフトウェアを更新した後、再登録や再起動を試しても接続できなかったもの'
+ranking_filters='"filters":{"document_type":"support_case"}'
 ranking_hybrid="$(curl -fsS -X POST "${LAB_URL}/api/search" \
   -H 'Content-Type: application/json' \
   -d "{\"query\":\"${ranking_query}\",\"mode\":\"hybrid\",\"top_k\":10,${ranking_filters}}")"

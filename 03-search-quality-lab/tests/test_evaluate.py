@@ -23,22 +23,10 @@ class EvaluationMetricTest(unittest.TestCase):
         self.assertGreater(ideal, reversed_order)
 
     def test_filter_validation_checks_returned_fields(self) -> None:
-        filters = {
-            "document_type": "support_case",
-            "product_category": "washer",
-            "firmware_major_gte": 3,
-            "device_age_months_gte": 12,
-            "support_outcome": "unresolved",
-        }
-        matching = {
-            "document_type": "support_case",
-            "product_category": "washer",
-            "firmware_major": 4,
-            "device_age_months": 18,
-            "support_outcome": "unresolved",
-        }
+        filters = {"document_type": "support_case"}
+        matching = {"document_type": "support_case"}
         self.assertTrue(hit_matches_filters(matching, filters))
-        self.assertFalse(hit_matches_filters({**matching, "firmware_major": 2}, filters))
+        self.assertFalse(hit_matches_filters({"document_type": "repair_case"}, filters))
 
     def test_constraint_summary_omits_ranking_metrics(self) -> None:
         row = {

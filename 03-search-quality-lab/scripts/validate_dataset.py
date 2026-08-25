@@ -13,7 +13,7 @@ QUERIES_PATH = ROOT / "data" / "evaluation_queries.json"
 REQUIRED_DOCUMENT_FIELDS = {
     "id", "family", "title", "filename", "category", "page_start", "identifiers",
     "parent_id", "chunk_order", "document_type", "product_category",
-    "firmware_major", "device_age_months", "support_outcome", "synthetic", "body",
+    "device_age_months", "support_outcome", "synthetic", "body",
 }
 EXPECTED_QUERY_COUNTS = {
     ("dev", "semantic"): 10,
@@ -58,6 +58,8 @@ def validate() -> None:
             errors.append(f"{row.get('id')}: synthetic must be true")
         if not row.get("body"):
             errors.append(f"{row.get('id')}: body must not be empty")
+        if "firmware_major" in row:
+            errors.append(f"{row.get('id')}: firmware_major must remain unstructured")
 
     parent_orders: dict[str, list[int]] = defaultdict(list)
     for row in documents:

@@ -1,7 +1,7 @@
 {
   "metadata": {
-    "executed_at": "2026-08-24T01:14:04+09:00",
-    "evaluation_version": "v3",
+    "executed_at": "2026-08-25T23:53:27+09:00",
+    "evaluation_version": "v4",
     "split": "test",
     "host": "macOS-26.3.1-arm64-arm-64bit-Mach-O",
     "python": "3.14.3"
@@ -10,7 +10,7 @@
     "status": "ok",
     "index_name": "appliance-support-demo-v1",
     "document_count": 180,
-    "dataset_sha256": "d7355ea0eaf5d53398862fc5bca83a292a6e11f440d1eb419d0e8d5c14f671a9",
+    "dataset_sha256": "d3ee9d4f1cd1ffccf381917b5167cb9f9cf7be1c492d4b177955ce4b62955539",
     "embedding_model": "cl-nagoya/ruri-v3-310m",
     "embedding_model_revision": "18b60fb8c2b9df296fb4212bb7d23ef94e579cd3",
     "rerank_model": "BAAI/bge-reranker-v2-m3",
@@ -41,7 +41,7 @@
     },
     {
       "category": "constraint",
-      "mode": "hybrid_filter",
+      "mode": "hybrid",
       "queries": 3,
       "hit_rate_at_3": null,
       "hit_rate_at_10": null,
@@ -295,11 +295,11 @@
       "forbidden_violations": 0,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 121,
-        "search_ms": 4,
+        "embedding_ms": 123,
+        "search_ms": 3,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 125
+        "total_ms": 127
       }
     },
     {
@@ -369,11 +369,11 @@
       "forbidden_violations": 0,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 117,
+        "embedding_ms": 84,
         "search_ms": 5,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 122
+        "total_ms": 89
       }
     },
     {
@@ -406,11 +406,11 @@
       "forbidden_violations": 0,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 124,
+        "embedding_ms": 86,
         "search_ms": 3,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 128
+        "total_ms": 90
       }
     },
     {
@@ -480,11 +480,11 @@
       "forbidden_violations": 0,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 93,
+        "embedding_ms": 85,
         "search_ms": 5,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 98
+        "total_ms": 89
       }
     },
     {
@@ -517,11 +517,11 @@
       "forbidden_violations": 0,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 90,
+        "embedding_ms": 81,
         "search_ms": 3,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 94
+        "total_ms": 84
       }
     },
     {
@@ -591,11 +591,11 @@
       "forbidden_violations": 0,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 92,
-        "search_ms": 6,
+        "embedding_ms": 77,
+        "search_ms": 5,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 98
+        "total_ms": 81
       }
     },
     {
@@ -628,11 +628,11 @@
       "forbidden_violations": 0,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 91,
+        "embedding_ms": 80,
         "search_ms": 3,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 94
+        "total_ms": 83
       }
     },
     {
@@ -702,11 +702,11 @@
       "forbidden_violations": 0,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 92,
-        "search_ms": 5,
+        "embedding_ms": 78,
+        "search_ms": 6,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 97
+        "total_ms": 84
       }
     },
     {
@@ -739,11 +739,11 @@
       "forbidden_violations": 0,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 89,
+        "embedding_ms": 82,
         "search_ms": 3,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 92
+        "total_ms": 85
       }
     },
     {
@@ -777,10 +777,10 @@
       "constraint_pass": null,
       "timings": {
         "embedding_ms": 0,
-        "search_ms": 3,
+        "search_ms": 4,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 3
+        "total_ms": 4
       }
     },
     {
@@ -813,11 +813,11 @@
       "forbidden_violations": 0,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 106,
+        "embedding_ms": 81,
         "search_ms": 5,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 111
+        "total_ms": 86
       }
     },
     {
@@ -850,11 +850,11 @@
       "forbidden_violations": 0,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 97,
+        "embedding_ms": 75,
         "search_ms": 3,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 100
+        "total_ms": 78
       }
     },
     {
@@ -924,11 +924,11 @@
       "forbidden_violations": 0,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 92,
+        "embedding_ms": 76,
         "search_ms": 5,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 97
+        "total_ms": 81
       }
     },
     {
@@ -961,11 +961,11 @@
       "forbidden_violations": 0,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 91,
+        "embedding_ms": 81,
         "search_ms": 3,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 94
+        "total_ms": 85
       }
     },
     {
@@ -1035,11 +1035,11 @@
       "forbidden_violations": 0,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 90,
-        "search_ms": 5,
+        "embedding_ms": 78,
+        "search_ms": 4,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 95
+        "total_ms": 83
       }
     },
     {
@@ -1072,11 +1072,11 @@
       "forbidden_violations": 0,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 87,
+        "embedding_ms": 82,
         "search_ms": 3,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 90
+        "total_ms": 85
       }
     },
     {
@@ -1110,7 +1110,7 @@
       "constraint_pass": null,
       "timings": {
         "embedding_ms": 0,
-        "search_ms": 3,
+        "search_ms": 2,
         "rerank_ms": 0,
         "context_ms": 0,
         "total_ms": 3
@@ -1146,11 +1146,11 @@
       "forbidden_violations": 0,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 91,
-        "search_ms": 5,
+        "embedding_ms": 84,
+        "search_ms": 4,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 96
+        "total_ms": 89
       }
     },
     {
@@ -1183,11 +1183,11 @@
       "forbidden_violations": 0,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 89,
-        "search_ms": 3,
+        "embedding_ms": 98,
+        "search_ms": 4,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 92
+        "total_ms": 103
       }
     },
     {
@@ -1257,11 +1257,11 @@
       "forbidden_violations": 0,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 87,
+        "embedding_ms": 104,
         "search_ms": 5,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 92
+        "total_ms": 109
       }
     },
     {
@@ -1294,11 +1294,11 @@
       "forbidden_violations": 0,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 96,
+        "embedding_ms": 86,
         "search_ms": 3,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 100
+        "total_ms": 89
       }
     },
     {
@@ -1368,11 +1368,11 @@
       "forbidden_violations": 0,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 88,
+        "embedding_ms": 81,
         "search_ms": 5,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 93
+        "total_ms": 86
       }
     },
     {
@@ -1405,11 +1405,11 @@
       "forbidden_violations": 0,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 80,
+        "embedding_ms": 73,
         "search_ms": 3,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 84
+        "total_ms": 76
       }
     },
     {
@@ -1479,11 +1479,11 @@
       "forbidden_violations": 0,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 92,
-        "search_ms": 5,
+        "embedding_ms": 78,
+        "search_ms": 7,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 97
+        "total_ms": 85
       }
     },
     {
@@ -1516,11 +1516,11 @@
       "forbidden_violations": 0,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 105,
-        "search_ms": 3,
+        "embedding_ms": 119,
+        "search_ms": 5,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 108
+        "total_ms": 124
       }
     },
     {
@@ -1554,10 +1554,10 @@
       "constraint_pass": null,
       "timings": {
         "embedding_ms": 0,
-        "search_ms": 3,
+        "search_ms": 5,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 3
+        "total_ms": 5
       }
     },
     {
@@ -1590,11 +1590,11 @@
       "forbidden_violations": 0,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 98,
-        "search_ms": 5,
+        "embedding_ms": 79,
+        "search_ms": 4,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 103
+        "total_ms": 84
       }
     },
     {
@@ -1627,11 +1627,11 @@
       "forbidden_violations": 0,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 84,
-        "search_ms": 9,
+        "embedding_ms": 80,
+        "search_ms": 3,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 93
+        "total_ms": 83
       }
     },
     {
@@ -1665,7 +1665,7 @@
       "constraint_pass": null,
       "timings": {
         "embedding_ms": 0,
-        "search_ms": 3,
+        "search_ms": 2,
         "rerank_ms": 0,
         "context_ms": 0,
         "total_ms": 3
@@ -1701,11 +1701,11 @@
       "forbidden_violations": 0,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 89,
-        "search_ms": 5,
+        "embedding_ms": 88,
+        "search_ms": 4,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 94
+        "total_ms": 92
       }
     },
     {
@@ -1738,11 +1738,11 @@
       "forbidden_violations": 0,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 80,
+        "embedding_ms": 76,
         "search_ms": 3,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 83
+        "total_ms": 79
       }
     },
     {
@@ -1767,10 +1767,10 @@
       "constraint_pass": null,
       "timings": {
         "embedding_ms": 0,
-        "search_ms": 2,
+        "search_ms": 1,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 2
+        "total_ms": 1
       }
     },
     {
@@ -1803,11 +1803,11 @@
       "forbidden_violations": 0,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 99,
+        "embedding_ms": 79,
         "search_ms": 4,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 103
+        "total_ms": 83
       }
     },
     {
@@ -1840,11 +1840,11 @@
       "forbidden_violations": 0,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 84,
-        "search_ms": 4,
+        "embedding_ms": 87,
+        "search_ms": 6,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 88
+        "total_ms": 93
       }
     },
     {
@@ -1876,10 +1876,10 @@
       "constraint_pass": null,
       "timings": {
         "embedding_ms": 0,
-        "search_ms": 2,
+        "search_ms": 4,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 2
+        "total_ms": 4
       }
     },
     {
@@ -1916,7 +1916,7 @@
         "search_ms": 4,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 90
+        "total_ms": 91
       }
     },
     {
@@ -1949,11 +1949,11 @@
       "forbidden_violations": 0,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 78,
+        "embedding_ms": 73,
         "search_ms": 3,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 82
+        "total_ms": 76
       }
     },
     {
@@ -2023,11 +2023,11 @@
       "forbidden_violations": 0,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 82,
-        "search_ms": 5,
+        "embedding_ms": 76,
+        "search_ms": 6,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 86
+        "total_ms": 82
       }
     },
     {
@@ -2060,11 +2060,11 @@
       "forbidden_violations": 0,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 93,
+        "embedding_ms": 73,
         "search_ms": 3,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 96
+        "total_ms": 76
       }
     },
     {
@@ -2098,10 +2098,10 @@
       "constraint_pass": null,
       "timings": {
         "embedding_ms": 0,
-        "search_ms": 3,
+        "search_ms": 2,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 3
+        "total_ms": 2
       }
     },
     {
@@ -2134,11 +2134,11 @@
       "forbidden_violations": 0,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 84,
-        "search_ms": 5,
+        "embedding_ms": 77,
+        "search_ms": 4,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 89
+        "total_ms": 82
       }
     },
     {
@@ -2171,11 +2171,11 @@
       "forbidden_violations": 0,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 81,
-        "search_ms": 3,
+        "embedding_ms": 75,
+        "search_ms": 4,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 84
+        "total_ms": 79
       }
     },
     {
@@ -2212,7 +2212,7 @@
         "search_ms": 2,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 2
+        "total_ms": 3
       }
     },
     {
@@ -2245,11 +2245,11 @@
       "forbidden_violations": 0,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 84,
-        "search_ms": 5,
+        "embedding_ms": 77,
+        "search_ms": 4,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 89
+        "total_ms": 81
       }
     },
     {
@@ -2282,11 +2282,11 @@
       "forbidden_violations": 0,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 83,
+        "embedding_ms": 80,
         "search_ms": 3,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 86
+        "total_ms": 83
       }
     },
     {
@@ -2348,11 +2348,11 @@
       "forbidden_violations": 0,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 89,
+        "embedding_ms": 77,
         "search_ms": 4,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 93
+        "total_ms": 81
       }
     },
     {
@@ -2385,11 +2385,11 @@
       "forbidden_violations": 0,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 107,
+        "embedding_ms": 74,
         "search_ms": 3,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 110
+        "total_ms": 77
       }
     },
     {
@@ -2415,10 +2415,10 @@
       "constraint_pass": null,
       "timings": {
         "embedding_ms": 0,
-        "search_ms": 2,
+        "search_ms": 1,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 2
+        "total_ms": 1
       }
     },
     {
@@ -2451,11 +2451,11 @@
       "forbidden_violations": 0,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 110,
+        "embedding_ms": 131,
         "search_ms": 4,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 114
+        "total_ms": 135
       }
     },
     {
@@ -2488,11 +2488,11 @@
       "forbidden_violations": 0,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 99,
+        "embedding_ms": 92,
         "search_ms": 3,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 102
+        "total_ms": 95
       }
     },
     {
@@ -2562,11 +2562,11 @@
       "forbidden_violations": 0,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 95,
-        "search_ms": 5,
+        "embedding_ms": 87,
+        "search_ms": 4,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 100
+        "total_ms": 91
       }
     },
     {
@@ -2599,11 +2599,11 @@
       "forbidden_violations": 0,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 94,
+        "embedding_ms": 83,
         "search_ms": 3,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 98
+        "total_ms": 87
       }
     },
     {
@@ -2673,11 +2673,11 @@
       "forbidden_violations": 0,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 95,
+        "embedding_ms": 101,
         "search_ms": 5,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 100
+        "total_ms": 106
       }
     },
     {
@@ -2710,11 +2710,11 @@
       "forbidden_violations": 0,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 89,
+        "embedding_ms": 87,
         "search_ms": 3,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 92
+        "total_ms": 90
       }
     },
     {
@@ -2748,10 +2748,10 @@
       "constraint_pass": null,
       "timings": {
         "embedding_ms": 0,
-        "search_ms": 6,
+        "search_ms": 3,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 6
+        "total_ms": 3
       }
     },
     {
@@ -2784,11 +2784,11 @@
       "forbidden_violations": 0,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 104,
+        "embedding_ms": 84,
         "search_ms": 5,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 109
+        "total_ms": 88
       }
     },
     {
@@ -2821,11 +2821,11 @@
       "forbidden_violations": 0,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 99,
+        "embedding_ms": 96,
         "search_ms": 3,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 103
+        "total_ms": 99
       }
     },
     {
@@ -2895,11 +2895,11 @@
       "forbidden_violations": 0,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 91,
+        "embedding_ms": 93,
         "search_ms": 5,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 96
+        "total_ms": 98
       }
     },
     {
@@ -2932,11 +2932,11 @@
       "forbidden_violations": 0,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 97,
+        "embedding_ms": 88,
         "search_ms": 3,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 100
+        "total_ms": 91
       }
     },
     {
@@ -3006,11 +3006,11 @@
       "forbidden_violations": 0,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 96,
+        "embedding_ms": 90,
         "search_ms": 5,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 101
+        "total_ms": 95
       }
     },
     {
@@ -3043,11 +3043,11 @@
       "forbidden_violations": 0,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 94,
+        "embedding_ms": 89,
         "search_ms": 3,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 98
+        "total_ms": 92
       }
     },
     {
@@ -3117,11 +3117,11 @@
       "forbidden_violations": 0,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 92,
+        "embedding_ms": 89,
         "search_ms": 5,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 97
+        "total_ms": 94
       }
     },
     {
@@ -3154,11 +3154,11 @@
       "forbidden_violations": 0,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 95,
+        "embedding_ms": 93,
         "search_ms": 3,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 98
+        "total_ms": 96
       }
     },
     {
@@ -3228,11 +3228,11 @@
       "forbidden_violations": 0,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 99,
+        "embedding_ms": 83,
         "search_ms": 5,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 104
+        "total_ms": 88
       }
     },
     {
@@ -3265,11 +3265,11 @@
       "forbidden_violations": 0,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 85,
+        "embedding_ms": 80,
         "search_ms": 3,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 88
+        "total_ms": 83
       }
     },
     {
@@ -3303,10 +3303,10 @@
       "constraint_pass": null,
       "timings": {
         "embedding_ms": 0,
-        "search_ms": 3,
+        "search_ms": 2,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 3
+        "total_ms": 2
       }
     },
     {
@@ -3339,11 +3339,11 @@
       "forbidden_violations": 0,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 93,
+        "embedding_ms": 81,
         "search_ms": 5,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 98
+        "total_ms": 86
       }
     },
     {
@@ -3376,11 +3376,11 @@
       "forbidden_violations": 0,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 88,
-        "search_ms": 4,
+        "embedding_ms": 80,
+        "search_ms": 3,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 91
+        "total_ms": 83
       }
     },
     {
@@ -3450,11 +3450,11 @@
       "forbidden_violations": 0,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 82,
+        "embedding_ms": 79,
         "search_ms": 5,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 87
+        "total_ms": 84
       }
     },
     {
@@ -3487,11 +3487,11 @@
       "forbidden_violations": 0,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 126,
-        "search_ms": 4,
+        "embedding_ms": 84,
+        "search_ms": 3,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 130
+        "total_ms": 87
       }
     },
     {
@@ -3561,11 +3561,11 @@
       "forbidden_violations": 0,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 100,
+        "embedding_ms": 110,
         "search_ms": 5,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 104
+        "total_ms": 115
       }
     },
     {
@@ -3598,11 +3598,11 @@
       "forbidden_violations": 1,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 92,
+        "embedding_ms": 91,
         "search_ms": 5,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 97
+        "total_ms": 96
       }
     },
     {
@@ -3635,11 +3635,11 @@
       "forbidden_violations": 1,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 97,
+        "embedding_ms": 86,
         "search_ms": 5,
-        "rerank_ms": 1022,
+        "rerank_ms": 989,
         "context_ms": 0,
-        "total_ms": 1125
+        "total_ms": 1079
       }
     },
     {
@@ -3672,11 +3672,11 @@
       "forbidden_violations": 1,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 95,
+        "embedding_ms": 84,
         "search_ms": 5,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 100
+        "total_ms": 89
       }
     },
     {
@@ -3709,11 +3709,11 @@
       "forbidden_violations": 1,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 92,
+        "embedding_ms": 79,
         "search_ms": 5,
-        "rerank_ms": 990,
+        "rerank_ms": 961,
         "context_ms": 0,
-        "total_ms": 1087
+        "total_ms": 1045
       }
     },
     {
@@ -3746,11 +3746,11 @@
       "forbidden_violations": 0,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 90,
-        "search_ms": 6,
+        "embedding_ms": 97,
+        "search_ms": 5,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 95
+        "total_ms": 102
       }
     },
     {
@@ -3783,11 +3783,11 @@
       "forbidden_violations": 0,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 86,
+        "embedding_ms": 76,
         "search_ms": 5,
-        "rerank_ms": 985,
+        "rerank_ms": 939,
         "context_ms": 0,
-        "total_ms": 1077
+        "total_ms": 1019
       }
     },
     {
@@ -3820,11 +3820,11 @@
       "forbidden_violations": 0,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 90,
-        "search_ms": 5,
+        "embedding_ms": 77,
+        "search_ms": 10,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 95
+        "total_ms": 87
       }
     },
     {
@@ -3857,11 +3857,11 @@
       "forbidden_violations": 0,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 100,
+        "embedding_ms": 76,
         "search_ms": 5,
-        "rerank_ms": 985,
+        "rerank_ms": 948,
         "context_ms": 0,
-        "total_ms": 1091
+        "total_ms": 1029
       }
     },
     {
@@ -3894,11 +3894,11 @@
       "forbidden_violations": 1,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 88,
-        "search_ms": 6,
+        "embedding_ms": 83,
+        "search_ms": 5,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 94
+        "total_ms": 88
       }
     },
     {
@@ -3931,11 +3931,11 @@
       "forbidden_violations": 1,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 83,
+        "embedding_ms": 79,
         "search_ms": 6,
-        "rerank_ms": 1024,
+        "rerank_ms": 1006,
         "context_ms": 0,
-        "total_ms": 1113
+        "total_ms": 1091
       }
     },
     {
@@ -3968,11 +3968,11 @@
       "forbidden_violations": 1,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 93,
+        "embedding_ms": 91,
         "search_ms": 6,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 100
+        "total_ms": 98
       }
     },
     {
@@ -4005,11 +4005,11 @@
       "forbidden_violations": 1,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 91,
-        "search_ms": 6,
-        "rerank_ms": 1041,
+        "embedding_ms": 82,
+        "search_ms": 5,
+        "rerank_ms": 1030,
         "context_ms": 0,
-        "total_ms": 1138
+        "total_ms": 1117
       }
     },
     {
@@ -4042,11 +4042,11 @@
       "forbidden_violations": 1,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 95,
+        "embedding_ms": 81,
         "search_ms": 5,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 100
+        "total_ms": 86
       }
     },
     {
@@ -4079,11 +4079,11 @@
       "forbidden_violations": 1,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 88,
+        "embedding_ms": 82,
         "search_ms": 5,
-        "rerank_ms": 1099,
+        "rerank_ms": 1079,
         "context_ms": 0,
-        "total_ms": 1193
+        "total_ms": 1166
       }
     },
     {
@@ -4116,11 +4116,11 @@
       "forbidden_violations": 0,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 101,
-        "search_ms": 6,
+        "embedding_ms": 82,
+        "search_ms": 5,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 107
+        "total_ms": 87
       }
     },
     {
@@ -4153,85 +4153,85 @@
       "forbidden_violations": 0,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 101,
-        "search_ms": 6,
-        "rerank_ms": 1055,
-        "context_ms": 0,
-        "total_ms": 1163
-      }
-    },
-    {
-      "id": "neg-t09",
-      "split": "test",
-      "category": "negation_exception",
-      "mode": "hybrid",
-      "hit_ids": [
-        "repair-case-14",
-        "product-tv-g880",
-        "safety-context-tipover-tv-1",
-        "warranty-context-tv-g800-1",
-        "firmware-tv-g880-5",
-        "faq-tv-black",
-        "product-tv-g800",
-        "repair-case-07",
-        "support-connect-10",
-        "product-wm-a401"
-      ],
-      "hit_at_3": 1,
-      "hit_at_10": 1,
-      "mrr_at_5": 1.0,
-      "ndcg_at_5": 1.0,
-      "context_completeness": null,
-      "parent_hit_at_3": null,
-      "context_precision": null,
-      "context_chunks_added": null,
-      "expected_pass": null,
-      "condition_violations": 0,
-      "forbidden_violations": 1,
-      "constraint_pass": null,
-      "timings": {
-        "embedding_ms": 123,
-        "search_ms": 6,
-        "rerank_ms": 0,
-        "context_ms": 0,
-        "total_ms": 128
-      }
-    },
-    {
-      "id": "neg-t09",
-      "split": "test",
-      "category": "negation_exception",
-      "mode": "hybrid_rerank",
-      "hit_ids": [
-        "repair-case-14",
-        "warranty-context-tv-g800-1",
-        "repair-case-07",
-        "safety-context-tipover-tv-1",
-        "firmware-tv-g880-5",
-        "product-tv-g880",
-        "support-connect-10",
-        "product-tv-g800",
-        "faq-tv-black",
-        "product-wm-a401"
-      ],
-      "hit_at_3": 1,
-      "hit_at_10": 1,
-      "mrr_at_5": 1.0,
-      "ndcg_at_5": 1.0,
-      "context_completeness": null,
-      "parent_hit_at_3": null,
-      "context_precision": null,
-      "context_chunks_added": null,
-      "expected_pass": null,
-      "condition_violations": 0,
-      "forbidden_violations": 1,
-      "constraint_pass": null,
-      "timings": {
-        "embedding_ms": 90,
+        "embedding_ms": 75,
         "search_ms": 5,
-        "rerank_ms": 982,
+        "rerank_ms": 1011,
         "context_ms": 0,
-        "total_ms": 1078
+        "total_ms": 1091
+      }
+    },
+    {
+      "id": "neg-t09",
+      "split": "test",
+      "category": "negation_exception",
+      "mode": "hybrid",
+      "hit_ids": [
+        "repair-case-14",
+        "product-tv-g880",
+        "safety-context-tipover-tv-1",
+        "warranty-context-tv-g800-1",
+        "firmware-tv-g880-5",
+        "faq-tv-black",
+        "product-tv-g800",
+        "repair-case-07",
+        "support-connect-10",
+        "product-wm-a401"
+      ],
+      "hit_at_3": 1,
+      "hit_at_10": 1,
+      "mrr_at_5": 1.0,
+      "ndcg_at_5": 1.0,
+      "context_completeness": null,
+      "parent_hit_at_3": null,
+      "context_precision": null,
+      "context_chunks_added": null,
+      "expected_pass": null,
+      "condition_violations": 0,
+      "forbidden_violations": 1,
+      "constraint_pass": null,
+      "timings": {
+        "embedding_ms": 85,
+        "search_ms": 5,
+        "rerank_ms": 0,
+        "context_ms": 0,
+        "total_ms": 90
+      }
+    },
+    {
+      "id": "neg-t09",
+      "split": "test",
+      "category": "negation_exception",
+      "mode": "hybrid_rerank",
+      "hit_ids": [
+        "repair-case-14",
+        "warranty-context-tv-g800-1",
+        "repair-case-07",
+        "safety-context-tipover-tv-1",
+        "firmware-tv-g880-5",
+        "product-tv-g880",
+        "support-connect-10",
+        "product-tv-g800",
+        "faq-tv-black",
+        "product-wm-a401"
+      ],
+      "hit_at_3": 1,
+      "hit_at_10": 1,
+      "mrr_at_5": 1.0,
+      "ndcg_at_5": 1.0,
+      "context_completeness": null,
+      "parent_hit_at_3": null,
+      "context_precision": null,
+      "context_chunks_added": null,
+      "expected_pass": null,
+      "condition_violations": 0,
+      "forbidden_violations": 1,
+      "constraint_pass": null,
+      "timings": {
+        "embedding_ms": 82,
+        "search_ms": 5,
+        "rerank_ms": 949,
+        "context_ms": 0,
+        "total_ms": 1036
       }
     },
     {
@@ -4264,11 +4264,11 @@
       "forbidden_violations": 1,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 96,
+        "embedding_ms": 82,
         "search_ms": 6,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 102
+        "total_ms": 88
       }
     },
     {
@@ -4301,11 +4301,11 @@
       "forbidden_violations": 1,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 87,
-        "search_ms": 7,
-        "rerank_ms": 1159,
+        "embedding_ms": 83,
+        "search_ms": 5,
+        "rerank_ms": 1161,
         "context_ms": 0,
-        "total_ms": 1252
+        "total_ms": 1249
       }
     },
     {
@@ -4338,11 +4338,11 @@
       "forbidden_violations": 0,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 107,
-        "search_ms": 6,
+        "embedding_ms": 96,
+        "search_ms": 5,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 114
+        "total_ms": 101
       }
     },
     {
@@ -4374,11 +4374,11 @@
       "forbidden_violations": 0,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 95,
-        "search_ms": 6,
+        "embedding_ms": 89,
+        "search_ms": 5,
         "rerank_ms": 0,
         "context_ms": 3,
-        "total_ms": 104
+        "total_ms": 97
       }
     },
     {
@@ -4411,11 +4411,11 @@
       "forbidden_violations": 0,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 93,
+        "embedding_ms": 85,
         "search_ms": 5,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 98
+        "total_ms": 90
       }
     },
     {
@@ -4447,11 +4447,11 @@
       "forbidden_violations": 0,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 95,
-        "search_ms": 6,
+        "embedding_ms": 84,
+        "search_ms": 5,
         "rerank_ms": 0,
-        "context_ms": 2,
-        "total_ms": 102
+        "context_ms": 1,
+        "total_ms": 90
       }
     },
     {
@@ -4484,11 +4484,11 @@
       "forbidden_violations": 0,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 98,
+        "embedding_ms": 88,
         "search_ms": 5,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 103
+        "total_ms": 93
       }
     },
     {
@@ -4520,11 +4520,11 @@
       "forbidden_violations": 0,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 91,
+        "embedding_ms": 84,
         "search_ms": 5,
         "rerank_ms": 0,
         "context_ms": 4,
-        "total_ms": 100
+        "total_ms": 92
       }
     },
     {
@@ -4557,11 +4557,11 @@
       "forbidden_violations": 0,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 97,
-        "search_ms": 6,
+        "embedding_ms": 82,
+        "search_ms": 5,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 103
+        "total_ms": 87
       }
     },
     {
@@ -4592,11 +4592,11 @@
       "forbidden_violations": 0,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 90,
+        "embedding_ms": 85,
         "search_ms": 5,
         "rerank_ms": 0,
-        "context_ms": 2,
-        "total_ms": 97
+        "context_ms": 1,
+        "total_ms": 91
       }
     },
     {
@@ -4629,11 +4629,11 @@
       "forbidden_violations": 0,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 90,
-        "search_ms": 6,
+        "embedding_ms": 82,
+        "search_ms": 5,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 96
+        "total_ms": 87
       }
     },
     {
@@ -4664,11 +4664,11 @@
       "forbidden_violations": 0,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 95,
-        "search_ms": 6,
+        "embedding_ms": 83,
+        "search_ms": 5,
         "rerank_ms": 0,
-        "context_ms": 5,
-        "total_ms": 106
+        "context_ms": 4,
+        "total_ms": 92
       }
     },
     {
@@ -4721,23 +4721,28 @@
       "constraint_pass": true,
       "timings": {
         "embedding_ms": 0,
-        "search_ms": 2,
+        "search_ms": 1,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 2
+        "total_ms": 1
       }
     },
     {
       "id": "con-t03",
       "split": "test",
       "category": "constraint",
-      "mode": "hybrid_filter",
+      "mode": "hybrid",
       "hit_ids": [
-        "support-connect-11",
         "support-connect-03",
         "support-connect-14",
+        "support-connect-01",
+        "support-connect-15",
+        "support-connect-13",
+        "support-connect-10",
+        "support-connect-05",
+        "support-connect-07",
         "support-connect-04",
-        "repair-case-11"
+        "support-connect-06"
       ],
       "hit_at_3": 0,
       "hit_at_10": 0,
@@ -4752,24 +4757,29 @@
       "forbidden_violations": 0,
       "constraint_pass": true,
       "timings": {
-        "embedding_ms": 97,
-        "search_ms": 4,
+        "embedding_ms": 85,
+        "search_ms": 5,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 101
+        "total_ms": 90
       }
     },
     {
       "id": "con-t04",
       "split": "test",
       "category": "constraint",
-      "mode": "hybrid_filter",
+      "mode": "hybrid",
       "hit_ids": [
-        "support-connect-03",
         "repair-case-11",
-        "support-connect-14",
-        "support-connect-04",
-        "support-connect-11"
+        "repair-case-01",
+        "repair-case-12",
+        "repair-case-02",
+        "repair-case-03",
+        "repair-case-06",
+        "repair-case-08",
+        "repair-case-05",
+        "repair-case-10",
+        "repair-case-04"
       ],
       "hit_at_3": 0,
       "hit_at_10": 0,
@@ -4784,29 +4794,29 @@
       "forbidden_violations": 0,
       "constraint_pass": true,
       "timings": {
-        "embedding_ms": 84,
-        "search_ms": 4,
+        "embedding_ms": 104,
+        "search_ms": 5,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 88
+        "total_ms": 109
       }
     },
     {
       "id": "con-t05",
       "split": "test",
       "category": "constraint",
-      "mode": "hybrid_filter",
+      "mode": "hybrid",
       "hit_ids": [
-        "support-connect-03",
-        "support-connect-14",
-        "support-connect-07",
-        "support-connect-11",
-        "support-connect-02",
-        "support-connect-09",
-        "support-connect-12",
-        "repair-case-11",
-        "repair-case-08",
-        "repair-case-06"
+        "manual-wm-water",
+        "manual-oven-steam",
+        "manual-wm-drain",
+        "manual-fridge-ice",
+        "manual-router-reset",
+        "manual-ac-pairing",
+        "manual-tv-audio",
+        "manual-tv-network",
+        "manual-oven-preheat",
+        "manual-vacuum-dust"
       ],
       "hit_at_3": 0,
       "hit_at_10": 0,
@@ -4821,11 +4831,11 @@
       "forbidden_violations": 0,
       "constraint_pass": true,
       "timings": {
-        "embedding_ms": 86,
+        "embedding_ms": 81,
         "search_ms": 5,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 91
+        "total_ms": 86
       }
     }
   ],

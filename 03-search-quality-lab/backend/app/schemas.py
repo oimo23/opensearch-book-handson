@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from enum import Enum
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, ConfigDict, Field
 
 
 class SearchMode(str, Enum):
@@ -10,17 +10,14 @@ class SearchMode(str, Enum):
     FULLTEXT = "fulltext"
     EXACT = "exact"
     HYBRID = "hybrid"
-    HYBRID_FILTER = "hybrid_filter"
     HYBRID_RERANK = "hybrid_rerank"
     HYBRID_CONTEXT = "hybrid_context"
 
 
 class SearchFilters(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
     document_type: str | None = None
-    product_category: str | None = None
-    firmware_major_gte: int | None = Field(default=None, ge=0, le=99)
-    device_age_months_gte: int | None = Field(default=None, ge=0, le=600)
-    support_outcome: str | None = None
 
 
 class SearchRequest(BaseModel):
@@ -47,7 +44,6 @@ class SearchHit(BaseModel):
     body: str
     document_type: str
     product_category: str | None = None
-    firmware_major: int | None = None
     device_age_months: int | None = None
     support_outcome: str | None = None
     score: float

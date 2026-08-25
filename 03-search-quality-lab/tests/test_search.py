@@ -21,54 +21,41 @@ class BuildQueryTest(unittest.TestCase):
             {"term": {"identifiers.raw": "WM-A410-E42"}},
         )
 
-    def test_hybrid_filter_applies_all_clauses_to_both_queries(self) -> None:
+    def test_hybrid_applies_document_type_to_both_queries(self) -> None:
         request = SearchRequest(
             query="更新後も接続できない洗濯機の事例",
-            mode=SearchMode.HYBRID_FILTER,
-            filters=SearchFilters(
-                document_type="support_case",
-                product_category="washer",
-                firmware_major_gte=3,
-                device_age_months_gte=12,
-                support_outcome="unresolved",
-            ),
+            mode=SearchMode.HYBRID,
+            filters=SearchFilters(document_type="support_case"),
         )
         built = build_query(request, [0.0] * 768, 10)
         keyword, vector = built.body["query"]["hybrid"]["queries"]
-        expected = [
-            {"term": {"document_type": "support_case"}},
-            {"term": {"product_category": "washer"}},
-            {"range": {"firmware_major": {"gte": 3}}},
-            {"range": {"device_age_months": {"gte": 12}}},
-            {"term": {"support_outcome": "unresolved"}},
-        ]
+        expected = [{"term": {"document_type": "support_case"}}]
         self.assertEqual(keyword["bool"]["filter"], expected)
         self.assertEqual(
             vector["knn"]["body_vector"]["filter"],
-            {"bool": {"filter": expected}},
+            expected[0],
         )
 
-    def test_hybrid_filter_rejects_empty_filter(self) -> None:
-        request = SearchRequest(query="事例", mode=SearchMode.HYBRID_FILTER)
-        with self.assertRaisesRegex(ValueError, "structured filter"):
-            build_query(request, [0.0] * 768, 10)
+    def test_hybrid_allows_search_without_filter(self) -> None:
+        request = SearchRequest(query="事例", mode=SearchMode.HYBRID)
+        built = build_query(request, [0.0] * 768, 10)
+        keyword, vector = built.body["query"]["hybrid"]["queries"]
+        self.assertIn("multi_match", keyword)
+        self.assertNotIn("filter", vector["knn"]["body_vector"])
 
     def test_hybrid_rerank_applies_filters_before_reranking(self) -> None:
         request = SearchRequest(
             query="更新後も接続できない事例",
             mode=SearchMode.HYBRID_RERANK,
-            filters=SearchFilters(document_type="support_case", support_outcome="unresolved"),
+            filters=SearchFilters(document_type="support_case"),
         )
         built = build_query(request, [0.0] * 768, 10)
         keyword, vector = built.body["query"]["hybrid"]["queries"]
-        expected = [
-            {"term": {"document_type": "support_case"}},
-            {"term": {"support_outcome": "unresolved"}},
-        ]
+        expected = [{"term": {"document_type": "support_case"}}]
         self.assertEqual(keyword["bool"]["filter"], expected)
         self.assertEqual(
             vector["knn"]["body_vector"]["filter"],
-            {"bool": {"filter": expected}},
+            expected[0],
         )
 
 

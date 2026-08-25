@@ -27,19 +27,22 @@ jq -e '.hits[0].id == "error-wm-a410-e42"' "${tmp_dir}/product-fulltext.json" >/
 jq -e '.hits[0].id == "error-wm-a410-e42"' "${tmp_dir}/product-hybrid.json" >/dev/null
 
 echo '[3/5] 同じ10件をrerankすることを確認します'
-ranking_query='ソフトウェアを更新した後、再登録や再起動を試しても接続できなかった事例'
-ranking_filters='"filters":{"document_type":"support_case","firmware_major_gte":3}'
+ranking_query='ファームウェア3以降で、ソフトウェアを更新した後、再登録や再起動を試しても接続できなかったもの'
+ranking_filters='"filters":{"document_type":"support_case"}'
+search ranking-unfiltered "{\"query\":\"${ranking_query}\",\"mode\":\"hybrid\",\"top_k\":10}"
 search ranking-hybrid "{\"query\":\"${ranking_query}\",\"mode\":\"hybrid\",\"top_k\":10,${ranking_filters}}"
 search ranking-rerank "{\"query\":\"${ranking_query}\",\"mode\":\"hybrid_rerank\",\"top_k\":10,${ranking_filters}}"
+jq -e '[.hits[].document_type] | index("release_note") != null' "${tmp_dir}/ranking-unfiltered.json" >/dev/null
+jq -e 'all(.hits[]; .document_type == "support_case")' "${tmp_dir}/ranking-hybrid.json" >/dev/null
 jq -e '[.hits[].id] | index("support-connect-03") != null' "${tmp_dir}/ranking-hybrid.json" >/dev/null
 jq -e '[.hits[].id] | index("support-connect-03") != null' "${tmp_dir}/ranking-rerank.json" >/dev/null
 jq -e --slurpfile before "${tmp_dir}/ranking-hybrid.json" '([.hits[].id] | sort) == ([$before[0].hits[].id] | sort)' "${tmp_dir}/ranking-rerank.json" >/dev/null
-jq -e '.hits[0].id == "support-connect-14" and .hits[1].id == "support-connect-03" and .hits[2].id == "support-connect-13"' "${tmp_dir}/ranking-hybrid.json" >/dev/null
+jq -e '.hits[0].id == "support-connect-13" and .hits[1].id == "support-connect-03" and .hits[2].id == "support-connect-01"' "${tmp_dir}/ranking-hybrid.json" >/dev/null
 jq -e '.hits[0].id == "support-connect-03" and .hits[1].id == "support-connect-13" and .hits[2].id == "support-connect-01"' "${tmp_dir}/ranking-rerank.json" >/dev/null
 
 echo '[4/5] 構造化filterを確認します'
-search filtered '{"query":"更新後も接続できない洗濯機の事例","mode":"hybrid_filter","top_k":5,"filters":{"document_type":"support_case","product_category":"washer","firmware_major_gte":3,"device_age_months_gte":12,"support_outcome":"unresolved"}}'
-jq -e 'all(.hits[]; .document_type == "support_case" and .product_category == "washer" and .firmware_major >= 3 and .device_age_months >= 12 and .support_outcome == "unresolved")' "${tmp_dir}/filtered.json" >/dev/null
+search filtered "{\"query\":\"${ranking_query}\",\"mode\":\"hybrid\",\"top_k\":5,${ranking_filters}}"
+jq -e 'all(.hits[]; .document_type == "support_case")' "${tmp_dir}/filtered.json" >/dev/null
 
 echo '[5/5] 保証条件の文脈復元を確認します'
 search context '{"query":"WM-A410の無償交換が認められる条件と、対象外になる場合","mode":"hybrid_context","top_k":5}'
