@@ -69,9 +69,10 @@ textarea:focus, select:focus, input:focus { border-color: var(--moss); box-shado
 .mode-grid input:checked + span { color: white; background: var(--moss); border-color: var(--moss); }
 .mode-grid input:checked + span small { color: rgba(255,255,255,.72); }
 .document-type-filter { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-.document-type-filter input { position: absolute; opacity: 0; pointer-events: none; }
-.document-type-filter span { display: block; padding: 12px; background: #f8f5eb; border: 1px solid var(--line); cursor: pointer; font-size: 12px; font-weight: 600; }
-.document-type-filter input:checked + span { color: white; background: var(--accent); border-color: var(--accent); }
+.document-type-filter label { display: flex; gap: 9px; align-items: center; padding: 12px; background: #f8f5eb; border: 1px solid var(--line); cursor: pointer; }
+.document-type-filter input { width: 16px; height: 16px; margin: 0; padding: 0; flex: 0 0 auto; accent-color: var(--accent); cursor: pointer; }
+.document-type-filter span { font-size: 12px; font-weight: 600; line-height: 1.4; }
+.document-type-filter label:has(input:checked) { border-color: var(--accent); background: rgba(231, 92, 53, 0.09); }
 
 .search-button { display: flex; width: 100%; justify-content: space-between; margin-top: 24px; padding: 16px 18px; color: white; background: var(--accent); border: 0; cursor: pointer; font-weight: 700; }
 .search-button:hover { background: #c94725; }
