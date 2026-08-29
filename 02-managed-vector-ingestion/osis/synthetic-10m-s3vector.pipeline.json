@@ -1,0 +1,91 @@
+{
+  "version": 2,
+  "extension": {
+    "osis_configuration_metadata": {
+      "builder_type": "visual"
+    }
+  },
+  "book-s3vector-ingestion": {
+    "source": {
+      "s3": {
+        "acknowledgments": true,
+        "delete_s3_objects_on_read": false,
+        "scan": {
+          "buckets": [
+            {
+              "bucket": {
+                "name": "opensearch-book-handson-data-153766774185",
+                "filter": {
+                  "include_prefix": [
+                    "__SOURCE_PREFIX__"
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        "aws": {
+          "region": "__AWS_REGION__",
+          "sts_role_arn": "__INGESTION_ROLE_ARN__"
+        },
+        "codec": {
+          "parquet": null
+        },
+        "compression": "none",
+        "workers": "5"
+      }
+    },
+    "processor": [
+      {
+        "rename_keys": {
+          "entries": [
+            {
+              "from_key": "_id",
+              "to_key": "id"
+            }
+          ]
+        }
+      },
+      {
+        "list_to_map": {
+          "source": "vector",
+          "use_source_key": true,
+          "extract_value": true
+        }
+      },
+      {
+        "delete_entries": {
+          "with_keys": [
+            "vector"
+          ]
+        }
+      },
+      {
+        "rename_keys": {
+          "entries": [
+            {
+              "from_key": "element",
+              "to_key": "vector"
+            }
+          ]
+        }
+      }
+    ],
+    "sink": [
+      {
+        "opensearch": {
+          "hosts": [
+            "__DOMAIN_ENDPOINT__"
+          ],
+          "aws": {
+            "serverless": false,
+            "region": "__AWS_REGION__",
+            "sts_role_arn": "__INGESTION_ROLE_ARN__"
+          },
+          "index_type": "custom",
+          "index": "__INDEX_NAME__"
+        }
+      }
+    ]
+  }
+}

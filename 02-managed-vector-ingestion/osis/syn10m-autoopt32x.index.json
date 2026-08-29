@@ -1,0 +1,45 @@
+{
+  "settings": {
+    "index": {
+      "knn": true,
+      "knn.algo_param.ef_search": 128,
+      "knn.advanced.approximate_threshold": 100000,
+      "knn.remote_index_build.enabled": true,
+      "knn.remote_index_build.size.min": "5mb",
+      "refresh_interval": "300s",
+      "number_of_shards": 1,
+      "number_of_replicas": 0
+    }
+  },
+  "mappings": {
+    "properties": {
+      "id": {
+        "type": "keyword"
+      },
+      "url": {
+        "type": "keyword"
+      },
+      "title": {
+        "type": "text"
+      },
+      "chunk": {
+        "type": "text"
+      },
+      "vector": {
+        "type": "knn_vector",
+        "dimension": 1024,
+        "method": {
+          "engine": "faiss",
+          "name": "hnsw",
+          "space_type": "cosinesimil",
+          "parameters": {
+            "m": 16,
+            "ef_construction": 128
+          }
+        },
+        "mode": "on_disk",
+        "compression_level": "32x"
+      }
+    }
+  }
+}

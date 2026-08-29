@@ -1,4 +1,5 @@
 import * as cdk from "aws-cdk-lib";
+import { aws_iam as iam } from "aws-cdk-lib";
 import { aws_opensearchservice as opensearch } from "aws-cdk-lib";
 import { execSync } from "node:child_process";
 import { Construct } from "constructs";
@@ -17,9 +18,34 @@ export class ManagedVectorIngestionStack extends cdk.Stack {
     const enableS3Vectors = String(this.node.tryGetContext("enableS3Vectors") ?? "false") === "true";
     const enableGpuAcceleration =
       String(this.node.tryGetContext("enableGpuAcceleration") ?? "true") === "true";
+    const sourceBucketName = "opensearch-book-handson-data-153766774185";
     const allowedCidrs = this.resolveAllowedCidrs();
 
     const domainArn = `arn:aws:es:${region}:${accountId}:domain/${domainName}/*`;
+    const ingestionRole = new iam.Role(this, "VectorIngestionRole", {
+      assumedBy: new iam.ServicePrincipal("osis-pipelines.amazonaws.com"),
+      description: "Reads the hands-on dataset and writes it to the OpenSearch domain.",
+    });
+
+    ingestionRole.addToPolicy(
+      new iam.PolicyStatement({
+        actions: ["s3:ListBucket", "s3:GetBucketLocation"],
+        resources: [`arn:aws:s3:::${sourceBucketName}`],
+      }),
+    );
+    ingestionRole.addToPolicy(
+      new iam.PolicyStatement({
+        actions: ["s3:GetObject", "s3:GetObjectAttributes"],
+        resources: [`arn:aws:s3:::${sourceBucketName}/*`],
+      }),
+    );
+    ingestionRole.addToPolicy(
+      new iam.PolicyStatement({
+        actions: ["es:ESHttp*"],
+        resources: [domainArn],
+      }),
+    );
+
     const accessPolicies = {
       Version: "2012-10-17",
       Statement: [
@@ -43,16 +69,11 @@ export class ManagedVectorIngestionStack extends cdk.Stack {
           },
         },
         {
-          Sid: "AllowFutureVectorIngestionRoles",
+          Sid: "AllowVectorIngestionRole",
           Effect: "Allow",
-          Principal: "*",
+          Principal: { AWS: ingestionRole.roleArn },
           Action: "es:ESHttp*",
           Resource: domainArn,
-          Condition: {
-            StringLike: {
-              "aws:PrincipalArn": `arn:aws:iam::${accountId}:role/service-role/VectorIngestionRole-*`,
-            },
-          },
         },
       ],
     };
@@ -93,6 +114,7 @@ export class ManagedVectorIngestionStack extends cdk.Stack {
         },
       },
     });
+    domain.addDependency(ingestionRole.node.defaultChild as iam.CfnRole);
 
     new cdk.CfnOutput(this, "DomainName", {
       value: domainName,
@@ -100,6 +122,10 @@ export class ManagedVectorIngestionStack extends cdk.Stack {
 
     new cdk.CfnOutput(this, "DomainEndpoint", {
       value: `https://${domain.attrDomainEndpoint}`,
+    });
+
+    new cdk.CfnOutput(this, "IngestionRoleArn", {
+      value: ingestionRole.roleArn,
     });
 
     new cdk.CfnOutput(this, "DashboardsUrl", {

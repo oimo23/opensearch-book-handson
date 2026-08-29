@@ -1,0 +1,37 @@
+{
+  "settings": {
+    "index": {
+      "knn": true,
+      "knn.remote_index_build.enabled": true,
+      "refresh_interval": "60s",
+      "number_of_shards": 1,
+      "number_of_replicas": 0
+    }
+  },
+  "mappings": {
+    "properties": {
+      "id": {
+        "type": "keyword"
+      },
+      "url": {
+        "type": "keyword"
+      },
+      "title": {
+        "type": "text",
+        "analyzer": "kuromoji"
+      },
+      "text": {
+        "type": "text",
+        "analyzer": "kuromoji"
+      },
+      "vector": {
+        "type": "knn_vector",
+        "dimension": 1024,
+        "space_type": "cosinesimil",
+        "method": {
+          "engine": "s3vector"
+        }
+      }
+    }
+  }
+}

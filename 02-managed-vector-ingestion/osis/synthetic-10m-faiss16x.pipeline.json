@@ -24,8 +24,8 @@
           ]
         },
         "aws": {
-          "region": "ap-northeast-1",
-          "sts_role_arn": "arn:aws:iam::153766774185:role/service-role/VectorIngestionRole-10mfaiss16x"
+          "region": "__AWS_REGION__",
+          "sts_role_arn": "__INGESTION_ROLE_ARN__"
         },
         "codec": {
           "parquet": null
@@ -78,12 +78,12 @@
       {
         "opensearch": {
           "hosts": [
-            "https://search-handson-vector-xlarge-fajj4fnh75nikgzragag3wjxyq.ap-northeast-1.es.amazonaws.com"
+            "__DOMAIN_ENDPOINT__"
           ],
           "aws": {
             "serverless": false,
-            "region": "ap-northeast-1",
-            "sts_role_arn": "arn:aws:iam::153766774185:role/service-role/VectorIngestionRole-10mfaiss16x"
+            "region": "__AWS_REGION__",
+            "sts_role_arn": "__INGESTION_ROLE_ARN__"
           },
           "index_type": "custom",
           "index": "synthetic_10m_faiss_16x",

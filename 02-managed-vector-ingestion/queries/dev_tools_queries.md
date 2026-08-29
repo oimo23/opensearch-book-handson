@@ -15,9 +15,9 @@
 登録後は、Dev Tools で次の短いクエリだけを実行すれば大丈夫です。
 
 ```json
-GET syn10m_full/_search/template
+GET syn10m_autoopt32x/_search/template
 {
-  "id": "syn10m_full_knn_sample"
+  "id": "syn10m_autoopt32x_knn_sample"
 }
 ```
 
@@ -30,7 +30,7 @@ GET syn10m_full/_search/template
 `k-NN` の試行後に 502 や極端な遅延が出たときは、次のリクエストで index のキャッシュを明示的に解放できます。
 
 ```json
-POST syn10m_full/_cache/clear
+POST syn10m_autoopt32x/_cache/clear
 ```
 
 ドメイン全体に対して行いたい場合は、次でも構いません。

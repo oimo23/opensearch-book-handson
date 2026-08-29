@@ -3,3 +3,8 @@ cdk.out/
 __pycache__/
 .DS_Store
 .env
+.handson/
+02-managed-vector-ingestion/bin/*.js
+02-managed-vector-ingestion/bin/*.d.ts
+02-managed-vector-ingestion/lib/*.js
+02-managed-vector-ingestion/lib/*.d.ts

@@ -1,152 +1,177 @@
-# Hands-on 2: OpenSearch Service で managed vector ingestion と auto-optimize を試す
+# Hands-on 2: managed vector ingestionで1000万件を投入する
 
-## 注意: AWS 料金について
+このハンズオンでは、Amazon OpenSearch ServiceとAmazon OpenSearch Ingestion（OSIS）を使い、S3上のParquetデータをベクトルindexへ投入します。
 
-このハンズオンでは、Amazon OpenSearch Service のドメインや関連リソースを実際に作成します。これらのリソースは、作成したままにすると AWS 料金が継続して発生します。
+主な手順では、過去のAuto-Optimize実測で得た`Faiss + HNSW + on_disk + 32x`の設定を固定して使います。AWSコンソールの操作に依存せず、構築、投入、検索、削除までコマンドで再現できます。
 
-ハンズオンが終わったら、必ず不要なリソースを削除するか、停止できるものは停止してください。特に OpenSearch ドメインは単価が高くなりやすいため、後片付けまで含めて実施することを前提に進めることを勧めます。
+## AWS料金に関する注意
 
-このディレクトリでは、Amazon OpenSearch Service の managed vector ingestion を使って、大規模ベクトルデータの自動最適化とインデックス構築を体験します。データセットは、あらかじめ S3 に配置済みの Parquet ファイルを利用します。
+OpenSearchドメインとOSIS pipelineを作成するため、実行中はAWS料金が発生します。スクリプトは、次の確認変数がなければ課金リソースを作成しません。
 
-大きな流れは次の 3 段階です。
+```bash
+CONFIRM_AWS_COSTS=yes
+```
 
-1. TypeScript CDK で OpenSearch ドメインを用意する
-2. AWS コンソールから vector ingestion job と auto-optimize を実行する
-3. Dashboards の Dev Tools で `k-NN` クエリを試す
+検証後は、必ず`./scripts/destroy.sh`まで実行してください。
 
-## Step 1. OpenSearch ドメインをデプロイする
+## 検証済みの構成
 
-まずは OpenSearch ドメインを用意します。このディレクトリの CDK は、vector ingestion pipeline や auto-optimize job までは作らず、OpenSearch ドメインだけを起動します。これらは AWS コンソールから作成する前提です。
+2026年8月23日に、次の構成で1000万件の投入から削除まで確認しました。
 
-### この CDK が作るもの
+- OpenSearch 3.1
+- `or2.xlarge.search x1`
+- gp3 512 GiB
+- GPUベースのvector index build acceleration有効
+- 1シャード、レプリカ0
+- Faiss、HNSW、`on_disk`、`32x`
+- OSIS 4〜8 OCU、S3 source 5 workers
+- 1000万件、1024次元、200 Parquetファイル
 
-- OpenSearch 3.1 のドメイン
-- `or2.xlarge.search x1` の単一ノード構成
-- public endpoint
-- Dashboards にアクセスできる CIDR 制限付き resource policy
-- 今後コンソールが作成する `VectorIngestionRole-*` からの書き込みを許可する policy
-- GPU acceleration (`ServerlessVectorAcceleration`) を有効化した構成
+実測では、投入開始から約83分で1000万件へ到達しました。初回検索は8,559 ms、ウォーム後は10〜16 msでした。
 
-### この CDK がまだ作らないもの
+## 自動化している範囲
 
-- vector ingestion pipeline
-- auto-optimize job
-- index template や index build
+CDKとスクリプトが次を行います。
 
-これらは、読者が AWS コンソールの UI から作成します。
+1. OpenSearchドメインとOSIS用IAM roleを作成する
+2. CloudFormation出力からendpointとrole ARNを取得する
+3. 固定mappingでindexを作成する
+4. 読者自身のendpointとrole ARNを埋めたOSIS設定を生成する
+5. pipelineを作成し、指定件数まで投入する
+6. 件数、mapping、k-NN queryを検証する
+7. pipeline、index、OpenSearchドメインを削除する
 
-### 前提
+著者環境のendpointやAWSアカウントIDを入力する必要はありません。
 
-- Node.js 20 以上
+## 前提
+
+- Node.js 20以上
+- AWS CLI v2
 - AWS CDK v2
-- `cdk bootstrap` 済みの AWS アカウント
+- `jq`、`curl`
+- `cdk bootstrap`済みのAWSアカウント
+- OpenSearch、OSIS、CloudFormation、IAM roleを作成できる権限
+- `ap-northeast-1`を利用できること
 
-### 使い方
+OSISへIAM roleを渡すため、実行ユーザーには作成されたroleに対する`iam:PassRole`も必要です。共有データと検証済み構成をそろえるため、このハンズオンではリージョンを`ap-northeast-1`に固定します。
+
+AWSプロファイルを使う場合は、実行前に設定します。
+
+```bash
+export AWS_PROFILE=your-profile
+export AWS_REGION=ap-northeast-1
+```
+
+## まずsmokeテストを実行する
+
+新規clone後、最初に事前確認を行います。この処理では課金リソースを作成しません。
 
 ```bash
 git clone https://github.com/oimo23/opensearch-book-handson.git
 cd opensearch-book-handson/02-managed-vector-ingestion
-npm install
-npx cdk synth
-npx cdk deploy
+./scripts/preflight.sh
 ```
 
-### よく使う context
-
-デフォルトでは `or2.xlarge.search x1`、`512 GiB gp3` で作ります。  
-`allowedCidrs` を指定しない場合は、CDK 実行マシンのグローバル IP を自動検出して `/32` を許可します。  
-OpenSearch Service は `0.0.0.0/0` のような広すぎる access policy を fine-grained access control なしでは受け付けません。Dashboards を public endpoint で使う場合でも、少なくとも `/32` や社内ネットワーク単位の **CIDR 制限** を付けて deploy してください。
+smokeモードは、先頭のParquet 1ファイルだけを読み込み、5万件の投入を確認します。1000万件すべてを走査しないため、OSISとindexの接続を短時間で確認できます。
 
 ```bash
-npx cdk deploy \
-  -c domainName=handson-vector-xlarge \
-  -c instanceType=or2.xlarge.search \
-  -c instanceCount=1 \
-  -c ebsVolumeSize=512 \
-  -c allowedCidrs=203.0.113.10/32
+MODE=smoke \
+CONFIRM_AWS_COSTS=yes \
+./scripts/run.sh
 ```
 
-複数 CIDR を許可する場合はカンマ区切りです。
+結果は`.handson/verification.json`へ保存されます。
 
 ```bash
-npx cdk deploy -c allowedCidrs=203.0.113.10/32,198.51.100.0/24
+jq . .handson/verification.json
 ```
 
-IP 自動検出に任せる場合は、context を省略してそのまま deploy できます。
+確認後、リソースを削除します。
 
 ```bash
-npx cdk deploy
+CONFIRM_DESTROY=yes ./scripts/destroy.sh
 ```
 
-### 出力
+## 1000万件を投入する
 
-deploy が終わると、次の値が出ます。
+smokeテストのリソースを削除した後、fullモードを実行します。1000万件の投入は時間と料金が増えるため、追加の確認変数が必要です。
 
-- `DomainName`
-- `DomainEndpoint`
-- `DashboardsUrl`
-- `AllowedCidrs`
+```bash
+MODE=full \
+CONFIRM_AWS_COSTS=yes \
+CONFIRM_10M_INGEST=yes \
+./scripts/run.sh
+```
 
-### 注意
+投入と確認が終わったら削除します。
 
-- Dashboards を public に開く場合でも、最低でも IP 制限はかけるほうが安全です。
-- vector ingestion の UI を使うと、`VectorIngestionRole-*` という service role が作られます。本 CDK は、その role が後から domain に書き込めるように access policy を先に入れています。
+```bash
+CONFIRM_DESTROY=yes ./scripts/destroy.sh
+```
 
-## Step 2. vector ingestion から auto-optimize を行う
+## スクリプトを個別に実行する
 
-次に AWS コンソールから vector ingestion job を作成し、自動最適化を実行します。ここでは、事前に用意した S3 上の Parquet データセットを使います。
+問題を切り分ける場合は、次の順序で個別実行できます。
 
-今回使う S3 prefix は次です。
+```bash
+./scripts/preflight.sh
+CONFIRM_AWS_COSTS=yes ./scripts/deploy.sh
+./scripts/create-index.sh
+SOURCE_PREFIX=synthetic-cohere-like-parquet-10m-v2/data/part-00000.parquet \
+./scripts/create-pipeline.sh
+TARGET_COUNT=50000 ./scripts/monitor-ingest.sh
+EXPECTED_COUNT=50000 ./scripts/verify.sh
+CONFIRM_DESTROY=yes ./scripts/destroy.sh
+```
+
+主な環境変数は次のとおりです。
+
+| 変数 | 既定値 | 用途 |
+| --- | --- | --- |
+| `AWS_REGION` | `ap-northeast-1` | AWSリージョン |
+| `DOMAIN_NAME` | `handson-vector-<account>` | OpenSearchドメイン名 |
+| `INSTANCE_TYPE` | `or2.xlarge.search` | データノードの種類 |
+| `ALLOWED_CIDRS` | 実行マシンのIP `/32` | APIとDashboardsの接続元 |
+| `PIPELINE_NAME` | `book-vector-10m-32x` | OSIS pipeline名 |
+| `INDEX_NAME` | `syn10m_autoopt32x` | 投入先index名 |
+| `SOURCE_PREFIX` | fullではデータフォルダ全体 | OSISが読み込むS3 key prefix |
+| `TARGET_COUNT` | smokeでは50,000 | pipelineを停止する件数 |
+
+## 共有データセット
+
+投入元は次の公開S3 prefixです。
 
 ```text
-s3://realworld-opensearch-vector-data-153766774185/synthetic-cohere-like-parquet-10m-v1/data/
+s3://opensearch-book-handson-data-153766774185/synthetic-cohere-like-parquet-10m-v2/data/
 ```
 
-### 2-1. vector ingestion の作成画面を開く
+バケット名には著者のAWSアカウントIDが含まれますが、これは全読者が参照する共有データの配置先です。OpenSearchのendpointとOSIS用IAM roleは、読者自身のAWSアカウントに作成されます。
 
-Amazon OpenSearch Ingestion Service の画面から `Vector ingestion` を開き、新しい job を作成します。
+## Auto-Optimizeについて
 
-![Vector ingestion menu](./images/step1.png)
+Auto-Optimizeジョブの作成とrecommendation取得はAWSコンソールのUIに依存し、AWS CLIだけでは再現できません。そのため、読者が実行する手順からは外しています。
 
-### 2-2. データセットと接続先ドメインを指定する
+第4章では、Auto-Optimizeを使って`on_disk + 32x`が提案された過去の実測をケーススタディとして扱います。このハンズオンは、その結果を固定mappingとして再利用し、UI以降の工程を再現します。
 
-- Data source: 上記の S3 prefix
-- Destination: Step 1 で作成した OpenSearch ドメイン
-- ベクトル列名: `vector`
-- 次元数: `1024`
+## 発展: S3 Vectors
 
-![Create vector ingestion job](./images/step2.png)
+同じ1000万件を`or2.medium.search`とS3 Vectorsで試す手順は、次を参照してください。
 
-### 2-3. auto-optimize を有効にして recommendation を待つ
+- [S3 Vectorsを`or2.medium.search`で比較する](./osis/s3vector_or2_medium_experiment.md)
 
-auto-optimize では、与えた recall 要件と latency 要件に合わせて、候補となるインデックス構成が提案されます。候補が出るまで数十分かかることがあります。
+通常のハンズオンとはmappingと削除順序が異なります。先に主な手順のリソースを削除してから実行してください。
 
-![Configure data source and destination](./images/step3.png)
+## dry-run
 
-## Step 3. 推奨された設定で index build を行う
+AWSリソースを作成せず、コマンド生成とプレースホルダー置換を確認できます。
 
-候補が表示されたら、内容を確認して `Build index` を実行します。これにより、推奨された設定で実際のインデックス構築が始まります。
+```bash
+DRY_RUN=1 MODE=smoke ./scripts/run.sh
+DRY_RUN=1 CONFIRM_DESTROY=yes ./scripts/destroy.sh
+```
 
-確認したいポイントは次のとおりです。
+シェル構文、JSON、TypeScript、別アカウントでのCDK synth、dry-runをまとめて確認する場合は、次を実行します。
 
-- engine が何になったか
-- `on_disk` か `in_memory` か
-- compression level がどの程度か
-- recall と memory footprint のトレードオフがどうなっているか
-
-![Configure index with auto-optimize](./images/step4.png)
-
-## Step 4. Dashboards の Dev Tools で `k-NN` クエリを試す
-
-インデックス構築が終わったら、Dashboards の Dev Tools から `k-NN` クエリを投げて結果を確認します。1024 次元のベクトルをそのまま貼り付けると崩れやすいので、まず検索テンプレートを登録し、その後は短いクエリで呼び出します。
-
-- [queries/dev_tools_queries.md](./queries/dev_tools_queries.md)
-- [queries/dev_tools_query_syn10m_full.json](./queries/dev_tools_query_syn10m_full.json)
-- [queries/register_search_template.md](./queries/register_search_template.md)
-- [queries/register_search_template.json](./queries/register_search_template.json)
-
-## 補足
-
-- auto-optimize の recommendation は、全件に対する厳密評価ではなく、AWS 側の sampled evaluation に基づく推奨です。
-- そのため、ここでの数値は「この条件ならこういう候補が有望」という判断材料として読みます。
-- 本ハンズオンでは managed vector ingestion の流れを体験することを重視し、pipeline や index build の細かい設定は AWS 側の recommendation に委ねます。
+```bash
+./scripts/test-local.sh
+```

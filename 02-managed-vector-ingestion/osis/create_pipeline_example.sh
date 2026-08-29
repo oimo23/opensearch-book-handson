@@ -1,20 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-PIPELINE_NAME="${PIPELINE_NAME:-vectoringestion10mfaiss2x}"
-REGION="${AWS_REGION:-ap-northeast-1}"
-CONFIG_PATH="$(cd "$(dirname "$0")" && pwd)/synthetic-10m-faiss2x.pipeline.json"
-
-cat <<EOF
-このスクリプトは、後から CLI で pipeline を作るための例です。
-まだ自動では実行しません。
-
-必要なら次のコマンドを手元で実行してください。
-
-aws osis create-pipeline \\
-  --region ${REGION} \\
-  --pipeline-name ${PIPELINE_NAME} \\
-  --min-units 4 \\
-  --max-units 8 \\
-  --pipeline-configuration-body file://${CONFIG_PATH}
-EOF
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+export PIPELINE_NAME="${PIPELINE_NAME:-book-vector-10m-2x}"
+export INDEX_NAME="${INDEX_NAME:-synthetic_10m_faiss_2x}"
+export TEMPLATE_PATH="${SCRIPT_DIR}/synthetic-10m-faiss2x.pipeline.json"
+exec "${SCRIPT_DIR}/../scripts/create-pipeline.sh"

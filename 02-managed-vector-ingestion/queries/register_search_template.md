@@ -3,7 +3,7 @@
 次を Dev Tools に貼り付けると、短い ID 呼び出しで `k-NN` クエリを再利用できます。
 
 ```json
-PUT _scripts/syn10m_full_knn_sample
+PUT _scripts/syn10m_autoopt32x_knn_sample
 {
   "script": {
     "lang": "mustache",
@@ -15,8 +15,8 @@ PUT _scripts/syn10m_full_knn_sample
 登録後は、次の短いクエリだけで検索できます。
 
 ```json
-GET syn10m_full/_search/template
+GET syn10m_autoopt32x/_search/template
 {
-  "id": "syn10m_full_knn_sample"
+  "id": "syn10m_autoopt32x_knn_sample"
 }
 ```

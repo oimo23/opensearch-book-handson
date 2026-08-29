@@ -1,4 +1,4 @@
-GET syn10m_full/_search
+GET syn10m_autoopt32x/_search
 {
   "size": 5,
   "_source": [
