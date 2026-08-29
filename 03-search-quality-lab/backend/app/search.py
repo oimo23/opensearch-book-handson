@@ -152,10 +152,7 @@ class SearchService:
         rerank_ms = 0
         if request.mode is SearchMode.HYBRID_RERANK and raw_hits:
             rerank_started = perf_counter()
-            documents = [
-                f"{hit['_source']['title']}\n{hit['_source']['body']}"
-                for hit in raw_hits
-            ]
+            documents = [hit["_source"]["body"] for hit in raw_hits]
             scores = models.rerank(request.query, documents)
             rerank_scores = {hit["_id"]: score for hit, score in zip(raw_hits, scores, strict=True)}
             raw_hits = sorted(raw_hits, key=lambda hit: rerank_scores[hit["_id"]], reverse=True)

@@ -101,7 +101,7 @@ def build_connectivity_cases() -> list[dict[str, Any]]:
     ]
     return [document(
         id=f"support-connect-{slug}", family="connectivity-cases",
-        title=f"接続サポート事例 2025-{slug}", filename="connectivity-support-cases-2025.pdf",
+        title=f"接続サポート事例 No.{slug}", filename="connectivity-support-cases-2025.pdf",
         category="サポート事例", body=body, identifiers=[f"CASE-CONNECT-{slug}"],
         document_type="support_case", product_category=category,
         device_age_months=age, support_outcome=outcome,
@@ -128,7 +128,7 @@ def build_repair_cases() -> list[dict[str, Any]]:
     ]
     return [document(
         id=f"repair-case-{slug}", family="repair-cases",
-        title=f"訪問修理事例 2025-{slug}", filename="repair-cases-2025.pdf",
+        title=f"訪問修理事例 No.{slug}", filename="repair-cases-2025.pdf",
         category="修理事例", body=body, identifiers=[f"CASE-REPAIR-{slug}"],
         document_type="repair_case", product_category=category,
         device_age_months=age, support_outcome=outcome,

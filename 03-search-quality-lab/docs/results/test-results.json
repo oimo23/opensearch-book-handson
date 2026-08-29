@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "executed_at": "2026-08-25T23:53:27+09:00",
+    "executed_at": "2026-08-29T15:48:14+09:00",
     "evaluation_version": "v4",
     "split": "test",
     "host": "macOS-26.3.1-arm64-arm-64bit-Mach-O",
@@ -10,7 +10,7 @@
     "status": "ok",
     "index_name": "appliance-support-demo-v1",
     "document_count": 180,
-    "dataset_sha256": "d3ee9d4f1cd1ffccf381917b5167cb9f9cf7be1c492d4b177955ce4b62955539",
+    "dataset_sha256": "6d04f164b5b70ae26ff7d2982a7a91a475341f20be185e1a6a4a296518ce3956",
     "embedding_model": "cl-nagoya/ruri-v3-310m",
     "embedding_model_revision": "18b60fb8c2b9df296fb4212bb7d23ef94e579cd3",
     "rerank_model": "BAAI/bge-reranker-v2-m3",
@@ -81,8 +81,8 @@
       "ndcg_at_5": 0.27057176321486043,
       "context_completeness": 1.0,
       "parent_hit_rate_at_3": 1.0,
-      "context_precision": 0.6166666666666667,
-      "context_chunks_added": 4.4,
+      "context_precision": 0.5166666666666667,
+      "context_chunks_added": 4.8,
       "constraint_pass_rate": null,
       "condition_violations": 0,
       "forbidden_violations": 0
@@ -109,8 +109,8 @@
       "queries": 10,
       "hit_rate_at_3": 0.9,
       "hit_rate_at_10": 0.9,
-      "mrr_at_5": 0.85,
-      "ndcg_at_5": 0.8630929753571458,
+      "mrr_at_5": 0.9,
+      "ndcg_at_5": 0.9,
       "context_completeness": null,
       "parent_hit_rate_at_3": null,
       "context_precision": null,
@@ -124,9 +124,9 @@
       "mode": "vector",
       "queries": 10,
       "hit_rate_at_3": 0.4,
-      "hit_rate_at_10": 0.5,
-      "mrr_at_5": 0.35,
-      "ndcg_at_5": 0.3630929753571458,
+      "hit_rate_at_10": 0.6,
+      "mrr_at_5": 0.395,
+      "ndcg_at_5": 0.4448459118879392,
       "context_completeness": null,
       "parent_hit_rate_at_3": null,
       "context_precision": null,
@@ -197,7 +197,7 @@
       "context_chunks_added": null,
       "constraint_pass_rate": null,
       "condition_violations": 0,
-      "forbidden_violations": 7
+      "forbidden_violations": 6
     },
     {
       "category": "negation_exception",
@@ -213,7 +213,7 @@
       "context_chunks_added": null,
       "constraint_pass_rate": null,
       "condition_violations": 0,
-      "forbidden_violations": 7
+      "forbidden_violations": 6
     },
     {
       "category": "semantic",
@@ -237,8 +237,8 @@
       "queries": 10,
       "hit_rate_at_3": 0.5,
       "hit_rate_at_10": 1.0,
-      "mrr_at_5": 0.52,
-      "ndcg_at_5": 0.5879135676952785,
+      "mrr_at_5": 0.545,
+      "ndcg_at_5": 0.6309812235026178,
       "context_completeness": null,
       "parent_hit_rate_at_3": null,
       "context_precision": null,
@@ -253,8 +253,8 @@
       "queries": 10,
       "hit_rate_at_3": 0.8,
       "hit_rate_at_10": 1.0,
-      "mrr_at_5": 0.75,
-      "ndcg_at_5": 0.7630929753571458,
+      "mrr_at_5": 0.77,
+      "ndcg_at_5": 0.8017782560805999,
       "context_completeness": null,
       "parent_hit_rate_at_3": null,
       "context_precision": null,
@@ -273,14 +273,14 @@
       "hit_ids": [
         "product-wm-a401",
         "support-connect-10",
-        "support-connect-02",
         "support-connect-07",
-        "support-connect-05",
-        "support-connect-03",
-        "support-connect-06",
         "manual-router-reset",
         "manual-wm-water",
-        "support-connect-14"
+        "support-connect-02",
+        "support-connect-05",
+        "error-wm-a410-c07",
+        "support-connect-14",
+        "support-connect-03"
       ],
       "hit_at_3": 0,
       "hit_at_10": 1,
@@ -299,7 +299,7 @@
         "search_ms": 3,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 127
+        "total_ms": 126
       }
     },
     {
@@ -354,7 +354,7 @@
         "support-connect-03",
         "manual-ac-pairing",
         "support-connect-10",
-        "support-connect-06"
+        "support-connect-07"
       ],
       "hit_at_3": 0,
       "hit_at_10": 1,
@@ -369,11 +369,11 @@
       "forbidden_violations": 0,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 84,
-        "search_ms": 5,
+        "embedding_ms": 80,
+        "search_ms": 4,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 89
+        "total_ms": 85
       }
     },
     {
@@ -386,8 +386,8 @@
         "repair-case-02",
         "safety-context-overheating-dryer-1",
         "product-dr-b220",
-        "faq-dryer-time",
         "repair-case-03",
+        "faq-dryer-time",
         "error-dr-b220-e42",
         "repair-case-05",
         "repair-case-06",
@@ -395,8 +395,8 @@
       ],
       "hit_at_3": 0,
       "hit_at_10": 1,
-      "mrr_at_5": 0.0,
-      "ndcg_at_5": 0.0,
+      "mrr_at_5": 0.2,
+      "ndcg_at_5": 0.38685280723454163,
       "context_completeness": null,
       "parent_hit_at_3": null,
       "context_precision": null,
@@ -406,11 +406,11 @@
       "forbidden_violations": 0,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 86,
+        "embedding_ms": 89,
         "search_ms": 3,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 90
+        "total_ms": 92
       }
     },
     {
@@ -444,10 +444,10 @@
       "constraint_pass": null,
       "timings": {
         "embedding_ms": 0,
-        "search_ms": 3,
+        "search_ms": 2,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 3
+        "total_ms": 2
       }
     },
     {
@@ -460,8 +460,8 @@
         "repair-case-06",
         "repair-case-11",
         "safety-context-overheating-dryer-1",
-        "repair-case-14",
         "repair-case-03",
+        "repair-case-14",
         "product-dr-b220",
         "manual-dryer-filter",
         "product-wm-a410s",
@@ -469,8 +469,8 @@
       ],
       "hit_at_3": 0,
       "hit_at_10": 1,
-      "mrr_at_5": 0.0,
-      "ndcg_at_5": 0.0,
+      "mrr_at_5": 0.2,
+      "ndcg_at_5": 0.38685280723454163,
       "context_completeness": null,
       "parent_hit_at_3": null,
       "context_precision": null,
@@ -480,11 +480,11 @@
       "forbidden_violations": 0,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 85,
-        "search_ms": 5,
+        "embedding_ms": 90,
+        "search_ms": 4,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 89
+        "total_ms": 94
       }
     },
     {
@@ -517,11 +517,11 @@
       "forbidden_violations": 0,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 81,
+        "embedding_ms": 87,
         "search_ms": 3,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 84
+        "total_ms": 90
       }
     },
     {
@@ -555,7 +555,7 @@
       "constraint_pass": null,
       "timings": {
         "embedding_ms": 0,
-        "search_ms": 3,
+        "search_ms": 2,
         "rerank_ms": 0,
         "context_ms": 0,
         "total_ms": 3
@@ -570,9 +570,9 @@
         "manual-wm-water",
         "installation-wm-level",
         "error-wm-a410-e42",
+        "repair-case-11",
         "installation-dryer-stack",
         "faq-noise-night",
-        "repair-case-11",
         "repair-case-01",
         "error-wm-a410-e24",
         "manual-wm-drain",
@@ -591,11 +591,11 @@
       "forbidden_violations": 0,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 77,
+        "embedding_ms": 88,
         "search_ms": 5,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 81
+        "total_ms": 93
       }
     },
     {
@@ -628,11 +628,11 @@
       "forbidden_violations": 0,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 80,
+        "embedding_ms": 89,
         "search_ms": 3,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 83
+        "total_ms": 92
       }
     },
     {
@@ -666,10 +666,10 @@
       "constraint_pass": null,
       "timings": {
         "embedding_ms": 0,
-        "search_ms": 3,
+        "search_ms": 2,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 3
+        "total_ms": 2
       }
     },
     {
@@ -702,11 +702,11 @@
       "forbidden_violations": 0,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 78,
-        "search_ms": 6,
+        "embedding_ms": 91,
+        "search_ms": 4,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 84
+        "total_ms": 95
       }
     },
     {
@@ -739,11 +739,11 @@
       "forbidden_violations": 0,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 82,
+        "embedding_ms": 93,
         "search_ms": 3,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 85
+        "total_ms": 96
       }
     },
     {
@@ -777,10 +777,10 @@
       "constraint_pass": null,
       "timings": {
         "embedding_ms": 0,
-        "search_ms": 4,
+        "search_ms": 3,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 4
+        "total_ms": 3
       }
     },
     {
@@ -813,11 +813,11 @@
       "forbidden_violations": 0,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 81,
+        "embedding_ms": 87,
         "search_ms": 5,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 86
+        "total_ms": 92
       }
     },
     {
@@ -833,7 +833,7 @@
         "manual-dryer-filter",
         "maintenance-tv-vent",
         "faq-dryer-time",
-        "repair-case-05",
+        "manual-vacuum-dust",
         "maintenance-dryer-duct",
         "safety-context-overheating-dryer-3"
       ],
@@ -850,11 +850,11 @@
       "forbidden_violations": 0,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 75,
+        "embedding_ms": 94,
         "search_ms": 3,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 78
+        "total_ms": 97
       }
     },
     {
@@ -888,10 +888,10 @@
       "constraint_pass": null,
       "timings": {
         "embedding_ms": 0,
-        "search_ms": 3,
+        "search_ms": 2,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 3
+        "total_ms": 2
       }
     },
     {
@@ -924,11 +924,11 @@
       "forbidden_violations": 0,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 76,
-        "search_ms": 5,
+        "embedding_ms": 83,
+        "search_ms": 6,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 81
+        "total_ms": 89
       }
     },
     {
@@ -961,11 +961,11 @@
       "forbidden_violations": 0,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 81,
+        "embedding_ms": 77,
         "search_ms": 3,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 85
+        "total_ms": 80
       }
     },
     {
@@ -999,10 +999,10 @@
       "constraint_pass": null,
       "timings": {
         "embedding_ms": 0,
-        "search_ms": 3,
+        "search_ms": 2,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 3
+        "total_ms": 2
       }
     },
     {
@@ -1035,11 +1035,11 @@
       "forbidden_violations": 0,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 78,
-        "search_ms": 4,
+        "embedding_ms": 87,
+        "search_ms": 5,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 83
+        "total_ms": 92
       }
     },
     {
@@ -1072,11 +1072,11 @@
       "forbidden_violations": 0,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 82,
-        "search_ms": 3,
+        "embedding_ms": 89,
+        "search_ms": 4,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 85
+        "total_ms": 92
       }
     },
     {
@@ -1113,7 +1113,7 @@
         "search_ms": 2,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 3
+        "total_ms": 2
       }
     },
     {
@@ -1146,11 +1146,11 @@
       "forbidden_violations": 0,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 84,
+        "embedding_ms": 114,
         "search_ms": 4,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 89
+        "total_ms": 118
       }
     },
     {
@@ -1162,9 +1162,9 @@
         "product-rf-d510",
         "product-rf-d501",
         "installation-rf-clearance",
+        "support-connect-05",
         "product-ac-c300",
         "manual-fridge-temp",
-        "support-connect-05",
         "faq-fridge-hot",
         "warranty-context-rf-d510-3",
         "faq-fridge-frost",
@@ -1183,11 +1183,11 @@
       "forbidden_violations": 0,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 98,
-        "search_ms": 4,
+        "embedding_ms": 83,
+        "search_ms": 3,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 103
+        "total_ms": 86
       }
     },
     {
@@ -1257,11 +1257,11 @@
       "forbidden_violations": 0,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 104,
+        "embedding_ms": 90,
         "search_ms": 5,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 109
+        "total_ms": 95
       }
     },
     {
@@ -1275,11 +1275,11 @@
         "safety-context-battery-vacuum-1",
         "maintenance-vc-brush",
         "manual-dryer-filter",
-        "safety-context-overheating-dryer-1",
         "repair-case-06",
-        "safety-context-tipover-tv-3",
+        "safety-context-overheating-dryer-1",
         "error-ac-c300-e42",
-        "faq-oven-spark"
+        "faq-oven-spark",
+        "manual-ac-clean"
       ],
       "hit_at_3": 1,
       "hit_at_10": 1,
@@ -1294,11 +1294,11 @@
       "forbidden_violations": 0,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 86,
+        "embedding_ms": 88,
         "search_ms": 3,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 89
+        "total_ms": 91
       }
     },
     {
@@ -1347,18 +1347,18 @@
         "manual-vacuum-brush",
         "product-vc-f710",
         "product-vc-f701",
-        "safety-context-battery-vacuum-1",
         "error-vc-f710-e31",
+        "safety-context-battery-vacuum-1",
         "installation-oven-power",
         "maintenance-vc-brush",
         "manual-dryer-filter",
-        "safety-context-overheating-dryer-1",
-        "repair-case-06"
+        "repair-case-06",
+        "safety-context-overheating-dryer-1"
       ],
       "hit_at_3": 0,
       "hit_at_10": 1,
-      "mrr_at_5": 0.2,
-      "ndcg_at_5": 0.38685280723454163,
+      "mrr_at_5": 0.25,
+      "ndcg_at_5": 0.43067655807339306,
       "context_completeness": null,
       "parent_hit_at_3": null,
       "context_precision": null,
@@ -1368,11 +1368,11 @@
       "forbidden_violations": 0,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 81,
+        "embedding_ms": 89,
         "search_ms": 5,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 86
+        "total_ms": 94
       }
     },
     {
@@ -1389,8 +1389,8 @@
         "firmware-wm-a410s-3",
         "firmware-wm-a410-3",
         "error-wm-a410s-e42",
-        "repair-case-11",
-        "support-connect-04"
+        "support-connect-01",
+        "repair-case-11"
       ],
       "hit_at_3": 0,
       "hit_at_10": 0,
@@ -1405,11 +1405,11 @@
       "forbidden_violations": 0,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 73,
+        "embedding_ms": 86,
         "search_ms": 3,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 76
+        "total_ms": 89
       }
     },
     {
@@ -1443,10 +1443,10 @@
       "constraint_pass": null,
       "timings": {
         "embedding_ms": 0,
-        "search_ms": 3,
+        "search_ms": 2,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 3
+        "total_ms": 2
       }
     },
     {
@@ -1479,11 +1479,11 @@
       "forbidden_violations": 0,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 78,
-        "search_ms": 7,
+        "embedding_ms": 81,
+        "search_ms": 4,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 85
+        "total_ms": 86
       }
     },
     {
@@ -1516,11 +1516,11 @@
       "forbidden_violations": 0,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 119,
-        "search_ms": 5,
+        "embedding_ms": 91,
+        "search_ms": 3,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 124
+        "total_ms": 94
       }
     },
     {
@@ -1554,10 +1554,10 @@
       "constraint_pass": null,
       "timings": {
         "embedding_ms": 0,
-        "search_ms": 5,
+        "search_ms": 2,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 5
+        "total_ms": 2
       }
     },
     {
@@ -1566,12 +1566,12 @@
       "category": "lexical",
       "mode": "hybrid",
       "hit_ids": [
-        "error-wm-a410-u11",
         "error-wm-a410-e42",
+        "error-wm-a410-u11",
         "error-wm-a410-e24",
         "error-wm-a410-c07",
-        "repair-case-11",
         "warranty-context-wm-a410-1",
+        "repair-case-11",
         "error-wm-a410s-e42",
         "warranty-context-wm-a410-2",
         "warranty-context-wm-a410-3",
@@ -1579,8 +1579,8 @@
       ],
       "hit_at_3": 1,
       "hit_at_10": 1,
-      "mrr_at_5": 0.5,
-      "ndcg_at_5": 0.6309297535714575,
+      "mrr_at_5": 1.0,
+      "ndcg_at_5": 1.0,
       "context_completeness": null,
       "parent_hit_at_3": null,
       "context_precision": null,
@@ -1590,11 +1590,11 @@
       "forbidden_violations": 0,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 79,
+        "embedding_ms": 91,
         "search_ms": 4,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 84
+        "total_ms": 96
       }
     },
     {
@@ -1627,11 +1627,11 @@
       "forbidden_violations": 0,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 80,
+        "embedding_ms": 87,
         "search_ms": 3,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 83
+        "total_ms": 90
       }
     },
     {
@@ -1668,7 +1668,7 @@
         "search_ms": 2,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 3
+        "total_ms": 2
       }
     },
     {
@@ -1701,11 +1701,11 @@
       "forbidden_violations": 0,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 88,
+        "embedding_ms": 96,
         "search_ms": 4,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 92
+        "total_ms": 101
       }
     },
     {
@@ -1738,11 +1738,11 @@
       "forbidden_violations": 0,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 76,
+        "embedding_ms": 83,
         "search_ms": 3,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 79
+        "total_ms": 86
       }
     },
     {
@@ -1803,11 +1803,11 @@
       "forbidden_violations": 0,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 79,
+        "embedding_ms": 87,
         "search_ms": 4,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 83
+        "total_ms": 90
       }
     },
     {
@@ -1819,8 +1819,8 @@
         "maintenance-vc-brush",
         "firmware-vc-f710-3",
         "maintenance-oven-steam",
-        "repair-case-06",
         "maintenance-tv-vent",
+        "repair-case-06",
         "maintenance-wm-filter",
         "product-vc-f710",
         "product-vc-f701",
@@ -1840,11 +1840,11 @@
       "forbidden_violations": 0,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 87,
-        "search_ms": 6,
+        "embedding_ms": 88,
+        "search_ms": 3,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 93
+        "total_ms": 91
       }
     },
     {
@@ -1876,10 +1876,10 @@
       "constraint_pass": null,
       "timings": {
         "embedding_ms": 0,
-        "search_ms": 4,
+        "search_ms": 2,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 4
+        "total_ms": 2
       }
     },
     {
@@ -1892,8 +1892,8 @@
         "firmware-vc-f710-3",
         "error-vc-f710-e31",
         "maintenance-oven-steam",
-        "repair-case-06",
         "maintenance-tv-vent",
+        "repair-case-06",
         "maintenance-wm-filter",
         "product-vc-f710",
         "product-vc-f701",
@@ -1912,8 +1912,8 @@
       "forbidden_violations": 0,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 86,
-        "search_ms": 4,
+        "embedding_ms": 87,
+        "search_ms": 5,
         "rerank_ms": 0,
         "context_ms": 0,
         "total_ms": 91
@@ -1928,13 +1928,13 @@
         "product-ac-c300",
         "firmware-rf-d510-2",
         "product-dr-b202",
-        "repair-case-04",
         "product-ac-c330",
         "product-wm-a410",
         "installation-vc-charge",
+        "repair-case-04",
         "installation-router-place",
         "product-vc-f710",
-        "warranty-context-rf-d510-1"
+        "product-rf-d510"
       ],
       "hit_at_3": 0,
       "hit_at_10": 0,
@@ -1949,11 +1949,11 @@
       "forbidden_violations": 0,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 73,
-        "search_ms": 3,
+        "embedding_ms": 90,
+        "search_ms": 4,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 76
+        "total_ms": 93
       }
     },
     {
@@ -2004,10 +2004,10 @@
         "firmware-rf-d510-2",
         "error-rf-d510-e17",
         "error-rf-d510-c07",
-        "repair-case-04",
         "product-dr-b202",
         "product-ac-c330",
         "product-wm-a410",
+        "repair-case-04",
         "installation-vc-charge"
       ],
       "hit_at_3": 1,
@@ -2023,11 +2023,11 @@
       "forbidden_violations": 0,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 76,
+        "embedding_ms": 106,
         "search_ms": 6,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 82
+        "total_ms": 112
       }
     },
     {
@@ -2040,12 +2040,12 @@
         "product-ov-e660",
         "safety-context-recall-wm-a401-1",
         "firmware-wm-a410-4",
-        "repair-case-05",
         "firmware-wm-a410s-3",
         "safety-context-battery-vacuum-2",
         "warranty-context-wm-a410-1",
+        "faq-wm-vibration",
         "error-wm-a401-e42",
-        "repair-case-11"
+        "faq-dryer-time"
       ],
       "hit_at_3": 0,
       "hit_at_10": 0,
@@ -2060,11 +2060,11 @@
       "forbidden_violations": 0,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 73,
-        "search_ms": 3,
+        "embedding_ms": 84,
+        "search_ms": 4,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 76
+        "total_ms": 88
       }
     },
     {
@@ -2098,10 +2098,10 @@
       "constraint_pass": null,
       "timings": {
         "embedding_ms": 0,
-        "search_ms": 2,
+        "search_ms": 3,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 2
+        "total_ms": 3
       }
     },
     {
@@ -2134,11 +2134,11 @@
       "forbidden_violations": 0,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 77,
-        "search_ms": 4,
+        "embedding_ms": 96,
+        "search_ms": 6,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 82
+        "total_ms": 102
       }
     },
     {
@@ -2150,18 +2150,18 @@
         "product-tv-g880",
         "product-tv-g800",
         "firmware-tv-g880-5",
-        "support-connect-06",
-        "support-connect-10",
         "product-ac-c300",
         "manual-tv-network",
+        "support-connect-10",
         "compat-voice-b",
         "firmware-tv-g800-5",
+        "support-connect-06",
         "product-wm-a410"
       ],
       "hit_at_3": 0,
       "hit_at_10": 1,
-      "mrr_at_5": 0.0,
-      "ndcg_at_5": 0.0,
+      "mrr_at_5": 0.2,
+      "ndcg_at_5": 0.38685280723454163,
       "context_completeness": null,
       "parent_hit_at_3": null,
       "context_precision": null,
@@ -2171,11 +2171,11 @@
       "forbidden_violations": 0,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 75,
+        "embedding_ms": 91,
         "search_ms": 4,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 79
+        "total_ms": 95
       }
     },
     {
@@ -2209,7 +2209,7 @@
       "constraint_pass": null,
       "timings": {
         "embedding_ms": 0,
-        "search_ms": 2,
+        "search_ms": 3,
         "rerank_ms": 0,
         "context_ms": 0,
         "total_ms": 3
@@ -2223,14 +2223,14 @@
       "hit_ids": [
         "manual-tv-network",
         "product-tv-g880",
-        "error-tv-g800-e31",
         "product-tv-g800",
+        "error-tv-g800-e31",
         "firmware-tv-g880-5",
-        "support-connect-06",
-        "support-connect-10",
         "product-ac-c300",
+        "support-connect-10",
         "firmware-tv-g800-5",
-        "compat-voice-b"
+        "compat-voice-b",
+        "warranty-context-tv-g800-1"
       ],
       "hit_at_3": 1,
       "hit_at_10": 1,
@@ -2245,11 +2245,11 @@
       "forbidden_violations": 0,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 77,
-        "search_ms": 4,
+        "embedding_ms": 102,
+        "search_ms": 6,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 81
+        "total_ms": 108
       }
     },
     {
@@ -2261,18 +2261,18 @@
         "safety-context-recall-wm-a401-1",
         "safety-context-battery-vacuum-2",
         "repair-case-06",
+        "repair-case-07",
         "safety-context-recall-wm-a401-3",
         "product-vc-f710",
         "warranty-context-rf-d510-3",
         "safety-context-tipover-tv-2",
         "safety-context-tipover-tv-3",
-        "safety-context-recall-wm-a401-2",
         "repair-case-13"
       ],
       "hit_at_3": 0,
-      "hit_at_10": 0,
-      "mrr_at_5": 0.0,
-      "ndcg_at_5": 0.0,
+      "hit_at_10": 1,
+      "mrr_at_5": 0.25,
+      "ndcg_at_5": 0.43067655807339306,
       "context_completeness": null,
       "parent_hit_at_3": null,
       "context_precision": null,
@@ -2282,11 +2282,11 @@
       "forbidden_violations": 0,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 80,
-        "search_ms": 3,
+        "embedding_ms": 93,
+        "search_ms": 4,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 83
+        "total_ms": 97
       }
     },
     {
@@ -2333,7 +2333,7 @@
         "warranty-context-rf-d510-3",
         "safety-context-tipover-tv-2",
         "safety-context-tipover-tv-3",
-        "safety-context-recall-wm-a401-2"
+        "support-connect-07"
       ],
       "hit_at_3": 1,
       "hit_at_10": 1,
@@ -2348,11 +2348,11 @@
       "forbidden_violations": 0,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 77,
-        "search_ms": 4,
+        "embedding_ms": 96,
+        "search_ms": 5,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 81
+        "total_ms": 101
       }
     },
     {
@@ -2365,12 +2365,12 @@
         "support-connect-15",
         "firmware-wm-a410-4",
         "firmware-hub-4",
-        "support-connect-03",
         "support-connect-11",
-        "safety-context-recall-wm-a401-1",
-        "support-connect-09",
         "support-connect-04",
-        "firmware-ac-c300-4"
+        "repair-case-14",
+        "safety-context-recall-wm-a401-1",
+        "support-connect-03",
+        "support-connect-09"
       ],
       "hit_at_3": 1,
       "hit_at_10": 1,
@@ -2385,11 +2385,11 @@
       "forbidden_violations": 0,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 74,
-        "search_ms": 3,
+        "embedding_ms": 100,
+        "search_ms": 4,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 77
+        "total_ms": 104
       }
     },
     {
@@ -2415,10 +2415,10 @@
       "constraint_pass": null,
       "timings": {
         "embedding_ms": 0,
-        "search_ms": 1,
+        "search_ms": 2,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 1
+        "total_ms": 2
       }
     },
     {
@@ -2431,12 +2431,12 @@
         "support-connect-15",
         "firmware-wm-a410-4",
         "firmware-hub-4",
-        "support-connect-03",
         "support-connect-11",
-        "safety-context-recall-wm-a401-1",
-        "support-connect-09",
         "support-connect-04",
-        "repair-case-14"
+        "repair-case-14",
+        "safety-context-recall-wm-a401-1",
+        "support-connect-03",
+        "support-connect-09"
       ],
       "hit_at_3": 1,
       "hit_at_10": 1,
@@ -2451,11 +2451,11 @@
       "forbidden_violations": 0,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 131,
-        "search_ms": 4,
+        "embedding_ms": 97,
+        "search_ms": 5,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 135
+        "total_ms": 102
       }
     },
     {
@@ -2488,11 +2488,11 @@
       "forbidden_violations": 0,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 92,
-        "search_ms": 3,
+        "embedding_ms": 117,
+        "search_ms": 4,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 95
+        "total_ms": 121
       }
     },
     {
@@ -2526,10 +2526,10 @@
       "constraint_pass": null,
       "timings": {
         "embedding_ms": 0,
-        "search_ms": 3,
+        "search_ms": 4,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 3
+        "total_ms": 4
       }
     },
     {
@@ -2562,11 +2562,11 @@
       "forbidden_violations": 0,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 87,
-        "search_ms": 4,
+        "embedding_ms": 114,
+        "search_ms": 6,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 91
+        "total_ms": 120
       }
     },
     {
@@ -2583,8 +2583,8 @@
         "support-connect-14",
         "product-wm-a410s",
         "firmware-wm-a410s-3",
-        "repair-case-11",
-        "product-wm-a401"
+        "product-wm-a401",
+        "warranty-context-wm-a410-1"
       ],
       "hit_at_3": 0,
       "hit_at_10": 0,
@@ -2599,11 +2599,11 @@
       "forbidden_violations": 0,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 83,
-        "search_ms": 3,
+        "embedding_ms": 103,
+        "search_ms": 4,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 87
+        "total_ms": 108
       }
     },
     {
@@ -2637,10 +2637,10 @@
       "constraint_pass": null,
       "timings": {
         "embedding_ms": 0,
-        "search_ms": 3,
+        "search_ms": 4,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 3
+        "total_ms": 4
       }
     },
     {
@@ -2673,11 +2673,11 @@
       "forbidden_violations": 0,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 101,
-        "search_ms": 5,
+        "embedding_ms": 106,
+        "search_ms": 7,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 106
+        "total_ms": 113
       }
     },
     {
@@ -2686,16 +2686,16 @@
       "category": "mixed",
       "mode": "vector",
       "hit_ids": [
-        "support-connect-13",
         "support-connect-07",
+        "support-connect-13",
         "support-connect-03",
         "support-connect-04",
         "support-connect-15",
         "support-connect-01",
         "support-connect-10",
-        "support-connect-14",
         "firmware-ac-c300-4",
-        "support-connect-08"
+        "support-connect-14",
+        "support-connect-02"
       ],
       "hit_at_3": 1,
       "hit_at_10": 1,
@@ -2710,11 +2710,11 @@
       "forbidden_violations": 0,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 87,
-        "search_ms": 3,
+        "embedding_ms": 114,
+        "search_ms": 4,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 90
+        "total_ms": 119
       }
     },
     {
@@ -2728,9 +2728,9 @@
         "support-connect-03",
         "support-connect-01",
         "support-connect-10",
+        "repair-case-03",
         "firmware-wm-a410s-3",
         "support-connect-04",
-        "repair-case-03",
         "compat-tv-g800",
         "firmware-wm-a410-3"
       ],
@@ -2748,10 +2748,10 @@
       "constraint_pass": null,
       "timings": {
         "embedding_ms": 0,
-        "search_ms": 3,
+        "search_ms": 4,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 3
+        "total_ms": 4
       }
     },
     {
@@ -2764,12 +2764,12 @@
         "support-connect-15",
         "support-connect-03",
         "support-connect-01",
-        "support-connect-10",
         "support-connect-04",
-        "support-connect-13",
+        "support-connect-10",
         "support-connect-07",
-        "firmware-wm-a410s-3",
-        "firmware-ac-c300-4"
+        "support-connect-13",
+        "repair-case-03",
+        "firmware-wm-a410s-3"
       ],
       "hit_at_3": 1,
       "hit_at_10": 1,
@@ -2784,11 +2784,11 @@
       "forbidden_violations": 0,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 84,
-        "search_ms": 5,
+        "embedding_ms": 109,
+        "search_ms": 7,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 88
+        "total_ms": 116
       }
     },
     {
@@ -2801,12 +2801,12 @@
         "repair-case-01",
         "repair-case-12",
         "repair-case-06",
-        "repair-case-09",
         "warranty-context-wm-a410-3",
         "manual-wm-water",
+        "repair-case-09",
         "repair-case-05",
-        "repair-case-08",
-        "warranty-context-rf-d510-3"
+        "warranty-context-rf-d510-3",
+        "error-wm-a410s-e42"
       ],
       "hit_at_3": 1,
       "hit_at_10": 1,
@@ -2821,11 +2821,11 @@
       "forbidden_violations": 0,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 96,
-        "search_ms": 3,
+        "embedding_ms": 111,
+        "search_ms": 4,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 99
+        "total_ms": 116
       }
     },
     {
@@ -2876,9 +2876,9 @@
         "repair-case-14",
         "compat-voice-a",
         "repair-case-12",
-        "repair-case-09",
         "support-connect-11",
         "repair-case-06",
+        "repair-case-09",
         "warranty-context-wm-a410-3",
         "manual-wm-water"
       ],
@@ -2895,11 +2895,11 @@
       "forbidden_violations": 0,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 93,
-        "search_ms": 5,
+        "embedding_ms": 116,
+        "search_ms": 6,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 98
+        "total_ms": 122
       }
     },
     {
@@ -2910,12 +2910,12 @@
       "hit_ids": [
         "firmware-wm-a410-3",
         "firmware-wm-a410-4",
-        "support-connect-15",
         "firmware-wm-a410s-3",
-        "support-connect-04",
+        "support-connect-15",
         "support-connect-01",
-        "support-connect-03",
         "warranty-context-wm-a410-1",
+        "support-connect-03",
+        "support-connect-04",
         "product-wm-a410s",
         "compat-wm-a410s"
       ],
@@ -2932,11 +2932,11 @@
       "forbidden_violations": 0,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 88,
-        "search_ms": 3,
+        "embedding_ms": 111,
+        "search_ms": 4,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 91
+        "total_ms": 115
       }
     },
     {
@@ -2986,12 +2986,12 @@
         "firmware-wm-a410-4",
         "firmware-ac-c300-3",
         "firmware-tv-g800-5",
-        "support-connect-15",
         "firmware-wm-a410s-3",
-        "support-connect-04",
+        "support-connect-15",
         "support-connect-01",
+        "warranty-context-wm-a410-1",
         "support-connect-03",
-        "warranty-context-wm-a410-1"
+        "error-wm-a410-e42"
       ],
       "hit_at_3": 1,
       "hit_at_10": 1,
@@ -3006,11 +3006,11 @@
       "forbidden_violations": 0,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 90,
-        "search_ms": 5,
+        "embedding_ms": 109,
+        "search_ms": 6,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 95
+        "total_ms": 115
       }
     },
     {
@@ -3023,12 +3023,12 @@
         "compat-router-5g",
         "support-connect-04",
         "support-connect-03",
-        "support-connect-15",
         "support-connect-01",
-        "support-connect-14",
+        "support-connect-15",
         "compat-wm-a410",
         "firmware-wm-a410-4",
-        "firmware-wm-a410s-3"
+        "firmware-wm-a410s-3",
+        "support-connect-14"
       ],
       "hit_at_3": 1,
       "hit_at_10": 1,
@@ -3043,11 +3043,11 @@
       "forbidden_violations": 0,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 89,
-        "search_ms": 3,
+        "embedding_ms": 150,
+        "search_ms": 4,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 92
+        "total_ms": 154
       }
     },
     {
@@ -3081,10 +3081,10 @@
       "constraint_pass": null,
       "timings": {
         "embedding_ms": 0,
-        "search_ms": 3,
+        "search_ms": 4,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 3
+        "total_ms": 4
       }
     },
     {
@@ -3098,11 +3098,11 @@
         "support-connect-14",
         "support-connect-04",
         "support-connect-03",
-        "support-connect-15",
         "support-connect-01",
         "error-wm-a410-e42",
         "error-wm-a410-e24",
-        "error-wm-a410-c07"
+        "error-wm-a410-c07",
+        "error-wm-a410-u11"
       ],
       "hit_at_3": 1,
       "hit_at_10": 1,
@@ -3117,11 +3117,11 @@
       "forbidden_violations": 0,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 89,
-        "search_ms": 5,
+        "embedding_ms": 109,
+        "search_ms": 6,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 94
+        "total_ms": 115
       }
     },
     {
@@ -3133,13 +3133,13 @@
         "maintenance-wm-drum",
         "maintenance-rf-ice",
         "repair-case-01",
-        "error-wm-a410-u11",
         "maintenance-ac-filter",
         "maintenance-dryer-filter",
         "maintenance-wm-filter",
         "maintenance-oven-steam",
         "maintenance-tv-vent",
-        "error-wm-a410-c07"
+        "error-wm-a410-c07",
+        "maintenance-vc-brush"
       ],
       "hit_at_3": 1,
       "hit_at_10": 1,
@@ -3154,11 +3154,11 @@
       "forbidden_violations": 0,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 93,
-        "search_ms": 3,
+        "embedding_ms": 115,
+        "search_ms": 4,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 96
+        "total_ms": 119
       }
     },
     {
@@ -3195,7 +3195,7 @@
         "search_ms": 3,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 3
+        "total_ms": 4
       }
     },
     {
@@ -3206,10 +3206,10 @@
       "hit_ids": [
         "maintenance-wm-drum",
         "maintenance-tv-vent",
-        "error-wm-a410-u11",
         "error-wm-a410-c07",
         "error-wm-a410-e42",
         "error-wm-a410-e24",
+        "error-wm-a410-u11",
         "maintenance-dryer-filter",
         "maintenance-vc-battery",
         "maintenance-rf-ice",
@@ -3228,11 +3228,11 @@
       "forbidden_violations": 0,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 83,
-        "search_ms": 5,
+        "embedding_ms": 114,
+        "search_ms": 6,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 88
+        "total_ms": 120
       }
     },
     {
@@ -3265,11 +3265,11 @@
       "forbidden_violations": 0,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 80,
-        "search_ms": 3,
+        "embedding_ms": 107,
+        "search_ms": 4,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 83
+        "total_ms": 111
       }
     },
     {
@@ -3303,10 +3303,10 @@
       "constraint_pass": null,
       "timings": {
         "embedding_ms": 0,
-        "search_ms": 2,
+        "search_ms": 3,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 2
+        "total_ms": 3
       }
     },
     {
@@ -3339,11 +3339,11 @@
       "forbidden_violations": 0,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 81,
+        "embedding_ms": 107,
         "search_ms": 5,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 86
+        "total_ms": 113
       }
     },
     {
@@ -3356,12 +3356,12 @@
         "support-connect-12",
         "support-connect-05",
         "faq-app-login",
-        "support-connect-06",
         "manual-tv-network",
+        "support-connect-06",
         "support-connect-08",
         "firmware-app-240",
         "compat-rf-d510",
-        "support-connect-02"
+        "support-connect-09"
       ],
       "hit_at_3": 1,
       "hit_at_10": 1,
@@ -3376,11 +3376,11 @@
       "forbidden_violations": 0,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 80,
-        "search_ms": 3,
+        "embedding_ms": 96,
+        "search_ms": 4,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 83
+        "total_ms": 100
       }
     },
     {
@@ -3431,10 +3431,10 @@
         "firmware-app-240",
         "compat-rf-d510",
         "firmware-ov-e600-2",
-        "compat-android15",
         "support-connect-08",
-        "firmware-wm-a410-3",
+        "compat-android15",
         "support-connect-05",
+        "firmware-wm-a410-3",
         "faq-app-login"
       ],
       "hit_at_3": 1,
@@ -3450,11 +3450,11 @@
       "forbidden_violations": 0,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 79,
+        "embedding_ms": 95,
         "search_ms": 5,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 84
+        "total_ms": 101
       }
     },
     {
@@ -3463,16 +3463,16 @@
       "category": "mixed",
       "mode": "vector",
       "hit_ids": [
-        "repair-case-09",
         "error-wm-a410-e42",
+        "repair-case-09",
         "error-wm-a410-u11",
         "error-wm-a410-e24",
         "repair-case-11",
         "manual-wm-drain",
-        "repair-case-01",
         "error-wm-a410-c07",
         "manual-wm-water",
-        "error-wm-a410s-e42"
+        "error-wm-a410s-e42",
+        "repair-case-01"
       ],
       "hit_at_3": 0,
       "hit_at_10": 1,
@@ -3487,11 +3487,11 @@
       "forbidden_violations": 0,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 84,
-        "search_ms": 3,
+        "embedding_ms": 111,
+        "search_ms": 4,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 87
+        "total_ms": 115
       }
     },
     {
@@ -3538,15 +3538,15 @@
       "mode": "hybrid",
       "hit_ids": [
         "manual-wm-drain",
-        "error-wm-a410-e42",
         "error-wm-a410s-e42",
-        "repair-case-09",
+        "error-wm-a410-e42",
         "error-wm-a410-u11",
+        "repair-case-09",
         "error-wm-a410-e24",
         "firmware-wm-a410s-3",
         "error-wm-a410-c07",
         "repair-case-11",
-        "installation-wm-drain"
+        "manual-wm-water"
       ],
       "hit_at_3": 1,
       "hit_at_10": 1,
@@ -3561,11 +3561,11 @@
       "forbidden_violations": 0,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 110,
+        "embedding_ms": 102,
         "search_ms": 5,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 115
+        "total_ms": 108
       }
     },
     {
@@ -3581,8 +3581,8 @@
         "firmware-ac-c300-3",
         "support-connect-14",
         "support-connect-15",
-        "support-connect-07",
         "support-connect-10",
+        "support-connect-07",
         "support-connect-04"
       ],
       "hit_at_3": 1,
@@ -3598,11 +3598,11 @@
       "forbidden_violations": 1,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 91,
+        "embedding_ms": 106,
         "search_ms": 5,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 96
+        "total_ms": 112
       }
     },
     {
@@ -3614,9 +3614,9 @@
         "support-connect-03",
         "support-connect-14",
         "support-connect-13",
-        "support-connect-04",
         "support-connect-15",
         "support-connect-10",
+        "support-connect-04",
         "support-connect-01",
         "support-connect-07",
         "firmware-ac-c300-3",
@@ -3635,11 +3635,11 @@
       "forbidden_violations": 1,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 86,
+        "embedding_ms": 109,
         "search_ms": 5,
-        "rerank_ms": 989,
+        "rerank_ms": 1194,
         "context_ms": 0,
-        "total_ms": 1079
+        "total_ms": 1308
       }
     },
     {
@@ -3651,50 +3651,50 @@
         "support-connect-04",
         "support-connect-14",
         "support-connect-02",
-        "support-connect-10",
         "support-connect-07",
-        "support-connect-03",
+        "support-connect-10",
         "firmware-app-250",
+        "support-connect-15",
+        "support-connect-03",
+        "firmware-wm-a410-4",
+        "firmware-wm-a410s-3"
+      ],
+      "hit_at_3": 1,
+      "hit_at_10": 1,
+      "mrr_at_5": 1.0,
+      "ndcg_at_5": 1.0,
+      "context_completeness": null,
+      "parent_hit_at_3": null,
+      "context_precision": null,
+      "context_chunks_added": null,
+      "expected_pass": null,
+      "condition_violations": 0,
+      "forbidden_violations": 1,
+      "constraint_pass": null,
+      "timings": {
+        "embedding_ms": 109,
+        "search_ms": 6,
+        "rerank_ms": 0,
+        "context_ms": 0,
+        "total_ms": 116
+      }
+    },
+    {
+      "id": "neg-t02",
+      "split": "test",
+      "category": "negation_exception",
+      "mode": "hybrid_rerank",
+      "hit_ids": [
+        "support-connect-04",
+        "firmware-app-250",
+        "support-connect-14",
+        "support-connect-10",
         "support-connect-15",
         "firmware-wm-a410-4",
-        "support-connect-05"
-      ],
-      "hit_at_3": 1,
-      "hit_at_10": 1,
-      "mrr_at_5": 1.0,
-      "ndcg_at_5": 1.0,
-      "context_completeness": null,
-      "parent_hit_at_3": null,
-      "context_precision": null,
-      "context_chunks_added": null,
-      "expected_pass": null,
-      "condition_violations": 0,
-      "forbidden_violations": 1,
-      "constraint_pass": null,
-      "timings": {
-        "embedding_ms": 84,
-        "search_ms": 5,
-        "rerank_ms": 0,
-        "context_ms": 0,
-        "total_ms": 89
-      }
-    },
-    {
-      "id": "neg-t02",
-      "split": "test",
-      "category": "negation_exception",
-      "mode": "hybrid_rerank",
-      "hit_ids": [
-        "support-connect-04",
-        "support-connect-14",
-        "firmware-app-250",
-        "support-connect-10",
-        "support-connect-15",
         "support-connect-03",
         "support-connect-07",
-        "support-connect-05",
-        "support-connect-02",
-        "firmware-wm-a410-4"
+        "firmware-wm-a410s-3",
+        "support-connect-02"
       ],
       "hit_at_3": 1,
       "hit_at_10": 1,
@@ -3709,11 +3709,11 @@
       "forbidden_violations": 1,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 79,
-        "search_ms": 5,
-        "rerank_ms": 961,
+        "embedding_ms": 106,
+        "search_ms": 6,
+        "rerank_ms": 1110,
         "context_ms": 0,
-        "total_ms": 1045
+        "total_ms": 1221
       }
     },
     {
@@ -3723,15 +3723,15 @@
       "mode": "hybrid",
       "hit_ids": [
         "support-connect-13",
-        "support-connect-05",
         "firmware-app-240",
-        "safety-context-tipover-tv-3",
         "firmware-wm-a410-3",
+        "support-connect-05",
+        "safety-context-tipover-tv-3",
         "manual-router-reset",
-        "support-connect-10",
+        "firmware-wm-a410-4",
+        "firmware-ov-e600-2",
         "support-connect-08",
-        "error-dr-b220-e42",
-        "faq-app-offline"
+        "support-connect-10"
       ],
       "hit_at_3": 1,
       "hit_at_10": 1,
@@ -3746,11 +3746,11 @@
       "forbidden_violations": 0,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 97,
-        "search_ms": 5,
+        "embedding_ms": 111,
+        "search_ms": 6,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 102
+        "total_ms": 117
       }
     },
     {
@@ -3764,11 +3764,11 @@
         "firmware-wm-a410-3",
         "support-connect-05",
         "support-connect-08",
-        "faq-app-offline",
-        "firmware-app-240",
+        "firmware-ov-e600-2",
         "safety-context-tipover-tv-3",
+        "firmware-wm-a410-4",
         "manual-router-reset",
-        "error-dr-b220-e42"
+        "firmware-app-240"
       ],
       "hit_at_3": 1,
       "hit_at_10": 1,
@@ -3783,11 +3783,11 @@
       "forbidden_violations": 0,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 76,
-        "search_ms": 5,
-        "rerank_ms": 939,
+        "embedding_ms": 99,
+        "search_ms": 6,
+        "rerank_ms": 1189,
         "context_ms": 0,
-        "total_ms": 1019
+        "total_ms": 1294
       }
     },
     {
@@ -3820,11 +3820,11 @@
       "forbidden_violations": 0,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 77,
-        "search_ms": 10,
+        "embedding_ms": 102,
+        "search_ms": 6,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 87
+        "total_ms": 109
       }
     },
     {
@@ -3834,11 +3834,11 @@
       "mode": "hybrid_rerank",
       "hit_ids": [
         "support-connect-14",
-        "support-connect-03",
-        "support-connect-02",
-        "support-connect-07",
-        "support-connect-08",
         "manual-app-account",
+        "support-connect-03",
+        "support-connect-07",
+        "support-connect-02",
+        "support-connect-08",
         "manual-ac-pairing",
         "product-wm-a401",
         "product-wm-a410",
@@ -3857,11 +3857,11 @@
       "forbidden_violations": 0,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 76,
-        "search_ms": 5,
-        "rerank_ms": 948,
+        "embedding_ms": 106,
+        "search_ms": 6,
+        "rerank_ms": 1121,
         "context_ms": 0,
-        "total_ms": 1029
+        "total_ms": 1233
       }
     },
     {
@@ -3873,13 +3873,13 @@
         "support-connect-15",
         "support-connect-04",
         "support-connect-13",
-        "support-connect-01",
         "compat-app240",
+        "support-connect-01",
         "firmware-app-240",
-        "support-connect-03",
         "compat-router-wpa3",
-        "support-connect-10",
-        "firmware-ac-c300-3"
+        "support-connect-03",
+        "firmware-wm-a410-4",
+        "support-connect-10"
       ],
       "hit_at_3": 1,
       "hit_at_10": 1,
@@ -3894,11 +3894,11 @@
       "forbidden_violations": 1,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 83,
-        "search_ms": 5,
+        "embedding_ms": 120,
+        "search_ms": 6,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 88
+        "total_ms": 127
       }
     },
     {
@@ -3909,11 +3909,11 @@
       "hit_ids": [
         "support-connect-15",
         "support-connect-13",
+        "support-connect-04",
         "support-connect-01",
         "support-connect-03",
-        "support-connect-04",
+        "firmware-wm-a410-4",
         "support-connect-10",
-        "firmware-ac-c300-3",
         "firmware-app-240",
         "compat-router-wpa3",
         "compat-app240"
@@ -3931,11 +3931,11 @@
       "forbidden_violations": 1,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 79,
+        "embedding_ms": 113,
         "search_ms": 6,
-        "rerank_ms": 1006,
+        "rerank_ms": 1146,
         "context_ms": 0,
-        "total_ms": 1091
+        "total_ms": 1265
       }
     },
     {
@@ -3951,9 +3951,9 @@
         "repair-case-07",
         "support-connect-06",
         "safety-context-overheating-dryer-1",
-        "repair-case-05",
         "installation-dryer-vent",
-        "error-dr-b220-e42"
+        "error-dr-b220-e42",
+        "safety-context-overheating-dryer-3"
       ],
       "hit_at_3": 1,
       "hit_at_10": 1,
@@ -3968,11 +3968,11 @@
       "forbidden_violations": 1,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 91,
-        "search_ms": 6,
+        "embedding_ms": 113,
+        "search_ms": 7,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 98
+        "total_ms": 120
       }
     },
     {
@@ -3984,12 +3984,12 @@
         "repair-case-02",
         "repair-case-03",
         "manual-dryer-filter",
-        "repair-case-05",
         "error-dr-b220-e42",
         "safety-context-overheating-dryer-1",
         "product-dr-b220",
-        "repair-case-07",
+        "safety-context-overheating-dryer-3",
         "installation-dryer-vent",
+        "repair-case-07",
         "support-connect-06"
       ],
       "hit_at_3": 1,
@@ -4005,11 +4005,11 @@
       "forbidden_violations": 1,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 82,
-        "search_ms": 5,
-        "rerank_ms": 1030,
+        "embedding_ms": 107,
+        "search_ms": 6,
+        "rerank_ms": 1149,
         "context_ms": 0,
-        "total_ms": 1117
+        "total_ms": 1262
       }
     },
     {
@@ -4022,10 +4022,10 @@
         "manual-dryer-filter",
         "repair-case-06",
         "repair-case-02",
-        "repair-case-05",
         "repair-case-14",
         "manual-fridge-ice",
         "support-connect-14",
+        "repair-case-05",
         "error-dr-b220-e42",
         "repair-case-11"
       ],
@@ -4042,11 +4042,11 @@
       "forbidden_violations": 1,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 81,
-        "search_ms": 5,
+        "embedding_ms": 101,
+        "search_ms": 6,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 86
+        "total_ms": 107
       }
     },
     {
@@ -4079,214 +4079,177 @@
       "forbidden_violations": 1,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 82,
-        "search_ms": 5,
-        "rerank_ms": 1079,
-        "context_ms": 0,
-        "total_ms": 1166
-      }
-    },
-    {
-      "id": "neg-t08",
-      "split": "test",
-      "category": "negation_exception",
-      "mode": "hybrid",
-      "hit_ids": [
-        "repair-case-08",
-        "repair-case-05",
-        "product-ac-c300",
-        "maintenance-ac-filter",
-        "manual-fridge-temp",
-        "compat-voice-b",
-        "manual-ac-pairing",
-        "repair-case-10",
-        "compat-voice-a",
-        "product-ac-c330"
-      ],
-      "hit_at_3": 1,
-      "hit_at_10": 1,
-      "mrr_at_5": 1.0,
-      "ndcg_at_5": 1.0,
-      "context_completeness": null,
-      "parent_hit_at_3": null,
-      "context_precision": null,
-      "context_chunks_added": null,
-      "expected_pass": null,
-      "condition_violations": 0,
-      "forbidden_violations": 0,
-      "constraint_pass": null,
-      "timings": {
-        "embedding_ms": 82,
-        "search_ms": 5,
-        "rerank_ms": 0,
-        "context_ms": 0,
-        "total_ms": 87
-      }
-    },
-    {
-      "id": "neg-t08",
-      "split": "test",
-      "category": "negation_exception",
-      "mode": "hybrid_rerank",
-      "hit_ids": [
-        "repair-case-08",
-        "repair-case-10",
-        "maintenance-ac-filter",
-        "product-ac-c330",
-        "repair-case-05",
-        "product-ac-c300",
-        "manual-fridge-temp",
-        "manual-ac-pairing",
-        "compat-voice-b",
-        "compat-voice-a"
-      ],
-      "hit_at_3": 1,
-      "hit_at_10": 1,
-      "mrr_at_5": 1.0,
-      "ndcg_at_5": 1.0,
-      "context_completeness": null,
-      "parent_hit_at_3": null,
-      "context_precision": null,
-      "context_chunks_added": null,
-      "expected_pass": null,
-      "condition_violations": 0,
-      "forbidden_violations": 0,
-      "constraint_pass": null,
-      "timings": {
-        "embedding_ms": 75,
-        "search_ms": 5,
-        "rerank_ms": 1011,
-        "context_ms": 0,
-        "total_ms": 1091
-      }
-    },
-    {
-      "id": "neg-t09",
-      "split": "test",
-      "category": "negation_exception",
-      "mode": "hybrid",
-      "hit_ids": [
-        "repair-case-14",
-        "product-tv-g880",
-        "safety-context-tipover-tv-1",
-        "warranty-context-tv-g800-1",
-        "firmware-tv-g880-5",
-        "faq-tv-black",
-        "product-tv-g800",
-        "repair-case-07",
-        "support-connect-10",
-        "product-wm-a401"
-      ],
-      "hit_at_3": 1,
-      "hit_at_10": 1,
-      "mrr_at_5": 1.0,
-      "ndcg_at_5": 1.0,
-      "context_completeness": null,
-      "parent_hit_at_3": null,
-      "context_precision": null,
-      "context_chunks_added": null,
-      "expected_pass": null,
-      "condition_violations": 0,
-      "forbidden_violations": 1,
-      "constraint_pass": null,
-      "timings": {
-        "embedding_ms": 85,
-        "search_ms": 5,
-        "rerank_ms": 0,
-        "context_ms": 0,
-        "total_ms": 90
-      }
-    },
-    {
-      "id": "neg-t09",
-      "split": "test",
-      "category": "negation_exception",
-      "mode": "hybrid_rerank",
-      "hit_ids": [
-        "repair-case-14",
-        "warranty-context-tv-g800-1",
-        "repair-case-07",
-        "safety-context-tipover-tv-1",
-        "firmware-tv-g880-5",
-        "product-tv-g880",
-        "support-connect-10",
-        "product-tv-g800",
-        "faq-tv-black",
-        "product-wm-a401"
-      ],
-      "hit_at_3": 1,
-      "hit_at_10": 1,
-      "mrr_at_5": 1.0,
-      "ndcg_at_5": 1.0,
-      "context_completeness": null,
-      "parent_hit_at_3": null,
-      "context_precision": null,
-      "context_chunks_added": null,
-      "expected_pass": null,
-      "condition_violations": 0,
-      "forbidden_violations": 1,
-      "constraint_pass": null,
-      "timings": {
-        "embedding_ms": 82,
-        "search_ms": 5,
-        "rerank_ms": 949,
-        "context_ms": 0,
-        "total_ms": 1036
-      }
-    },
-    {
-      "id": "neg-t10",
-      "split": "test",
-      "category": "negation_exception",
-      "mode": "hybrid",
-      "hit_ids": [
-        "repair-case-13",
-        "faq-vacuum-short",
-        "product-vc-f710",
-        "safety-context-battery-vacuum-1",
-        "product-vc-f701",
-        "maintenance-vc-battery",
-        "safety-context-battery-vacuum-3",
-        "repair-case-06",
-        "safety-context-overheating-dryer-2",
-        "repair-case-01"
-      ],
-      "hit_at_3": 1,
-      "hit_at_10": 1,
-      "mrr_at_5": 1.0,
-      "ndcg_at_5": 1.0,
-      "context_completeness": null,
-      "parent_hit_at_3": null,
-      "context_precision": null,
-      "context_chunks_added": null,
-      "expected_pass": null,
-      "condition_violations": 0,
-      "forbidden_violations": 1,
-      "constraint_pass": null,
-      "timings": {
-        "embedding_ms": 82,
+        "embedding_ms": 105,
         "search_ms": 6,
+        "rerank_ms": 1302,
+        "context_ms": 0,
+        "total_ms": 1413
+      }
+    },
+    {
+      "id": "neg-t08",
+      "split": "test",
+      "category": "negation_exception",
+      "mode": "hybrid",
+      "hit_ids": [
+        "repair-case-08",
+        "repair-case-05",
+        "product-ac-c300",
+        "maintenance-ac-filter",
+        "manual-fridge-temp",
+        "compat-voice-b",
+        "manual-ac-pairing",
+        "repair-case-10",
+        "repair-case-12",
+        "repair-case-06"
+      ],
+      "hit_at_3": 1,
+      "hit_at_10": 1,
+      "mrr_at_5": 1.0,
+      "ndcg_at_5": 1.0,
+      "context_completeness": null,
+      "parent_hit_at_3": null,
+      "context_precision": null,
+      "context_chunks_added": null,
+      "expected_pass": null,
+      "condition_violations": 0,
+      "forbidden_violations": 0,
+      "constraint_pass": null,
+      "timings": {
+        "embedding_ms": 115,
+        "search_ms": 8,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 88
+        "total_ms": 123
+      }
+    },
+    {
+      "id": "neg-t08",
+      "split": "test",
+      "category": "negation_exception",
+      "mode": "hybrid_rerank",
+      "hit_ids": [
+        "repair-case-08",
+        "maintenance-ac-filter",
+        "repair-case-10",
+        "repair-case-05",
+        "product-ac-c300",
+        "repair-case-06",
+        "manual-fridge-temp",
+        "repair-case-12",
+        "manual-ac-pairing",
+        "compat-voice-b"
+      ],
+      "hit_at_3": 1,
+      "hit_at_10": 1,
+      "mrr_at_5": 1.0,
+      "ndcg_at_5": 1.0,
+      "context_completeness": null,
+      "parent_hit_at_3": null,
+      "context_precision": null,
+      "context_chunks_added": null,
+      "expected_pass": null,
+      "condition_violations": 0,
+      "forbidden_violations": 0,
+      "constraint_pass": null,
+      "timings": {
+        "embedding_ms": 143,
+        "search_ms": 7,
+        "rerank_ms": 1245,
+        "context_ms": 0,
+        "total_ms": 1395
+      }
+    },
+    {
+      "id": "neg-t09",
+      "split": "test",
+      "category": "negation_exception",
+      "mode": "hybrid",
+      "hit_ids": [
+        "repair-case-14",
+        "product-tv-g880",
+        "safety-context-tipover-tv-1",
+        "warranty-context-tv-g800-1",
+        "firmware-tv-g880-5",
+        "faq-tv-black",
+        "support-connect-10",
+        "product-tv-g800",
+        "firmware-tv-g800-5",
+        "product-wm-a401"
+      ],
+      "hit_at_3": 1,
+      "hit_at_10": 1,
+      "mrr_at_5": 1.0,
+      "ndcg_at_5": 1.0,
+      "context_completeness": null,
+      "parent_hit_at_3": null,
+      "context_precision": null,
+      "context_chunks_added": null,
+      "expected_pass": null,
+      "condition_violations": 0,
+      "forbidden_violations": 0,
+      "constraint_pass": null,
+      "timings": {
+        "embedding_ms": 106,
+        "search_ms": 9,
+        "rerank_ms": 0,
+        "context_ms": 0,
+        "total_ms": 115
+      }
+    },
+    {
+      "id": "neg-t09",
+      "split": "test",
+      "category": "negation_exception",
+      "mode": "hybrid_rerank",
+      "hit_ids": [
+        "repair-case-14",
+        "warranty-context-tv-g800-1",
+        "product-tv-g880",
+        "safety-context-tipover-tv-1",
+        "product-tv-g800",
+        "firmware-tv-g880-5",
+        "support-connect-10",
+        "faq-tv-black",
+        "firmware-tv-g800-5",
+        "product-wm-a401"
+      ],
+      "hit_at_3": 1,
+      "hit_at_10": 1,
+      "mrr_at_5": 1.0,
+      "ndcg_at_5": 1.0,
+      "context_completeness": null,
+      "parent_hit_at_3": null,
+      "context_precision": null,
+      "context_chunks_added": null,
+      "expected_pass": null,
+      "condition_violations": 0,
+      "forbidden_violations": 0,
+      "constraint_pass": null,
+      "timings": {
+        "embedding_ms": 107,
+        "search_ms": 7,
+        "rerank_ms": 1139,
+        "context_ms": 0,
+        "total_ms": 1254
       }
     },
     {
       "id": "neg-t10",
       "split": "test",
       "category": "negation_exception",
-      "mode": "hybrid_rerank",
+      "mode": "hybrid",
       "hit_ids": [
         "repair-case-13",
-        "safety-context-battery-vacuum-1",
         "faq-vacuum-short",
         "product-vc-f710",
+        "safety-context-battery-vacuum-1",
         "product-vc-f701",
-        "safety-context-battery-vacuum-3",
         "maintenance-vc-battery",
+        "safety-context-battery-vacuum-3",
         "repair-case-06",
-        "safety-context-overheating-dryer-2",
-        "repair-case-01"
+        "safety-context-tipover-tv-3",
+        "safety-context-overheating-dryer-2"
       ],
       "hit_at_3": 1,
       "hit_at_10": 1,
@@ -4301,11 +4264,48 @@
       "forbidden_violations": 1,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 83,
-        "search_ms": 5,
-        "rerank_ms": 1161,
+        "embedding_ms": 105,
+        "search_ms": 8,
+        "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 1249
+        "total_ms": 113
+      }
+    },
+    {
+      "id": "neg-t10",
+      "split": "test",
+      "category": "negation_exception",
+      "mode": "hybrid_rerank",
+      "hit_ids": [
+        "repair-case-13",
+        "faq-vacuum-short",
+        "safety-context-battery-vacuum-1",
+        "product-vc-f710",
+        "product-vc-f701",
+        "safety-context-battery-vacuum-3",
+        "safety-context-overheating-dryer-2",
+        "repair-case-06",
+        "maintenance-vc-battery",
+        "safety-context-tipover-tv-3"
+      ],
+      "hit_at_3": 1,
+      "hit_at_10": 1,
+      "mrr_at_5": 1.0,
+      "ndcg_at_5": 1.0,
+      "context_completeness": null,
+      "parent_hit_at_3": null,
+      "context_precision": null,
+      "context_chunks_added": null,
+      "expected_pass": null,
+      "condition_violations": 0,
+      "forbidden_violations": 1,
+      "constraint_pass": null,
+      "timings": {
+        "embedding_ms": 109,
+        "search_ms": 7,
+        "rerank_ms": 1237,
+        "context_ms": 0,
+        "total_ms": 1354
       }
     },
     {
@@ -4338,11 +4338,11 @@
       "forbidden_violations": 0,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 96,
-        "search_ms": 5,
+        "embedding_ms": 118,
+        "search_ms": 8,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 101
+        "total_ms": 127
       }
     },
     {
@@ -4374,11 +4374,11 @@
       "forbidden_violations": 0,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 89,
-        "search_ms": 5,
+        "embedding_ms": 117,
+        "search_ms": 8,
         "rerank_ms": 0,
-        "context_ms": 3,
-        "total_ms": 97
+        "context_ms": 7,
+        "total_ms": 132
       }
     },
     {
@@ -4411,11 +4411,11 @@
       "forbidden_violations": 0,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 85,
-        "search_ms": 5,
+        "embedding_ms": 114,
+        "search_ms": 7,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 90
+        "total_ms": 121
       }
     },
     {
@@ -4447,11 +4447,11 @@
       "forbidden_violations": 0,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 84,
-        "search_ms": 5,
+        "embedding_ms": 110,
+        "search_ms": 7,
         "rerank_ms": 0,
-        "context_ms": 1,
-        "total_ms": 90
+        "context_ms": 2,
+        "total_ms": 119
       }
     },
     {
@@ -4484,11 +4484,11 @@
       "forbidden_violations": 0,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 88,
-        "search_ms": 5,
+        "embedding_ms": 109,
+        "search_ms": 7,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 93
+        "total_ms": 116
       }
     },
     {
@@ -4520,11 +4520,11 @@
       "forbidden_violations": 0,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 84,
-        "search_ms": 5,
+        "embedding_ms": 113,
+        "search_ms": 7,
         "rerank_ms": 0,
-        "context_ms": 4,
-        "total_ms": 92
+        "context_ms": 5,
+        "total_ms": 126
       }
     },
     {
@@ -4540,9 +4540,9 @@
         "repair-case-13",
         "maintenance-vc-battery",
         "safety-context-battery-vacuum-3",
-        "safety-context-battery-vacuum-2",
         "maintenance-tv-vent",
-        "manual-ac-clean"
+        "safety-context-battery-vacuum-2",
+        "warranty-context-wm-a410-3"
       ],
       "hit_at_3": 1,
       "hit_at_10": 1,
@@ -4557,11 +4557,11 @@
       "forbidden_violations": 0,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 82,
-        "search_ms": 5,
+        "embedding_ms": 116,
+        "search_ms": 7,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 87
+        "total_ms": 123
       }
     },
     {
@@ -4577,7 +4577,7 @@
         "repair-case-13",
         "maintenance-vc-battery",
         "maintenance-tv-vent",
-        "manual-ac-clean"
+        "warranty-context-wm-a410-3"
       ],
       "hit_at_3": 1,
       "hit_at_10": 1,
@@ -4585,18 +4585,18 @@
       "ndcg_at_5": 0.12298716509766383,
       "context_completeness": 1.0,
       "parent_hit_at_3": 1,
-      "context_precision": 1.0,
-      "context_chunks_added": 2,
+      "context_precision": 0.5,
+      "context_chunks_added": 4,
       "expected_pass": null,
       "condition_violations": 0,
       "forbidden_violations": 0,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 85,
-        "search_ms": 5,
+        "embedding_ms": 116,
+        "search_ms": 7,
         "rerank_ms": 0,
-        "context_ms": 1,
-        "total_ms": 91
+        "context_ms": 3,
+        "total_ms": 126
       }
     },
     {
@@ -4629,11 +4629,11 @@
       "forbidden_violations": 0,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 82,
-        "search_ms": 5,
+        "embedding_ms": 124,
+        "search_ms": 7,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 87
+        "total_ms": 132
       }
     },
     {
@@ -4664,11 +4664,11 @@
       "forbidden_violations": 0,
       "constraint_pass": null,
       "timings": {
-        "embedding_ms": 83,
-        "search_ms": 5,
+        "embedding_ms": 108,
+        "search_ms": 7,
         "rerank_ms": 0,
-        "context_ms": 4,
-        "total_ms": 92
+        "context_ms": 6,
+        "total_ms": 122
       }
     },
     {
@@ -4738,11 +4738,11 @@
         "support-connect-01",
         "support-connect-15",
         "support-connect-13",
-        "support-connect-10",
-        "support-connect-05",
-        "support-connect-07",
         "support-connect-04",
-        "support-connect-06"
+        "support-connect-10",
+        "support-connect-07",
+        "support-connect-05",
+        "support-connect-08"
       ],
       "hit_at_3": 0,
       "hit_at_10": 0,
@@ -4757,11 +4757,11 @@
       "forbidden_violations": 0,
       "constraint_pass": true,
       "timings": {
-        "embedding_ms": 85,
-        "search_ms": 5,
+        "embedding_ms": 111,
+        "search_ms": 7,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 90
+        "total_ms": 119
       }
     },
     {
@@ -4773,11 +4773,11 @@
         "repair-case-11",
         "repair-case-01",
         "repair-case-12",
-        "repair-case-02",
         "repair-case-03",
+        "repair-case-02",
         "repair-case-06",
-        "repair-case-08",
         "repair-case-05",
+        "repair-case-08",
         "repair-case-10",
         "repair-case-04"
       ],
@@ -4794,11 +4794,11 @@
       "forbidden_violations": 0,
       "constraint_pass": true,
       "timings": {
-        "embedding_ms": 104,
-        "search_ms": 5,
+        "embedding_ms": 108,
+        "search_ms": 7,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 109
+        "total_ms": 115
       }
     },
     {
@@ -4831,11 +4831,11 @@
       "forbidden_violations": 0,
       "constraint_pass": true,
       "timings": {
-        "embedding_ms": 81,
-        "search_ms": 5,
+        "embedding_ms": 107,
+        "search_ms": 6,
         "rerank_ms": 0,
         "context_ms": 0,
-        "total_ms": 86
+        "total_ms": 113
       }
     }
   ],

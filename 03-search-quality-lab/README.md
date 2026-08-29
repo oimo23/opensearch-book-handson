@@ -129,7 +129,7 @@ for mode in hybrid hybrid_rerank; do
 done
 ```
 
-hybridでは、更新後に接続が切れたものの再起動で解決した`support-connect-13`が1位です。問い合わせに最も合う`support-connect-03`は2位ですが、rerank後は1位へ上がります。rerankは候補を検索し直さず、hybridが取得した同じ10件を質問との適合度で並べ替えます。
+hybridでは、更新後に接続が切れたものの再起動で解決した`support-connect-13`が1位です。問い合わせに最も合う`support-connect-03`は2位ですが、rerank後は1位へ上がります。rerankは候補を検索し直さず、hybridが取得した同じ10件を質問との適合度で並べ替えます。このデモでは、`No.03`のような管理用の事例番号が順位へ影響しないよう、rerankerへ事例本文だけを渡します。
 
 ## ケース4: 前後チャンクを復元する
 

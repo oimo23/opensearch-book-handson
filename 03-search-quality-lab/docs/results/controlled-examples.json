@@ -1,10 +1,10 @@
 {
-  "captured_at": "2026-08-25T23:59:14+09:00",
+  "captured_at": "2026-08-29T15:48:25+09:00",
   "health": {
     "status": "ok",
     "index_name": "appliance-support-demo-v1",
     "document_count": 180,
-    "dataset_sha256": "d3ee9d4f1cd1ffccf381917b5167cb9f9cf7be1c492d4b177955ce4b62955539",
+    "dataset_sha256": "6d04f164b5b70ae26ff7d2982a7a91a475341f20be185e1a6a4a296518ce3956",
     "embedding_model": "cl-nagoya/ruri-v3-310m",
     "embedding_model_revision": "18b60fb8c2b9df296fb4212bb7d23ef94e579cd3",
     "rerank_model": "BAAI/bge-reranker-v2-m3",
@@ -28,11 +28,11 @@
         "query": "WM-A410-E42",
         "mode": "vector",
         "timings": {
-          "embedding_ms": 267,
-          "search_ms": 5,
+          "embedding_ms": 126,
+          "search_ms": 3,
           "rerank_ms": 0,
           "context_ms": 0,
-          "total_ms": 272
+          "total_ms": 130
         },
         "total_candidates": 10,
         "request_body": {
@@ -64,19 +64,19 @@
         "hits": [
           {
             "rank": 1,
-            "id": "repair-case-11",
-            "title": "訪問修理事例 2025-11",
-            "body": "WM-A410でE42が表示され、蛇口とホースを確認しても給水できませんでした。給水弁の交換部品を手配し、作業は未完了です。",
-            "score": 0.9499676,
+            "id": "error-wm-a410s-e42",
+            "title": "WM-A410S エラーコード一覧",
+            "body": "ドアロックを確認できないエラーです。WM-A410のE42とは意味が異なるため、給水ホースではなく扉の異物を点検します。",
+            "score": 0.94838095,
             "rerank_score": null,
             "context_chunks": []
           },
           {
             "rank": 2,
-            "id": "error-wm-a410s-e42",
-            "title": "WM-A410S エラーコード一覧",
-            "body": "ドアロックを確認できないエラーです。WM-A410のE42とは意味が異なるため、給水ホースではなく扉の異物を点検します。",
-            "score": 0.9483809,
+            "id": "repair-case-11",
+            "title": "訪問修理事例 No.11",
+            "body": "WM-A410でE42が表示され、蛇口とホースを確認しても給水できませんでした。給水弁の交換部品を手配し、作業は未完了です。",
+            "score": 0.9471565,
             "rerank_score": null,
             "context_chunks": []
           },
@@ -85,7 +85,7 @@
             "id": "product-wm-a410s",
             "title": "製品カタログ 2026年版",
             "body": "WM-A410の小型モデルです。乾燥容量とドラム径が異なり、交換部品や一部のエラー内容はWM-A410と共通ではありません。",
-            "score": 0.9466791,
+            "score": 0.9466792,
             "rerank_score": null,
             "context_chunks": []
           },
@@ -122,10 +122,10 @@
         "mode": "fulltext",
         "timings": {
           "embedding_ms": 0,
-          "search_ms": 3,
+          "search_ms": 2,
           "rerank_ms": 0,
           "context_ms": 0,
-          "total_ms": 3
+          "total_ms": 2
         },
         "total_candidates": 10,
         "request_body": {
@@ -163,7 +163,7 @@
             "id": "error-wm-a410-e42",
             "title": "WM-A410 エラーコード一覧",
             "body": "給水を開始できないエラーです。蛇口、給水ホース、給水口フィルターを確認します。排水異常を示すE24とは対処が異なります。",
-            "score": 12.208802,
+            "score": 12.05653,
             "rerank_score": null,
             "context_chunks": []
           },
@@ -172,7 +172,7 @@
             "id": "error-wm-a410-e24",
             "title": "WM-A410 エラーコード一覧",
             "body": "排水を完了できないエラーです。排水ホースの折れと糸くずフィルターを確認します。給水側の点検では解消しません。",
-            "score": 12.208802,
+            "score": 12.05653,
             "rerank_score": null,
             "context_chunks": []
           },
@@ -181,7 +181,7 @@
             "id": "error-wm-a410-c07",
             "title": "WM-A410 エラーコード一覧",
             "body": "洗剤自動投入タンクが正しく装着されていない通知です。運転はできますが、自動投入は行われません。",
-            "score": 12.208802,
+            "score": 12.05653,
             "rerank_score": null,
             "context_chunks": []
           },
@@ -190,7 +190,7 @@
             "id": "error-wm-a410-u11",
             "title": "WM-A410 エラーコード一覧",
             "body": "排水に通常より時間がかかっている通知です。E24になる前に排水フィルターを清掃します。",
-            "score": 12.208802,
+            "score": 12.05653,
             "rerank_score": null,
             "context_chunks": []
           },
@@ -271,11 +271,11 @@
         "query": "WM-A410でE42が出たときの給水エラーの対処",
         "mode": "vector",
         "timings": {
-          "embedding_ms": 88,
+          "embedding_ms": 102,
           "search_ms": 3,
           "rerank_ms": 0,
           "context_ms": 0,
-          "total_ms": 91
+          "total_ms": 105
         },
         "total_candidates": 10,
         "request_body": {
@@ -308,9 +308,9 @@
           {
             "rank": 1,
             "id": "repair-case-11",
-            "title": "訪問修理事例 2025-11",
+            "title": "訪問修理事例 No.11",
             "body": "WM-A410でE42が表示され、蛇口とホースを確認しても給水できませんでした。給水弁の交換部品を手配し、作業は未完了です。",
-            "score": 0.96945035,
+            "score": 0.9693858,
             "rerank_score": null,
             "context_chunks": []
           },
@@ -337,7 +337,7 @@
             "id": "error-wm-a410-e24",
             "title": "WM-A410 エラーコード一覧",
             "body": "排水を完了できないエラーです。排水ホースの折れと糸くずフィルターを確認します。給水側の点検では解消しません。",
-            "score": 0.9591372,
+            "score": 0.9591371,
             "rerank_score": null,
             "context_chunks": []
           },
@@ -353,9 +353,9 @@
           {
             "rank": 6,
             "id": "repair-case-09",
-            "title": "訪問修理事例 2025-09",
+            "title": "訪問修理事例 No.09",
             "body": "WM-A410の排水エラーE24は、排水ホースの折れを直すと解消しました。給水弁と水位センサーには異常がありませんでした。",
-            "score": 0.95352864,
+            "score": 0.94933593,
             "rerank_score": null,
             "context_chunks": []
           },
@@ -380,18 +380,18 @@
           {
             "rank": 9,
             "id": "repair-case-01",
-            "title": "訪問修理事例 2025-01",
+            "title": "訪問修理事例 No.01",
             "body": "給水が遅いWM-A410を点検し、給水口フィルターの砂を除去しました。部品交換は行わず、規定時間内に給水できることを確認しました。",
-            "score": 0.94428015,
+            "score": 0.9452563,
             "rerank_score": null,
             "context_chunks": []
           },
           {
             "rank": 10,
             "id": "support-connect-04",
-            "title": "接続サポート事例 2025-04",
+            "title": "接続サポート事例 No.04",
             "body": "WM-A410のファームウェアは2のままで、アプリの新しい認証方式に対応できず接続できませんでした。更新作業はまだ行っていません。",
-            "score": 0.93486756,
+            "score": 0.9338221,
             "rerank_score": null,
             "context_chunks": []
           }
@@ -410,10 +410,10 @@
         "mode": "fulltext",
         "timings": {
           "embedding_ms": 0,
-          "search_ms": 3,
+          "search_ms": 2,
           "rerank_ms": 0,
           "context_ms": 0,
-          "total_ms": 3
+          "total_ms": 2
         },
         "total_candidates": 10,
         "request_body": {
@@ -451,7 +451,7 @@
             "id": "error-wm-a410-e42",
             "title": "WM-A410 エラーコード一覧",
             "body": "給水を開始できないエラーです。蛇口、給水ホース、給水口フィルターを確認します。排水異常を示すE24とは対処が異なります。",
-            "score": 20.755892,
+            "score": 20.497017,
             "rerank_score": null,
             "context_chunks": []
           },
@@ -460,7 +460,7 @@
             "id": "error-wm-a410-e24",
             "title": "WM-A410 エラーコード一覧",
             "body": "排水を完了できないエラーです。排水ホースの折れと糸くずフィルターを確認します。給水側の点検では解消しません。",
-            "score": 20.755892,
+            "score": 20.497017,
             "rerank_score": null,
             "context_chunks": []
           },
@@ -469,7 +469,7 @@
             "id": "error-wm-a410-c07",
             "title": "WM-A410 エラーコード一覧",
             "body": "洗剤自動投入タンクが正しく装着されていない通知です。運転はできますが、自動投入は行われません。",
-            "score": 20.755892,
+            "score": 20.497017,
             "rerank_score": null,
             "context_chunks": []
           },
@@ -478,14 +478,14 @@
             "id": "error-wm-a410-u11",
             "title": "WM-A410 エラーコード一覧",
             "body": "排水に通常より時間がかかっている通知です。E24になる前に排水フィルターを清掃します。",
-            "score": 20.755892,
+            "score": 20.497017,
             "rerank_score": null,
             "context_chunks": []
           },
           {
             "rank": 5,
             "id": "repair-case-11",
-            "title": "訪問修理事例 2025-11",
+            "title": "訪問修理事例 No.11",
             "body": "WM-A410でE42が表示され、蛇口とホースを確認しても給水できませんでした。給水弁の交換部品を手配し、作業は未完了です。",
             "score": 15.962705,
             "rerank_score": null,
@@ -494,7 +494,7 @@
           {
             "rank": 6,
             "id": "repair-case-09",
-            "title": "訪問修理事例 2025-09",
+            "title": "訪問修理事例 No.09",
             "body": "WM-A410の排水エラーE24は、排水ホースの折れを直すと解消しました。給水弁と水位センサーには異常がありませんでした。",
             "score": 15.454203,
             "rerank_score": null,
@@ -514,14 +514,14 @@
             "id": "error-wm-a401-e42",
             "title": "WM-A401 エラーコード一覧",
             "body": "水位センサーの応答が規定範囲外であることを示します。電源を切っても再発する場合は点検を依頼します。",
-            "score": 14.331778,
+            "score": 14.153028,
             "rerank_score": null,
             "context_chunks": []
           },
           {
             "rank": 9,
             "id": "repair-case-01",
-            "title": "訪問修理事例 2025-01",
+            "title": "訪問修理事例 No.01",
             "body": "給水が遅いWM-A410を点検し、給水口フィルターの砂を除去しました。部品交換は行わず、規定時間内に給水できることを確認しました。",
             "score": 10.8752,
             "rerank_score": null,
@@ -550,11 +550,11 @@
         "query": "WM-A410でE42が出たときの給水エラーの対処",
         "mode": "hybrid",
         "timings": {
-          "embedding_ms": 85,
-          "search_ms": 5,
+          "embedding_ms": 97,
+          "search_ms": 4,
           "rerank_ms": 0,
           "context_ms": 0,
-          "total_ms": 90
+          "total_ms": 101
         },
         "total_candidates": 10,
         "request_body": {
@@ -606,7 +606,7 @@
             "id": "error-wm-a410-e42",
             "title": "WM-A410 エラーコード一覧",
             "body": "給水を開始できないエラーです。蛇口、給水ホース、給水口フィルターを確認します。排水異常を示すE24とは対処が異なります。",
-            "score": 0.9895233,
+            "score": 0.9903568,
             "rerank_score": null,
             "context_chunks": []
           },
@@ -615,7 +615,7 @@
             "id": "error-wm-a410-e24",
             "title": "WM-A410 エラーコード一覧",
             "body": "排水を完了できないエラーです。排水ホースの折れと糸くずフィルターを確認します。給水側の点検では解消しません。",
-            "score": 0.9105351,
+            "score": 0.9135462,
             "rerank_score": null,
             "context_chunks": []
           },
@@ -624,7 +624,7 @@
             "id": "error-wm-a410-u11",
             "title": "WM-A410 エラーコード一覧",
             "body": "排水に通常より時間がかかっている通知です。E24になる前に排水フィルターを清掃します。",
-            "score": 0.8865735,
+            "score": 0.8902465,
             "rerank_score": null,
             "context_chunks": []
           },
@@ -633,16 +633,16 @@
             "id": "error-wm-a410-c07",
             "title": "WM-A410 エラーコード一覧",
             "body": "洗剤自動投入タンクが正しく装着されていない通知です。運転はできますが、自動投入は行われません。",
-            "score": 0.8168179,
+            "score": 0.82241493,
             "rerank_score": null,
             "context_chunks": []
           },
           {
             "rank": 5,
             "id": "repair-case-11",
-            "title": "訪問修理事例 2025-11",
+            "title": "訪問修理事例 No.11",
             "body": "WM-A410でE42が表示され、蛇口とホースを確認しても給水できませんでした。給水弁の交換部品を手配し、作業は未完了です。",
-            "score": 0.66182446,
+            "score": 0.67151815,
             "rerank_score": null,
             "context_chunks": []
           },
@@ -651,16 +651,16 @@
             "id": "error-wm-a410s-e42",
             "title": "WM-A410S エラーコード一覧",
             "body": "ドアロックを確認できないエラーです。WM-A410のE42とは意味が異なるため、給水ホースではなく扉の異物を点検します。",
-            "score": 0.55265594,
+            "score": 0.5632678,
             "rerank_score": null,
             "context_chunks": []
           },
           {
             "rank": 7,
             "id": "repair-case-09",
-            "title": "訪問修理事例 2025-09",
+            "title": "訪問修理事例 No.09",
             "body": "WM-A410の排水エラーE24は、排水ホースの折れを直すと解消しました。給水弁と水位センサーには異常がありませんでした。",
-            "score": 0.48782972,
+            "score": 0.46554846,
             "rerank_score": null,
             "context_chunks": []
           },
@@ -669,16 +669,16 @@
             "id": "error-wm-a401-e42",
             "title": "WM-A401 エラーコード一覧",
             "body": "水位センサーの応答が規定範囲外であることを示します。電源を切っても再発する場合は点検を依頼します。",
-            "score": 0.34480566,
+            "score": 0.34458202,
             "rerank_score": null,
             "context_chunks": []
           },
           {
             "rank": 9,
             "id": "repair-case-01",
-            "title": "訪問修理事例 2025-01",
+            "title": "訪問修理事例 No.01",
             "body": "給水が遅いWM-A410を点検し、給水口フィルターの砂を除去しました。部品交換は行わず、規定時間内に給水できることを確認しました。",
-            "score": 0.08453646,
+            "score": 0.09941502,
             "rerank_score": null,
             "context_chunks": []
           },
@@ -706,10 +706,10 @@
         "mode": "hybrid",
         "timings": {
           "embedding_ms": 94,
-          "search_ms": 5,
+          "search_ms": 4,
           "rerank_ms": 0,
           "context_ms": 0,
-          "total_ms": 99
+          "total_ms": 98
         },
         "total_candidates": 10,
         "request_body": {
@@ -759,9 +759,9 @@
           {
             "rank": 1,
             "id": "support-connect-13",
-            "title": "接続サポート事例 2025-13",
+            "title": "接続サポート事例 No.13",
             "body": "AC-C300をファームウェア3へ更新した後、一度は接続が切れましたが、本体の再起動だけでアプリ操作が再開できました。",
-            "score": 0.9073756,
+            "score": 0.86365914,
             "rerank_score": null,
             "context_chunks": []
           },
@@ -770,34 +770,34 @@
             "id": "firmware-wm-a410s-3",
             "title": "更新履歴",
             "body": "WM-A410S専用ファームウェア3です。WM-A410へ適用すると起動できないため、型番を確認して更新します。",
-            "score": 0.7097447,
+            "score": 0.7093405,
             "rerank_score": null,
             "context_chunks": []
           },
           {
             "rank": 3,
             "id": "support-connect-03",
-            "title": "接続サポート事例 2025-03",
+            "title": "接続サポート事例 No.03",
             "body": "WM-A410をファームウェア4へ更新しましたが、更新完了後もスマートフォンとの接続が回復しませんでした。再登録とルーター再起動でも未解決です。",
-            "score": 0.6790335,
+            "score": 0.6792038,
             "rerank_score": null,
             "context_chunks": []
           },
           {
             "rank": 4,
             "id": "support-connect-01",
-            "title": "接続サポート事例 2025-01",
+            "title": "接続サポート事例 No.01",
             "body": "WM-A410をファームウェア3へ更新後、アプリから見つからなくなりました。登録を解除して同じ家庭内ネットワークで再登録すると接続できるようになりました。",
-            "score": 0.63742304,
+            "score": 0.55358917,
             "rerank_score": null,
             "context_chunks": []
           },
           {
             "rank": 5,
             "id": "support-connect-04",
-            "title": "接続サポート事例 2025-04",
+            "title": "接続サポート事例 No.04",
             "body": "WM-A410のファームウェアは2のままで、アプリの新しい認証方式に対応できず接続できませんでした。更新作業はまだ行っていません。",
-            "score": 0.3679645,
+            "score": 0.41185936,
             "rerank_score": null,
             "context_chunks": []
           },
@@ -806,7 +806,7 @@
             "id": "firmware-wm-a410-4",
             "title": "更新履歴",
             "body": "WM-A410ファームウェア4では、認証方式を更新し、接続履歴の保存を改善しました。更新中は電源を切らないでください。",
-            "score": 0.26741636,
+            "score": 0.28758886,
             "rerank_score": null,
             "context_chunks": []
           },
@@ -815,16 +815,16 @@
             "id": "firmware-wm-a410-3",
             "title": "更新履歴",
             "body": "WM-A410ファームウェア3では、予約運転の同期と無線LAN再接続処理を改善しました。更新後にアプリの再登録が必要な場合があります。",
-            "score": 0.26199168,
+            "score": 0.2702942,
             "rerank_score": null,
             "context_chunks": []
           },
           {
             "rank": 8,
             "id": "support-connect-15",
-            "title": "接続サポート事例 2025-15",
+            "title": "接続サポート事例 No.15",
             "body": "旧ファームウェアのWM-A410で一時的に接続が切れましたが、ルーターのDHCP更新後は再発せず、現在は接続できています。",
-            "score": 0.21008901,
+            "score": 0.2073457,
             "rerank_score": null,
             "context_chunks": []
           },
@@ -839,10 +839,10 @@
           },
           {
             "rank": 10,
-            "id": "support-connect-14",
-            "title": "接続サポート事例 2025-14",
-            "body": "スマートフォンを交換した後、WM-A410を新端末へ登録できませんでした。旧端末の登録解除を行っても接続できない状態が続きました。",
-            "score": 0.0042425347,
+            "id": "support-connect-10",
+            "title": "接続サポート事例 No.10",
+            "body": "TV-G880の更新直後にリモート操作が失敗しました。設定を保持したまま更新を再適用すると接続できる状態へ戻りました。",
+            "score": 0.03084884,
             "rerank_score": null,
             "context_chunks": []
           }
@@ -863,11 +863,11 @@
         "query": "ファームウェア3以降で、ソフトウェアを更新した後、再登録や再起動を試しても接続できなかったもの",
         "mode": "vector",
         "timings": {
-          "embedding_ms": 86,
+          "embedding_ms": 93,
           "search_ms": 3,
           "rerank_ms": 0,
           "context_ms": 0,
-          "total_ms": 89
+          "total_ms": 96
         },
         "total_candidates": 10,
         "request_body": {
@@ -904,91 +904,91 @@
         "hits": [
           {
             "rank": 1,
-            "id": "support-connect-01",
-            "title": "接続サポート事例 2025-01",
-            "body": "WM-A410をファームウェア3へ更新後、アプリから見つからなくなりました。登録を解除して同じ家庭内ネットワークで再登録すると接続できるようになりました。",
-            "score": 0.9521697,
+            "id": "support-connect-03",
+            "title": "接続サポート事例 No.03",
+            "body": "WM-A410をファームウェア4へ更新しましたが、更新完了後もスマートフォンとの接続が回復しませんでした。再登録とルーター再起動でも未解決です。",
+            "score": 0.95325917,
             "rerank_score": null,
             "context_chunks": []
           },
           {
             "rank": 2,
-            "id": "support-connect-03",
-            "title": "接続サポート事例 2025-03",
-            "body": "WM-A410をファームウェア4へ更新しましたが、更新完了後もスマートフォンとの接続が回復しませんでした。再登録とルーター再起動でも未解決です。",
-            "score": 0.95216095,
+            "id": "support-connect-04",
+            "title": "接続サポート事例 No.04",
+            "body": "WM-A410のファームウェアは2のままで、アプリの新しい認証方式に対応できず接続できませんでした。更新作業はまだ行っていません。",
+            "score": 0.9526255,
             "rerank_score": null,
             "context_chunks": []
           },
           {
             "rank": 3,
-            "id": "support-connect-04",
-            "title": "接続サポート事例 2025-04",
-            "body": "WM-A410のファームウェアは2のままで、アプリの新しい認証方式に対応できず接続できませんでした。更新作業はまだ行っていません。",
-            "score": 0.9493711,
+            "id": "support-connect-01",
+            "title": "接続サポート事例 No.01",
+            "body": "WM-A410をファームウェア3へ更新後、アプリから見つからなくなりました。登録を解除して同じ家庭内ネットワークで再登録すると接続できるようになりました。",
+            "score": 0.9482007,
             "rerank_score": null,
             "context_chunks": []
           },
           {
             "rank": 4,
             "id": "support-connect-13",
-            "title": "接続サポート事例 2025-13",
+            "title": "接続サポート事例 No.13",
             "body": "AC-C300をファームウェア3へ更新した後、一度は接続が切れましたが、本体の再起動だけでアプリ操作が再開できました。",
-            "score": 0.9474043,
+            "score": 0.9450325,
             "rerank_score": null,
             "context_chunks": []
           },
           {
             "rank": 5,
             "id": "support-connect-15",
-            "title": "接続サポート事例 2025-15",
+            "title": "接続サポート事例 No.15",
             "body": "旧ファームウェアのWM-A410で一時的に接続が切れましたが、ルーターのDHCP更新後は再発せず、現在は接続できています。",
-            "score": 0.9428979,
+            "score": 0.9422196,
             "rerank_score": null,
             "context_chunks": []
           },
           {
             "rank": 6,
-            "id": "support-connect-14",
-            "title": "接続サポート事例 2025-14",
-            "body": "スマートフォンを交換した後、WM-A410を新端末へ登録できませんでした。旧端末の登録解除を行っても接続できない状態が続きました。",
-            "score": 0.9369534,
+            "id": "support-connect-10",
+            "title": "接続サポート事例 No.10",
+            "body": "TV-G880の更新直後にリモート操作が失敗しました。設定を保持したまま更新を再適用すると接続できる状態へ戻りました。",
+            "score": 0.9370188,
             "rerank_score": null,
             "context_chunks": []
           },
           {
             "rank": 7,
-            "id": "support-connect-10",
-            "title": "接続サポート事例 2025-10",
-            "body": "TV-G880の更新直後にリモート操作が失敗しました。設定を保持したまま更新を再適用すると接続できる状態へ戻りました。",
-            "score": 0.93673515,
+            "id": "support-connect-14",
+            "title": "接続サポート事例 No.14",
+            "body": "スマートフォンを交換した後、WM-A410を新端末へ登録できませんでした。旧端末の登録解除を行っても接続できない状態が続きました。",
+            "score": 0.93336445,
             "rerank_score": null,
             "context_chunks": []
           },
           {
             "rank": 8,
             "id": "support-connect-07",
-            "title": "接続サポート事例 2025-07",
+            "title": "接続サポート事例 No.07",
             "body": "ルーター交換後、AC-C300を新しいSSIDへ登録しても外出先操作を利用できませんでした。本体操作はできますが、クラウド接続は未解決です。",
-            "score": 0.9321779,
+            "score": 0.93062705,
             "rerank_score": null,
             "context_chunks": []
           },
           {
             "rank": 9,
-            "id": "support-connect-08",
-            "title": "接続サポート事例 2025-08",
-            "body": "OV-E600がアプリに表示されなくなりました。アプリを再インストールして製品を再登録すると接続が回復しました。",
-            "score": 0.92929757,
+            "id": "support-connect-05",
+            "title": "接続サポート事例 No.05",
+            "body": "RF-D510の更新後に通知が届かなくなりました。ルーターと冷蔵庫を再起動するとクラウド接続が復旧し、扉通知も届くようになりました。",
+            "score": 0.92872834,
             "rerank_score": null,
             "context_chunks": []
           },
           {
             "rank": 10,
-            "id": "support-connect-05",
-            "title": "接続サポート事例 2025-05",
-            "body": "RF-D510の更新後に通知が届かなくなりました。ルーターと冷蔵庫を再起動するとクラウド接続が復旧し、扉通知も届くようになりました。",
-            "score": 0.92903614,
+            "id": "support-connect-08",
+            "title": "接続サポート事例 No.08",
+            "body": "OV-E600がアプリに表示されなくなりました。アプリを再インストールして製品を再登録すると接続が回復しました。",
+            "score": 0.92830974,
             "rerank_score": null,
             "context_chunks": []
           }
@@ -1062,7 +1062,7 @@
           {
             "rank": 1,
             "id": "support-connect-13",
-            "title": "接続サポート事例 2025-13",
+            "title": "接続サポート事例 No.13",
             "body": "AC-C300をファームウェア3へ更新した後、一度は接続が切れましたが、本体の再起動だけでアプリ操作が再開できました。",
             "score": 39.094425,
             "rerank_score": null,
@@ -1071,7 +1071,7 @@
           {
             "rank": 2,
             "id": "support-connect-03",
-            "title": "接続サポート事例 2025-03",
+            "title": "接続サポート事例 No.03",
             "body": "WM-A410をファームウェア4へ更新しましたが、更新完了後もスマートフォンとの接続が回復しませんでした。再登録とルーター再起動でも未解決です。",
             "score": 32.64447,
             "rerank_score": null,
@@ -1080,7 +1080,7 @@
           {
             "rank": 3,
             "id": "support-connect-01",
-            "title": "接続サポート事例 2025-01",
+            "title": "接続サポート事例 No.01",
             "body": "WM-A410をファームウェア3へ更新後、アプリから見つからなくなりました。登録を解除して同じ家庭内ネットワークで再登録すると接続できるようになりました。",
             "score": 31.804422,
             "rerank_score": null,
@@ -1089,7 +1089,7 @@
           {
             "rank": 4,
             "id": "support-connect-04",
-            "title": "接続サポート事例 2025-04",
+            "title": "接続サポート事例 No.04",
             "body": "WM-A410のファームウェアは2のままで、アプリの新しい認証方式に対応できず接続できませんでした。更新作業はまだ行っていません。",
             "score": 27.480366,
             "rerank_score": null,
@@ -1098,7 +1098,7 @@
           {
             "rank": 5,
             "id": "support-connect-15",
-            "title": "接続サポート事例 2025-15",
+            "title": "接続サポート事例 No.15",
             "body": "旧ファームウェアのWM-A410で一時的に接続が切れましたが、ルーターのDHCP更新後は再発せず、現在は接続できています。",
             "score": 26.835827,
             "rerank_score": null,
@@ -1107,7 +1107,7 @@
           {
             "rank": 6,
             "id": "support-connect-14",
-            "title": "接続サポート事例 2025-14",
+            "title": "接続サポート事例 No.14",
             "body": "スマートフォンを交換した後、WM-A410を新端末へ登録できませんでした。旧端末の登録解除を行っても接続できない状態が続きました。",
             "score": 23.974834,
             "rerank_score": null,
@@ -1116,7 +1116,7 @@
           {
             "rank": 7,
             "id": "support-connect-07",
-            "title": "接続サポート事例 2025-07",
+            "title": "接続サポート事例 No.07",
             "body": "ルーター交換後、AC-C300を新しいSSIDへ登録しても外出先操作を利用できませんでした。本体操作はできますが、クラウド接続は未解決です。",
             "score": 13.814088,
             "rerank_score": null,
@@ -1125,7 +1125,7 @@
           {
             "rank": 8,
             "id": "support-connect-10",
-            "title": "接続サポート事例 2025-10",
+            "title": "接続サポート事例 No.10",
             "body": "TV-G880の更新直後にリモート操作が失敗しました。設定を保持したまま更新を再適用すると接続できる状態へ戻りました。",
             "score": 11.108211,
             "rerank_score": null,
@@ -1134,7 +1134,7 @@
           {
             "rank": 9,
             "id": "support-connect-05",
-            "title": "接続サポート事例 2025-05",
+            "title": "接続サポート事例 No.05",
             "body": "RF-D510の更新後に通知が届かなくなりました。ルーターと冷蔵庫を再起動するとクラウド接続が復旧し、扉通知も届くようになりました。",
             "score": 11.01199,
             "rerank_score": null,
@@ -1143,7 +1143,7 @@
           {
             "rank": 10,
             "id": "support-connect-08",
-            "title": "接続サポート事例 2025-08",
+            "title": "接続サポート事例 No.08",
             "body": "OV-E600がアプリに表示されなくなりました。アプリを再インストールして製品を再登録すると接続が回復しました。",
             "score": 10.80462,
             "rerank_score": null,
@@ -1166,11 +1166,11 @@
         "query": "ファームウェア3以降で、ソフトウェアを更新した後、再登録や再起動を試しても接続できなかったもの",
         "mode": "hybrid",
         "timings": {
-          "embedding_ms": 85,
+          "embedding_ms": 94,
           "search_ms": 5,
           "rerank_ms": 0,
           "context_ms": 0,
-          "total_ms": 90
+          "total_ms": 99
         },
         "total_candidates": 10,
         "request_body": {
@@ -1238,90 +1238,90 @@
           {
             "rank": 1,
             "id": "support-connect-13",
-            "title": "接続サポート事例 2025-13",
+            "title": "接続サポート事例 No.13",
             "body": "AC-C300をファームウェア3へ更新した後、一度は接続が切れましたが、本体の再起動だけでアプリ操作が再開できました。",
-            "score": 0.9382016,
+            "score": 0.9010796,
             "rerank_score": null,
             "context_chunks": []
           },
           {
             "rank": 2,
             "id": "support-connect-03",
-            "title": "接続サポート事例 2025-03",
+            "title": "接続サポート事例 No.03",
             "body": "WM-A410をファームウェア4へ更新しましたが、更新完了後もスマートフォンとの接続が回復しませんでした。再登録とルーター再起動でも未解決です。",
-            "score": 0.84028935,
+            "score": 0.84040296,
             "rerank_score": null,
             "context_chunks": []
           },
           {
             "rank": 3,
             "id": "support-connect-01",
-            "title": "接続サポート事例 2025-01",
+            "title": "接続サポート事例 No.01",
             "body": "WM-A410をファームウェア3へ更新後、アプリから見つからなくなりました。登録を解除して同じ家庭内ネットワークで再登録すると接続できるようになりました。",
-            "score": 0.8196169,
+            "score": 0.7587923,
             "rerank_score": null,
             "context_chunks": []
           },
           {
             "rank": 4,
             "id": "support-connect-04",
-            "title": "接続サポート事例 2025-04",
+            "title": "接続サポート事例 No.04",
             "body": "WM-A410のファームウェアは2のままで、アプリの新しい認証方式に対応できず接続できませんでした。更新作業はまだ行っていません。",
-            "score": 0.67633003,
+            "score": 0.7050036,
             "rerank_score": null,
             "context_chunks": []
           },
           {
             "rank": 5,
             "id": "support-connect-15",
-            "title": "接続サポート事例 2025-15",
+            "title": "接続サポート事例 No.15",
             "body": "旧ファームウェアのWM-A410で一時的に接続が切れましたが、ルーターのDHCP更新後は再発せず、現在は接続できています。",
-            "score": 0.57643634,
+            "score": 0.56393135,
             "rerank_score": null,
             "context_chunks": []
           },
           {
             "rank": 6,
             "id": "support-connect-14",
-            "title": "接続サポート事例 2025-14",
+            "title": "接続サポート事例 No.14",
             "body": "スマートフォンを交換した後、WM-A410を新端末へ登録できませんでした。旧端末の登録解除を行っても接続できない状態が続きました。",
-            "score": 0.42855507,
+            "score": 0.3866619,
             "rerank_score": null,
             "context_chunks": []
           },
           {
             "rank": 7,
-            "id": "support-connect-07",
-            "title": "接続サポート事例 2025-07",
-            "body": "ルーター交換後、AC-C300を新しいSSIDへ登録しても外出先操作を利用できませんでした。本体操作はできますが、クラウド接続は未解決です。",
-            "score": 0.11520883,
+            "id": "support-connect-10",
+            "title": "接続サポート事例 No.10",
+            "body": "TV-G880の更新直後にリモート操作が失敗しました。設定を保持したまま更新を再適用すると接続できる状態へ戻りました。",
+            "score": 0.11223272,
             "rerank_score": null,
             "context_chunks": []
           },
           {
             "rank": 8,
-            "id": "support-connect-10",
-            "title": "接続サポート事例 2025-10",
-            "body": "TV-G880の更新直後にリモート操作が失敗しました。設定を保持したまま更新を再適用すると接続できる状態へ戻りました。",
-            "score": 0.10735408,
+            "id": "support-connect-07",
+            "title": "接続サポート事例 No.07",
+            "body": "ルーター交換後、AC-C300を新しいSSIDへ登録しても外出先操作を利用できませんでした。本体操作はできますが、クラウド接続は未解決です。",
+            "score": 0.10233004,
             "rerank_score": null,
             "context_chunks": []
           },
           {
             "rank": 9,
             "id": "support-connect-05",
-            "title": "接続サポート事例 2025-05",
+            "title": "接続サポート事例 No.05",
             "body": "RF-D510の更新後に通知が届かなくなりました。ルーターと冷蔵庫を再起動するとクラウド接続が復旧し、扉通知も届くようになりました。",
-            "score": 0.0054311366,
+            "score": 0.010164559,
             "rerank_score": null,
             "context_chunks": []
           },
           {
             "rank": 10,
             "id": "support-connect-08",
-            "title": "接続サポート事例 2025-08",
+            "title": "接続サポート事例 No.08",
             "body": "OV-E600がアプリに表示されなくなりました。アプリを再インストールして製品を再登録すると接続が回復しました。",
-            "score": 0.004090215,
+            "score": 0.001,
             "rerank_score": null,
             "context_chunks": []
           }
@@ -1342,11 +1342,11 @@
         "query": "ファームウェア3以降で、ソフトウェアを更新した後、再登録や再起動を試しても接続できなかったもの",
         "mode": "hybrid_rerank",
         "timings": {
-          "embedding_ms": 86,
-          "search_ms": 8,
-          "rerank_ms": 1312,
+          "embedding_ms": 116,
+          "search_ms": 5,
+          "rerank_ms": 1459,
           "context_ms": 0,
-          "total_ms": 1405
+          "total_ms": 1581
         },
         "total_candidates": 10,
         "request_body": {
@@ -1414,91 +1414,91 @@
           {
             "rank": 1,
             "id": "support-connect-03",
-            "title": "接続サポート事例 2025-03",
+            "title": "接続サポート事例 No.03",
             "body": "WM-A410をファームウェア4へ更新しましたが、更新完了後もスマートフォンとの接続が回復しませんでした。再登録とルーター再起動でも未解決です。",
-            "score": 0.84028935,
-            "rerank_score": 0.6360190510749817,
+            "score": 0.84040296,
+            "rerank_score": 0.3901674151420593,
             "context_chunks": []
           },
           {
             "rank": 2,
             "id": "support-connect-13",
-            "title": "接続サポート事例 2025-13",
+            "title": "接続サポート事例 No.13",
             "body": "AC-C300をファームウェア3へ更新した後、一度は接続が切れましたが、本体の再起動だけでアプリ操作が再開できました。",
-            "score": 0.9382016,
-            "rerank_score": 0.6262270212173462,
+            "score": 0.9010796,
+            "rerank_score": 0.29131019115448,
             "context_chunks": []
           },
           {
             "rank": 3,
             "id": "support-connect-01",
-            "title": "接続サポート事例 2025-01",
+            "title": "接続サポート事例 No.01",
             "body": "WM-A410をファームウェア3へ更新後、アプリから見つからなくなりました。登録を解除して同じ家庭内ネットワークで再登録すると接続できるようになりました。",
-            "score": 0.8196169,
-            "rerank_score": 0.5524290204048157,
+            "score": 0.7587923,
+            "rerank_score": 0.17002910375595093,
             "context_chunks": []
           },
           {
             "rank": 4,
             "id": "support-connect-15",
-            "title": "接続サポート事例 2025-15",
+            "title": "接続サポート事例 No.15",
             "body": "旧ファームウェアのWM-A410で一時的に接続が切れましたが、ルーターのDHCP更新後は再発せず、現在は接続できています。",
-            "score": 0.57643634,
-            "rerank_score": 0.036157090216875076,
+            "score": 0.56393135,
+            "rerank_score": 0.03365226462483406,
             "context_chunks": []
           },
           {
             "rank": 5,
             "id": "support-connect-04",
-            "title": "接続サポート事例 2025-04",
+            "title": "接続サポート事例 No.04",
             "body": "WM-A410のファームウェアは2のままで、アプリの新しい認証方式に対応できず接続できませんでした。更新作業はまだ行っていません。",
-            "score": 0.67633003,
-            "rerank_score": 0.029208563268184662,
+            "score": 0.7050036,
+            "rerank_score": 0.017523515969514847,
             "context_chunks": []
           },
           {
             "rank": 6,
             "id": "support-connect-14",
-            "title": "接続サポート事例 2025-14",
+            "title": "接続サポート事例 No.14",
             "body": "スマートフォンを交換した後、WM-A410を新端末へ登録できませんでした。旧端末の登録解除を行っても接続できない状態が続きました。",
-            "score": 0.42855507,
-            "rerank_score": 0.00714170653373003,
+            "score": 0.3866619,
+            "rerank_score": 0.008684894070029259,
             "context_chunks": []
           },
           {
             "rank": 7,
             "id": "support-connect-08",
-            "title": "接続サポート事例 2025-08",
+            "title": "接続サポート事例 No.08",
             "body": "OV-E600がアプリに表示されなくなりました。アプリを再インストールして製品を再登録すると接続が回復しました。",
-            "score": 0.004090215,
-            "rerank_score": 0.0026670913212001324,
+            "score": 0.001,
+            "rerank_score": 0.001444205641746521,
             "context_chunks": []
           },
           {
             "rank": 8,
             "id": "support-connect-10",
-            "title": "接続サポート事例 2025-10",
+            "title": "接続サポート事例 No.10",
             "body": "TV-G880の更新直後にリモート操作が失敗しました。設定を保持したまま更新を再適用すると接続できる状態へ戻りました。",
-            "score": 0.10735408,
-            "rerank_score": 0.001393769751302898,
+            "score": 0.11223272,
+            "rerank_score": 0.0013937086332589388,
             "context_chunks": []
           },
           {
             "rank": 9,
             "id": "support-connect-07",
-            "title": "接続サポート事例 2025-07",
+            "title": "接続サポート事例 No.07",
             "body": "ルーター交換後、AC-C300を新しいSSIDへ登録しても外出先操作を利用できませんでした。本体操作はできますが、クラウド接続は未解決です。",
-            "score": 0.11520883,
-            "rerank_score": 0.000614227494224906,
+            "score": 0.10233004,
+            "rerank_score": 0.00017440241936128587,
             "context_chunks": []
           },
           {
             "rank": 10,
             "id": "support-connect-05",
-            "title": "接続サポート事例 2025-05",
+            "title": "接続サポート事例 No.05",
             "body": "RF-D510の更新後に通知が届かなくなりました。ルーターと冷蔵庫を再起動するとクラウド接続が復旧し、扉通知も届くようになりました。",
-            "score": 0.0054311366,
-            "rerank_score": 0.00030972130480222404,
+            "score": 0.010164559,
+            "rerank_score": 0.00015094877744559199,
             "context_chunks": []
           }
         ]
@@ -1515,11 +1515,11 @@
         "query": "WM-A410の無償交換が認められる条件と、対象外になる場合",
         "mode": "hybrid_context",
         "timings": {
-          "embedding_ms": 85,
-          "search_ms": 5,
+          "embedding_ms": 148,
+          "search_ms": 11,
           "rerank_ms": 0,
-          "context_ms": 3,
-          "total_ms": 94
+          "context_ms": 4,
+          "total_ms": 164
         },
         "total_candidates": 10,
         "request_body": {
@@ -1596,7 +1596,7 @@
             "id": "safety-context-recall-wm-a401-1",
             "title": "安全対応ガイド",
             "body": "対象製造番号のWM-A401では電源部品を無償交換する回収対応を行います。使用を停止し電源プラグを抜きます。",
-            "score": 0.62610483,
+            "score": 0.6232832,
             "rerank_score": null,
             "context_chunks": [
               {
@@ -1621,7 +1621,7 @@
             "id": "error-wm-a410-e42",
             "title": "WM-A410 エラーコード一覧",
             "body": "給水を開始できないエラーです。蛇口、給水ホース、給水口フィルターを確認します。排水異常を示すE24とは対処が異なります。",
-            "score": 0.30991957,
+            "score": 0.29715833,
             "rerank_score": null,
             "context_chunks": []
           },
@@ -1630,7 +1630,7 @@
             "id": "error-wm-a410-e24",
             "title": "WM-A410 エラーコード一覧",
             "body": "排水を完了できないエラーです。排水ホースの折れと糸くずフィルターを確認します。給水側の点検では解消しません。",
-            "score": 0.30991957,
+            "score": 0.29715833,
             "rerank_score": null,
             "context_chunks": []
           },
@@ -1639,7 +1639,7 @@
             "id": "error-wm-a410-c07",
             "title": "WM-A410 エラーコード一覧",
             "body": "洗剤自動投入タンクが正しく装着されていない通知です。運転はできますが、自動投入は行われません。",
-            "score": 0.30991957,
+            "score": 0.29715833,
             "rerank_score": null,
             "context_chunks": []
           }
@@ -1660,11 +1660,11 @@
         "query": "ファームウェア3以降で、ソフトウェアを更新した後、再登録や再起動を試しても接続できなかったもの",
         "mode": "hybrid",
         "timings": {
-          "embedding_ms": 87,
-          "search_ms": 5,
+          "embedding_ms": 142,
+          "search_ms": 9,
           "rerank_ms": 0,
           "context_ms": 0,
-          "total_ms": 92
+          "total_ms": 150
         },
         "total_candidates": 10,
         "request_body": {
@@ -1732,45 +1732,45 @@
           {
             "rank": 1,
             "id": "support-connect-13",
-            "title": "接続サポート事例 2025-13",
+            "title": "接続サポート事例 No.13",
             "body": "AC-C300をファームウェア3へ更新した後、一度は接続が切れましたが、本体の再起動だけでアプリ操作が再開できました。",
-            "score": 0.9382016,
+            "score": 0.9010796,
             "rerank_score": null,
             "context_chunks": []
           },
           {
             "rank": 2,
             "id": "support-connect-03",
-            "title": "接続サポート事例 2025-03",
+            "title": "接続サポート事例 No.03",
             "body": "WM-A410をファームウェア4へ更新しましたが、更新完了後もスマートフォンとの接続が回復しませんでした。再登録とルーター再起動でも未解決です。",
-            "score": 0.84028935,
+            "score": 0.84040296,
             "rerank_score": null,
             "context_chunks": []
           },
           {
             "rank": 3,
             "id": "support-connect-01",
-            "title": "接続サポート事例 2025-01",
+            "title": "接続サポート事例 No.01",
             "body": "WM-A410をファームウェア3へ更新後、アプリから見つからなくなりました。登録を解除して同じ家庭内ネットワークで再登録すると接続できるようになりました。",
-            "score": 0.8196169,
+            "score": 0.7587923,
             "rerank_score": null,
             "context_chunks": []
           },
           {
             "rank": 4,
             "id": "support-connect-04",
-            "title": "接続サポート事例 2025-04",
+            "title": "接続サポート事例 No.04",
             "body": "WM-A410のファームウェアは2のままで、アプリの新しい認証方式に対応できず接続できませんでした。更新作業はまだ行っていません。",
-            "score": 0.67633003,
+            "score": 0.7050036,
             "rerank_score": null,
             "context_chunks": []
           },
           {
             "rank": 5,
             "id": "support-connect-15",
-            "title": "接続サポート事例 2025-15",
+            "title": "接続サポート事例 No.15",
             "body": "旧ファームウェアのWM-A410で一時的に接続が切れましたが、ルーターのDHCP更新後は再発せず、現在は接続できています。",
-            "score": 0.57643634,
+            "score": 0.56393135,
             "rerank_score": null,
             "context_chunks": []
           }
