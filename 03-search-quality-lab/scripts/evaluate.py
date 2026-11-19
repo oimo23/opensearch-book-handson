@@ -15,7 +15,7 @@ from urllib.request import Request, urlopen
 
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_QUERIES = ROOT / "data" / "evaluation_queries.json"
-EVALUATION_VERSION = "v4"
+EVALUATION_VERSION = "v5"
 CATEGORY_MODES = {
     "semantic": ("vector", "fulltext", "hybrid"),
     "lexical": ("vector", "fulltext", "hybrid"),

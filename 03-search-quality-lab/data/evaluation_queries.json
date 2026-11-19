@@ -304,7 +304,7 @@
     "split": "dev",
     "category": "lexical",
     "case_group": "lex-d01",
-    "query": "WM-A410S",
+    "query": "WM-A410Sの製品仕様",
     "relevance": {
       "product-wm-a410s": 3
     },
@@ -319,7 +319,7 @@
     "split": "dev",
     "category": "lexical",
     "case_group": "lex-d02",
-    "query": "WM-A410 E24",
+    "query": "WM-A410のE24エラーの説明",
     "relevance": {
       "error-wm-a410-e24": 3
     },
@@ -454,7 +454,7 @@
     "split": "test",
     "category": "lexical",
     "case_group": "lex-t01",
-    "query": "WM-A410",
+    "query": "WM-A410の製品仕様",
     "relevance": {
       "product-wm-a410": 3
     },
@@ -469,7 +469,7 @@
     "split": "test",
     "category": "lexical",
     "case_group": "lex-t02",
-    "query": "WM-A410 E42",
+    "query": "WM-A410のE42エラーの説明",
     "relevance": {
       "error-wm-a410-e42": 3
     },

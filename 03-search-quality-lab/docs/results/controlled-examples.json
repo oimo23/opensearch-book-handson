@@ -1,5 +1,5 @@
 {
-  "captured_at": "2026-08-29T15:48:25+09:00",
+  "captured_at": "2026-11-19T16:28:25+09:00",
   "health": {
     "status": "ok",
     "index_name": "appliance-support-demo-v1",
@@ -28,11 +28,11 @@
         "query": "WM-A410-E42",
         "mode": "vector",
         "timings": {
-          "embedding_ms": 126,
-          "search_ms": 3,
+          "embedding_ms": 128,
+          "search_ms": 4,
           "rerank_ms": 0,
           "context_ms": 0,
-          "total_ms": 130
+          "total_ms": 132
         },
         "total_candidates": 10,
         "request_body": {
@@ -122,10 +122,10 @@
         "mode": "fulltext",
         "timings": {
           "embedding_ms": 0,
-          "search_ms": 2,
+          "search_ms": 3,
           "rerank_ms": 0,
           "context_ms": 0,
-          "total_ms": 2
+          "total_ms": 3
         },
         "total_candidates": 10,
         "request_body": {
@@ -146,14 +146,28 @@
             "support_outcome"
           ],
           "query": {
-            "multi_match": {
-              "query": "WM-A410-E42",
-              "fields": [
-                "title^2",
-                "body",
-                "identifiers^3"
+            "bool": {
+              "should": [
+                {
+                  "multi_match": {
+                    "query": "WM-A410-E42",
+                    "fields": [
+                      "title^2",
+                      "body"
+                    ],
+                    "type": "best_fields"
+                  }
+                },
+                {
+                  "term": {
+                    "identifiers.raw": {
+                      "value": "WM-A410-E42",
+                      "boost": 3
+                    }
+                  }
+                }
               ],
-              "type": "best_fields"
+              "minimum_should_match": 1
             }
           }
         },
@@ -163,7 +177,7 @@
             "id": "error-wm-a410-e42",
             "title": "WM-A410 エラーコード一覧",
             "body": "給水を開始できないエラーです。蛇口、給水ホース、給水口フィルターを確認します。排水異常を示すE24とは対処が異なります。",
-            "score": 12.05653,
+            "score": 27.71693,
             "rerank_score": null,
             "context_chunks": []
           },
@@ -271,11 +285,11 @@
         "query": "WM-A410でE42が出たときの給水エラーの対処",
         "mode": "vector",
         "timings": {
-          "embedding_ms": 102,
-          "search_ms": 3,
+          "embedding_ms": 87,
+          "search_ms": 5,
           "rerank_ms": 0,
           "context_ms": 0,
-          "total_ms": 105
+          "total_ms": 92
         },
         "total_candidates": 10,
         "request_body": {
@@ -410,10 +424,10 @@
         "mode": "fulltext",
         "timings": {
           "embedding_ms": 0,
-          "search_ms": 2,
+          "search_ms": 8,
           "rerank_ms": 0,
           "context_ms": 0,
-          "total_ms": 2
+          "total_ms": 8
         },
         "total_candidates": 10,
         "request_body": {
@@ -434,14 +448,36 @@
             "support_outcome"
           ],
           "query": {
-            "multi_match": {
-              "query": "WM-A410でE42が出たときの給水エラーの対処",
-              "fields": [
-                "title^2",
-                "body",
-                "identifiers^3"
+            "bool": {
+              "should": [
+                {
+                  "multi_match": {
+                    "query": "WM-A410でE42が出たときの給水エラーの対処",
+                    "fields": [
+                      "title^2",
+                      "body"
+                    ],
+                    "type": "best_fields"
+                  }
+                },
+                {
+                  "term": {
+                    "identifiers.raw": {
+                      "value": "WM-A410",
+                      "boost": 3
+                    }
+                  }
+                },
+                {
+                  "term": {
+                    "identifiers.raw": {
+                      "value": "E42",
+                      "boost": 3
+                    }
+                  }
+                }
               ],
-              "type": "best_fields"
+              "minimum_should_match": 1
             }
           }
         },
@@ -451,7 +487,7 @@
             "id": "error-wm-a410-e42",
             "title": "WM-A410 エラーコード一覧",
             "body": "給水を開始できないエラーです。蛇口、給水ホース、給水口フィルターを確認します。排水異常を示すE24とは対処が異なります。",
-            "score": 20.497017,
+            "score": 41.90513,
             "rerank_score": null,
             "context_chunks": []
           },
@@ -460,7 +496,7 @@
             "id": "error-wm-a410-e24",
             "title": "WM-A410 エラーコード一覧",
             "body": "排水を完了できないエラーです。排水ホースの折れと糸くずフィルターを確認します。給水側の点検では解消しません。",
-            "score": 20.497017,
+            "score": 30.48991,
             "rerank_score": null,
             "context_chunks": []
           },
@@ -469,7 +505,7 @@
             "id": "error-wm-a410-c07",
             "title": "WM-A410 エラーコード一覧",
             "body": "洗剤自動投入タンクが正しく装着されていない通知です。運転はできますが、自動投入は行われません。",
-            "score": 20.497017,
+            "score": 30.48991,
             "rerank_score": null,
             "context_chunks": []
           },
@@ -478,12 +514,48 @@
             "id": "error-wm-a410-u11",
             "title": "WM-A410 エラーコード一覧",
             "body": "排水に通常より時間がかかっている通知です。E24になる前に排水フィルターを清掃します。",
-            "score": 20.497017,
+            "score": 30.48991,
             "rerank_score": null,
             "context_chunks": []
           },
           {
             "rank": 5,
+            "id": "error-wm-a410s-e42",
+            "title": "WM-A410S エラーコード一覧",
+            "body": "ドアロックを確認できないエラーです。WM-A410のE42とは意味が異なるため、給水ホースではなく扉の異物を点検します。",
+            "score": 26.690416,
+            "rerank_score": null,
+            "context_chunks": []
+          },
+          {
+            "rank": 6,
+            "id": "error-wm-a401-e42",
+            "title": "WM-A401 エラーコード一覧",
+            "body": "水位センサーの応答が規定範囲外であることを示します。電源を切っても再発する場合は点検を依頼します。",
+            "score": 25.568247,
+            "rerank_score": null,
+            "context_chunks": []
+          },
+          {
+            "rank": 7,
+            "id": "error-dr-b220-e42",
+            "title": "DR-B220 エラーコード一覧",
+            "body": "乾燥室の温度上昇を検知したエラーです。吸気口とフィルターを清掃し、冷却後に再開します。",
+            "score": 19.855707,
+            "rerank_score": null,
+            "context_chunks": []
+          },
+          {
+            "rank": 8,
+            "id": "error-ac-c300-e42",
+            "title": "AC-C300 エラーコード一覧",
+            "body": "排水経路の詰まりを検知したエラーです。ドレンホースの折れや逆勾配を確認します。",
+            "score": 19.855707,
+            "rerank_score": null,
+            "context_chunks": []
+          },
+          {
+            "rank": 9,
             "id": "repair-case-11",
             "title": "訪問修理事例 No.11",
             "body": "WM-A410でE42が表示され、蛇口とホースを確認しても給水できませんでした。給水弁の交換部品を手配し、作業は未完了です。",
@@ -492,47 +564,11 @@
             "context_chunks": []
           },
           {
-            "rank": 6,
+            "rank": 10,
             "id": "repair-case-09",
             "title": "訪問修理事例 No.09",
             "body": "WM-A410の排水エラーE24は、排水ホースの折れを直すと解消しました。給水弁と水位センサーには異常がありませんでした。",
             "score": 15.454203,
-            "rerank_score": null,
-            "context_chunks": []
-          },
-          {
-            "rank": 7,
-            "id": "error-wm-a410s-e42",
-            "title": "WM-A410S エラーコード一覧",
-            "body": "ドアロックを確認できないエラーです。WM-A410のE42とは意味が異なるため、給水ホースではなく扉の異物を点検します。",
-            "score": 15.275197,
-            "rerank_score": null,
-            "context_chunks": []
-          },
-          {
-            "rank": 8,
-            "id": "error-wm-a401-e42",
-            "title": "WM-A401 エラーコード一覧",
-            "body": "水位センサーの応答が規定範囲外であることを示します。電源を切っても再発する場合は点検を依頼します。",
-            "score": 14.153028,
-            "rerank_score": null,
-            "context_chunks": []
-          },
-          {
-            "rank": 9,
-            "id": "repair-case-01",
-            "title": "訪問修理事例 No.01",
-            "body": "給水が遅いWM-A410を点検し、給水口フィルターの砂を除去しました。部品交換は行わず、規定時間内に給水できることを確認しました。",
-            "score": 10.8752,
-            "rerank_score": null,
-            "context_chunks": []
-          },
-          {
-            "rank": 10,
-            "id": "product-wm-a410s",
-            "title": "製品カタログ 2026年版",
-            "body": "WM-A410の小型モデルです。乾燥容量とドラム径が異なり、交換部品や一部のエラー内容はWM-A410と共通ではありません。",
-            "score": 10.834326,
             "rerank_score": null,
             "context_chunks": []
           }
@@ -550,11 +586,11 @@
         "query": "WM-A410でE42が出たときの給水エラーの対処",
         "mode": "hybrid",
         "timings": {
-          "embedding_ms": 97,
-          "search_ms": 4,
+          "embedding_ms": 108,
+          "search_ms": 5,
           "rerank_ms": 0,
           "context_ms": 0,
-          "total_ms": 101
+          "total_ms": 113
         },
         "total_candidates": 10,
         "request_body": {
@@ -578,14 +614,36 @@
             "hybrid": {
               "queries": [
                 {
-                  "multi_match": {
-                    "query": "WM-A410でE42が出たときの給水エラーの対処",
-                    "fields": [
-                      "title^2",
-                      "body",
-                      "identifiers^3"
+                  "bool": {
+                    "should": [
+                      {
+                        "multi_match": {
+                          "query": "WM-A410でE42が出たときの給水エラーの対処",
+                          "fields": [
+                            "title^2",
+                            "body"
+                          ],
+                          "type": "best_fields"
+                        }
+                      },
+                      {
+                        "term": {
+                          "identifiers.raw": {
+                            "value": "WM-A410",
+                            "boost": 3
+                          }
+                        }
+                      },
+                      {
+                        "term": {
+                          "identifiers.raw": {
+                            "value": "E42",
+                            "boost": 3
+                          }
+                        }
+                      }
                     ],
-                    "type": "best_fields"
+                    "minimum_should_match": 1
                   }
                 },
                 {
@@ -615,7 +673,7 @@
             "id": "error-wm-a410-e24",
             "title": "WM-A410 エラーコード一覧",
             "body": "排水を完了できないエラーです。排水ホースの折れと糸くずフィルターを確認します。給水側の点検では解消しません。",
-            "score": 0.9135462,
+            "score": 0.61145276,
             "rerank_score": null,
             "context_chunks": []
           },
@@ -624,70 +682,70 @@
             "id": "error-wm-a410-u11",
             "title": "WM-A410 エラーコード一覧",
             "body": "排水に通常より時間がかかっている通知です。E24になる前に排水フィルターを清掃します。",
-            "score": 0.8902465,
+            "score": 0.58815306,
             "rerank_score": null,
             "context_chunks": []
           },
           {
             "rank": 4,
-            "id": "error-wm-a410-c07",
-            "title": "WM-A410 エラーコード一覧",
-            "body": "洗剤自動投入タンクが正しく装着されていない通知です。運転はできますが、自動投入は行われません。",
-            "score": 0.82241493,
+            "id": "error-wm-a410s-e42",
+            "title": "WM-A410S エラーコード一覧",
+            "body": "ドアロックを確認できないエラーです。WM-A410のE42とは意味が異なるため、給水ホースではなく扉の異物を点検します。",
+            "score": 0.53891146,
             "rerank_score": null,
             "context_chunks": []
           },
           {
             "rank": 5,
-            "id": "repair-case-11",
-            "title": "訪問修理事例 No.11",
-            "body": "WM-A410でE42が表示され、蛇口とホースを確認しても給水できませんでした。給水弁の交換部品を手配し、作業は未完了です。",
-            "score": 0.67151815,
+            "id": "error-wm-a410-c07",
+            "title": "WM-A410 エラーコード一覧",
+            "body": "洗剤自動投入タンクが正しく装着されていない通知です。運転はできますが、自動投入は行われません。",
+            "score": 0.5203215,
             "rerank_score": null,
             "context_chunks": []
           },
           {
             "rank": 6,
-            "id": "error-wm-a410s-e42",
-            "title": "WM-A410S エラーコード一覧",
-            "body": "ドアロックを確認できないエラーです。WM-A410のE42とは意味が異なるため、給水ホースではなく扉の異物を点検します。",
-            "score": 0.5632678,
+            "id": "error-wm-a401-e42",
+            "title": "WM-A401 エラーコード一覧",
+            "body": "水位センサーの応答が規定範囲外であることを示します。電源を切っても再発する場合は点検を依頼します。",
+            "score": 0.37182245,
             "rerank_score": null,
             "context_chunks": []
           },
           {
             "rank": 7,
-            "id": "repair-case-09",
-            "title": "訪問修理事例 No.09",
-            "body": "WM-A410の排水エラーE24は、排水ホースの折れを直すと解消しました。給水弁と水位センサーには異常がありませんでした。",
-            "score": 0.46554846,
+            "id": "repair-case-11",
+            "title": "訪問修理事例 No.11",
+            "body": "WM-A410でE42が表示され、蛇口とホースを確認しても給水できませんでした。給水弁の交換部品を手配し、作業は未完了です。",
+            "score": 0.31345707,
             "rerank_score": null,
             "context_chunks": []
           },
           {
             "rank": 8,
-            "id": "error-wm-a401-e42",
-            "title": "WM-A401 エラーコード一覧",
-            "body": "水位センサーの応答が規定範囲外であることを示します。電源を切っても再発する場合は点検を依頼します。",
-            "score": 0.34458202,
+            "id": "repair-case-09",
+            "title": "訪問修理事例 No.09",
+            "body": "WM-A410の排水エラーE24は、排水ホースの折れを直すと解消しました。給水弁と水位センサーには異常がありませんでした。",
+            "score": 0.131568,
             "rerank_score": null,
             "context_chunks": []
           },
           {
             "rank": 9,
-            "id": "repair-case-01",
-            "title": "訪問修理事例 No.01",
-            "body": "給水が遅いWM-A410を点検し、給水口フィルターの砂を除去しました。部品交換は行わず、規定時間内に給水できることを確認しました。",
-            "score": 0.09941502,
+            "id": "error-dr-b220-e42",
+            "title": "DR-B220 エラーコード一覧",
+            "body": "乾燥室の温度上昇を検知したエラーです。吸気口とフィルターを清掃し、冷却後に再開します。",
+            "score": 0.11648186,
             "rerank_score": null,
             "context_chunks": []
           },
           {
             "rank": 10,
-            "id": "product-wm-a410s",
-            "title": "製品カタログ 2026年版",
-            "body": "WM-A410の小型モデルです。乾燥容量とドラム径が異なり、交換部品や一部のエラー内容はWM-A410と共通ではありません。",
-            "score": 0.00070000003,
+            "id": "error-ac-c300-e42",
+            "title": "AC-C300 エラーコード一覧",
+            "body": "排水経路の詰まりを検知したエラーです。ドレンホースの折れや逆勾配を確認します。",
+            "score": 0.11648186,
             "rerank_score": null,
             "context_chunks": []
           }
@@ -705,11 +763,11 @@
         "query": "ファームウェア3以降で、ソフトウェアを更新した後、再登録や再起動を試しても接続できなかったもの",
         "mode": "hybrid",
         "timings": {
-          "embedding_ms": 94,
-          "search_ms": 4,
+          "embedding_ms": 93,
+          "search_ms": 5,
           "rerank_ms": 0,
           "context_ms": 0,
-          "total_ms": 98
+          "total_ms": 99
         },
         "total_candidates": 10,
         "request_body": {
@@ -733,14 +791,20 @@
             "hybrid": {
               "queries": [
                 {
-                  "multi_match": {
-                    "query": "ファームウェア3以降で、ソフトウェアを更新した後、再登録や再起動を試しても接続できなかったもの",
-                    "fields": [
-                      "title^2",
-                      "body",
-                      "identifiers^3"
+                  "bool": {
+                    "should": [
+                      {
+                        "multi_match": {
+                          "query": "ファームウェア3以降で、ソフトウェアを更新した後、再登録や再起動を試しても接続できなかったもの",
+                          "fields": [
+                            "title^2",
+                            "body"
+                          ],
+                          "type": "best_fields"
+                        }
+                      }
                     ],
-                    "type": "best_fields"
+                    "minimum_should_match": 1
                   }
                 },
                 {
@@ -863,11 +927,11 @@
         "query": "ファームウェア3以降で、ソフトウェアを更新した後、再登録や再起動を試しても接続できなかったもの",
         "mode": "vector",
         "timings": {
-          "embedding_ms": 93,
-          "search_ms": 3,
+          "embedding_ms": 100,
+          "search_ms": 5,
           "rerank_ms": 0,
           "context_ms": 0,
-          "total_ms": 96
+          "total_ms": 105
         },
         "total_candidates": 10,
         "request_body": {
@@ -1010,10 +1074,10 @@
         "mode": "fulltext",
         "timings": {
           "embedding_ms": 0,
-          "search_ms": 3,
+          "search_ms": 4,
           "rerank_ms": 0,
           "context_ms": 0,
-          "total_ms": 3
+          "total_ms": 4
         },
         "total_candidates": 10,
         "request_body": {
@@ -1037,14 +1101,20 @@
             "bool": {
               "must": [
                 {
-                  "multi_match": {
-                    "query": "ファームウェア3以降で、ソフトウェアを更新した後、再登録や再起動を試しても接続できなかったもの",
-                    "fields": [
-                      "title^2",
-                      "body",
-                      "identifiers^3"
+                  "bool": {
+                    "should": [
+                      {
+                        "multi_match": {
+                          "query": "ファームウェア3以降で、ソフトウェアを更新した後、再登録や再起動を試しても接続できなかったもの",
+                          "fields": [
+                            "title^2",
+                            "body"
+                          ],
+                          "type": "best_fields"
+                        }
+                      }
                     ],
-                    "type": "best_fields"
+                    "minimum_should_match": 1
                   }
                 }
               ],
@@ -1166,11 +1236,11 @@
         "query": "ファームウェア3以降で、ソフトウェアを更新した後、再登録や再起動を試しても接続できなかったもの",
         "mode": "hybrid",
         "timings": {
-          "embedding_ms": 94,
+          "embedding_ms": 99,
           "search_ms": 5,
           "rerank_ms": 0,
           "context_ms": 0,
-          "total_ms": 99
+          "total_ms": 105
         },
         "total_candidates": 10,
         "request_body": {
@@ -1197,14 +1267,20 @@
                   "bool": {
                     "must": [
                       {
-                        "multi_match": {
-                          "query": "ファームウェア3以降で、ソフトウェアを更新した後、再登録や再起動を試しても接続できなかったもの",
-                          "fields": [
-                            "title^2",
-                            "body",
-                            "identifiers^3"
+                        "bool": {
+                          "should": [
+                            {
+                              "multi_match": {
+                                "query": "ファームウェア3以降で、ソフトウェアを更新した後、再登録や再起動を試しても接続できなかったもの",
+                                "fields": [
+                                  "title^2",
+                                  "body"
+                                ],
+                                "type": "best_fields"
+                              }
+                            }
                           ],
-                          "type": "best_fields"
+                          "minimum_should_match": 1
                         }
                       }
                     ],
@@ -1342,11 +1418,11 @@
         "query": "ファームウェア3以降で、ソフトウェアを更新した後、再登録や再起動を試しても接続できなかったもの",
         "mode": "hybrid_rerank",
         "timings": {
-          "embedding_ms": 116,
+          "embedding_ms": 94,
           "search_ms": 5,
-          "rerank_ms": 1459,
+          "rerank_ms": 984,
           "context_ms": 0,
-          "total_ms": 1581
+          "total_ms": 1084
         },
         "total_candidates": 10,
         "request_body": {
@@ -1373,14 +1449,20 @@
                   "bool": {
                     "must": [
                       {
-                        "multi_match": {
-                          "query": "ファームウェア3以降で、ソフトウェアを更新した後、再登録や再起動を試しても接続できなかったもの",
-                          "fields": [
-                            "title^2",
-                            "body",
-                            "identifiers^3"
+                        "bool": {
+                          "should": [
+                            {
+                              "multi_match": {
+                                "query": "ファームウェア3以降で、ソフトウェアを更新した後、再登録や再起動を試しても接続できなかったもの",
+                                "fields": [
+                                  "title^2",
+                                  "body"
+                                ],
+                                "type": "best_fields"
+                              }
+                            }
                           ],
-                          "type": "best_fields"
+                          "minimum_should_match": 1
                         }
                       }
                     ],
@@ -1515,11 +1597,11 @@
         "query": "WM-A410の無償交換が認められる条件と、対象外になる場合",
         "mode": "hybrid_context",
         "timings": {
-          "embedding_ms": 148,
-          "search_ms": 11,
+          "embedding_ms": 87,
+          "search_ms": 5,
           "rerank_ms": 0,
-          "context_ms": 4,
-          "total_ms": 164
+          "context_ms": 2,
+          "total_ms": 94
         },
         "total_candidates": 10,
         "request_body": {
@@ -1543,14 +1625,28 @@
             "hybrid": {
               "queries": [
                 {
-                  "multi_match": {
-                    "query": "WM-A410の無償交換が認められる条件と、対象外になる場合",
-                    "fields": [
-                      "title^2",
-                      "body",
-                      "identifiers^3"
+                  "bool": {
+                    "should": [
+                      {
+                        "multi_match": {
+                          "query": "WM-A410の無償交換が認められる条件と、対象外になる場合",
+                          "fields": [
+                            "title^2",
+                            "body"
+                          ],
+                          "type": "best_fields"
+                        }
+                      },
+                      {
+                        "term": {
+                          "identifiers.raw": {
+                            "value": "WM-A410",
+                            "boost": 3
+                          }
+                        }
+                      }
                     ],
-                    "type": "best_fields"
+                    "minimum_should_match": 1
                   }
                 },
                 {
@@ -1593,53 +1689,37 @@
           },
           {
             "rank": 2,
-            "id": "safety-context-recall-wm-a401-1",
-            "title": "安全対応ガイド",
-            "body": "対象製造番号のWM-A401では電源部品を無償交換する回収対応を行います。使用を停止し電源プラグを抜きます。",
-            "score": 0.6232832,
-            "rerank_score": null,
-            "context_chunks": [
-              {
-                "id": "safety-context-recall-wm-a401-1",
-                "chunk_order": 1,
-                "body": "対象製造番号のWM-A401では電源部品を無償交換する回収対応を行います。使用を停止し電源プラグを抜きます。"
-              },
-              {
-                "id": "safety-context-recall-wm-a401-2",
-                "chunk_order": 2,
-                "body": "型番、製造番号、設置先、連絡先を確認し、回収受付へ登録します。"
-              },
-              {
-                "id": "safety-context-recall-wm-a401-3",
-                "chunk_order": 3,
-                "body": "通常保証が終了していても回収対象なら無償です。対象外の製造番号へ予防交換は行いません。"
-              }
-            ]
-          },
-          {
-            "rank": 3,
             "id": "error-wm-a410-e42",
             "title": "WM-A410 エラーコード一覧",
             "body": "給水を開始できないエラーです。蛇口、給水ホース、給水口フィルターを確認します。排水異常を示すE24とは対処が異なります。",
-            "score": 0.29715833,
+            "score": 0.50046676,
+            "rerank_score": null,
+            "context_chunks": []
+          },
+          {
+            "rank": 3,
+            "id": "error-wm-a410-e24",
+            "title": "WM-A410 エラーコード一覧",
+            "body": "排水を完了できないエラーです。排水ホースの折れと糸くずフィルターを確認します。給水側の点検では解消しません。",
+            "score": 0.50046676,
             "rerank_score": null,
             "context_chunks": []
           },
           {
             "rank": 4,
-            "id": "error-wm-a410-e24",
+            "id": "error-wm-a410-c07",
             "title": "WM-A410 エラーコード一覧",
-            "body": "排水を完了できないエラーです。排水ホースの折れと糸くずフィルターを確認します。給水側の点検では解消しません。",
-            "score": 0.29715833,
+            "body": "洗剤自動投入タンクが正しく装着されていない通知です。運転はできますが、自動投入は行われません。",
+            "score": 0.50046676,
             "rerank_score": null,
             "context_chunks": []
           },
           {
             "rank": 5,
-            "id": "error-wm-a410-c07",
+            "id": "error-wm-a410-u11",
             "title": "WM-A410 エラーコード一覧",
-            "body": "洗剤自動投入タンクが正しく装着されていない通知です。運転はできますが、自動投入は行われません。",
-            "score": 0.29715833,
+            "body": "排水に通常より時間がかかっている通知です。E24になる前に排水フィルターを清掃します。",
+            "score": 0.50046676,
             "rerank_score": null,
             "context_chunks": []
           }
@@ -1660,11 +1740,11 @@
         "query": "ファームウェア3以降で、ソフトウェアを更新した後、再登録や再起動を試しても接続できなかったもの",
         "mode": "hybrid",
         "timings": {
-          "embedding_ms": 142,
-          "search_ms": 9,
+          "embedding_ms": 84,
+          "search_ms": 5,
           "rerank_ms": 0,
           "context_ms": 0,
-          "total_ms": 150
+          "total_ms": 89
         },
         "total_candidates": 10,
         "request_body": {
@@ -1691,14 +1771,20 @@
                   "bool": {
                     "must": [
                       {
-                        "multi_match": {
-                          "query": "ファームウェア3以降で、ソフトウェアを更新した後、再登録や再起動を試しても接続できなかったもの",
-                          "fields": [
-                            "title^2",
-                            "body",
-                            "identifiers^3"
+                        "bool": {
+                          "should": [
+                            {
+                              "multi_match": {
+                                "query": "ファームウェア3以降で、ソフトウェアを更新した後、再登録や再起動を試しても接続できなかったもの",
+                                "fields": [
+                                  "title^2",
+                                  "body"
+                                ],
+                                "type": "best_fields"
+                              }
+                            }
                           ],
-                          "type": "best_fields"
+                          "minimum_should_match": 1
                         }
                       }
                     ],

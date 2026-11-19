@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import re
 from dataclasses import dataclass
 from time import perf_counter
 from typing import Any
@@ -15,6 +16,36 @@ from app.schemas import ContextChunk, SearchHit, SearchMode, SearchRequest, Sear
 class BuiltQuery:
     body: dict[str, Any]
     pipeline: str | None = None
+
+
+IDENTIFIER_PATTERN = re.compile(
+    r"(?<![A-Za-z0-9])(?:[A-Za-z]+(?:-[A-Za-z0-9]+)+|[A-Za-z]+[0-9][A-Za-z0-9-]*)(?![A-Za-z0-9])",
+)
+
+
+def _identifier_terms(query: str) -> list[str]:
+    terms = (
+        match.group(0).upper()
+        for match in IDENTIFIER_PATTERN.finditer(query)
+    )
+    return list(dict.fromkeys(terms))
+
+
+def _keyword_query(query: str) -> dict[str, Any]:
+    clauses: list[dict[str, Any]] = [
+        {
+            "multi_match": {
+                "query": query,
+                "fields": ["title^2", "body"],
+                "type": "best_fields",
+            }
+        }
+    ]
+    clauses.extend(
+        {"term": {"identifiers.raw": {"value": term, "boost": 3}}}
+        for term in _identifier_terms(query)
+    )
+    return {"bool": {"should": clauses, "minimum_should_match": 1}}
 
 
 def _filter_clauses(request: SearchRequest) -> list[dict[str, Any]]:
@@ -72,13 +103,7 @@ def build_query(
         )
 
     if request.mode is SearchMode.FULLTEXT:
-        match_query: dict[str, Any] = {
-            "multi_match": {
-                "query": request.query,
-                "fields": ["title^2", "body", "identifiers^3"],
-                "type": "best_fields",
-            }
-        }
+        match_query = _keyword_query(request.query)
         query = (
             {"bool": {"must": [match_query], "filter": filter_clauses}}
             if filter_clauses
@@ -98,13 +123,7 @@ def build_query(
     if query_vector is None:
         raise ValueError(f"{request.mode.value} mode requires a query vector")
 
-    keyword_query: dict[str, Any] = {
-        "multi_match": {
-            "query": request.query,
-            "fields": ["title^2", "body", "identifiers^3"],
-            "type": "best_fields",
-        }
-    }
+    keyword_query = _keyword_query(request.query)
     vector_options: dict[str, Any] = {"vector": query_vector, "k": candidate_size}
     if filter_clauses:
         keyword_query = {"bool": {"must": [keyword_query], "filter": filter_clauses}}

@@ -24,6 +24,11 @@ for mode in vector fulltext hybrid; do
 done
 jq -e '.hits[0].id == "repair-case-11" and .hits[1].id == "error-wm-a410-e42"' "${tmp_dir}/product-vector.json" >/dev/null
 jq -e '.hits[0].id == "error-wm-a410-e42"' "${tmp_dir}/product-fulltext.json" >/dev/null
+jq -e '
+  [.request_body.query.bool.should[] | select(.term) | .term["identifiers.raw"].value]
+  == ["WM-A410", "E42"]
+' "${tmp_dir}/product-fulltext.json" >/dev/null
+jq -e '.hits[0].score > .hits[1].score' "${tmp_dir}/product-fulltext.json" >/dev/null
 jq -e '.hits[0].id == "error-wm-a410-e42"' "${tmp_dir}/product-hybrid.json" >/dev/null
 
 echo '[3/5] 同じ10件をrerankすることを確認します'
